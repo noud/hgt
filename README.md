@@ -1,69 +1,53 @@
-Symfony Standard Edition
-========================
+HGT website
+=============================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+Technische afhankelijkheden
+---------------------------
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+Dit project heeft de volgende afhankelijkheden:
 
-What's inside?
---------------
+  * PHP 5.5.9
+  * MySQL 5.5
+  * Symfony 3.4
+ 
+Installatie: development
+------------------------
 
-The Symfony Standard Edition is configured with the following defaults:
+Voor het opzetten van een developmentomgeving zijn de volgende stappen nodig.
 
-  * An AppBundle you can use to start coding;
+Draai composer:
 
-  * Twig as the only configured template engine;
+```
+$ composer install
+```
 
-  * Doctrine ORM/DBAL;
+Aan het eind wordt je gevraagd om parameters in te geven. Voor de meeste parameters kun je de default waarde kiezen.
 
-  * Swiftmailer;
+Vervolgens draai je de Doctrine Migrations:
 
-  * Annotations enabled for everything.
+```
+$ app/console doctrine:migrations:migrate
+```
 
-It comes pre-configured with the following bundles:
+Tot slot stel je in Apache je webroot in op `/path-to-project/web/`. In deze directory vind je een `.htaccess` met alle rewrite rules, die hoe je dus niet meer in te stellen.
+Open de site en voeg `app_dev.php` aan de URL toe. Je krijgt nu de melding dat je geen toegang hebt. Om dat te verhelpen voeg je je IP toe aan de whitelist in `web/app_dev.php`.
 
-  * **FrameworkBundle** - The core Symfony framework bundle
 
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
+Installatie: production
+------------------------
 
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
+Voor het opzetten van een live omgeving zijn de volgende stappen nodig. Mogelijk is composer niet geinstalleerd, deze kan je downloaden (en als bestandsnaam composer.phar gebruiken).
 
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
+Draai composer:
 
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
+```
+$ SYMFONY_ENV=prod composer install --no-dev --optimize-autoloader
+```
 
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
+Aan het eind wordt je gevraagd om parameters in te geven. Voor de meeste parameters kun je de default waarde kiezen.
 
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
+Vervolgens draai je de Doctrine Migrations:
 
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  https://symfony.com/doc/3.2/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/3.2/doctrine.html
-[8]:  https://symfony.com/doc/3.2/templating.html
-[9]:  https://symfony.com/doc/3.2/security.html
-[10]: https://symfony.com/doc/3.2/email.html
-[11]: https://symfony.com/doc/3.2/logging.html
-[12]: https://symfony.com/doc/3.2/assetic/asset_management.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
+```
+$ app/console doctrine:migrations:migrate --env=prod
+```
