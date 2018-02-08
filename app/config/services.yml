@@ -63,7 +63,7 @@ services:
     AppBundle\Repository\CustomerOrderLineRepository:
         factory: doctrine.orm.entity_manager::getRepository
         arguments:
-            - AppBundle\Entity\Customer
+            - AppBundle\Entity\CustomerOrderLine
 
     AppBundle\Repository\CustomerPriceGroupRepository:
         factory: doctrine.orm.entity_manager::getRepository
@@ -130,6 +130,11 @@ services:
         arguments:
             - AppBundle\Entity\PageWidget
 
+    AppBundle\Repository\ProductRepository:
+        factory: doctrine.orm.entity_manager::getRepository
+        arguments:
+            - AppBundle\Entity\Product
+
     AppBundle\Repository\ProductCategoryRepository:
         factory: doctrine.orm.entity_manager::getRepository
         arguments:
@@ -195,7 +200,3 @@ services:
         arguments:
             - AppBundle\Entity\Widget
 
-    AppBundle\Repository\ProductRepository:
-        factory: doctrine.orm.entity_manager::getRepository
-        arguments:
-            - AppBundle\Entity\Product
