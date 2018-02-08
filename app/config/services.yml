@@ -130,6 +130,11 @@ services:
         arguments:
             - AppBundle\Entity\PageWidget
 
+    AppBundle\Repository\ProductRepository:
+        factory: doctrine.orm.entity_manager::getRepository
+        arguments:
+            - AppBundle\Entity\Product
+
     AppBundle\Repository\ProductCategoryRepository:
         factory: doctrine.orm.entity_manager::getRepository
         arguments:
