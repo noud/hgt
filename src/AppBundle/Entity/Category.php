@@ -17,9 +17,11 @@ class Category
      */
     private $id;
 
-
-    //@TODO: parent_id > category.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="category")
+     * @ORM\JoinColumn(name="parent_id", onDelete="CASCADE", referencedColumnName="id")
+     */
+    private $parent;
 
     /**
      * @var string

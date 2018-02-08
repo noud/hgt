@@ -17,9 +17,11 @@ class ProductUnitOfMeasure
      */
     private $id;
 
-
-    //@TODO: product_id > product.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product", inversedBy="product_unit_of_measure")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $product;
 
     /**
      * @var integer
@@ -33,9 +35,11 @@ class ProductUnitOfMeasure
      */
     private $qty_per_unit_of_measure;
 
-
-    //@TODO: unit_of_measure_id > unit_of_measure.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\UnitOfMeasure", inversedBy="product_category")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $unit_of_measure;
 
     /**
      * @var boolean

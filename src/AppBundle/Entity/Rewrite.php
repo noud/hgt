@@ -41,9 +41,10 @@ class Rewrite
      */
     private $target_path;
 
-
-    //@TODO: page_id > page.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Page", inversedBy="rewrite")
+     */
+    private $page;
 
     /**
      * @var string

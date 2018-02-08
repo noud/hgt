@@ -17,9 +17,11 @@ class ProductPicture
      */
     private $id;
 
-
-    //@TODO: product_id > product.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product", inversedBy="product_picture")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $product;
 
     /**
      * @var string

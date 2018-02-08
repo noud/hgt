@@ -17,7 +17,15 @@ class ProductCategory
      */
     private $id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product", inversedBy="product_category")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $product;
 
-    //@TODO: product_id > product.id
-    //@TODO: category_id > category.id
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="product_category")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
 }

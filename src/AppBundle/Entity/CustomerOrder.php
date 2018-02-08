@@ -18,9 +18,11 @@ class CustomerOrder
      */
     private $id;
 
-
-    //@TODO: customer_group_id > customer_group.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CustomerGroup", inversedBy="customer_order")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $customer_group;
 
     /**
      * @var string

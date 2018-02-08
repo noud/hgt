@@ -17,10 +17,15 @@ class Product
      */
     private $id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Manufacturer", inversedBy="product")
+     */
+    private $manufacturer;
 
-    //@TODO: manufacturer_id > manufacturer.id
-    //@TODO: main_picture_id > product_picture.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ProductPicture", inversedBy="product")
+     */
+    private $main_picture;
 
     /**
      * @var string
@@ -70,9 +75,11 @@ class Product
      */
     private $url_key;
 
-
-    //@TODO: product_tax_group_id > product_tax_group.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Manufacturer", inversedBy="product")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $product_tax_group;
 
     /**
      * @var boolean

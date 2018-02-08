@@ -17,10 +17,17 @@ class Tax
      */
     private $id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ProductTaxGroup", inversedBy="tax")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $product_tax_group;
 
-    //@TODO; product_tax_group_id > product_tax_group.id
-    //@TODO; customer_tax_group_id > customer_tax_group.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CustomerTaxGroup", inversedBy="tax")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $customer_tax_group;
 
     /**
      * @var float

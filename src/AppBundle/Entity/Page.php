@@ -47,9 +47,11 @@ class Page
      */
     private $meta_description;
 
-
-    //@TODO: parent_id > parent.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="Page", inversedBy="page")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     */
+    private $parent;
 
     /**
      * @var string
@@ -69,9 +71,10 @@ class Page
      */
     private $show_in_search;
 
-
-    //@TODO; page_type_id > page_type.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PageType", inversedBy="page")
+     */
+    private $page_type;
 
     /**
      * @var integer

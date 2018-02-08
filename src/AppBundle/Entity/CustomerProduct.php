@@ -17,11 +17,23 @@ class CustomerProduct
      */
     private $id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CustomerGroup", inversedBy="customer_product")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $customer_group;
 
-    //@TODO: customer_group_id > customer_group.id
-    //@TODO: product_id > product.id
-    //@TODO: unit_of_measure_id > unit_of_measure.id
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product", inversedBy="customer_product")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $product;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\UnitOfMeasure", inversedBy="customer_product")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $unit_of_measure_id;
 
     /**
      * @var string
