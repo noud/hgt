@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <title>{{ title|default('Horeca Groothandel Tilburg') }}</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/lib/bootstrap/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}" />
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+    {% block body %}{% endblock %}
+
+    <script type="text/javascript" src="{{ asset('assets/lib/jquery/jquery-3.1.1.min.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
