@@ -54,17 +54,6 @@ class User implements AdvancedUserInterface
     protected $roles = [];
 
     /**
-     * @param string $name
-     * @param string $email
-     */
-    public function __construct($name, $email, $password)
-    {
-        $this->name = $name;
-        $this->email = $email;
-        $this->password = $password;
-    }
-
-    /**
      * @return integer
      */
     public function getId()

@@ -1,0 +1,6 @@
+AppBundle\Entity\User:
+    admin_user_1:
+        email: info@webdesigntilburg.nl
+        name: 'Admin'
+        password: 'test'
+        roles: ['ROLE_USER', 'ROLE_ADMIN']
