@@ -2,6 +2,7 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Entity\Customer;
 use AppBundle\Repository\CustomerRepository;
 
 class CustomerService
@@ -18,5 +19,14 @@ class CustomerService
     public function __construct(CustomerRepository $customerRepository)
     {
         $this->customerRepository = $customerRepository;
+    }
+
+    /**
+     * @param $username string
+     * @return Customer
+     */
+    public function getCustomerByUsername($username)
+    {
+        return $this->customerRepository->getByUsername($username);
     }
 }

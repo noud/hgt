@@ -1,0 +1,49 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Inloggen Horeca Groothandel Tilburg</h1>
+                <p>Wilt u inloggen op onze webshop? Vul dan uw gebruikersnaam en wachtwoord in. Onze klanten kunnen een webshop account aanvragen bij onze afdeling verkoop.</p>
+                <p>Nog geen klant? Dan kunt u zich hieronder registreren door op de kkop "Klant worden" te klikken.</p>
+            </div>
+            <div class="col-md-7">
+                <h2>Inloggen</h2>
+
+                {% if error %}
+                    <div class="row alert alert-danger">
+                        {% if error.message %}
+                            {{ error.message|trans([], 'security') }}
+                        {% else %}
+                            {{ error.messageKey|trans(error.messageData, 'security') }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                {{ form_start(form) }}
+                    {{ form_row(form._username) }}
+                    {{ form_row(form._password) }}
+
+                    <div class="form-group row">
+                        <div class="col-xs-8 col-xs-offset-4 text-right">
+                            <a href="{{ path('account_password_forgotten') }}">Wachtwoord vergeten?</a>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-8 col-xs-offset-4">
+                            <button class="btn btn-primary btn-block" type="submit">Inloggen</button>
+                        </div>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+
+            <div class="col-md-4 col-md-offset-1">
+                <h2>Ook online bestellen bij Horeca Groothandel Tilburg?</h2>
+                <p>Klik op de groene knop en vul uw bedrijfsgegevens in. Wij maken een webshopaccount voor u aan na controle van uw gegevens.</p>
+                <a class="btn btn-block btn-success" href="{{ path('account_signup') }}">Klant worden</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
