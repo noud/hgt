@@ -20,6 +20,4 @@ class ProductCategory
 
     //@TODO: product_id > product.id
     //@TODO: category_id > category.id
-
-
 }

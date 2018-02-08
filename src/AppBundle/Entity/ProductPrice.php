@@ -80,6 +80,4 @@ class ProductPrice
 
 
     //@TODO: selection_code_id > selection_code.id
-
-
 }
