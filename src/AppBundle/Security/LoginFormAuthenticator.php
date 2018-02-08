@@ -2,13 +2,15 @@
 
 namespace AppBundle\Security;
 
+use AppBundle\Entity\Customer;
 use AppBundle\Form\Account\LoginForm;
 use AppBundle\Service\CustomerService;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
@@ -28,18 +30,35 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      * @var CustomerService
      */
     private $customerService;
+    /**
+     * @var PasswordEncoder
+     */
+    private $passwordEncoder;
+    /**
+     * @var EntityManager
+     */
+    private $entityManager;
 
     /**
      * LoginFormAuthenticator constructor.
      * @param FormFactoryInterface $formFactory
      * @param RouterInterface $router
      * @param CustomerService $customerService
+     * @param PasswordEncoder $passwordEncoder
+     * @param EntityManager $entityManager
      */
-    public function __construct(FormFactoryInterface $formFactory, RouterInterface $router, CustomerService $customerService)
-    {
+    public function __construct(
+        FormFactoryInterface $formFactory,
+        RouterInterface $router,
+        CustomerService $customerService,
+        PasswordEncoder $passwordEncoder,
+        EntityManager $entityManager
+    ) {
         $this->router = $router;
         $this->formFactory = $formFactory;
         $this->customerService = $customerService;
+        $this->passwordEncoder = $passwordEncoder;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -69,7 +88,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
         $request->getSession()->set(
             Security::LAST_USERNAME,
-            $data['_username']
+            $data['account_username']
         );
 
         return $data;
@@ -83,8 +102,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $username = $credentials['_username'];
-        return $this->customerService->getCustomerByUsername($username);
+        $user = $this->customerService->getCustomerByUsername($credentials['account_username']);
+
+        if (null === $user) {
+            throw new UsernameNotFoundException();
+        }
+
+        return $user;
     }
 
     /**
@@ -92,9 +116,34 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      * @param UserInterface $user
      *
      * @return bool
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return false;
+        $password = $credentials['account_password'];
+
+        if ($user instanceof Customer && null === $user->getPassword()) {
+            /** @var Customer $customer */
+            $customer = $user;
+
+            if ($this->passwordEncoder->isOldPasswordValid($user, $password)) {
+                $this->customerService->convertOldPassword($customer->getId(), $password);
+                $this->entityManager->flush();
+
+                return true;
+            }
+
+            return false;
+        }
+
+        return $this->passwordEncoder->isPasswordValid($user, $password);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultSuccessRedirectUrl()
+    {
+        return $this->router->generate('homepage');
     }
 }

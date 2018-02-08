@@ -26,177 +26,194 @@ services:
         tags: ['doctrine.fixture.orm']
 
     AppBundle\Repository\CartRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\Cart
 
     AppBundle\Repository\CartProductRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\CartProduct
 
     AppBundle\Repository\CategoryRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\Category
 
     AppBundle\Repository\CustomerRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\Customer
 
     AppBundle\Repository\CustomerDiscountGroupRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\CustomerDiscount
 
     AppBundle\Repository\CustomerGroupRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\CustomerGroup
 
     AppBundle\Repository\CustomerOrderRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\CustomerOrder
 
     AppBundle\Repository\CustomerOrderLineRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\CustomerOrderLine
 
     AppBundle\Repository\CustomerPriceGroupRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\CustomerPriceGroup
 
     AppBundle\Repository\CustomerProductRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\CustomerProduct
 
     AppBundle\Repository\CustomerTaxGroupRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\CustomerTaxGroup
 
     AppBundle\Repository\FolderRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\Folder
 
     AppBundle\Repository\FolderPageRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\FolderPage
 
     AppBundle\Repository\HomeBannerRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\HomeBanner
 
     AppBundle\Repository\HomeSlideRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\HomeSlide
 
     AppBundle\Repository\InvalidDeliveryDateRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\InvalidDeliveryDate
 
     AppBundle\Repository\ManufacturerRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\Manufacturer
 
     AppBundle\Repository\NewsRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\News
 
     AppBundle\Repository\PageRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\Page
 
     AppBundle\Repository\PageTypeRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\PageType
 
     AppBundle\Repository\PageWidgetRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\PageWidget
 
     AppBundle\Repository\ProductRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\Product
 
     AppBundle\Repository\ProductCategoryRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\ProductCategory
 
     AppBundle\Repository\ProductPictureRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\ProductPicture
 
     AppBundle\Repository\ProductPriceRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\ProductPrice
 
     AppBundle\Repository\ProductTaxGroupRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\ProductTaxGrouop
 
     AppBundle\Repository\ProductUnitOfMeasureRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\ProductUnitOfMeasure
 
     AppBundle\Repository\RewriteRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\Rewrite
 
     AppBundle\Repository\SelectionCodeRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\SelectionCode
 
     AppBundle\Repository\StaticBlockRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\StaticBlock
 
     AppBundle\Repository\TaxRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\Tax
 
     AppBundle\Repository\UnitOfMeasureRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\UnitOfMeasure
 
     AppBundle\Repository\UserRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\User
 
     AppBundle\Repository\WebOrderRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\WebOrder
 
     AppBundle\Repository\WidgetRepository:
-        factory: doctrine.orm.entity_manager::getRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
             - AppBundle\Entity\Widget
+
+    AppBundle\Repository\PasswordResetHashRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - AppBundle\Entity\PasswordResetHash
+
+    AppBundle\Mailer\Sender\Mailer:
+        arguments:
+            - ""
+            - ""
+            - "%mailer_default_from_email%"
+            - "%mailer_default_from_name%"
+
+    AppBundle\Security\PasswordEncoder:
+        arguments:
+            - ""
+            - "%salt%"
 

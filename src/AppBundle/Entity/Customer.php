@@ -258,6 +258,14 @@ class Customer implements UserInterface
     private $allow_line_discount;
 
     /**
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * Returns the roles granted to the user.
      *
      * <code>
@@ -281,6 +289,14 @@ class Customer implements UserInterface
     }
 
     /**
+     * @param string|null $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
      * Returns the password used to authenticate the user.
      *
      * This should be the encoded password. On authentication, a plain-text
@@ -291,6 +307,22 @@ class Customer implements UserInterface
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * @param string|null $old_password
+     */
+    public function setOldPassword($old_password)
+    {
+        $this->old_password = $old_password;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOldPassword()
+    {
+        return $this->old_password;
     }
 
     /**
@@ -324,5 +356,24 @@ class Customer implements UserInterface
     public function eraseCredentials()
     {
 
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return implode(' ', [
+           $this->first_name,
+           $this->last_name,
+        ]);
     }
 }

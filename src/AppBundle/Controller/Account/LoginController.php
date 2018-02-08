@@ -31,7 +31,7 @@ class LoginController extends Controller
         $error = $this->authenticationUtils->getLastAuthenticationError();
 
         $form = $this->createForm(LoginForm::class, [
-            '_username' => $this->authenticationUtils->getLastUsername()
+            'account_username' => $this->authenticationUtils->getLastUsername()
         ]);
 
         return $this->render('account/login.html.twig', array(
