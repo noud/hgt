@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\PasswordReset;
+namespace HGT\AppBundle\PasswordReset;
 
 use DateTimeImmutable;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace AppBundle\Security;
+namespace HGT\AppBundle\Security;
 
-use AppBundle\Entity\Customer;
-use AppBundle\Form\Account\LoginForm;
-use AppBundle\Service\CustomerService;
 use Doctrine\ORM\EntityManager;
+use HGT\AppBundle\Form\Customer\LoginForm;
+use HGT\Application\User\Customer\Customer;
+use HGT\Application\User\CustomerService;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;

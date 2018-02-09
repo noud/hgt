@@ -3,12 +3,12 @@
 security:
 
     encoders:
-        AppBundle\Entity\Customer: bcrypt
+        HGT\Application\User\Customer\Customer: bcrypt
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         accounts:
-            entity: { class: AppBundle\Entity\Customer, property: username }
+            entity: { class: HGT\Application\User\Customer\Customer, property: username }
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -20,7 +20,7 @@ security:
             anonymous: ~
             guard:
                 authenticators:
-                    - AppBundle\Security\LoginFormAuthenticator
+                    - HGT\AppBundle\Security\LoginFormAuthenticator
             logout:
                 path: /logout
 

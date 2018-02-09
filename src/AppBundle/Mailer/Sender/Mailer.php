@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Mailer\Sender;
+namespace HGT\AppBundle\Mailer\Sender;
 
 use Swift_Mailer;
 use Swift_Message;
