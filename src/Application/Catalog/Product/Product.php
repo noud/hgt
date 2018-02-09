@@ -76,7 +76,7 @@ class Product
     private $url_key;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Manufacture\Manufacturer", inversedBy="product")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\ProductTaxGroup", inversedBy="product")
      * @ORM\JoinColumn(nullable=false)
      */
     private $product_tax_group;

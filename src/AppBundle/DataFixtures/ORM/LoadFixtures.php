@@ -13,6 +13,11 @@ class LoadFixtures implements FixtureInterface
         return strtolower($string);
     }
 
+    public function uppercase($string)
+    {
+        return strtoupper($string);
+    }
+
     public function fixTitle($string)
     {
         $separator = '-';

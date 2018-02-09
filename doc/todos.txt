@@ -1,6 +1,8 @@
-HERNOEMEN: Entity\Customer > customer_tax_grup --> customer_tax_group (let ook op fixtures)
-
-Fixture voor AppBundle\Entity\Manufacturer, hierbij moet 'name' hetzelfde worden als wat er uit 'navision_brand' komt,
+Fixture voor HGT\Application\Catalog\Manufacture\Manufacturer, hierbij moet 'name' hetzelfde worden als wat er uit 'navision_brand' komt,
 en dat moet vervolgens omgezet worden naar url_key met de functie fixTitle() - zie LoadFixtures.php
 
-Fixture voor AppBundle\Entity\Product, hierbij moet 'url_key' hetzelfde zijn als fixTitle('name')
+Fixture voor HGT\Application\Catalog\Product\Product, hierbij moet 'url_key' hetzelfde zijn als fixTitle('name')
+
+Fixture voor HGT\Application\Catalog\Category\Category, hierbij moet 'url key' hetzelfde zijn als fixTitle('name')
+
+Fixture voor HGT\Application\Catalog\Product\UnitOfMeasure:, hierbij moet navision_id hetzelfde zijn als 'name' in hoofdletters
