@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle\Mailer\Sender;
+namespace HGT\AppBundle\Mailer\Sender;
 
-use AppBundle\Mailer\Customer\NewPassword;
-use AppBundle\Mailer\Customer\PasswordResetLink;
+use HGT\AppBundle\Mailer\Customer\NewPassword;
+use HGT\AppBundle\Mailer\Customer\PasswordResetLink;
 
 class AccountSender
 {

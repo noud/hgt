@@ -1,9 +1,8 @@
 <?php
 
-namespace AppBundle\Security;
+namespace HGT\AppBundle\Security;
 
-use AppBundle\Entity\Customer;
-use Nelmio\Alice\Instances\Populator\Methods\Custom;
+use HGT\Application\User\Customer\Customer;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 

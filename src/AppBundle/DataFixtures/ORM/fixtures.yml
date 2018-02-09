@@ -1,11 +1,16 @@
-AppBundle\Entity\User:
+HGT\Application\User\User\User:
     admin_user_1:
         email: info@webdesigntilburg.nl
         name: 'Admin'
         password: 'test'
         roles: ['ROLE_USER', 'ROLE_ADMIN']
 
-AppBundle\Entity\Customer:
+HGT\Application\User\CustomerTaxGroup\CustomerTaxGroup:
+    tax_group_1:
+        name: 'TAX 1'
+        navision_id: 'CON33745'
+
+HGT\Application\User\Customer\Customer:
     customer_1:
         navision_id: 'CON33745'
         username: '33744'
@@ -37,6 +42,7 @@ AppBundle\Entity\Customer:
         shipping_email: ''
         chamber_of_commerce_number: ''
         merchant_notes: ''
+        customer_tax_grup: '@tax_group_1'
         payment_terms: '14D'
         navision_pricing_discount_id: '118312'
         customer_vat_number: ''

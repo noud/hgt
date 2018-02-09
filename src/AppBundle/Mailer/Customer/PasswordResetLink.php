@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Mailer\Customer;
+namespace HGT\AppBundle\Mailer\Customer;
 
 class PasswordResetLink
 {
