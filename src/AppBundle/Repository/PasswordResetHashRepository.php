@@ -39,8 +39,6 @@ class PasswordResetHashRepository extends EntityRepository
 
         $stmt = $conn->prepare($sql);
 
-        return $stmt->execute(array(
-            'username' => $username
-        ));
+        return $stmt->execute(compact('username'));
     }
 }

@@ -70,9 +70,34 @@ class PasswordResetController extends Controller
     /**
      * @param Request $request
      * @Route("/wachtwoord-vergeten/reset/{hash}", name="account_password_reset")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function passwordResetAction($hash, Request $request)
     {
-        die('passwordResetAction: ' . $hash);
+        $isValid = $this->passwordResetService->isValidHash($hash);
+
+        if (!$isValid) {
+            $this->addFlash('error', 'De link is verlopen, vul je gebruikersnaam opnieuw in om een nieuwe link aan te vragen.');
+            return $this->redirectToRoute('account_password_forgotten');
+        }
+
+        if (!$this->passwordResetService->resetPassword($hash)) {
+            $this->addFlash('error', 'Het is niet gelukt om je wachtwoord te resetten.');
+            return $this->redirectToRoute('account_password_forgotten');
+        }
+
+        $this->entityManager->flush();
+        return $this->redirectToRoute('account_password_new_password_sent');
+    }
+
+    /**
+     * @param Request $request
+     * @Route("/wachtwoord-vergeten/nieuw-wachtwoord-verzonden", name="account_password_new_password_sent")
+     */
+    public function newPasswordSentAction()
+    {
+        return $this->render('account/password-new-password-sent.html.twig');
     }
 }

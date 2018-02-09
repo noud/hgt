@@ -3,8 +3,8 @@
 namespace AppBundle\Service;
 
 use AppBundle\Entity\PasswordResetHash;
-use AppBundle\PasswordResetHash\DateTimeGenerator;
-use AppBundle\PasswordResetHash\HashGenerator;
+use AppBundle\PasswordReset\DateTimeGenerator;
+use AppBundle\PasswordReset\HashGenerator;
 use AppBundle\Repository\PasswordResetHashRepository;
 use DateInterval;
 use InvalidArgumentException;

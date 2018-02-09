@@ -127,7 +127,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             $customer = $user;
 
             if ($this->passwordEncoder->isOldPasswordValid($user, $password)) {
-                $this->customerService->convertOldPassword($customer->getId(), $password);
+                $this->customerService->updatePassword($customer->getId(), $password);
                 $this->entityManager->flush();
 
                 return true;

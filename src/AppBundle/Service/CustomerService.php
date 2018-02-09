@@ -41,8 +41,10 @@ class CustomerService
     /**
      * @param Customer $customer
      * @param $password
+     *
+     * @return Customer|object
      */
-    public function convertOldPassword($customerId, $password)
+    public function updatePassword($customerId, $password)
     {
         $customer = $this->customerRepository->get($customerId);
 

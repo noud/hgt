@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\PasswordResetHash;
+namespace AppBundle\PasswordReset;
 
 class RandomHashGenerator implements HashGenerator
 {

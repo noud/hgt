@@ -2,7 +2,7 @@
 
 namespace AppBundle\Mailer\Customer;
 
-class PasswordResetLink
+class NewPassword
 {
     /**
      * @var string
@@ -22,5 +22,5 @@ class PasswordResetLink
     /**
      * @var string
      */
-    public $password;
+    public $hash;
 }
