@@ -17,9 +17,11 @@ class FolderPage
      */
     private $id;
 
-
-    //@TODO: folder_id > folder.id (delete = cascade)
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Folder", inversedBy="folder_page")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $folder;
 
     /**
      * @var string

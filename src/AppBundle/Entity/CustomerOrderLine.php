@@ -17,9 +17,11 @@ class CustomerOrderLine
      */
     private $id;
 
-
-    //@TODO: customer_order_id > customer_order.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CustomerOrder", inversedBy="customer_order_line")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $customer_order;
 
     /**
      * @var string
@@ -33,9 +35,11 @@ class CustomerOrderLine
      */
     private $line_type;
 
-
-    //@TODO: product_id > product.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product", inversedBy="customer_order_line")
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    private $product;
 
     /**
      * @var string
@@ -61,9 +65,11 @@ class CustomerOrderLine
      */
     private $qty;
 
-
-    //@TODO: unit_of_measure_id > unit_of_measeure.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\UnitOfMeasure", inversedBy="customer_order_line")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $unit_of_measure;
 
     /**
      * @var float

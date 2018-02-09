@@ -23,9 +23,11 @@ class Cart
      */
     private $id;
 
-
-    //@TODO: customer_id > customer.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Customer", inversedBy="cart")
+     * @ORM\JoinColumn(nullable=false,onDelete="CASCADE")
+     */
+    private $customer;
 
     /**
      * @var DateTime

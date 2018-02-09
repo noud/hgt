@@ -14,7 +14,8 @@ class Customer
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
-     */private $id;
+     */
+    private $id;
 
     /**
      * @var string
@@ -70,10 +71,15 @@ class Customer
      */
     private $show_prices;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CustomerPriceGroup", inversedBy="customer")
+     */
+    private $customer_price_group;
 
-    //@TODO: customer_price_group_id > customer_price_group.id
-    //@TODO: customer_group_id > customer_group.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CustomerGroup", inversedBy="customer")
+     */
+    private $customer_group;
 
     /**
      * @var string
@@ -87,9 +93,11 @@ class Customer
      */
     private $delivery_days;
 
-
-    //@TODO: customer_tax_group_id > customer_tax_group.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CustomerTaxGroup", inversedBy="customer")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $customer_tax_grup;
 
     /**
      * @var string
@@ -217,9 +225,10 @@ class Customer
      */
     private $payment_terms;
 
-
-    //@TODO: customer_discount_group_id > customer_discount_group.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CustomerDiscountGroup", inversedBy="customer")
+     */
+    private $customer_discount_group;
 
     /**
      * @var string
@@ -233,9 +242,10 @@ class Customer
      */
     private $customer_vat_number;
 
-
-    //@TODO: selection_code_id > selection_code.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\SelectionCode", inversedBy="customer")
+     */
+    private $selection_code;
 
     /**
      * @var boolean

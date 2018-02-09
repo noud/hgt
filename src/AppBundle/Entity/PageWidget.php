@@ -17,10 +17,17 @@ class PageWidget
      */
     private $id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Page", inversedBy="page_widget")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $page;
 
-    //@TODO: page_id > page.id
-    //@TODO: widget_id > widget.id
-
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Widget", inversedBy="page_widget")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $widget;
 
     /**
      * @var integer

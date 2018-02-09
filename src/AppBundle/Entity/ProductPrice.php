@@ -29,12 +29,26 @@ class ProductPrice
      */
     private $navision_id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product", inversedBy="product_price")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $product;
 
-    //@TODO; product_id > product.id
-    //@TODO: customer_price_group_id > customer_price_group.id
-    //@TODO: customer_group_id > customer_group.id
-    //@TODO: unit_of_measure_id > unit_of_measure.id
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CustomerPriceGroup", inversedBy="product_price")
+     */
+    private $customer_price_group;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CustomerGroup", inversedBy="product_price")
+     */
+    private $customer_group;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\UnitOfMeasure", inversedBy="product_price")
+     */
+    private $unit_of_measure;
 
     /**
      * @var DateTime
@@ -78,6 +92,8 @@ class ProductPrice
      */
     private $is_web_action;
 
-
-    //@TODO: selection_code_id > selection_code.id
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\SelectionCode", inversedBy="product_price")
+     */
+    private $selection_code;
 }

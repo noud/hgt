@@ -17,11 +17,23 @@ class CartProduct
      */
     private $id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Cart", inversedBy="cart_product")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $cart;
 
-    //@TODO: cart_id > cart.id
-    //@TODO: product_id > product.id
-    //@TODO: unit_of_measure_id > unit_of_measure.id
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product", inversedBy="cart_product")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $product;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\UnitOfMeasure", inversedBy="cart_product")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $unit_of_measure;
 
     /**
      * @var float
