@@ -4,3 +4,116 @@ AppBundle\Entity\User:
         name: 'Admin'
         password: 'test'
         roles: ['ROLE_USER', 'ROLE_ADMIN']
+AppBundle\Entity\CustomerTaxGroup:
+    customer_tax_group_1:
+        name: 'Onbekend'
+        navision_id: ''
+    customer_tax_group_2:
+        name: 'Binnen de EU'
+        navision_id: 'EU'
+    customer_tax_group_3:
+        name: 'Nederland'
+        navision_id: 'NED'
+    customer_tax_group_4:
+        name: 'Buiten de EU'
+        navision_id: 'NIET-EU'
+    customer_tax_group_5:
+        name: 'BTW verlegd'
+        navision_id: 'VERLEGD'
+AppBundle\Entity\ProductTaxGroup:
+    product_tax_group_1:
+        name: 'Onbekend'
+        navision_id: ''
+    product_tax_group_2:
+        name: 'Hoog (19%)'
+        navision_id: 'G19'
+    product_tax_group_3:
+        name: 'Hoog (21%)'
+        navision_id: 'G21'
+    product_tax_group_4:
+        name: 'Laag (6%)'
+        navision_id: 'LAAG'
+    product_tax_group_5:
+        name: 'Vrijgesteld (0%)'
+        navision_id: 'NUL'
+    product_tax_group_6:
+        name: 'Vrijgesteld (100%)'
+        navision_id: 'VOLLEDIG'
+AppBundle\Entity\Manufacturer:
+    manufacturer_{1..50}:
+        navision_brand: <randomElement(['3M','8x4','A & K','Baileys','Campina','Dash','Enjoy','Fast Drinks','Galbani','Haribo','Isabel','Jozo','Karavan Cévitam','Lenor','M&M','Nutricia','Oerlemans','Pall Mall','Quaker','Raak','Sambuca','Tic tac','Unox','Venz','Wesco','Yogho Yogho','Zuidam'])>
+        #name: "@manufacturer_1->navision_brand"
+        name: <word()>
+        url_key: <fixTitle('dit moet nog omgezet worden')>
+        total_product_count: <numberBetween(1, 999)>
+        picture: ''
+AppBundle\Entity\Customer:
+    customer_{1..10}:
+        navision_id: <numerify('CON#####')>
+        username: '<username()>'
+        blocked: <randomElement(['0', '1'])>
+        password: <password()>
+        first_name: <firstName()>
+        last_name: <lastName()>
+        company: <company()>
+        email: <email()>
+        show_prices: <randomElement(['0', '1'])>
+        #customer_price_group:
+        #customer_group:
+        password_token: NULL
+        delivery_days: 1
+        customer_tax_grup: "@customer_tax_group_*"
+        address1: '<streetName()> <numberBetween(1, 9999)>'
+        address2: ''
+        city: <city()>
+        phone: <numerify('+31#########')>
+        fax: <numerify('+31#########')>
+        country: <countryCode()>
+        post_code: "<regexify('[1-9]{1}[1-9]{3}[A-Z]{2}')>"
+        shipping_first_name: <firstName()>
+        shipping_last_name: <lastName()>
+        shipping_company: <company()>
+        shipping_address1: '<streetName()> <numberBetween(1, 9999)>'
+        shipping_address2: ''
+        shipping_city: <city()>
+        shipping_post_code: "<regexify('[1-9]{1}[1-9]{3}[A-Z]{2}')>"
+        shipping_country: <countryCode()>
+        shipping_phone: <numerify('+31#########')>
+        shipping_fax: <numerify('+31#########')>
+        shipping_email: <email()>
+        chamber_of_commerce_number: <numerify('##.##.##.##')>
+        merchant_notes: <paragraph(2)>
+        payment_terms: <randomElement(['1D','2D','3D','4D','5D','6D','7D','8D','10D','12D','13D','14D','17D','21D','25D','28D','30D','35D','40D','42D','45D','60D','CONTANT 0','CONTANT 1','VOORUIT'])>
+        #customer_discount_group:
+        navision_pricing_discount_id: <numerify('######')>
+        customer_vat_number: <numerify('##.##.##.##')>
+        #selection_code:
+        is_buying_on_account: <randomElement(['0', '1'])>
+        allow_line_discount: <randomElement(['0', '1'])>
+AppBundle\Entity\Product:
+    product_{1..250}:
+        manufacturer: "@manufacturer_*"
+        navision_id: <numerify('######')>
+        name: <word(3)>
+        short_description: <paragraph()>
+        description: <paragraph(2)>
+        volume: '1x1 gr'
+        price: <numerify('###.##')>
+        enabled: <randomElement(['0', '1'])>
+        url_key: <fixTitle('dit moet nog omgezet worden')>
+        product_tax_group: "@product_tax_group_*"
+        is_order_product: <randomElement(['0', '1'])>
+        mail_order_to_supplier: <randomElement(['0', '1'])>
+#AppBundle\Entity\Category:
+#    category_{1..50}:
+#        navision_id:
+#        name:
+#        short_description:
+#        picture:
+#        show_homepage:
+#        priority:
+#        description:
+#        url_key:
+#        product_count:
+#        total_product_count:
+#        level:
