@@ -9,7 +9,7 @@ class CustomerRepository extends EntityRepository
 {
     /**
      * @param $id
-     * @return Customer
+     * @return Customer|object
      */
     public function get($id)
     {
@@ -30,5 +30,14 @@ class CustomerRepository extends EntityRepository
     public function remove(Customer $customer)
     {
         $this->getEntityManager()->remove($customer);
+    }
+
+    /**
+     * @param $username string
+     * @return Customer|object|null
+     */
+    public function getByUsername($username)
+    {
+        return $this->findOneBy(compact('username'));
     }
 }
