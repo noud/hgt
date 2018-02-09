@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Twig;
+namespace HGT\AppBundle\Twig;
 
 class AppExtension extends \Twig_Extension
 {

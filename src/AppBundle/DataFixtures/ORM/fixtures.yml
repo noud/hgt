@@ -1,10 +1,10 @@
-AppBundle\Entity\User:
+HGT\Application\User\User\User:
     admin_user_1:
         email: info@webdesigntilburg.nl
         name: 'Admin'
         password: 'test'
         roles: ['ROLE_USER', 'ROLE_ADMIN']
-AppBundle\Entity\CustomerTaxGroup:
+HGT\Application\User\CustomerTaxGroup\CustomerTaxGroup:
     customer_tax_group_1:
         name: 'Onbekend'
         navision_id: ''
@@ -20,7 +20,7 @@ AppBundle\Entity\CustomerTaxGroup:
     customer_tax_group_5:
         name: 'BTW verlegd'
         navision_id: 'VERLEGD'
-AppBundle\Entity\ProductTaxGroup:
+HGT\Application\Product\ProductTaxGroup:
     product_tax_group_1:
         name: 'Onbekend'
         navision_id: ''
@@ -39,7 +39,7 @@ AppBundle\Entity\ProductTaxGroup:
     product_tax_group_6:
         name: 'Vrijgesteld (100%)'
         navision_id: 'VOLLEDIG'
-AppBundle\Entity\Manufacturer:
+HGT\Application\Catalog\Manufacture\Manufacturer:
     manufacturer_{1..50}:
         navision_brand: <randomElement(['3M','8x4','A & K','Baileys','Campina','Dash','Enjoy','Fast Drinks','Galbani','Haribo','Isabel','Jozo','Karavan Cévitam','Lenor','M&M','Nutricia','Oerlemans','Pall Mall','Quaker','Raak','Sambuca','Tic tac','Unox','Venz','Wesco','Yogho Yogho','Zuidam'])>
         #name: "@manufacturer_1->navision_brand"
@@ -47,7 +47,45 @@ AppBundle\Entity\Manufacturer:
         url_key: <fixTitle('dit moet nog omgezet worden')>
         total_product_count: <numberBetween(1, 999)>
         picture: ''
-AppBundle\Entity\Customer:
+#HGT\Application\User\Customer\Customer:
+#    customer_1:
+#        navision_id: 'CON33745'
+#        username: '33744'
+#        blocked: false
+#        old_password: 'baa00fec0001de9905a8f74ed923cb0968740044'
+#        first_name: 'Kevin van'
+#        last_name: 'Laak'
+#        company: 'Webdesign Tilburg'
+#        email: 'kevin@webdesigntilburg.nl'
+#        show_prices: true
+#        delivery_days: '1'
+#        address1: 'Andromedastraat 2a'
+#        address2: ''
+#        city: 'Tilburg'
+#        phone: ''
+#        fax: ''
+#        country: 'NL'
+#        post_code: '5015 AV'
+#        shipping_first_name: ''
+#        shipping_last_name: ''
+#        shipping_company: ''
+#        shipping_address1: ''
+#        shipping_address2: ''
+#        shipping_city: ''
+#        shipping_post_code: ''
+#        shipping_country: ''
+#        shipping_phone: ''
+#        shipping_fax: ''
+#        shipping_email: ''
+#        chamber_of_commerce_number: ''
+#        merchant_notes: ''
+#        customer_tax_grup: '@tax_group_1'
+#        payment_terms: '14D'
+#        navision_pricing_discount_id: '118312'
+#        customer_vat_number: ''
+#        is_buying_on_account: true
+#        allow_line_discount: true
+HGT\Application\User\Customer\Customer:
     customer_{1..10}:
         navision_id: <numerify('CON#####')>
         username: '<username()>'
@@ -90,7 +128,7 @@ AppBundle\Entity\Customer:
         #selection_code:
         is_buying_on_account: <randomElement(['0', '1'])>
         allow_line_discount: <randomElement(['0', '1'])>
-AppBundle\Entity\Product:
+HGT\Application\Catalog\Product:
     product_{1..250}:
         manufacturer: "@manufacturer_*"
         navision_id: <numerify('######')>
