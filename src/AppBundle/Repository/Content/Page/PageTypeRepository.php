@@ -3,7 +3,7 @@
 namespace HGT\AppBundle\Repository\Content\Page;
 
 use Doctrine\ORM\EntityRepository;
-use HTG\Application\Content\Page\PageType;
+use HGT\Application\Content\Page\PageType;
 
 class PageTypeRepository extends EntityRepository
 {

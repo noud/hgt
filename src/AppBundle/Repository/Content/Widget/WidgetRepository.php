@@ -3,7 +3,7 @@
 namespace HGT\AppBundle\Repository\Content\Widget;
 
 use Doctrine\ORM\EntityRepository;
-use HTG\Application\Content\Widget\Widget;
+use HGT\Application\Content\Widget\Widget;
 
 class WidgetRepository extends EntityRepository
 {

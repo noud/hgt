@@ -3,7 +3,7 @@
 namespace HGT\AppBundle\Repository\Content\Home;
 
 use Doctrine\ORM\EntityRepository;
-use HTG\Application\Content\Home\HomeBanner;
+use HGT\Application\Content\Home\HomeBanner;
 
 class HomeBannerRepository extends EntityRepository
 {
@@ -30,5 +30,13 @@ class HomeBannerRepository extends EntityRepository
     public function remove(HomeBanner $homeBanner)
     {
         $this->getEntityManager()->remove($homeBanner);
+    }
+
+    /**
+     * @return HomeBanner[]
+     */
+    public function getAll()
+    {
+        return $this->findAll();
     }
 }

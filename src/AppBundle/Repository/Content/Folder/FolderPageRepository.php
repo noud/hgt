@@ -3,7 +3,7 @@
 namespace HGT\AppBundle\Repository\Content\Folder;
 
 use Doctrine\ORM\EntityRepository;
-use HTG\Application\Content\Folder\FolderPage;
+use HGT\Application\Content\Folder\FolderPage;
 
 class FolderPageRepository extends EntityRepository
 {

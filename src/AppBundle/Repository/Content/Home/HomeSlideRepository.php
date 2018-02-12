@@ -3,7 +3,7 @@
 namespace HGT\AppBundle\Repository\Content\Home;
 
 use Doctrine\ORM\EntityRepository;
-use HTG\Application\Content\Home\HomeSlide;
+use HGT\Application\Content\Home\HomeSlide;
 
 class HomeSlideRepository extends EntityRepository
 {
@@ -30,5 +30,13 @@ class HomeSlideRepository extends EntityRepository
     public function remove(HomeSlide $homeSlide)
     {
         $this->getEntityManager()->remove($homeSlide);
+    }
+
+    /**
+     * @return HomeSlide[]
+     */
+    public function getAll()
+    {
+        return $this->findAll();
     }
 }

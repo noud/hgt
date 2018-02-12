@@ -19,4 +19,9 @@ class HomeBannerService
     {
         $this->homeBannerRepository = $homeBannerRepository;
     }
+
+    public function getHomeSlides()
+    {
+        return $this->homeBannerRepository->getAll();
+    }
 }

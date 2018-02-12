@@ -3,7 +3,7 @@
 namespace HGT\AppBundle\Repository\Content\News;
 
 use Doctrine\ORM\EntityRepository;
-use HTG\Application\Content\News\News;
+use HGT\Application\Content\News\News;
 
 class NewsRepository extends EntityRepository
 {
