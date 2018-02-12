@@ -1,0 +1,60 @@
+.form-control {
+  box-shadow: @form-control-shadow;
+  height: @form-control-height;
+  border-radius: @border-radius;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+  display: block;
+  border: @form-control-border;
+}
+
+
+
+/* forms
+  ---------------------------------------------------------------------------------------------------------------------- */
+.form-sticky {
+  display: flex;
+
+  > * {
+    flex-shrink: 0;
+  }
+
+  button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .form-control {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+  }
+
+}
+
+
+
+.newsletter {
+
+  div {
+    &:first-child {
+      width: 60%;
+    }
+    &:last-child {
+      width: 40%;
+    }
+  }
+
+  button {
+    width: 100%;
+    text-transform: uppercase;
+  }
+}
+
+.search {
+  .form-control {
+    box-sizing: border-box;
+  }
+
+}

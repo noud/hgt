@@ -1,19 +1,274 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <title>{{ title|default('Horeca Groothandel Tilburg') }}</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0">
-
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/lib/bootstrap/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}" />
-    {% block stylesheets %}{% endblock %}
+  <title>{{ title|default('Horeca Groothandel Tilburg') }}</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0">
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}"/>
+  {% block stylesheets %}{% endblock %}
 </head>
 <body>
-    {% block body %}{% endblock %}
+<div class="rwd"></div>
 
-    <script type="text/javascript" src="{{ asset('assets/lib/jquery/jquery-3.1.1.min.js') }}"></script>
-    {% block scripts %}{% endblock %}
+<header class="page-header">
+
+  <div class="header-main">
+
+    <div class="wrapper">
+
+      <div class="header-container header-corporate">
+        <div>Meer dan 30 jaar ervaring in <strong>food</strong> en <strong>non food</strong> producten in Noord-Brabant
+        </div>
+        <div>Hulp nodig bij je bestelling? <a href="tel:0135711790">013&nbsp;-&nbsp;571&nbsp;17&nbsp;90</a></div>
+      </div>
+
+
+      <div class="header-branding">
+        <div>
+          <a class="logo" href="#"><img src="{{ asset('assets/images/logo.svg') }}" alt=""/></a>
+        </div>
+        <div>
+          <div class="overlay"></div>
+          <nav class="primary-menu">
+            <ul>
+              <li><a href="#" title="">Home</a></li>
+              <li class="has-sub">
+                <a href="#" title="">Assortiment</a>
+                <div>
+                  <ul class="sub">
+                    <li><a href="#" title="">Acties Acties Acties Acties Acties Acties Acties Acties Acties</a></li>
+                    <li><a href="#" title="">Acties</a></li>
+                    <li><a href="#" title="">Acties</a></li>
+                    <li><a href="#" title="">Acties</a></li>
+                    <li><a href="#" title="">Acties</a></li>
+                    <li><a href="#" title="">Acties</a></li>
+                    <li><a href="#" title="">Acties</a></li>
+                  </ul>
+
+                  <ul class="sub">
+                    <li><a href="#" title="">Acties</a></li>
+                    <li><a href="#" title="">Acties</a></li>
+                    <li><a href="#" title="">Acties</a></li>
+                    <li><a href="#" title="">Acties</a></li>
+                    <li><a href="#" title="">Acties</a></li>
+                    <li><a href="#" title="">Acties</a></li>
+                    <li><a href="#" title="">Acties</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li><a href="#" title="">Acties</a></li>
+              <li><a href="#" title="">Folder</a></li>
+              <li><a href="#" title="">Kerstpakketten</a></li>
+              <li><a href="#" title="">Nieuws</a></li>
+              <li><a href="#" title="">Over ons</a></li>
+              <li><a href="#" title="">Contact</a></li>
+            </ul>
+          </nav>
+          <a class="primary-menu-trigger" href="#"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% set shopping_cart = false %}
+
+  <div class="header-sub">
+    <div class="wrapper">
+      <div></div>
+      <div>
+        <form class="search form-sticky">
+          <div class="form-group">
+            <input type="search" class="form-control" placeholder="Ik ben op zoek naar">
+          </div>
+          <div>
+            <button class="btn btn-icon"><i class="fas fa-search"></i></button>
+          </div>
+        </form>
+        <a href="#" class="btn btn-icon-label">
+          <span class="icon">
+            <i class="fas fa-user"></i>
+          </span>
+          <span class="label">Klant worden</span>
+        </a>
+        <a href="#" class="btn btn-icon-label">
+          <span class="icon">
+            <i class="fas fa-lock"></i>
+          </span>
+          <span class="label">Inloggen</span>
+        </a>
+        {% if shopping_cart %}
+          <a href="#" class="btn btn-icon-label shopping-cart js-shopping-cart">
+          <span class="icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span>1337</span>
+          </span>
+            <span class="label">Winkelwagen</span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+</header>
+
+<main class="page-main">
+
+  <div class="wrapper">
+
+    <div class="feature-hero">
+
+      <div>
+
+      </div>
+
+
+      <div>
+        <div><a href="#" class="banner" style="background-image:url('https://www.hgt-tilburg.nl/images/teaser-nieuws.jpg');"></a></div>
+        <div><a href="#" class="banner" style="background-image:url('https://www.hgt-tilburg.nl/images/teaser-nieuws.jpg');"></a></div>
+        <div><a href="#" class="banner" style="background-image:url('https://www.hgt-tilburg.nl/images/teaser-nieuws.jpg');"></a></div>
+      </div>
+
+    </div>
+
+    <div class="feature-buttons">
+      <div>
+        <a href="#" class="btn btn-icon-label btn-icon-label-lg">
+          <span class="icon"><i class="fas fa-tag"></i></span>
+          <span class="label">
+          <span>Bekijk alle acties</span>
+        </span>
+        </a>
+      </div>
+      <div>
+        <a href="#" class="btn btn-icon-label btn-icon-label-lg">
+          <span class="icon"><i class="fas fa-bookmark"></i></span>
+          <span class="label">
+          <span>Bekijk onze folder</span>
+        </span>
+        </a>
+      </div>
+      <div>
+        <a href="#" class="btn btn-icon-label btn-icon-label-lg">
+          <span class="icon"><i class="fas fa-cart-arrow-down"></i></span>
+          <span class="label">
+          <span>Direct bestellen?</span>
+          <em>Klik hier om te registreren</em>
+        </span>
+        </a>
+      </div>
+    </div>
+
+    <div class="feature-cat">
+
+      <h2>Populaire categorieën</h2>
+
+      <div class="main">
+        <div>
+          <a class="listing" href="#">
+            Private label
+            <span class="icon"><i class="fa fa-chevron-right"></i></span>
+          </a>
+        </div>
+        <div>
+          <a class="listing" href="#">
+            Sauzen
+            <span class="icon"><i class="fa fa-chevron-right"></i></span>
+          </a>
+        </div>
+        <div>
+          <a class="listing" href="#">
+            Snacks
+            <span class="icon"><i class="fa fa-chevron-right"></i></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="sub">
+        <a class="btn-border" href="#">
+          <i class="fa fa-align-justify"></i>
+          <span>Ons assortiment</span>
+        </a>
+        <a class="btn-border" href="#">
+          <i class="fa fa-align-justify"></i>
+          <span>Alle merken</span>
+        </a>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+  {% block body %}{% endblock %}
+</main>
+
+
+<footer class="page-footer">
+  <div class="footer-highlight">
+    <div class="wrapper">
+      <div>
+        <h2>
+          <strong>Mis onze topaanbiedingen niet:</strong>
+          ontvang onze <span>nieuwsbrief</span>!
+        </h2>
+      </div>
+      <div>
+        <form class="newsletter form-sticky">
+          <div class="form-group">
+            <input type="email" class="form-control" placeholder="Uw e-mailadres">
+          </div>
+          <div>
+            <button class="btn">Aanmelden</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+  <div class="footer-main">
+    <div class="main">
+      <div class="wrapper">
+        <div>
+          <h4>Informatie</h4>
+          <ul class="footer-list">
+            <li><a href="#">Over ons</a></li>
+            <li><a href="#">Klant worden</a></li>
+            <li><a href="#">Veelgestelde vragen</a></li>
+            <li><a href="#">Over ons</a></li>
+            <li><a href="#">Leverings- en betalingsvoorwaarden</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Social media</h4>
+          <ul class="footer-social">
+            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul class="footer-meta">
+            <li><strong>Horeca Groothandel Tilburg</strong>
+              Polluxstraat 6, 5047 RB Tilburg
+            </li>
+            <li>
+              <a href="#">013 - 571 17 90</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="sub">&copy; 2014 - Horeca Groothandel Tilburg</div>
+    </div>
+  </div>
+</footer>
+
+<script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
+{% block scripts %}{% endblock %}
 </body>
 </html>
