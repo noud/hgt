@@ -11,6 +11,8 @@
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
+    {{ include('_partials/page/menu.html.twig') }}
+
     {% block body %}{% endblock %}
 
     <script type="text/javascript" src="{{ asset('assets/lib/jquery/jquery-3.1.1.min.js') }}"></script>

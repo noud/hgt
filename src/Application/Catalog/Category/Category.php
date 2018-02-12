@@ -120,4 +120,36 @@ class Category
     {
         $this->name = $name;
     }
+
+    /**
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param string $picture
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalProductCount()
+    {
+        return $this->total_product_count;
+    }
+
+    /**
+     * @param int $total_product_count
+     */
+    public function setTotalProductCount($total_product_count)
+    {
+        $this->total_product_count = $total_product_count;
+    }
 }
