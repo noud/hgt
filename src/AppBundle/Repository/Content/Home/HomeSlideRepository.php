@@ -35,8 +35,15 @@ class HomeSlideRepository extends EntityRepository
     /**
      * @return HomeSlide[]
      */
-    public function getAll()
+    public function getHomeSlides()
     {
-        return $this->findAll();
+        $qb = $this->createQueryBuilder('q');
+
+        $qb->where('q.date_from <= CURRENT_DATE()')
+            ->andWhere('q.date_to >= CURRENT_DATE() OR q.date_to IS NULL');
+
+        $qb->orderBy('q.priority', 'DESC');
+
+        return $qb->getQuery()->getResult();
     }
 }

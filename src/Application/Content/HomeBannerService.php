@@ -20,8 +20,12 @@ class HomeBannerService
         $this->homeBannerRepository = $homeBannerRepository;
     }
 
-    public function getHomeSlides()
+    /**
+     * @param $limit
+     * @return Home\HomeBanner[]
+     */
+    public function getHomeBanners($limit = 3)
     {
-        return $this->homeBannerRepository->getAll();
+        return $this->homeBannerRepository->getHomeBanners($limit);
     }
 }

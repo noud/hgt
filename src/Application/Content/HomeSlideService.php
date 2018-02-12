@@ -22,6 +22,6 @@ class HomeSlideService
 
     public function getHomeSlides()
     {
-        return $this->homeSlideRepository->getAll();
+        return $this->homeSlideRepository->getHomeSlides();
     }
 }

@@ -33,10 +33,16 @@ class HomeBannerRepository extends EntityRepository
     }
 
     /**
+     * @param int $limit
      * @return HomeBanner[]
      */
-    public function getAll()
+    public function getHomeBanners($limit)
     {
-        return $this->findAll();
+        $qb = $this->createQueryBuilder('q');
+
+        $qb->orderBy('q.priority', 'DESC')
+            ->setMaxResults($limit);
+
+        return $qb->getQuery()->getResult();
     }
 }

@@ -30,7 +30,7 @@ class IndexController extends Controller
     public function indexAction(Request $request, HomeSlideService $homeSlideService, HomeBannerService $homeBannerService, CategoryService $categoryService)
     {
         $homeSlides = $homeSlideService->getHomeSlides();
-        $homeBanners = $homeBannerService->getHomeSlides();
+        $homeBanners = $homeBannerService->getHomeBanners(2);
         $homeCategories = $categoryService->getHomeCategories();
 
         return $this->render('index/index.html.twig', [
