@@ -1,0 +1,171 @@
+.banner {
+  display: block;
+  border: 1px solid @primary-color;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.feature-hero {
+
+  margin-bottom: 30px;
+
+  height: 440px;
+
+  display: flex;
+
+  > div {
+
+    &:first-child {
+      width: 65%;
+      height: 100%;
+      background-color: red;
+      margin-right: 25px;
+    }
+
+    &:last-child {
+      flex-grow: 1;
+
+      > div {
+        width: 100%;
+        height: 94% / 3;
+
+        &:not(:last-child) {
+          margin-bottom: 3%;
+        }
+
+      }
+
+    }
+
+  }
+
+  .banner {
+    width: 100%;
+    height: 100%;
+  }
+
+}
+
+/*
+  ---------------------------------------------------------------------------------------------------------------------- */
+
+.feature-buttons {
+
+  @spacing: 40px;
+
+  margin-bottom: 30px;
+
+  display: flex;
+
+  @media (max-width: @wrapper-padding-bp) {
+    display: block;
+  }
+
+  > div {
+    width: 100% / 3;
+
+    @media (max-width: @wrapper-padding-bp) {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    &:not(:last-child) {
+      margin-right: @spacing;
+
+      @media (max-width: @wrapper-padding-bp) {
+        margin-right: 0;
+        margin-bottom: @spacing;
+      }
+
+    }
+
+  }
+
+  .btn-icon-label-lg {
+
+    width: 100%;
+
+    @media (max-width: @wrapper-padding-bp) {
+      width: auto;
+    }
+
+    @media @sm {
+      width: 100%;
+    }
+
+    .label {
+      @media @xs {
+        font-size: 24px * 0.75;
+      }
+
+    }
+
+  }
+
+}
+
+/*
+  ---------------------------------------------------------------------------------------------------------------------- */
+
+.feature-cat {
+
+  h2 {
+    font-size: @heading-lg;
+    color: @primary-color;
+    text-align: center;
+    margin-bottom: 15px;
+
+    @media @sm {
+      font-size: @heading-lg * 0.75;
+    }
+
+    @media @xs {
+      font-size: @heading-lg * 0.55;
+    }
+  }
+
+  .main {
+
+    display: flex;
+    margin-bottom: 30px;
+
+    @media @sm {
+      display: block;
+    }
+
+    > div {
+      width: 100% / 3;
+
+      @media @sm {
+        width: 100%;
+      }
+
+      &:not(:last-child) {
+        margin-right: 20px;
+
+        @media @sm {
+          margin-right: 0;
+          margin-bottom: -1px;
+        }
+      }
+
+    }
+  }
+
+  .sub {
+    display: flex;
+    justify-content: center;
+    > * {
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .listing {
+    width: 100%;
+  }
+
+}

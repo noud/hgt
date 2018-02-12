@@ -70,5 +70,5 @@ class News
      * @var string
      * @ORM\Column(type="string")
      */
-    private $meta_decription;
+    private $meta_description;
 }
