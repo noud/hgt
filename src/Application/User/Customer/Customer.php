@@ -104,7 +104,7 @@ class Customer implements UserInterface
      * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerTaxGroup\CustomerTaxGroup", inversedBy="customer")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $customer_tax_grup;
+    private $customer_tax_group;
 
     /**
      * @var string
