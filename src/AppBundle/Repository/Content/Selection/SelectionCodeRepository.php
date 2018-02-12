@@ -3,7 +3,7 @@
 namespace HGT\AppBundle\Repository\Content\Selection;
 
 use Doctrine\ORM\EntityRepository;
-use HTG\Application\Content\SelectionCode\SelectionCode;
+use HGT\Application\Content\SelectionCode\SelectionCode;
 
 class SelectionCodeRepository extends EntityRepository
 {

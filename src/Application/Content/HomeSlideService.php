@@ -19,4 +19,9 @@ class HomeSlideService
     {
         $this->homeSlideRepository = $homeSlideRepository;
     }
+
+    public function getHomeSlides()
+    {
+        return $this->homeSlideRepository->getHomeSlides();
+    }
 }

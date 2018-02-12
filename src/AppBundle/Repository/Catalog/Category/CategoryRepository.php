@@ -31,4 +31,19 @@ class CategoryRepository extends EntityRepository
     {
         $this->getEntityManager()->remove($category);
     }
+
+    public function getHomeCategories()
+    {
+        $qb = $this->createQueryBuilder('q');
+
+        $qb->where('q.show_homepage = :show_homepage')
+            ->andWhere('q.total_product_count > :total_product_count')
+            ->setParameters([
+                'show_homepage' => 1,
+                'total_product_count' => 0,
+            ]);
+        $qb->orderBy('q.name', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
 }

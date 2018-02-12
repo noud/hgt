@@ -3,7 +3,7 @@
 namespace HGT\AppBundle\Repository\Content\Page;
 
 use Doctrine\ORM\EntityRepository;
-use HTG\Application\Content\Page\PageWidget;
+use HGT\Application\Content\Page\PageWidget;
 
 class PageWidgetRepository extends EntityRepository
 {

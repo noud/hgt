@@ -2,8 +2,9 @@
 
 namespace HGT\AppBundle\Controller\Home;
 
-use HGT\Application\User\CustomerService;
-use HGT\Application\User\PasswordResetService;
+use HGT\Application\Catalog\CategoryService;
+use HGT\Application\Content\HomeBannerService;
+use HGT\Application\Content\HomeSlideService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,14 +16,27 @@ class IndexController extends Controller
      */
     public function __construct()
     {
+        //
     }
-
 
     /**
      * @Route("/", name="homepage")
+     * @param Request $request
+     * @param HomeSlideService $homeSlideService
+     * @param HomeBannerService $homeBannerService
+     * @param CategoryService $categoryService
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, HomeSlideService $homeSlideService, HomeBannerService $homeBannerService, CategoryService $categoryService)
     {
-        return $this->render('index/index.html.twig');
+        $homeSlides = $homeSlideService->getHomeSlides();
+        $homeBanners = $homeBannerService->getHomeBanners(2);
+        $homeCategories = $categoryService->getHomeCategories();
+
+        return $this->render('index/index.html.twig', [
+            'homeSlides' => $homeSlides,
+            'homeBanners' => $homeBanners,
+            'homeCategories' => $homeCategories,
+        ]);
     }
 }

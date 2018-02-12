@@ -19,4 +19,13 @@ class HomeBannerService
     {
         $this->homeBannerRepository = $homeBannerRepository;
     }
+
+    /**
+     * @param $limit
+     * @return Home\HomeBanner[]
+     */
+    public function getHomeBanners($limit = 3)
+    {
+        return $this->homeBannerRepository->getHomeBanners($limit);
+    }
 }

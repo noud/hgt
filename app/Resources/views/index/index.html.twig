@@ -7,5 +7,42 @@
                 <h1>Horeca Groothandel Tilburg</h1>
             </div>
         </div>
+        {% if homeSlides %}
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Homeslides</h1>
+                    {% for homeSlide in homeSlides %}
+                        <a href="{{ homeSlide.url }}" title="{{ homeSlide.title }}">
+                            <img src="{{ homeSlide.slideImage }}" alt="{{ homeSlide.title }}"/>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        {% if homeBanners %}
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Homebanners</h1>
+                    {% for homeBanner in homeBanners %}
+                        <a href="{{ homeBanner.url }}" title="{{ homeBanner.title }}">
+                            <img src="{{ homeBanner.bannerImage }}" alt="{{ homeBanner.title }}"/>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        {% if homeCategories %}
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Homecategories</h1>
+                    {% for homeCategory in homeCategories %}
+                        <a href="category/view/{{ homeCategory.id }}" title="{{ homeCategory.name }}">
+                            {{ homeCategory.name }}
+                        </a>
+                        <br />
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

@@ -3,7 +3,7 @@
 namespace HGT\AppBundle\Repository\Content\StaticBlock;
 
 use Doctrine\ORM\EntityRepository;
-use HTG\Application\Content\StaticBlock\StaticBlock;
+use HGT\Application\Content\StaticBlock\StaticBlock;
 
 class StaticBlockRepository extends EntityRepository
 {

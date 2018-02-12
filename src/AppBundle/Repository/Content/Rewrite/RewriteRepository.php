@@ -3,7 +3,7 @@
 namespace HGT\AppBundle\Repository\Content\Rewrite;
 
 use Doctrine\ORM\EntityRepository;
-use HTG\Application\Content\Rewrite\Rewrite;
+use HGT\Application\Content\Rewrite\Rewrite;
 
 class RewriteRepository extends EntityRepository
 {
