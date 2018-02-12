@@ -11,16 +11,215 @@ services:
 
     # makes classes in src/AppBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    AppBundle\:
+    HGT\AppBundle\:
         resource: '../../src/AppBundle/*'
         # you can exclude directories or files
         # but if a service is unused, it's removed anyway
         exclude: '../../src/AppBundle/{Entity,Repository,DataFixtures,Traits}'
 
-    AppBundle\Controller\:
+    HGT\Application\:
+        resource: '../../src/Application/*'
+        # you can exclude directories or files
+        # but if a service is unused, it's removed anyway
+        exclude: '../../src/Application/{Entity,Repository,DataFixtures,Traits}'
+
+    HGT\AppBundle\Controller\:
         resource: '../../src/AppBundle/Controller'
         public: true
         tags: ['controller.service_arguments']
 
-    AppBundle\DataFixtures\ORM\LoadFixtures:
+    HGT\AppBundle\DataFixtures\ORM\LoadFixtures:
         tags: ['doctrine.fixture.orm']
+
+    HGT\AppBundle\Repository\Catalog\Cart\CartRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Catalog\Cart\Cart
+
+    HGT\AppBundle\Repository\Catalog\Cart\CartProductRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Catalog\Cart\CartProduct
+
+    HGT\AppBundle\Repository\Catalog\Category\CategoryRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Catalog\Category\Category
+
+    HGT\AppBundle\Repository\User\Customer\CustomerRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\User\Customer\Customer
+
+    HGT\AppBundle\Repository\User\CustomerDiscountGroup\CustomerDiscountGroupRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\User\CustomerDiscountGroup\CustomerDiscountGroup
+
+    HGT\AppBundle\Repository\User\CustomerGroup\CustomerGroupRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\User\CustomerGroup\CustomerGroup
+
+    HGT\AppBundle\Repository\User\CustomerOrder\CustomerOrderRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\User\CustomerOrder\CustomerOrder
+
+    HGT\AppBundle\Repository\User\CustomerOrder\CustomerOrderLineRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\User\CustomerOrder\CustomerOrderLine
+
+    HGT\AppBundle\Repository\User\CustomerPriceGroup\CustomerPriceGroupRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\User\CustomerPriceGroup\CustomerPriceGroup
+
+    HGT\AppBundle\Repository\User\CustomerProduct\CustomerProductRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\User\CustomerProduct\CustomerProduct
+
+    HGT\AppBundle\Repository\User\CustomerTaxGroup\CustomerTaxGroupRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\User\CustomerTaxGroup\CustomerTaxGroup
+
+    HGT\AppBundle\Repository\Content\Folder\FolderRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Content\Folder\Folder
+
+    HGT\AppBundle\Repository\Content\Folder\FolderPageRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Content\Folder\FolderPage
+
+    HGT\AppBundle\Repository\Content\Home\HomeBannerRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Content\Home\HomeBanner
+
+    HGT\AppBundle\Repository\Content\Home\HomeSlideRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Content\Home\HomeSlide
+
+    HGT\AppBundle\Repository\Catalog\Order\InvalidDeliveryDateRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Catalog\Order\InvalidDeliveryDate
+
+    HGT\AppBundle\Repository\Catalog\Manufacture\ManufacturerRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Catalog\Manufacture\Manufacturer
+
+    HGT\AppBundle\Repository\Content\News\NewsRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Content\News\News
+
+    HGT\AppBundle\Repository\Content\Page\PageRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Content\Page\Page
+
+    HGT\AppBundle\Repository\Content\Page\PageTypeRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Content\Page\PageType
+
+    HGT\AppBundle\Repository\Content\Page\PageWidgetRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Content\Page\PageWidget
+
+    HGT\AppBundle\Repository\Catalog\Product\ProductRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Catalog\Product\Product
+
+    HGT\AppBundle\Repository\Catalog\Product\ProductCategoryRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Catalog\Product\ProductCategory
+
+    HGT\AppBundle\Repository\Catalog\Product\ProductPictureRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Catalog\Product\ProductPicture
+
+    HGT\AppBundle\Repository\Catalog\Product\ProductPriceRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Catalog\Product\ProductPrice
+
+    HGT\AppBundle\Repository\Catalog\Product\ProductTaxGroupRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Catalog\Product\ProductTaxGroup
+
+    HGT\AppBundle\Repository\Catalog\Product\ProductUnitOfMeasureRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Catalog\Product\ProductUnitOfMeasure
+
+    HGT\AppBundle\Repository\Content\Rewrite\RewriteRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Content\Rewrite\Rewrite
+
+    HGT\AppBundle\Repository\Content\Selection\SelectionCodeRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Content\SelectionCode\SelectionCode
+
+    HGT\AppBundle\Repository\Content\StaticBlock\StaticBlockRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Content\StaticBlock\StaticBlock
+
+    HGT\AppBundle\Repository\Catalog\Tax\TaxRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Catalog\Tax\Tax
+
+    HGT\AppBundle\Repository\Catalog\Product\UnitOfMeasureRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Catalog\Product\UnitOfMeasure
+
+    HGT\AppBundle\Repository\User\User\UserRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\User\User\User
+
+    HGT\AppBundle\Repository\Catalog\Order\WebOrderRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Catalog\Order\WebOrder
+
+    HGT\AppBundle\Repository\Content\Widget\WidgetRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Content\Widget\Widget
+
+    HGT\AppBundle\Repository\User\PasswordResetHash\PasswordResetHashRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\User\PasswordResetHash\PasswordResetHash
+
+    HGT\AppBundle\Mailer\Sender\Mailer:
+        arguments:
+            - ""
+            - ""
+            - "%mailer_default_from_email%"
+            - "%mailer_default_from_name%"
+
+    HGT\AppBundle\Security\PasswordEncoder:
+        arguments:
+            - ""
+            - "%salt%"
+

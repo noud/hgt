@@ -2,10 +2,13 @@
 # https://symfony.com/doc/current/security.html
 security:
 
+    encoders:
+        HGT\Application\User\Customer\Customer: bcrypt
+
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
+        accounts:
+            entity: { class: HGT\Application\User\Customer\Customer, property: username }
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -15,15 +18,13 @@ security:
 
         main:
             anonymous: ~
-            # activate different ways to authenticate
+            guard:
+                authenticators:
+                    - HGT\AppBundle\Security\LoginFormAuthenticator
+            logout:
+                path: /logout
 
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
+            switch_user: ~
 
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
-
-    encoders:
-        AppBundle\Entity\User:
-            algorithm: bcrypt
-            cost: 12
+    access_control:
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
