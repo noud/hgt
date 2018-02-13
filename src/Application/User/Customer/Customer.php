@@ -378,6 +378,14 @@ class Customer implements UserInterface
     /**
      * @return string
      */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * @return string
+     */
     public function getName()
     {
         return implode(' ', [

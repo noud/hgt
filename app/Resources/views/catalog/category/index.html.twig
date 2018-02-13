@@ -1,10 +1,24 @@
 {% extends 'layout/base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .title {padding-bottom:1em;margin-bottom:2em;border-bottom:1px solid #DDD;}
+        .title h1 {color:#ff671f;}
+        .categories nav ul li .active {font-weight:bold;}
+        .categories .category {border:1px solid #DDD;text-align:center;}
+    </style>
+{% endblock %}
+
 {% block body %}
     <div class="wrapper">
-        <h1>Ons assortiment</h1>
+        <div class="row title">
+            <div class="col-md-9 col-md-push-3">
+                <h1>Ons assortiment</h1>
+            </div>
+        </div>
         {% if categories %}
-            <div class="row">
+            <div class="row categories">
                 <div class="col-md-3">
                     <ul>
                         {% for category in categories %}
@@ -19,8 +33,10 @@
                 </div>
                 <div class="col-md-9">
                     <div class="row">
+                        {% set i = 0 %}
                         {% for category in categories %}
-                            <div class="col-md-4" style="border: 1px solid #DDD; text-align: center">
+                            {% set i = i + 1 %}
+                            <div class="col-md-4 category">
                                 <a href="{{ path('category_view', {'id': category.id }) }}">
                                     <div>
                                         <img src="http://via.placeholder.com/250x250{# category.picture #}" alt="{{ category.name }}" />
@@ -31,6 +47,9 @@
                                     </div>
                                 </a>
                             </div>
+                            {% if i % 3 == 0 %}
+                                </div><div class="row">
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>

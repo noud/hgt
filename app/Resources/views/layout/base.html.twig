@@ -17,11 +17,19 @@
             <div class="wrapper">
                 <div class="header-container header-corporate">
                     <div>
+                    {% if app.user %}
+                        Welkom <a href="#" title="">{{ app.user.name }}
+                        {% if app.user.company %}
+                            ({{ app.user.company }})
+                        {% endif %}</a> | <a href="{{ path('logout') }}" title="Uitloggen">Uitloggen</a>
+                    {% else %}
                         Meer dan 30 jaar ervaring in <strong>food</strong>
                         en <strong>non food</strong> producten in Noord-Brabant
+                    {% endif %}
                     </div>
                     <div>
-                        Hulp nodig bij je bestelling? <a href="tel:{{ company_phonenumber|replace({' ':''}) }}">{{ company_phonenumber }}</a>
+                        Hulp nodig bij je bestelling?
+                        <a href="tel:{{ company_phonenumber|replace({' ':''}) }}">{{ company_phonenumber }}</a>
                     </div>
                 </div>
                 <div class="header-branding">
@@ -38,7 +46,6 @@
                 </div>
             </div>
         </div>
-        {% set shopping_cart = true %}
         <div class="header-sub">
             <div class="wrapper">
                 <div></div>
@@ -51,25 +58,27 @@
                             <button class="btn btn-icon"><i class="fas fa-search"></i></button>
                         </div>
                     </form>
-                    <a href="#" class="btn btn-icon-label">
-                        <span class="icon">
-                            <i class="fas fa-user"></i>
-                        </span>
-                        <span class="label">Klant worden</span>
-                    </a>
-                    <a href="{{ path('account_login') }}" class="btn btn-icon-label">
-                        <span class="icon">
-                            <i class="fas fa-lock"></i>
-                        </span>
-                        <span class="label">Inloggen</span>
-                    </a>
-                    {% if shopping_cart %}
+                    {% if app.user %}
+                        <a href="#" class="btn btn-icon-label">
+                            <span class="icon"><i class="fa fa-user"></i></span>
+                            <span class="label">Mijn account</span>
+                        </a>
+                        <a href="#" class="btn btn-icon-label">
+                            <span class="icon"><i class="fa fa-list-ul"></i></span>
+                            <span class="label">Mijn bestellijst</span>
+                        </a>
                         <a href="#" class="btn btn-icon-label shopping-cart js-shopping-cart">
-                            <span class="icon">
-                                <i class="fas fa-shopping-cart"></i>
-                                <span>1337</span>
-                            </span>
+                            <span class="icon"><i class="fas fa-shopping-cart"></i><span>1337</span></span>
                             <span class="label">Winkelwagen</span>
+                        </a>
+                    {% else %}
+                        <a href="#" class="btn btn-icon-label">
+                            <span class="icon"><i class="fas fa-user"></i></span>
+                            <span class="label">Klant worden</span>
+                        </a>
+                        <a href="{{ path('account_login') }}" class="btn btn-icon-label">
+                            <span class="icon"><i class="fas fa-lock"></i></span>
+                            <span class="label">Inloggen</span>
                         </a>
                     {% endif %}
                 </div>

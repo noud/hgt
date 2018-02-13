@@ -109,6 +109,14 @@ class Category
     }
 
     /**
+     * @return mixed
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
      * @return string
      */
     public function getId()

@@ -3,6 +3,7 @@
 namespace HGT\Application\Catalog;
 
 use HGT\AppBundle\Repository\Catalog\Category\CategoryRepository;
+use HGT\Application\Catalog\Category\Category;
 
 class CategoryService
 {
@@ -38,8 +39,30 @@ class CategoryService
     }
 
     /**
+     * @param $parent_id
+     * @return Category|null
+     */
+    public function getParentCategory($parent_id)
+    {
+        if($parent_id !== null) {
+            return $this->categoryRepository->findOneById($parent_id);
+        }
+
+        return null;
+    }
+
+    /**
+     * @param $category_id
+     * @return Category[]
+     */
+    public function getSuperCategoriesWithProducts($category_id)
+    {
+        return $this->categoryRepository->getCategoriesWithProducts($category_id);
+    }
+
+    /**
      * @param int $id
-     * @return Category\Category
+     * @return Category
      */
     public function get($id = 0)
     {
