@@ -19,4 +19,23 @@ class FolderService
     {
         $this->folderRepository = $folderRepository;
     }
+
+    /**
+     * @param $id
+     * @return Folder\Folder|object
+     */
+    public function getFolder($id)
+    {
+        return $this->folderRepository->get($id);
+    }
+
+    /**
+     * @return array
+     */
+    public function getActiveFolders()
+    {
+        return $this->folderRepository->getActiveFolders();
+    }
+
+
 }

@@ -1,0 +1,99 @@
+{% extends 'layout/base.html.twig' %}
+
+
+
+{% block body %}
+
+  <div class="template">
+
+    <div class="wrapper">
+
+      <aside class="meta-side">
+
+        <ul>
+          <li>
+            <h3>Over ons</h3>
+
+            <div class="entries">
+              <ul>
+                <li><a href="#">Verkoop team</a></li>
+                <li><a href="#">Verkoop team</a></li>
+                <li><a href="#">Verkoop team</a></li>
+                <li><a href="#">Verkoop team</a></li>
+                <li><a href="#">Verkoop team</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li>
+            <h3>Horeca Groothandel Tilburg B.V.</h3>
+
+            <div class="entries">
+              <div class="entry">
+                <strong>Bezoekadres:</strong> 6 <br/>
+                Polluxstraat 6 <br/>
+                5047 RB Tilburg
+              </div>
+              <div class="entry">
+                <strong>Postadres:</strong> 6 <br/>
+                Postbus 1208 6 <br/>
+                5004 BE Tilburg
+              </div>
+              <div class="entry">
+                <strong>Postadres:</strong> 6 <br/>
+                Postbus 1208 6 <br/>
+                5004 BE Tilburg
+              </div>
+              <div class="entry">
+                <strong>T:</strong> <a href="#">013 - 571 17 90</a> <br/>
+                <strong>E:</strong> <a href="#">verkoop@hgt-tilburg.nl</a> <br/>
+              </div>
+            </div>
+
+          </li>
+        </ul>
+
+      </aside>
+
+      <div>
+        <div class="page-title">
+          <h1>Folder</h1>
+        </div>
+
+        <div class="content">
+          <p>Hier vindt u de op dit moment lopende folders.</p>
+        </div>
+
+        {% if folders %}
+          <ul>
+            {% for folder in folders %}
+              <li>
+                <div>id: <a href="{{ path('folder_view', {'id': folder.Id } ) }}">{{ folder.id }}</a></div>
+                <div>title: {{ folder.title }}</div>
+                <div>desc: {{ folder.shortdescription }}</div>
+                <div>image url: {{ folder.picture }}</div>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+
+    </div>
+
+  </div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+{% extends 'layout/base.html.twig' %}
+
+
+
+{% block body %}
+
+      {% for image in folder_images %}
+
+        {{ image.folderImage }}
+
+
+      {% endfor %}
+
+{% endblock %}

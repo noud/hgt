@@ -34,4 +34,77 @@ class FolderPage
      * @ORM\Column(type="integer", options={"default":900})
      */
     private $priority;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFolder()
+    {
+        return $this->folder;
+    }
+
+    /**
+     * @param mixed $folder
+     */
+    public function setFolder($folder)
+    {
+        $this->folder = $folder;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFolderImage()
+    {
+        return $this->folder_image;
+    }
+
+    /**
+     * @param string $folder_image
+     */
+    public function setFolderImage($folder_image)
+    {
+        $this->folder_image = $folder_image;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
+     * @param int $priority
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+    }
+
+
+
+
+
+
+
+
+
 }
