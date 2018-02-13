@@ -46,4 +46,12 @@ class Manufacturer
      * @ORM\Column(type="string")
      */
     private $picture;
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 }

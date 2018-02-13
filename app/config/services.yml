@@ -141,11 +141,6 @@ services:
         arguments:
             - HGT\Application\Catalog\Product\Product
 
-    HGT\AppBundle\Repository\Catalog\Product\ProductCategoryRepository:
-        factory: ["@doctrine.orm.default_entity_manager", getRepository]
-        arguments:
-            - HGT\Application\Catalog\Product\ProductCategory
-
     HGT\AppBundle\Repository\Catalog\Product\ProductPictureRepository:
         factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:

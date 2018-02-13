@@ -1,13 +1,13 @@
 <?php
 
-namespace HGT\AppBundle\Controller\Category;
+namespace HGT\AppBundle\Controller\Catalog;
 
 use HGT\Application\Catalog\CategoryService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class IndexController extends Controller
+class CategoryController extends Controller
 {
     /**
      * IndexController constructor.
@@ -41,17 +41,12 @@ class IndexController extends Controller
      */
     public function viewAction($id, Request $request, CategoryService $categoryService)
     {
-        $categoryInfo = $categoryService->get($id);
+        $category = $categoryService->get($id);
         $superCategories = $categoryService->getCategoriesWithProducts($id);
 
-        if (count($superCategories) === 0) {
-            $products = 'X';
-        }
-
         return $this->render('category/view.html.twig', [
-            'categoryInfo' => $categoryInfo,
-            'categories' => $superCategories,
-            'products' => 'XX'
+            'category' => $category,
+            'categories' => $superCategories
         ]);
     }
 }

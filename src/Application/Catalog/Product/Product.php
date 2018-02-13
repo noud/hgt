@@ -18,6 +18,15 @@ class Product
     private $id;
 
     /**
+     * @ORM\ManyToMany(targetEntity="HGT\Application\Catalog\Category\Category")
+     * @ORM\JoinTable(name="product_category",
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")}
+     *     )
+     */
+    private $category;
+
+    /**
      * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Manufacture\Manufacturer", inversedBy="product")
      */
     private $manufacturer;
@@ -91,4 +100,44 @@ class Product
      * @ORM\Column(type="string")
      */
     private $mail_order_to_supplier;
+
+    /**
+     * @return mixed
+     */
+    public function getManufacturer()
+    {
+        return $this->manufacturer;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVolume()
+    {
+        return $this->volume;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
 }
