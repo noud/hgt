@@ -20,8 +20,29 @@ class CategoryService
         $this->categoryRepository = $categoryRepository;
     }
 
+    /**
+     * @return array
+     */
     public function getHomeCategories()
     {
         return $this->categoryRepository->getHomeCategories();
+    }
+
+    /**
+     * @param string $id
+     * @return array
+     */
+    public function getCategoriesWithProducts($id = "NULL")
+    {
+        return $this->categoryRepository->getCategoriesWithProducts($id);
+    }
+
+    /**
+     * @param int $id
+     * @return Category\Category
+     */
+    public function get($id = 0)
+    {
+        return $this->categoryRepository->get($id);
     }
 }
