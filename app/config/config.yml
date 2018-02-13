@@ -41,6 +41,12 @@ twig:
     form_themes:
         - 'bootstrap_3_layout.html.twig'
         - 'components/_customForms.html.twig'
+    globals:
+        company_name: '%company_name%'
+        company_phonenumber: '%company_phonenumber%'
+        company_street: '%company_street%'
+        company_zipcode: '%company_zipcode%'
+        company_city: '%company_city%'
 
 # Doctrine Configuration
 doctrine:

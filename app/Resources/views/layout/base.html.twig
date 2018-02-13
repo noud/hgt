@@ -2,12 +2,12 @@
 <html lang="nl">
 <head>
     <title>{{ title|default('Horeca Groothandel Tilburg') }}</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0">
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}"/>
+    <meta charset="UTF-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0" />
+    <link href="http://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}" />
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
@@ -16,63 +16,29 @@
         <div class="header-main">
             <div class="wrapper">
                 <div class="header-container header-corporate">
-                    <div>Meer dan 30 jaar ervaring in <strong>food</strong> en <strong>non food</strong> producten in
-                        Noord-Brabant
+                    <div>
+                        Meer dan 30 jaar ervaring in <strong>food</strong>
+                        en <strong>non food</strong> producten in Noord-Brabant
                     </div>
-                    <div>Hulp nodig bij je bestelling? <a href="tel:0135711790">013&nbsp;-&nbsp;571&nbsp;17&nbsp;90</a>
+                    <div>
+                        Hulp nodig bij je bestelling? <a href="tel:{{ company_phonenumber|replace({' ':''}) }}">{{ company_phonenumber }}</a>
                     </div>
                 </div>
                 <div class="header-branding">
                     <div>
-                        <a class="logo" href="#"><img src="{{ asset('assets/images/logo.svg') }}" alt=""/></a>
+                        <a class="logo" href="{{ path('homepage') }}" title="{{ company_name }}">
+                            <img src="{{ asset('assets/images/logo.svg') }}" alt="{{ company_name }}" />
+                        </a>
                     </div>
                     <div>
                         <div class="overlay"></div>
-                        <nav class="primary-menu">
-                            {{ include('_partials/page/menu.html.twig') }}
-                            <ul>
-                                <li><a href="#" title="">Home</a></li>
-                                <li class="has-sub">
-                                    <a href="#" title="">Assortiment</a>
-                                    <div>
-                                        <ul class="sub">
-                                            <li><a href="#" title="">Acties Acties Acties Acties Acties Acties Acties Acties
-                                                    Acties</a></li>
-                                            <li><a href="#" title="">Acties</a></li>
-                                            <li><a href="#" title="">Acties</a></li>
-                                            <li><a href="#" title="">Acties</a></li>
-                                            <li><a href="#" title="">Acties</a></li>
-                                            <li><a href="#" title="">Acties</a></li>
-                                            <li><a href="#" title="">Acties</a></li>
-                                        </ul>
-
-                                        <ul class="sub">
-                                            <li><a href="#" title="">Acties</a></li>
-                                            <li><a href="#" title="">Acties</a></li>
-                                            <li><a href="#" title="">Acties</a></li>
-                                            <li><a href="#" title="">Acties</a></li>
-                                            <li><a href="#" title="">Acties</a></li>
-                                            <li><a href="#" title="">Acties</a></li>
-                                            <li><a href="#" title="">Acties</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li><a href="#" title="">Acties</a></li>
-                                <li><a href="#" title="">Folder</a></li>
-                                <li><a href="#" title="">Kerstpakketten</a></li>
-                                <li><a href="#" title="">Nieuws</a></li>
-                                <li><a href="#" title="">Over ons</a></li>
-                                <li><a href="#" title="">Contact</a></li>
-                            </ul>
-                        </nav>
-                        <a class="primary-menu-trigger" href="#"></a>
+                        {{ include('_partials/page/menu.html.twig') }}
+                        <a class="primary-menu-trigger" onclick="return false;"></a>
                     </div>
                 </div>
             </div>
         </div>
-
-        {% set shopping_cart = false %}
-
+        {% set shopping_cart = true %}
         <div class="header-sub">
             <div class="wrapper">
                 <div></div>
@@ -91,7 +57,7 @@
                         </span>
                         <span class="label">Klant worden</span>
                     </a>
-                    <a href="#" class="btn btn-icon-label">
+                    <a href="{{ path('account_login') }}" class="btn btn-icon-label">
                         <span class="icon">
                             <i class="fas fa-lock"></i>
                         </span>
@@ -110,93 +76,9 @@
             </div>
         </div>
     </header>
-
     <main class="page-main">
-        <div class="wrapper">
-            <div class="feature-hero">
-                <div></div>
-                <div>
-                    <div>
-                        <a href="#" class="banner" style="background-image:url('https://www.hgt-tilburg.nl/images/teaser-nieuws.jpg');"></a></div>
-                    <div><a href="#" class="banner" style="background-image:url('https://www.hgt-tilburg.nl/images/teaser-nieuws.jpg');"></a></div>
-                    <div><a href="#" class="banner" style="background-image:url('https://www.hgt-tilburg.nl/images/teaser-nieuws.jpg');"></a></div>
-                </div>
-            </div>
-
-            <div class="feature-buttons">
-                <div>
-                    <a href="#" class="btn btn-icon-label btn-icon-label-lg">
-                        <span class="icon"><i class="fas fa-tag"></i></span>
-                        <span class="label">
-              <span>Bekijk alle acties</span>
-            </span>
-                    </a>
-                </div>
-                <div>
-                    <a href="#" class="btn btn-icon-label btn-icon-label-lg">
-                        <span class="icon"><i class="fas fa-bookmark"></i></span>
-                        <span class="label">
-              <span>Bekijk onze folder</span>
-            </span>
-                    </a>
-                </div>
-                <div>
-                    <a href="#" class="btn btn-icon-label btn-icon-label-lg">
-                        <span class="icon"><i class="fas fa-cart-arrow-down"></i></span>
-                        <span class="label">
-              <span>Direct bestellen?</span>
-              <em>Klik hier om te registreren</em>
-            </span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="feature-cat">
-
-                <h2>Populaire categorieën</h2>
-
-                <div class="main">
-                    <div>
-                        <a class="listing" href="#">
-                            Private label
-                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
-                        </a>
-                    </div>
-                    <div>
-                        <a class="listing" href="#">
-                            Sauzen
-                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
-                        </a>
-                    </div>
-                    <div>
-                        <a class="listing" href="#">
-                            Snacks
-                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="sub">
-                    <a class="btn-border" href="#">
-                        <i class="fa fa-align-justify"></i>
-                        <span>Ons assortiment</span>
-                    </a>
-                    <a class="btn-border" href="#">
-                        <i class="fa fa-align-justify"></i>
-                        <span>Alle merken</span>
-                    </a>
-                </div>
-
-
-            </div>
-
-
-        </div>
-
         {% block body %}{% endblock %}
     </main>
-
-
     <footer class="page-footer">
         <div class="footer-highlight">
             <div class="wrapper">
@@ -214,11 +96,9 @@
                         <div>
                             <button class="btn">Aanmelden</button>
                         </div>
-
                     </form>
                 </div>
             </div>
-
         </div>
         <div class="footer-main">
             <div class="main">
@@ -236,24 +116,28 @@
                     <div>
                         <h4>Social media</h4>
                         <ul class="footer-social">
-                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li>
+                                <a href="https://www.facebook.com/horecagroothandeltilburg/" target="_blank">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div>
                         <h4>Contact</h4>
                         <ul class="footer-meta">
-                            <li><strong>Horeca Groothandel Tilburg</strong>
-                                Polluxstraat 6, 5047 RB Tilburg
+                            <li><strong>{{ company_name }}</strong>
+                                {{ company_street }}, {{ company_zipcode }} {{ company_city }}
                             </li>
                             <li>
-                                <a href="#">013 - 571 17 90</a>
+                                <a href="tel:{{ company_phonenumber|replace({' ':''}) }}">{{ company_phonenumber }}</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="wrapper">
-                <div class="sub">&copy; {{ "now" | date("Y") }} - Horeca Groothandel Tilburg</div>
+                <div class="sub">&copy; {{ "now" | date("Y") }} - {{ company_name }}</div>
             </div>
         </div>
     </footer>

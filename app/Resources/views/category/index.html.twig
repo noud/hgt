@@ -1,14 +1,19 @@
 {% extends 'layout/base.html.twig' %}
 
 {% block body %}
-    <h1>Ons assortiment</h1>
-    <div class="container">
-        <div class="row">
-            {% if categories %}
+    <div class="wrapper">
+        <h1>Ons assortiment</h1>
+        {% if categories %}
+            <div class="row">
                 <div class="col-md-3">
                     <ul>
                         {% for category in categories %}
-                            <li><a href="{{ category.id }}">{{ category.name }}</a></li>
+                            <li>
+                                <a href="{{ category.id }}" class="listing">
+                                    {{ category.name }}
+                                    <span class="icon"><i class="fa fa-chevron-right"></i></span>
+                                </a>
+                            </li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -18,7 +23,7 @@
                             <div class="col-md-4" style="border: 1px solid #DDD; text-align: center">
                                 <a href="{{ path('category_view', {'id': category.id }) }}">
                                     <div>
-                                        <img src="http://via.placeholder.com/250x250{# category.picture #}" alt="{{ category.name }}"/>
+                                        <img src="http://via.placeholder.com/250x250{# category.picture #}" alt="{{ category.name }}" />
                                     </div>
                                     <div>
                                         {{ category.name }}
@@ -29,9 +34,9 @@
                         {% endfor %}
                     </div>
                 </div>
-            {% else %}
-                <p>Geen categorieën gevonden.</p>
-            {% endif %}
-        </div>
+            </div>
+        {% else %}
+            <p>Geen categorieën gevonden.</p>
+        {% endif %}
     </div>
 {% endblock %}
