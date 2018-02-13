@@ -9,7 +9,7 @@ class CategoryRepository extends EntityRepository
 {
     /**
      * @param $id
-     * @return Category
+     * @return Category|object
      */
     public function get($id)
     {

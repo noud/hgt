@@ -9,7 +9,7 @@
                     <ul>
                         {% for category in categories %}
                             <li>
-                                <a href="{{ category.id }}" class="listing">
+                                <a href="{{ path('category_view', {'id': category.id }) }}" class="listing">
                                     {{ category.name }}
                                     <span class="icon"><i class="fa fa-chevron-right"></i></span>
                                 </a>

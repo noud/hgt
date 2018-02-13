@@ -1,0 +1,31 @@
+<div style="border-bottom:1px solid #CCC;padding:1em 0;">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="http://via.placeholder.com/133x105{# product.picture.filename #}" alt="{{ product.name }}" style="width:133px;height:105px;"/>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>
+                        <a href="#">
+                            {{ product.name|upper }}
+                        </a>
+                    </h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ product.manufacturer.name|upper }}
+                </div>
+                <div class="col-sm-6">
+                    {{ product.volume }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12" style="text-align:right;">
+                    <button>[ Bestel ]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,6 +2,7 @@
 
 namespace HGT\Application\Catalog\Category;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,12 +11,22 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="HGT\Application\Catalog\Product\Product", mappedBy="category")
+     */
+    private $products;
 
     /**
      * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Category\Category", inversedBy="category")
@@ -88,6 +99,14 @@ class Category
      * @ORM\Column(type="integer", options={"default":0})
      */
     private $level;
+
+    /**
+     * @return array
+     */
+    public function getProducts()
+    {
+        return $this->products->toArray();
+    }
 
     /**
      * @return string

@@ -2,14 +2,14 @@
 
 {% block body %}
     <div class="wrapper">
-        <h1>{{ categoryInfo.name }}</h1>
+        <h1>{{ category.name }}</h1>
         {% if categories %}
             <div class="row">
                 <div class="col-md-3">
                     <ul>
                         {% for category in categories %}
                             <li>
-                                <a href="{{ category.id }}" class="listing">
+                                <a href="{{ path('category_view', {'id': category.id }) }}" class="listing">
                                     {{ category.name }}
                                     <span class="icon"><i class="fa fa-chevron-right"></i></span>
                                 </a>
@@ -34,7 +34,9 @@
                 </div>
             </div>
         {% else %}
-            {{ products }}
+            {% for product in category.products %}
+                {{  include('_partials/catalog/product/item.html.twig', {'product' : product }) }}
+            {% endfor %}
         {% endif %}
     </div>
 {% endblock %}
