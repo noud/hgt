@@ -19,4 +19,15 @@ class FolderPageService
     {
         $this->folderPageRepository = $folderPageRepository;
     }
+
+    public function getFolderPageById()
+    {
+
+    }
+
+    public function getFolderPagesByFolderId($folder_id)
+    {
+        return $this->folderPageRepository->getFolderPagesByFolderId($folder_id);
+    }
+
 }
