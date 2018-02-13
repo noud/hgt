@@ -27,7 +27,7 @@ class CategoryController extends Controller
     {
         $categories = $categoryService->getHomeCategories("NULL");
 
-        return $this->render('category/index.html.twig', [
+        return $this->render('catalog/category/index.html.twig', [
             'categories' => $categories
         ]);
     }
@@ -42,11 +42,16 @@ class CategoryController extends Controller
     public function viewAction($id, Request $request, CategoryService $categoryService)
     {
         $category = $categoryService->get($id);
+        $parentId = $category->getParent() ? $category->getParent()->getId() : null;
+        $parentCategory = $categoryService->getParentCategory($parentId);
         $superCategories = $categoryService->getCategoriesWithProducts($id);
 
-        return $this->render('category/view.html.twig', [
+        $parentCategories = ($parentCategory !== null ? $categoryService->getSuperCategoriesWithProducts($parentId) : $categoryService->getCategoriesWithProducts("NULL"));
+
+        return $this->render('catalog/category/view.html.twig', [
             'category' => $category,
-            'categories' => $superCategories
+            'categories' => $superCategories,
+            'parentCategories' => $parentCategories,
         ]);
     }
 }

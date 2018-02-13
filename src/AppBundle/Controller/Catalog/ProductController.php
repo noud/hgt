@@ -17,12 +17,15 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/category", name="product_view")
+     * @Route("/product/view/{id}", name="product_view")
+     * @param $id
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function viewAction($id, Request $request)
     {
-        return null;
+        return $this->render('catalog/product/view.html.twig', [
+            'id' => $id,
+        ]);
     }
 }

@@ -1,31 +1,45 @@
-<div style="border-bottom:1px solid #CCC;padding:1em 0;">
+<div class="product">
     <div class="row">
-        <div class="col-md-3">
-            <img src="http://via.placeholder.com/133x105{# product.picture.filename #}" alt="{{ product.name }}" style="width:133px;height:105px;"/>
+        <div class="col-md-3 product-image">
+            <img src="http://via.placeholder.com/133x105{# product.picture.filename #}" alt="{{ product.name }}" />
         </div>
         <div class="col-md-9">
             <div class="row">
                 <div class="col-md-12">
                     <h2>
-                        <a href="#">
+                        <a href="{{ path('product_view', { 'id': product.id }) }}">
                             {{ product.name|upper }}
                         </a>
                     </h2>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6">
-                    {{ product.manufacturer.name|upper }}
+                <div class="col-sm-5">
+                    {{ product.manufacturer.name }}
                 </div>
-                <div class="col-sm-6">
-                    {{ product.volume }}
+                <div class="col-sm-3">
+                    <span class="amount">{{ product.volume }}</span>
+                </div>
+                <div class="col-sm-4 price">
+                    {% if app.user %}
+                        <strong>{{ product.price|price|raw }}</strong>
+                    {% endif %}
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12" style="text-align:right;">
-                    <button>[ Bestel ]</button>
+                <div class="col-sm-12 add-to-cart">
+                    <div>
+                        <button>[ Bestel ]</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .product {border-bottom:1px solid #AAA;padding:1em 0;}
+    .product .product-image img {width:133px;height:105px}
+    .amount {color:#808080;}
+    .price, .add-to-cart {text-align:right;}
+</style>

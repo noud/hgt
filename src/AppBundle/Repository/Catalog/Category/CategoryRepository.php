@@ -47,15 +47,19 @@ class CategoryRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getCategoriesWithProducts($id)
+    /**
+     * @param $parent_id
+     * @return array
+     */
+    public function getCategoriesWithProducts($parent_id)
     {
         $qb = $this->createQueryBuilder('q');
 
-        if($id === "NULL") {
+        if($parent_id === "NULL") {
             $qb->where('q.parent IS NULL');
         } else {
             $qb->where('q.parent = :parent_id')
-                ->setParameter('parent_id', $id);
+                ->setParameter('parent_id', $parent_id);
         }
 
         $qb->andWhere('q.total_product_count > 0');

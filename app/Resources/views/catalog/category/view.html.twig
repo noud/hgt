@@ -1,0 +1,78 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .title {padding-bottom:1em;margin-bottom:2em;border-bottom:1px solid #DDD;}
+        .title h1 {color:#ff671f;}
+        .categories nav ul li .active {font-weight:bold;}
+        .categories .category {border:1px solid #DDD;text-align:center;}
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="wrapper">
+        <div class="row title">
+            <div class="col-md-3">
+                {% if category.parent %}
+                    <a href="{{ path('category_view', {'id': category.parent.id }) }} ">Terug</a>
+                {% else %}
+                    <a href="{{ path('category_index') }} ">Terug</a>
+                {% endif %}
+            </div>
+            <div class="col-md-9">
+                <h1>{{ category.name }}</h1>
+            </div>
+        </div>
+        <div class="row categories">
+            <div class="col-md-3">
+                <nav>
+                    <ul>
+                        {% for parentCategory in parentCategories %}
+                            <li>
+                                <a href="{{ path('category_view', {'id': parentCategory.id }) }}" class="listing{% if app.request.attributes.get('id') == parentCategory.id %} active{% endif %}">
+                                    {{ parentCategory.name }}
+                                    <span class="icon"><i class="fa fa-chevron-right"></i></span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+            {% if categories %}
+                <div class="col-md-9">
+                    <div class="row">
+                        {% set i = 0 %}
+                        {% for category in categories %}
+                            {% set i = i + 1 %}
+                            <div class="col-md-4 category">
+                                <a href="{{ path('category_view', { 'id': category.id }) }}">
+                                    <div>
+                                        <img src="http://via.placeholder.com/250x250{# category.picture #}" alt="{{ category.name }}" />
+                                    </div>
+                                    <div>
+                                        {{ category.name }}
+                                        <span class="amount">({{ category.totalProductCount }})</span>
+                                    </div>
+                                </a>
+                            </div>
+                            {% if i % 3 == 0 %}
+                                </div><div class="row">
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-md-9">
+                    {% if category.products %}
+                        {% for product in category.products %}
+                            {{  include('_partials/catalog/product/item.html.twig', {'product' : product }) }}
+                        {% endfor %}
+                    {% else %}
+                        <p>Geen categorieën/producten gevonden in deze categorie.</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
