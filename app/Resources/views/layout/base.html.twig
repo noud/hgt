@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}" />
     {% block stylesheets %}{% endblock %}
 </head>
-<body>
+<body class="{% block bodyClass %}{% endblock %}">
     <div class="rwd"></div>
     <header class="page-header">
         <div class="header-main">
@@ -29,7 +29,7 @@
                     </div>
                     <div>
                         Hulp nodig bij je bestelling?
-                        <a href="tel:{{ company_phonenumber|replace({' ':''}) }}">{{ company_phonenumber }}</a>
+                        <a class="phone" href="tel:{{ company_phonenumber|replace({' ':''}) }}">{{ company_phonenumber }}</a>
                     </div>
                 </div>
                 <div class="header-branding">

@@ -10,9 +10,6 @@
 }
 
 
-
-/* forms
-  ---------------------------------------------------------------------------------------------------------------------- */
 .form-sticky {
   display: flex;
 
@@ -26,10 +23,53 @@
     border-bottom-right-radius: 0;
     border-right: none;
   }
-
 }
 
 
+.form-base {
+  > .form-group {
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  .meta {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+
+    a {
+      color: @primary-color;
+    }
+
+    button {
+      margin-right: 20px;
+    }
+
+  }
+}
+
+
+
+.alert {
+  margin-bottom: 30px;
+  font-size: @font-size-sm;
+  font-weight: @font-weight-semi-bold;
+  border: @border;
+  padding: 5px;
+
+  &.alert-danger {
+    color: red;
+  }
+
+  &.alert-success {
+    color: green;
+  }
+
+}
+
+/* specific
+  ---------------------------------------------------------------------------------------------------------------------- */
 
 .newsletter {
 
@@ -54,3 +94,6 @@
   }
 
 }
+
+
+
