@@ -24,7 +24,20 @@ class IndexController extends Controller
      */
     public function indexAction(Request $request, FolderService $folderService)
     {
+
+        $i = 0;
+        foreach($folderService->getActiveFolders() as $item) {
+            $i++;
+        }
+
+        if($i % 2 == 0) {
+            $isEven = true;
+        } else {
+            $isEven = false;
+        }
+
         return $this->render('folder/index.html.twig', [
+            'isEven' => $isEven,
             'folders' => $folderService->getActiveFolders(),
         ]);
     }
@@ -34,61 +47,6 @@ class IndexController extends Controller
      */
     public function viewAction(Request $request, FolderService $folderService, FolderPageService $folderPageService, $id)
     {
-
-//        $someArr = [
-//
-//            'page_id' => 1,
-//            'content' =>
-//                [
-//                    'left' => '1.jpg',
-//                    'right' => '2.jpg',
-//                ],
-//
-//            'page_id' => 2,
-//            'content' =>
-//                [
-//                    'left' => '3.jpg',
-//                    'right' => '4.jpg'
-//                ]
-//            ]
-//        ];
-
-
-        $i = 0;
-
-        $images = count($folderPageService->getFolderPagesByFolderId($id));
-        $pages = ceil($images / 2);
-
-        dump($images);
-        dump($pages);
-
-
-
-
-
-
-//
-//
-//        foreach($folderPageService->getFolderPagesByFolderId($id) as $item) {
-//
-//            $i++;
-//
-//            if ($i % 2 == 0) {
-//                dump($item);
-//                $someArr['left'] = $item;
-//                //dump('right');
-//            } else {
-//                $someArr['right'] = $item;
-//
-//            }
-//
-//        }
-//
-//        dump($someArr);
-
-
-
-
         return $this->render('folder/view.html.twig', [
             'folder' => $folderService->getFolder($id),
             'folder_images' => $folderPageService->getFolderPagesByFolderId($id),

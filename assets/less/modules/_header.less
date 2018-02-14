@@ -26,7 +26,7 @@
 
     @media @md {
       transform: translate(0, -80px);
-
+      opacity: 0;
     }
 
   }
@@ -102,7 +102,6 @@
   }
 
   form {
-    width: 100%;
     margin-right: 50px;
 
     @media @sm {
@@ -121,9 +120,15 @@
         width: 40px;
         flex-shrink: 0;
       }
+
       &:first-child {
-        flex-grow: 1;
+        @media @sm {
+          flex-grow: 1;
+        }
       }
+
+
+
     }
 
   }
@@ -199,7 +204,7 @@
     font-weight: @font-weight-bold;
   }
 
-  a {
+  .phone {
 
     &:before {
       margin-right: 5px;
@@ -268,7 +273,7 @@
     position: absolute;
     right: 30px;
     top: 30px;
-    z-index: 3;
+    z-index: 999;
 
     &:after {
       content: '\f00d';
