@@ -67,16 +67,15 @@
   padding-bottom: 20px;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1);
 
-  .wrapper {
+  .container {
     display: flex;
     > div {
-      flex-shrink: 0;
-
       &:first-child {
         width: 25%;
+        flex-shrink: 0;
 
-        @media @sm {
-          width: 0;
+        @media @md {
+          display: none;
         }
       }
 
@@ -103,14 +102,12 @@
   }
 
   form {
+    width: 100%;
     margin-right: 50px;
+
     @media @sm {
       margin-right: 0;
       width: 100%;
-    }
-
-    > * {
-      flex-shrink: 1;
     }
 
     > .form-group {
@@ -119,7 +116,19 @@
       }
     }
 
+    > div {
+      &:last-child {
+        width: 40px;
+        flex-shrink: 0;
+      }
+      &:first-child {
+        flex-grow: 1;
+      }
+    }
+
   }
+
+
 
 }
 
@@ -128,7 +137,7 @@
   height: auto;
   display: block;
 
-  @media (max-width: @wrapper-padding-bp) {
+  @media @lg {
     width: 45px;
   }
 
@@ -137,7 +146,7 @@
     bottom: -30px;
     margin-bottom: -30px;
 
-    @media (max-width: @wrapper-padding-bp) {
+    @media @lg {
       bottom: auto;
       margin-bottom: auto;
     }
@@ -208,7 +217,7 @@
   padding-top: 10px;
   padding-bottom: 20px;
 
-  @media (max-width: @wrapper-padding-bp) {
+  @media @lg {
     height: 70px;
   }
 
@@ -286,7 +295,7 @@
     position: fixed;
     z-index: 2;
 
-    padding: 50px @wrapper-padding 50px @wrapper-padding;
+    padding: 50px 20px 50px 20px;
 
     width: 50%;
     height: 100%;

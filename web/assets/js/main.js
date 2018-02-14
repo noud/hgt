@@ -13405,9 +13405,10 @@ $(document).ready(function () {
     }
   };
 
-  var initSlick = function () {
+  var initHero = function () {
     if ($body.find('*').hasClass('js-hero')) {
       $('.hero').slick({
+        'adaptiveHeight': true,
         'arrows': true,
         'prevArrow': '<a role="button" class="slick-prev"><i class="fas fa-chevron-left"></i></a>',
         'nextArrow': '<a role="button" class="slick-next"><i class="fas fa-chevron-right"></i></a>'
@@ -13415,7 +13416,21 @@ $(document).ready(function () {
     }
   };
 
-  executeAsync([initSlick, initShoppingCartLabel], 50);
+  var initFolderSlider = function () {
+    if ($body.find('*').hasClass('js-folder-slider')) {
+      $('.folder-slider').slick({
+        'slidesToScroll': 2,
+        'infinite': false,
+        'slidesToShow': 2,
+        'adaptiveHeight': true,
+        'arrows': true,
+        'prevArrow': '<a role="button" class="slick-prev"><i class="fas fa-chevron-left"></i></a>',
+        'nextArrow': '<a role="button" class="slick-next"><i class="fas fa-chevron-right"></i></a>'
+      });
+    }
+  };
+
+  executeAsync([initHero, initFolderSlider, initShoppingCartLabel], 50);
 
 });
 
