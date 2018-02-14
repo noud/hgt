@@ -1,19 +1,18 @@
+@grid-gutter-width: 30px;
+
+@container-tablet: (720px + @grid-gutter-width);
+@container-sm: @container-tablet;
+@container-desktop: (940px + @grid-gutter-width);
+@container-md: @container-desktop;
+@container-large-desktop: (1140px + @grid-gutter-width);
+@container-lg: @container-large-desktop;
+
 @header-height: 221px;
 
-@wrapper-padding-bp: 1180px;
-@wrapper-width: 1140px;
-@wrapper-padding: 20px;
-
-@lg-screen: 1199px;
-@md-screen: 991px;
-@sm-screen: 767px;
-@xs-screen: 480px;
-
-@lg: ~"(max-width: @{lg-screen})";
-@md: ~"(max-width: @{md-screen})";
-@sm: ~"(max-width: @{sm-screen})";
-@xs: ~"(max-width: @{xs-screen})";
-@special: ~"(max-width: 550px)";
+@lg: ~"(max-width: @{screen-md-max})";
+@md: ~"(max-width: @{screen-sm-max})";
+@sm: ~"(max-width: @{screen-sm-min})";
+@xs: ~"(max-width: @{screen-xs})";
 
 @images: "../images";
 @svg: "../svg";
@@ -22,8 +21,6 @@
 @secondary-color: #fec62b;
 @highlight-color: #009900;
 
-@border: 1px solid #cccccc;
-@border-radius: 5px;
 
 @fa: 'FontAwesome';
 @font-family: 'Open Sans', sans-serif;
@@ -48,11 +45,12 @@
 @line-height-heading: 1.1;
 @line-height: 1.4;
 
+@border: 1px solid #cccccc;
+@border-radius: 5px;
+
 @form-control-shadow: inset 3px 3px 3px 1px #dddddd;
 @form-control-height: 40px;
 @form-control-height-lg: 70px;
 @form-control-border: 1px solid #aaa;
 
 @bevel: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
-
-@testingshadow: inset 0 0.25rem 0.125rem 0 rgba(0,0,0,.5);
