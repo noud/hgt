@@ -21,10 +21,10 @@
 
         {% if error %}
           <div class="alert alert-danger">
-            {% if error.message %}
-              {{ error.message|trans([], 'security') }}
+            {% if error.messageKey %}
+                {{ error.messageKey|trans(error.messageData, 'security') }}
             {% else %}
-              {{ error.messageKey|trans(error.messageData, 'security') }}
+                {{ error.message|trans([], 'security') }}
             {% endif %}
           </div>
         {% endif %}

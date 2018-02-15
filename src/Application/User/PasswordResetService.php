@@ -6,6 +6,7 @@ use HGT\AppBundle\Mailer\Customer\NewPassword;
 use HGT\AppBundle\Mailer\Customer\PasswordResetLink;
 use HGT\AppBundle\Mailer\Sender\AccountSender;
 use HGT\AppBundle\PasswordReset\RandomPasswordGenerator;
+use HGT\Application\User\Customer\PasswordResetListener;
 
 class PasswordResetService
 {
@@ -30,22 +31,31 @@ class PasswordResetService
     private $randomPasswordGenerator;
 
     /**
+     * @var PasswordResetListener
+     */
+    private $passwordResetListener;
+
+    /**
      * PasswordResetService constructor.
+     *
      * @param AccountSender $accountSender
      * @param CustomerService $customerService
      * @param PasswordResetHashService $passwordResetHashService
      * @param RandomPasswordGenerator $randomPasswordGenerator
+     * @param PasswordResetListener $passwordResetListener
      */
     public function __construct(
         AccountSender $accountSender,
         CustomerService $customerService,
         PasswordResetHashService $passwordResetHashService,
-        RandomPasswordGenerator $randomPasswordGenerator
+        RandomPasswordGenerator $randomPasswordGenerator,
+        PasswordResetListener $passwordResetListener
     ) {
         $this->accountSender = $accountSender;
         $this->customerService = $customerService;
         $this->passwordResetHashService = $passwordResetHashService;
         $this->randomPasswordGenerator = $randomPasswordGenerator;
+        $this->passwordResetListener = $passwordResetListener;
     }
 
     /**
@@ -107,6 +117,9 @@ class PasswordResetService
         $newPasswordData->password = $newPassword;
 
         $this->accountSender->sendNewPassword($newPasswordData);
+
+        // Reset login attempts and locked account
+        $this->passwordResetListener->onPasswordReset($username);
 
         // 6. Clear all password reset hashes
         $this->passwordResetHashService->makeAllUserHashesInvalid($username);

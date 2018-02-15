@@ -16,6 +16,7 @@ class LoginController extends Controller
 
     /**
      * LoginController constructor.
+     *
      * @param AuthenticationUtils $authenticationUtils
      */
     public function __construct(AuthenticationUtils $authenticationUtils)
@@ -28,6 +29,11 @@ class LoginController extends Controller
      */
     public function loginAction()
     {
+        // Redirect teacher and student when already logged in
+        if ($this->isGranted('ROLE_CUSTOMER')) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $error = $this->authenticationUtils->getLastAuthenticationError();
 
         $form = $this->createForm(LoginForm::class, [
@@ -35,7 +41,7 @@ class LoginController extends Controller
         ]);
 
         return $this->render('account/login.html.twig', array(
-            'form' => $form->createView(),
+            'form'  => $form->createView(),
             'error' => $error
         ));
     }

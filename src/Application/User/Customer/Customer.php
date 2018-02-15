@@ -393,4 +393,12 @@ class Customer implements UserInterface
            $this->last_name,
         ]);
     }
+
+    /**
+     * @return bool
+     */
+    public function isBlocked()
+    {
+        return $this->blocked;
+    }
 }

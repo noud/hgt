@@ -2,13 +2,18 @@
 
 namespace HGT\AppBundle\Security;
 
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManager;
 use HGT\AppBundle\Form\Customer\LoginForm;
 use HGT\Application\User\Customer\Customer;
 use HGT\Application\User\CustomerService;
+use HGT\Application\User\Event\SuccessfulLoginEvent;
+use HGT\Application\User\LockingService;
+use HGT\Application\User\Query\IsAccountLockedQuery;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Exception\LockedException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -26,39 +31,51 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      * @var FormFactoryInterface
      */
     private $formFactory;
+
     /**
      * @var CustomerService
      */
     private $customerService;
+
     /**
      * @var PasswordEncoder
      */
     private $passwordEncoder;
+
     /**
      * @var EntityManager
      */
     private $entityManager;
 
     /**
+     * @var LockingService
+     */
+    private $lockingService;
+
+    /**
      * LoginFormAuthenticator constructor.
+     *
      * @param FormFactoryInterface $formFactory
      * @param RouterInterface $router
      * @param CustomerService $customerService
      * @param PasswordEncoder $passwordEncoder
      * @param EntityManager $entityManager
+     * @param LockingService $lockingService
      */
     public function __construct(
         FormFactoryInterface $formFactory,
         RouterInterface $router,
         CustomerService $customerService,
         PasswordEncoder $passwordEncoder,
-        EntityManager $entityManager
+        EntityManager $entityManager,
+        LockingService $lockingService
     ) {
         $this->router = $router;
         $this->formFactory = $formFactory;
         $this->customerService = $customerService;
         $this->passwordEncoder = $passwordEncoder;
         $this->entityManager = $entityManager;
+        $this->lockingService = $lockingService;
     }
 
     /**
@@ -67,6 +84,16 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     protected function getLoginUrl()
     {
         return $this->router->generate('account_login');
+    }
+
+    private function isCustomerLocked($username)
+    {
+        // Check if the user is locked
+        $query = new IsAccountLockedQuery();
+        $query->username = $username;
+        $query->timestamp = new DateTimeImmutable();
+
+        return $this->lockingService->isAccountLockedAt($query);
     }
 
     /**
@@ -120,23 +147,53 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function checkCredentials($credentials, UserInterface $user)
     {
-        $password = $credentials['account_password'];
+        // Check if the account is locked
+        if ($this->isCustomerLocked($credentials['account_username'])) {
+            throw new LockedException('Customer account is locked.');
+        }
 
-        if ($user instanceof Customer && null === $user->getPassword()) {
+        $password = $credentials['account_password'];
+        $success = false;
+
+        if ($user instanceof Customer) {
             /** @var Customer $customer */
             $customer = $user;
 
-            if ($this->passwordEncoder->isOldPasswordValid($user, $password)) {
-                $this->customerService->updatePassword($customer->getId(), $password);
-                $this->entityManager->flush();
-
-                return true;
+            // Check if the account is blocked
+            if ($customer->isBlocked()) {
+                throw new LockedException('Customer account is blocked.');
             }
 
-            return false;
+            if (null === $user->getPassword()) {
+                if ($this->passwordEncoder->isOldPasswordValid($user, $password)) {
+                    $this->customerService->updatePassword($customer->getId(), $password);
+                    $this->entityManager->flush();
+
+                    $this->onSuccessfulLoginEvent($credentials);
+                    return true;
+                }
+
+                return false;
+            }
         }
 
-        return $this->passwordEncoder->isPasswordValid($user, $password);
+        $success = $this->passwordEncoder->isPasswordValid($user, $password);
+
+        if ($success) {
+            $this->onSuccessfulLoginEvent($credentials);
+        }
+
+        return $success;
+    }
+
+    private function onSuccessfulLoginEvent($credentials)
+    {
+        $event = new SuccessfulLoginEvent();
+        $event->username = $credentials['account_username'];
+        $event->timestamp = new DateTimeImmutable();
+
+        $this->lockingService->handleSuccessfulLogin($event);
+        $this->entityManager->flush();
     }
 
     /**
