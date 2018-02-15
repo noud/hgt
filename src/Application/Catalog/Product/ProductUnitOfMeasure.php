@@ -46,4 +46,12 @@ class ProductUnitOfMeasure
      * @ORM\Column(type="boolean", options={"default":0})
      */
     private $selected;
+
+    /**
+     * @return mixed
+     */
+    public function getUnitOfMeasure()
+    {
+        return $this->unit_of_measure;
+    }
 }

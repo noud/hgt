@@ -29,11 +29,7 @@
                     </div>
                     <div>
                         Hulp nodig bij je bestelling?
-<<<<<<< HEAD
-                        <a href="{{ config_manager.get('company_phonenumber', '')|phone_href }}">{{ config_manager.get('company_phonenumber', '') }}</a>
-=======
-                        <a class="phone" href="tel:{{ company_phonenumber|replace({' ':''}) }}">{{ company_phonenumber }}</a>
->>>>>>> master
+                        <a class="phone"  href="{{ config_manager.get('company_phonenumber', '')|phone_href }}">{{ config_manager.get('company_phonenumber', '') }}</a>
                     </div>
                 </div>
                 <div class="header-branding">
@@ -74,11 +70,11 @@
                             <span class="label">Mijn bestellijst</span>
                         </a>
                         <a href="#" class="btn btn-icon-label shopping-cart js-shopping-cart">
-                            <span class="icon"><i class="fas fa-shopping-cart"></i><span>1337</span></span>
+                            <span class="icon"><i class="fas fa-shopping-cart"></i><span>0</span></span>
                             <span class="label">Winkelwagen</span>
                         </a>
                     {% else %}
-                        <a href="#" class="btn btn-icon-label">
+                        <a href="{{ path('account_signup') }}" class="btn btn-icon-label">
                             <span class="icon"><i class="fas fa-user"></i></span>
                             <span class="label">Klant worden</span>
                         </a>
@@ -122,7 +118,7 @@
                         <h4>Informatie</h4>
                         <ul class="footer-list">
                             <li><a href="#">Over ons</a></li>
-                            <li><a href="#">Klant worden</a></li>
+                            <li><a href="{{ path('account_signup') }}">Klant worden</a></li>
                             <li><a href="#">Veelgestelde vragen</a></li>
                             <li><a href="#">Over ons</a></li>
                             <li><a href="#">Leverings- en betalingsvoorwaarden</a></li>

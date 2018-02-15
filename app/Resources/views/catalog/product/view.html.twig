@@ -6,7 +6,14 @@
         .title {padding-bottom:1em;margin-bottom:2em;border-bottom:1px solid #DDD;}
         .title h1 {color:#ff671f;}
         .categories nav ul li .active {font-weight:bold;}
-        .categories .category {border:1px solid #DDD;text-align:center;}
+        .categories .category {border:1px solid #BBB;text-align:center;}
+        .product-detail .unit_of_measure_id {margin-right:20px;}
+        .product-detail .price { font-size: 24px;}
+        .product-detail .block {display:block;}
+        .product-detail .block.volume {color:#BBB;}
+        .product-detail .add-to-cart {display:flex;width:260px;background-color:orange;padding:1em;border-radius:10px}
+        .product-detail .add-to-cart input[type=text] {padding:10px;border-radius:10px;margin-right:10px;}
+        .product-detail .add-to-orderlist {border-bottom:1px solid #DDD;border-top:1px solid #DDD;margin-top:1em;padding:1em;}
     </style>
 {% endblock %}
 
@@ -50,25 +57,38 @@
                             <img src="http://via.placeholder.com/250x250{# product.mainPicture #}" />
                         </div>
                         <div class="col-md-9">
-                            <div class="content">
+                            <div class="product-detail content">
                                 <p>
-                                    <span style="display:block;"><a href="#">{{ product.manufacturer.name }}</a></span>
-                                    <span style="display:block;">Inhoud: {{ product.volume }}</span>
+                                    <span class="block"><a href="#">{{ product.manufacturer.name }}</a></span>
+                                    <span class="block volume">Inhoud: {{ product.volume }}</span>
                                 </p>
-                                <div>
-                                    <select>
-                                        <option>DOOS</option>
-                                    </select> | {{ product.price|price }}
-                                </div>
                                 {% if app.user %}
-                                    <input type="text" placeholder="Aantal stuks"> [ Bestel ]
-                                {% else %}
-                                    <a href="#" class="btn btn-icon-label">
-                                        <span class="icon"><i class="fa fa-shopping-cart"></i></span>
-                                        <span class="label">Login om het product te bestellen</span>
-                                    </a>
-                                {% endif %}
-                                <div>{{ product.description }}</div>
+                                    <p>
+                                        <select class="unit_of_measure_id">
+                                            {% for unitOfMeasure in productUnitOfMeasure %}
+                                                <option>{{ unitOfMeasure.UnitOfMeasure.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <span class="price">{{ product.price|price }}</span>
+                                    </p>
+                                    <p>
+                                        <div class="add-to-cart">
+                                            <input type="text" placeholder="Aantal stuks">
+                                            <button>Bestel</button>
+                                        </div>
+                                        <div class="add-to-orderlist">
+                                            <a href="#" onclick="addToOrderList();return false;">Toevoegen aan bestellijst</a>
+                                        </div>
+                                    {% else %}
+                                        <a href="{{ path('account_login') }}" class="btn btn-icon-label">
+                                            <span class="icon"><i class="fa fa-shopping-cart"></i></span>
+                                            <span class="label">Login om het product te bestellen</span>
+                                        </a>
+                                    {% endif %}
+                                </p>
+                                <p>
+                                    {{ product.description }}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -78,4 +98,13 @@
             {% endif %}
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        function addToOrderList() {
+            alert('Actie');
+        }
+    </script>
 {% endblock %}

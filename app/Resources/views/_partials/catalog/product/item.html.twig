@@ -1,3 +1,10 @@
+<style>
+    .product {border-bottom:1px solid #AAA;padding:1em 0;}
+    .product .product-image img {width:133px;height:105px}
+    .amount {color:#808080;}
+    .price, .add-to-cart {text-align:right;}
+</style>
+
 <div class="product">
     <div class="row">
         <div class="col-md-3 product-image">
@@ -22,24 +29,20 @@
                 </div>
                 <div class="col-sm-4 price">
                     {% if app.user %}
-                        <strong>{{ product.price|price|raw }}</strong>
+                        <strong>{{ product.price|price }}</strong>
                     {% endif %}
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12 add-to-cart">
                     <div>
-                        <button>[ Bestel ]</button>
+                        <a href="#" class="btn btn-icon-label">
+                            <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+                            <span class="label">Bestel</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<style>
-    .product {border-bottom:1px solid #AAA;padding:1em 0;}
-    .product .product-image img {width:133px;height:105px}
-    .amount {color:#808080;}
-    .price, .add-to-cart {text-align:right;}
-</style>

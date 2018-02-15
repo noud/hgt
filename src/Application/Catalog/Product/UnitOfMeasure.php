@@ -36,12 +36,4 @@ class UnitOfMeasure
     {
         return $this->name;
     }
-
-    /**
-     * @return string
-     */
-    public function getNavisionId()
-    {
-        return $this->navision_id;
-    }
 }
