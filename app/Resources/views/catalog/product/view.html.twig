@@ -1,1 +1,110 @@
-{{ id }}
+{% extends 'layout/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .title {padding-bottom:1em;margin-bottom:2em;border-bottom:1px solid #DDD;}
+        .title h1 {color:#ff671f;}
+        .categories nav ul li .active {font-weight:bold;}
+        .categories .category {border:1px solid #BBB;text-align:center;}
+        .product-detail .unit_of_measure_id {margin-right:20px;}
+        .product-detail .price { font-size: 24px;}
+        .product-detail .block {display:block;}
+        .product-detail .block.volume {color:#BBB;}
+        .product-detail .add-to-cart {display:flex;width:260px;background-color:orange;padding:1em;border-radius:10px}
+        .product-detail .add-to-cart input[type=text] {padding:10px;border-radius:10px;margin-right:10px;}
+        .product-detail .add-to-orderlist {border-bottom:1px solid #DDD;border-top:1px solid #DDD;margin-top:1em;padding:1em;}
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container product">
+        <div class="row title">
+            {% if product %}
+                <div class="col-md-3">
+                    <a href="{{ path('category_index') }} ">Terug</a>
+                </div>
+                <div class="col-md-9">
+                    <h1>{{ product.name|upper }}</h1>
+                </div>
+            {% else %}
+                <div class="col-md-12">
+                    <h1>Product niet gevonden</h1>
+                </div>
+            {% endif %}
+        </div>
+        <p class="row">
+            {% if product %}
+                <div class="col-md-3 categories">
+                    {% if parentCategories %}
+                        <nav>
+                            <ul>
+                                {% for parentCategory in parentCategories %}
+                                    <li>
+                                        <a href="{{ path('category_view', {'id': parentCategory.id }) }}" class="listing{% if product.category.id == parentCategory.id %} active{% endif %}">
+                                            {{ parentCategory.name }}
+                                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </nav>
+                    {% endif %}
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="http://via.placeholder.com/250x250{# product.mainPicture #}" />
+                        </div>
+                        <div class="col-md-9">
+                            <div class="product-detail content">
+                                <p>
+                                    <span class="block"><a href="#">{{ product.manufacturer.name }}</a></span>
+                                    <span class="block volume">Inhoud: {{ product.volume }}</span>
+                                </p>
+                                {% if app.user %}
+                                    <p>
+                                        <select class="unit_of_measure_id">
+                                            {% for unitOfMeasure in productUnitOfMeasure %}
+                                                <option>{{ unitOfMeasure.UnitOfMeasure.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <span class="price">{{ product.price|price }}</span>
+                                    </p>
+                                    <p>
+                                        <div class="add-to-cart">
+                                            <input type="text" placeholder="Aantal stuks">
+                                            <button>Bestel</button>
+                                        </div>
+                                        <div class="add-to-orderlist">
+                                            <a href="#" onclick="addToOrderList();return false;">Toevoegen aan bestellijst</a>
+                                        </div>
+                                    {% else %}
+                                        <a href="{{ path('account_login') }}" class="btn btn-icon-label">
+                                            <span class="icon"><i class="fa fa-shopping-cart"></i></span>
+                                            <span class="label">Login om het product te bestellen</span>
+                                        </a>
+                                    {% endif %}
+                                </p>
+                                <p>
+                                    {{ product.description }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p>Het product dat je probeert te bekijken bestaat niet.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        function addToOrderList() {
+            alert('Actie');
+        }
+    </script>
+{% endblock %}

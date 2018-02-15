@@ -2,7 +2,11 @@
 
 namespace HGT\Application\Catalog\Product;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
+use HGT\Application\Catalog\Category\Category;
+use HGT\Application\Catalog\Manufacture\Manufacturer;
 
 /**
  * @ORM\Entity(repositoryClass="HGT\AppBundle\Repository\Catalog\Product\ProductRepository")
@@ -18,6 +22,7 @@ class Product
     private $id;
 
     /**
+     * @var PersistentCollection
      * @ORM\ManyToMany(targetEntity="HGT\Application\Catalog\Category\Category")
      * @ORM\JoinTable(name="product_category",
      *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
@@ -102,11 +107,31 @@ class Product
     private $mail_order_to_supplier;
 
     /**
-     * @return mixed
+     * @return Category|null
+     */
+    public function getCategory()
+    {
+        if ($this->category->count() === 0) {
+            return null;
+        }
+
+        return $this->category->first();
+    }
+
+    /**
+     * @return Manufacturer
      */
     public function getManufacturer()
     {
         return $this->manufacturer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMainPicture()
+    {
+        return $this->main_picture;
     }
 
     /**
@@ -123,6 +148,14 @@ class Product
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**

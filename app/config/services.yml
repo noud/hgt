@@ -46,6 +46,11 @@ services:
         arguments:
             - HGT\Application\Catalog\Category\Category
 
+    HGT\AppBundle\Repository\Content\Config\ConfigRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\Content\Config\Config
+
     HGT\AppBundle\Repository\User\Customer\CustomerRepository:
         factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:

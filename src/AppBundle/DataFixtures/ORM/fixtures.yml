@@ -14,6 +14,31 @@ HGT\Application\Catalog\Category\Category:
         total_product_count: <numberBetween(1, 250)>
         level: <numberBetween(1, 4)>
 
+### CONFIG
+
+HGT\Application\Content\Config\Config:
+    config_1:
+        name: 'company_city'
+        value: 'Tilburg'
+    config_2:
+        name: 'company_name'
+        value: 'Horeca Groothandel Tilburg'
+    config_3:
+        name: 'company_phonenumber'
+        value: '013 - 571 17 90'
+    config_4:
+        name: 'company_street'
+        value: 'Polluxstraat 6'
+    config_5:
+        name: 'company_zipcode'
+        value: '06 - 10 99 33 20'
+    config_6:
+        name: 'company_vatnumber'
+        value: 'NL8072.96.533.B01'
+    config_7:
+        name: 'company_coc_number'
+        value: '18046208'
+
 ### CUSTOMER
 
 HGT\Application\User\Customer\Customer:
@@ -21,7 +46,7 @@ HGT\Application\User\Customer\Customer:
         navision_id: 'CON33745'
         username: '33744'
         blocked: false
-        old_password: 'baa00fec0001de9905a8f74ed923cb0968740044'
+        password: '$2y$13$Xv0.AugQq/2ieCrx5c3UAOWx0pU1TwGwpdHGM/1YsIVOGnzbP49Em'
         first_name: 'Kevin van'
         last_name: 'Laak'
         company: 'Webdesign Tilburg'
