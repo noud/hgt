@@ -28,4 +28,20 @@ class UnitOfMeasure
      * @ORM\Column(type="string", length=16)
      */
     private $navision_id;
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNavisionId()
+    {
+        return $this->navision_id;
+    }
 }

@@ -39,7 +39,7 @@ class CategoryController extends Controller
      * @param CategoryService $categoryService
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction($id, Request $request, CategoryService $categoryService)
+    public function viewAction(Request $request, CategoryService $categoryService, $id)
     {
         $category = $categoryService->get($id);
         $parentId = $category->getParent() ? $category->getParent()->getId() : null;

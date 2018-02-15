@@ -36,7 +36,7 @@ class ProductUnitOfMeasure
     private $qty_per_unit_of_measure;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\UnitOfMeasure", inversedBy="product_category")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\UnitOfMeasure", fetch="LAZY")
      * @ORM\JoinColumn(nullable=false)
      */
     private $unit_of_measure;

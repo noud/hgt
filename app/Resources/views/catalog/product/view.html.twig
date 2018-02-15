@@ -1,1 +1,81 @@
-{{ id }}
+{% extends 'layout/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .title {padding-bottom:1em;margin-bottom:2em;border-bottom:1px solid #DDD;}
+        .title h1 {color:#ff671f;}
+        .categories nav ul li .active {font-weight:bold;}
+        .categories .category {border:1px solid #DDD;text-align:center;}
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container product">
+        <div class="row title">
+            {% if product %}
+                <div class="col-md-3">
+                    <a href="{{ path('category_index') }} ">Terug</a>
+                </div>
+                <div class="col-md-9">
+                    <h1>{{ product.name|upper }}</h1>
+                </div>
+            {% else %}
+                <div class="col-md-12">
+                    <h1>Product niet gevonden</h1>
+                </div>
+            {% endif %}
+        </div>
+        <p class="row">
+            {% if product %}
+                <div class="col-md-3 categories">
+                    {% if parentCategories %}
+                        <nav>
+                            <ul>
+                                {% for parentCategory in parentCategories %}
+                                    <li>
+                                        <a href="{{ path('category_view', {'id': parentCategory.id }) }}" class="listing{% if product.category.id == parentCategory.id %} active{% endif %}">
+                                            {{ parentCategory.name }}
+                                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </nav>
+                    {% endif %}
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="http://via.placeholder.com/250x250{# product.mainPicture #}" />
+                        </div>
+                        <div class="col-md-9">
+                            <div class="content">
+                                <p>
+                                    <span style="display:block;"><a href="#">{{ product.manufacturer.name }}</a></span>
+                                    <span style="display:block;">Inhoud: {{ product.volume }}</span>
+                                </p>
+                                <div>
+                                    <select>
+                                        <option>DOOS</option>
+                                    </select> | {{ product.price|price }}
+                                </div>
+                                {% if app.user %}
+                                    <input type="text" placeholder="Aantal stuks"> [ Bestel ]
+                                {% else %}
+                                    <a href="#" class="btn btn-icon-label">
+                                        <span class="icon"><i class="fa fa-shopping-cart"></i></span>
+                                        <span class="label">Login om het product te bestellen</span>
+                                    </a>
+                                {% endif %}
+                                <div>{{ product.description }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p>Het product dat je probeert te bekijken bestaat niet.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

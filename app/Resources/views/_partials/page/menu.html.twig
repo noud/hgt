@@ -4,28 +4,17 @@
         <li class="has-sub">
             <a href="{{ path('category_index') }}" title="Assortiment">Assortiment</a>
             <div>
-                <ul class="sub">
-                    <li><a href="#" title="Acties">Acties Acties Acties Acties Acties Acties Acties Acties Acties</a></li>
-                    <li><a href="#" title="Acties">Acties</a></li>
-                    <li><a href="#" title="Acties">Acties</a></li>
-                    <li><a href="#" title="Acties">Acties</a></li>
-                    <li><a href="#" title="Acties">Acties</a></li>
-                    <li><a href="#" title="Acties">Acties</a></li>
-                    <li><a href="#" title="Acties">Acties</a></li>
-                </ul>
-                <ul class="sub">
-                    <li><a href="#" title="Acties">Acties</a></li>
-                    <li><a href="#" title="Acties">Acties</a></li>
-                    <li><a href="#" title="Acties">Acties</a></li>
-                    <li><a href="#" title="Acties">Acties</a></li>
-                    <li><a href="#" title="Acties">Acties</a></li>
-                    <li><a href="#" title="Acties">Acties</a></li>
-                    <li><a href="#" title="Acties">Acties</a></li>
-                </ul>
+                {% for menu in menu_manager.getCategoriesForMenu() %}
+                    <ul class="sub">
+                        {% for subMenu in menu %}
+                            <li><a href="{{ path('category_view', {'id': subMenu.id}) }}" title="{{ subMenu.name }}">{{ subMenu.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
             </div>
         </li>
         <li><a href="#" title="Acties">Acties</a></li>
-        <li><a href="#" title="Folder">Folder</a></li>
+        <li><a href="{{ path('folder_index') }}" title="Folder">Folder</a></li>
         <li><a href="#" title="Kerstpakketten">Kerstpakketten</a></li>
         <li><a href="#" title="Nieuws">Nieuws</a></li>
         <li><a href="#" title="Over ons">Over ons</a></li>

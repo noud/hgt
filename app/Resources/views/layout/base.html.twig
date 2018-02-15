@@ -29,13 +29,13 @@
                     </div>
                     <div>
                         Hulp nodig bij je bestelling?
-                        <a href="tel:{{ company_phonenumber|replace({' ':''}) }}">{{ company_phonenumber }}</a>
+                        <a href="{{ config_manager.get('company_phonenumber', '')|phone_href }}">{{ config_manager.get('company_phonenumber', '') }}</a>
                     </div>
                 </div>
                 <div class="header-branding">
                     <div>
-                        <a class="logo" href="{{ path('homepage') }}" title="{{ company_name }}">
-                            <img src="{{ asset('assets/images/logo.svg') }}" alt="{{ company_name }}" />
+                        <a class="logo" href="{{ path('homepage') }}" title="{{ config_manager.get('company_name', '') }}">
+                            <img src="{{ asset('assets/images/logo.svg') }}" alt="{{ config_manager.get('company_name', '') }}" />
                         </a>
                     </div>
                     <div>
@@ -135,18 +135,18 @@
                     <div>
                         <h4>Contact</h4>
                         <ul class="footer-meta">
-                            <li><strong>{{ company_name }}</strong>
-                                {{ company_street }}, {{ company_zipcode }} {{ company_city }}
+                            <li><strong>{{ config_manager.get('company_name', '') }}</strong>
+                                {{ config_manager.get('company_street', '') }}, {{ config_manager.get('company_zipcode', '') }} {{ config_manager.get('company_city', '') }}
                             </li>
                             <li>
-                                <a href="tel:{{ company_phonenumber|replace({' ':''}) }}">{{ company_phonenumber }}</a>
+                                <a href="{{ config_manager.get('company_phonenumber', '')|phone_href }}">{{ config_manager.get('company_phonenumber', '') }}</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="wrapper">
-                <div class="sub">&copy; {{ "now" | date("Y") }} - {{ company_name }}</div>
+                <div class="sub">&copy; {{ "now" | date("Y") }} - {{ config_manager.get('company_name') }}</div>
             </div>
         </div>
     </footer>

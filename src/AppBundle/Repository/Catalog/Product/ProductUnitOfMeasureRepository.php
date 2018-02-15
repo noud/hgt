@@ -31,4 +31,15 @@ class ProductUnitOfMeasureRepository extends EntityRepository
     {
         $this->getEntityManager()->remove($productUnitOfMeasure);
     }
+
+    /**
+     * @param $product_id int
+     * @return array
+     */
+    public function getProductUnitOfMeasureByProductId($product_id)
+    {
+        return $this->findBy(
+            ['product' => $product_id]
+        );
+    }
 }
