@@ -1,0 +1,40 @@
+<h1 class="page-title">Folder</h1>
+
+<div class="content">
+  <p>Hier vindt u de op dit moment lopende folders.</p>
+</div>
+
+<div class="folder">
+  {% if folders %}
+  <ul class="row">
+    {% for folder in folders %}
+
+    <li class="col-md-6">
+      <div class="folder-item">
+        <h2><a href="{{ path('folder_view', {'id': folder.Id } ) }}">{{ folder.title }} {{ folder.id }}</a></h2>
+        <div>
+          <div>
+            <div class="img">
+              <a href="{{ path('folder_view', {'id': folder.Id } ) }}"><img src="{{ folder.picture }}"/></a>
+            </div>
+          </div>
+          <div>
+            <div class="entry">
+              <div class="content">
+                <p>{{ folder.shortdescription }}</p>
+              </div>
+              <a href="{{ path('folder_view', {'id': folder.Id } ) }}">Lees verder</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    {% endfor %}
+    {% if isEven == false %}
+    <li class="col-md-6"></li>
+    {% endif %}
+  </ul>
+  {% endif %}
+
+
+</div>

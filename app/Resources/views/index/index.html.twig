@@ -1,7 +1,7 @@
 {% extends 'layout/base.html.twig' %}
 
 {% block body %}
-    <div class="wrapper">
+    <div class="container">
         <div class="feature-hero">
             <div>
 
@@ -10,7 +10,7 @@
                     {% for homeSlide in homeSlides %}
                         <div>
                             <a href="{{ homeSlide.url }}" title="{{ homeSlide.title }}">
-                                <img src="https://i.imgur.com/FpuirSy.jpg" alt="{{ homeSlide.title }}"/>
+                                <img src="https://i.imgur.com/BBYqcH3.jpg" alt="{{ homeSlide.title }}"/>
                             </a>
                         </div>
                     {% endfor %}
@@ -20,14 +20,14 @@
             <div>
                 <div>
                     <a href="#" title="Lees hier het laatste nieuws" class="banner">
-                        <img src="http://via.placeholder.com/374x136" alt="Lees hier het laatste nieuws" title="Lees hier het laatste nieuws" />
+                        <img src="http://via.placeholder.com/380x145" alt="Lees hier het laatste nieuws" title="Lees hier het laatste nieuws" />
                     </a>
                 </div>
                 {% if homeBanners %}
                     {% for homeBanner in homeBanners %}
                         <div>
                             <a href="{{ homeBanner.url }}" title="{{ homeBanner.title }}" class="banner">
-                                <img src="http://via.placeholder.com/374x136{# homeBanner.bannerImage #}" alt="{{ homeBanner.title }}" />
+                                <img src="http://via.placeholder.com/380x145{# homeBanner.bannerImage #}" alt="{{ homeBanner.title }}" />
                             </a>
                         </div>
                     {% endfor %}

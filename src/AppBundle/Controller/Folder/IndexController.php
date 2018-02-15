@@ -2,6 +2,7 @@
 
 namespace HGT\AppBundle\Controller\Folder;
 
+use HGT\Application\Content\Folder\Folder;
 use HGT\Application\Content\FolderPageService;
 use HGT\Application\Content\FolderService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -23,7 +24,20 @@ class IndexController extends Controller
      */
     public function indexAction(Request $request, FolderService $folderService)
     {
+
+        $i = 0;
+        foreach($folderService->getActiveFolders() as $item) {
+            $i++;
+        }
+
+        if($i % 2 == 0) {
+            $isEven = true;
+        } else {
+            $isEven = false;
+        }
+
         return $this->render('folder/index.html.twig', [
+            'isEven' => $isEven,
             'folders' => $folderService->getActiveFolders(),
         ]);
     }
@@ -34,7 +48,8 @@ class IndexController extends Controller
     public function viewAction(Request $request, FolderService $folderService, FolderPageService $folderPageService, $id)
     {
         return $this->render('folder/view.html.twig', [
-            'folder_images' => $folderPageService->getFolderPagesByFolderId($id)
+            'folder' => $folderService->getFolder($id),
+            'folder_images' => $folderPageService->getFolderPagesByFolderId($id),
         ]);
     }
 

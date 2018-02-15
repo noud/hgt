@@ -26,7 +26,7 @@
 
     @media @md {
       transform: translate(0, -80px);
-
+      opacity: 0;
     }
 
   }
@@ -67,16 +67,15 @@
   padding-bottom: 20px;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1);
 
-  .wrapper {
+  .container {
     display: flex;
     > div {
-      flex-shrink: 0;
-
       &:first-child {
         width: 25%;
+        flex-shrink: 0;
 
-        @media @sm {
-          width: 0;
+        @media @md {
+          display: none;
         }
       }
 
@@ -104,13 +103,10 @@
 
   form {
     margin-right: 50px;
+
     @media @sm {
       margin-right: 0;
       width: 100%;
-    }
-
-    > * {
-      flex-shrink: 1;
     }
 
     > .form-group {
@@ -119,7 +115,25 @@
       }
     }
 
+    > div {
+      &:last-child {
+        width: 40px;
+        flex-shrink: 0;
+      }
+
+      &:first-child {
+        @media @sm {
+          flex-grow: 1;
+        }
+      }
+
+
+
+    }
+
   }
+
+
 
 }
 
@@ -128,7 +142,7 @@
   height: auto;
   display: block;
 
-  @media (max-width: @wrapper-padding-bp) {
+  @media @lg {
     width: 45px;
   }
 
@@ -137,7 +151,7 @@
     bottom: -30px;
     margin-bottom: -30px;
 
-    @media (max-width: @wrapper-padding-bp) {
+    @media @lg {
       bottom: auto;
       margin-bottom: auto;
     }
@@ -190,7 +204,7 @@
     font-weight: @font-weight-bold;
   }
 
-  a {
+  .phone {
 
     &:before {
       margin-right: 5px;
@@ -208,7 +222,7 @@
   padding-top: 10px;
   padding-bottom: 20px;
 
-  @media (max-width: @wrapper-padding-bp) {
+  @media @lg {
     height: 70px;
   }
 
@@ -259,7 +273,7 @@
     position: absolute;
     right: 30px;
     top: 30px;
-    z-index: 3;
+    z-index: 999;
 
     &:after {
       content: '\f00d';
@@ -286,7 +300,7 @@
     position: fixed;
     z-index: 2;
 
-    padding: 50px @wrapper-padding 50px @wrapper-padding;
+    padding: 50px 20px 50px 20px;
 
     width: 50%;
     height: 100%;

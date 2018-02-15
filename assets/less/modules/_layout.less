@@ -1,33 +1,29 @@
-.wrapper {
+.template-sidebar {
 
-  max-width: @wrapper-width;
-  margin: 0 auto;
-
-  @media (max-width: @wrapper-padding-bp) {
-    padding-left: @wrapper-padding;
-    padding-right: @wrapper-padding;
+  aside {
+    padding-right: @grid-gutter-width/2;
   }
 
-}
+  > .row {
 
-.template {
-
-  .wrapper {
-
-    display: flex;
-
-    > * {
-      flex-shrink: 0;
-    }
-
-    > aside {
-      flex-grow: 1;
+    @media @sm {
+      display: flex;
+      flex-direction: column-reverse;
     }
 
     > div {
-      width: 75%;
+
+      &:last-child {
+        @media @sm {
+          margin-bottom: @grid-gutter-width * 2;
+        }
+      }
     }
-
   }
+}
 
+.template {
+  .content {
+    margin-bottom: 50px;
+  }
 }

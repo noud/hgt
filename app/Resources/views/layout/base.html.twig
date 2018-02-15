@@ -10,11 +10,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}" />
     {% block stylesheets %}{% endblock %}
 </head>
-<body>
+<body class="{% block bodyClass %}{% endblock %}">
     <div class="rwd"></div>
     <header class="page-header">
         <div class="header-main">
-            <div class="wrapper">
+            <div class="container">
                 <div class="header-container header-corporate">
                     <div>
                     {% if app.user %}
@@ -29,7 +29,11 @@
                     </div>
                     <div>
                         Hulp nodig bij je bestelling?
+<<<<<<< HEAD
                         <a href="{{ config_manager.get('company_phonenumber', '')|phone_href }}">{{ config_manager.get('company_phonenumber', '') }}</a>
+=======
+                        <a class="phone" href="tel:{{ company_phonenumber|replace({' ':''}) }}">{{ company_phonenumber }}</a>
+>>>>>>> master
                     </div>
                 </div>
                 <div class="header-branding">
@@ -47,12 +51,14 @@
             </div>
         </div>
         <div class="header-sub">
-            <div class="wrapper">
+            <div class="container">
                 <div></div>
                 <div>
                     <form class="search form-sticky">
-                        <div class="form-group">
-                            <input type="search" class="form-control" placeholder="Ik ben op zoek naar">
+                        <div>
+                            <div class="form-group">
+                                <input type="search" class="form-control" placeholder="Ik ben op zoek naar">
+                            </div>
                         </div>
                         <div>
                             <button class="btn btn-icon"><i class="fas fa-search"></i></button>
@@ -90,7 +96,7 @@
     </main>
     <footer class="page-footer">
         <div class="footer-highlight">
-            <div class="wrapper">
+            <div class="container">
                 <div>
                     <h2>
                         <strong>Mis onze topaanbiedingen niet:</strong>
@@ -111,7 +117,7 @@
         </div>
         <div class="footer-main">
             <div class="main">
-                <div class="wrapper">
+                <div class="container">
                     <div>
                         <h4>Informatie</h4>
                         <ul class="footer-list">
@@ -145,7 +151,7 @@
                     </div>
                 </div>
             </div>
-            <div class="wrapper">
+            <div class="container">
                 <div class="sub">&copy; {{ "now" | date("Y") }} - {{ config_manager.get('company_name') }}</div>
             </div>
         </div>
