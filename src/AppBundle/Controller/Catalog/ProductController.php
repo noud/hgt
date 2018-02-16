@@ -4,7 +4,8 @@ namespace HGT\AppBundle\Controller\Catalog;
 
 use HGT\Application\Catalog\Category\Category;
 use HGT\Application\Catalog\CategoryService;
-use HGT\Application\Catalog\ProductCategoryService;
+use HGT\Application\Catalog\Product\ProductUnitOfMeasure;
+use HGT\Application\Catalog\ProductPriceService;
 use HGT\Application\Catalog\ProductService;
 use HGT\Application\Catalog\ProductUnitOfMeasureService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -23,17 +24,18 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/product/view/{id}", name="product_view")
+     * @Route("/product/view/{product_id}", name="product_view")
      * @param Request $request
      * @param ProductService $productService
      * @param CategoryService $categoryService
+     * @param ProductPriceService $productPriceService
      * @param ProductUnitOfMeasureService $productUnitOfMeasureService
-     * @param $id
+     * @param $product_id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction(Request $request, ProductService $productService, CategoryService $categoryService, ProductUnitOfMeasureService $productUnitOfMeasureService, $id)
+    public function viewAction(Request $request, ProductService $productService, CategoryService $categoryService, ProductPriceService $productPriceService, ProductUnitOfMeasureService $productUnitOfMeasureService, $product_id)
     {
-        $product = $productService->getProductById($id);
+        $product = $productService->getProductById($product_id);
 
         if($product === null) {
             throw new NotFoundHttpException();
@@ -42,12 +44,22 @@ class ProductController extends Controller
         /** @var Category $productCategory */
         $productCategory = $product->getCategory()->getParent()->getId();
         $parentCategories = $categoryService->getCategoriesWithProducts($productCategory);
-        $productUnitOfMeasure = $productUnitOfMeasureService->getProductUnitOfMeasures($id);
+        $productUnitOfMeasures = $productUnitOfMeasureService->getProductUnitOfMeasures($product_id);
+
+        $productPrices = array();
+
+        //$this->getUser();
+
+        foreach($productUnitOfMeasures as $productUnitOfMeasure) {
+            /** @var ProductUnitOfMeasure $productUnitOfMeasure */
+            $productPrices[] = $productPriceService->getUnitPriceForCustomer($product_id, $productUnitOfMeasure->getUnitOfMeasure());
+        }
 
         return $this->render('catalog/product/view.html.twig', [
             'product' => $product,
             'parentCategories' => $parentCategories,
-            'productUnitOfMeasure' => $productUnitOfMeasure,
+            'productUnitOfMeasures' => $productUnitOfMeasures,
+            'productPrices' => $productPrices
         ]);
     }
 }

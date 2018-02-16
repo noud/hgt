@@ -28,4 +28,14 @@ class ProductUnitOfMeasureService
     {
         return $this->productUnitOfMeasureRepository->getProductUnitOfMeasureByProductId($product_id);
     }
+
+    /**
+     * @param $product_id
+     * @param $unit_of_measure_id
+     * @return object
+     */
+    public function getProductUnitOfMeasure($product_id, $unit_of_measure_id)
+    {
+        return $this->productUnitOfMeasureRepository->getProductUnitOfMeasureForProductPrice($product_id, $unit_of_measure_id);
+    }
 }

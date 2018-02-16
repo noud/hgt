@@ -42,4 +42,22 @@ class ProductUnitOfMeasureRepository extends EntityRepository
             ['product' => $product_id]
         );
     }
+
+    /**
+     * @param $product_id
+     * @param $unit_of_measure_id
+     * @return object
+     */
+    public function getProductUnitOfMeasureForProductPrice($product_id, $unit_of_measure_id)
+    {
+        $return = $this->findOneBy(
+            [
+                'product' => $product_id,
+                'unit_of_measure' => $unit_of_measure_id
+            ]
+        );
+
+        dump($return);
+        return $return;
+    }
 }

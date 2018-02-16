@@ -50,8 +50,32 @@ class ProductUnitOfMeasure
     /**
      * @return mixed
      */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getUnitOfMeasure()
     {
         return $this->unit_of_measure;
+    }
+
+    /**
+     * @return float
+     */
+    public function getQtyPerUnitOfMeasure()
+    {
+        return $this->qty_per_unit_of_measure;
     }
 }

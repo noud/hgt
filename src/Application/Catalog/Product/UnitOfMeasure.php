@@ -30,6 +30,14 @@ class UnitOfMeasure
     private $navision_id;
 
     /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * @return string
      */
     public function getName()

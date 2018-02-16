@@ -1,5 +1,7 @@
 {% extends 'layout/base.html.twig' %}
 
+{% block bodyClass %}catalog-product-view{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     <style>
@@ -7,7 +9,7 @@
         .title h1 {color:#ff671f;}
         .categories nav ul li .active {font-weight:bold;}
         .categories .category {border:1px solid #BBB;text-align:center;}
-        .product-detail .unit_of_measure_id {margin-right:20px;}
+        .product-detail #unit_of_measure_id {margin-right:20px;}
         .product-detail .price { font-size: 24px;}
         .product-detail .block {display:block;}
         .product-detail .block.volume {color:#BBB;}
@@ -64,12 +66,22 @@
                                 </p>
                                 {% if app.user %}
                                     <p>
-                                        <select class="unit_of_measure_id">
-                                            {% for unitOfMeasure in productUnitOfMeasure %}
-                                                <option>{{ unitOfMeasure.UnitOfMeasure.name }}</option>
+                                        <select id="unit_of_measure_id">
+                                            {% for productUnitOfMeasure in productUnitOfMeasures %}
+                                                <option value="{{ productUnitOfMeasure.unitOfMeasure.id }}">
+                                                    {{ productUnitOfMeasure.unitOfMeasure.name }}
+                                                    {% if productUnitOfMeasure.qtyPerUnitOfMeasure > 1 %}{{ productUnitOfMeasure.qtyPerUnitOfMeasure }}){% endif %}
+                                                </option>
                                             {% endfor %}
                                         </select>
                                         <span class="price">{{ product.price|price }}</span>
+                                        {% for productPrice in productPrices %}
+                                            {{ dump(productPrice) }}
+                                            {# <div class="prijs price_item" id="price_{{ productPrice.id}}">
+                                                <span class="euro">&euro;</span>
+                                                <span class="price_value">{{ productPrice.price }}</span>
+                                            </div>#}
+                                        {% endfor %}
                                     </p>
                                     <p>
                                         <div class="add-to-cart">
@@ -106,5 +118,12 @@
         function addToOrderList() {
             alert('Actie');
         }
+
+        $("#unit_of_measure_id").change(function () {
+            //$(".price_item").hide();
+            $("#price_" + $(this).val()).show();
+        });
+
+        $("#unit_of_measure_id").trigger("change");
     </script>
 {% endblock %}
