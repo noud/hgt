@@ -1,0 +1,14 @@
+{% extends 'emails/base.html.twig' %}
+
+{% block body %}
+
+  <p>
+    Beste {{ contact.name }},<br><br>
+    Hierbij bevestigen wij uw contactbericht. We zullen uw zo spoedig beantwoorden.<br>
+  </p>
+
+  <p><strong>Uw bericht</strong></p>
+  <p>{{ contact.message }}</p>
+
+
+{% endblock %}

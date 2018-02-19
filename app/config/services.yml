@@ -211,6 +211,17 @@ services:
         arguments:
             - HGT\Application\User\PasswordResetHash\PasswordResetHash
 
+
+    HGT\AppBundle\Repository\User\FailedAttempts\FailedAttemptsRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\User\FailedAttempts\FailedAttempts
+
+    HGT\AppBundle\Repository\User\LockedAccount\LockedAccountRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+            - HGT\Application\User\LockedAccount\LockedAccount
+
     HGT\AppBundle\Mailer\Sender\Mailer:
         arguments:
             - ""

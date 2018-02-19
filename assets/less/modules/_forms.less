@@ -1,3 +1,40 @@
+.alert {
+  margin-bottom: 30px;
+  font-size: @font-size-sm;
+  font-weight: @font-weight-semi-bold;
+
+  &.alert-danger {
+    color: red;
+  }
+
+  &.alert-success {
+    color: green;
+  }
+
+}
+
+
+.help-block {
+  font-size: @font-size-sm;
+  font-weight: @font-weight-semi-bold;
+  color: red;
+}
+
+
+
+
+
+.control-label {
+
+  font-weight: @font-weight-semi-bold;
+  margin-bottom: 10px;
+
+  &.required:after {
+    content: ' *';
+    color: red;
+  }
+}
+
 .form-control {
   box-shadow: @form-control-shadow;
   height: @form-control-height;
@@ -7,6 +44,13 @@
   width: 100%;
   display: block;
   border: @form-control-border;
+
+}
+
+textarea.form-control {
+  height: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 
@@ -25,12 +69,44 @@
   }
 }
 
+.form-flex {
+
+  > .form-group {
+    display: flex;
+    flex-wrap: wrap;
+
+    .control-label {
+      width: 25%;
+      flex-shrink: 0;
+    }
+
+    .form-control {
+      flex-grow: 1;
+    }
+
+  }
+
+}
+
 
 .form-base {
+
+  .help-block {
+    margin-top: 10px;
+  }
+
+
   > .form-group {
     &:not(:last-child) {
       margin-bottom: 10px;
     }
+
+    &.has-error {
+      .form-control {
+        border: 1px solid red;
+      }
+    }
+
   }
 
   .meta {
@@ -51,22 +127,7 @@
 
 
 
-.alert {
-  margin-bottom: 30px;
-  font-size: @font-size-sm;
-  font-weight: @font-weight-semi-bold;
-  border: @border;
-  padding: 5px;
 
-  &.alert-danger {
-    color: red;
-  }
-
-  &.alert-success {
-    color: green;
-  }
-
-}
 
 /* specific
   ---------------------------------------------------------------------------------------------------------------------- */
