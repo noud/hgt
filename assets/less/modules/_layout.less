@@ -15,9 +15,22 @@
 
       &:last-child {
         @media @sm {
-          margin-bottom: @grid-gutter-width * 2;
+          margin-bottom: @section-space;
         }
       }
     }
+  }
+}
+
+.template-2-cols {
+
+  .row {
+
+    > div {
+      &:not(:last-child) {
+        margin-bottom: @section-space;
+      }
+    }
+
   }
 }
