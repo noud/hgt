@@ -2,9 +2,9 @@
 
 namespace HGT\AppBundle\Controller\Catalog;
 
+use HGT\AppBundle\Form\Catalog\Product\AddToCartForm;
 use HGT\Application\Catalog\Category\Category;
 use HGT\Application\Catalog\CategoryService;
-use HGT\Application\Catalog\Product\ProductUnitOfMeasure;
 use HGT\Application\Catalog\ProductPriceService;
 use HGT\Application\Catalog\ProductService;
 use HGT\Application\Catalog\ProductUnitOfMeasureService;
@@ -44,22 +44,23 @@ class ProductController extends Controller
         /** @var Category $productCategory */
         $productCategory = $product->getCategory()->getParent()->getId();
         $parentCategories = $categoryService->getCategoriesWithProducts($productCategory);
-        $productUnitOfMeasures = $productUnitOfMeasureService->getProductUnitOfMeasures($product_id);
+        $productUnitOfMeasures = $productUnitOfMeasureService->getProductUnitOfMeasures($product);
 
         $productPrices = array();
-
-        //$this->getUser();
-
         foreach($productUnitOfMeasures as $productUnitOfMeasure) {
-            /** @var ProductUnitOfMeasure $productUnitOfMeasure */
-            $productPrices[] = $productPriceService->getUnitPriceForCustomer($product_id, $productUnitOfMeasure->getUnitOfMeasure());
+            $productPrices[] = [
+                'productUnitOfMeasureId' => $productUnitOfMeasure->getUnitOfMeasure()->getId(),
+                'productPrice' => $productPriceService->getUnitPriceForCustomer($this->getUser(), $product, $productUnitOfMeasure->getUnitOfMeasure()),
+            ];
         }
+
+        $form = $this->createForm(AddToCartForm::class);
 
         return $this->render('catalog/product/view.html.twig', [
             'product' => $product,
             'parentCategories' => $parentCategories,
-            'productUnitOfMeasures' => $productUnitOfMeasures,
-            'productPrices' => $productPrices
+            'productPrices' => $productPrices,
+            'form' => $form->createView(),
         ]);
     }
 }

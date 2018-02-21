@@ -16,6 +16,11 @@
         .product-detail .add-to-cart {display:flex;width:260px;background-color:orange;padding:1em;border-radius:10px}
         .product-detail .add-to-cart input[type=text] {padding:10px;border-radius:10px;margin-right:10px;}
         .product-detail .add-to-orderlist {border-bottom:1px solid #DDD;border-top:1px solid #DDD;margin-top:1em;padding:1em;}
+        .product-detail .prijs.price_item {display:inline-block;font-size:25px;font-weight:bold;}
+        .product-price .select, .product-price .price {float:left;}
+        .product-price .select select {height:40px;}
+        .product-price:after {clear:both;content:'';display:block;margin-bottom:1em;}
+        .no-gutter {padding:0;}
     </style>
 {% endblock %}
 
@@ -61,43 +66,43 @@
                         <div class="col-md-9">
                             <div class="product-detail content">
                                 <p>
-                                    <span class="block"><a href="#">{{ product.manufacturer.name }}</a></span>
+                                    <span class="block">
+                                        {% if product.manufacturer %}
+                                            <a href="#">{{ product.manufacturer.name }}</a>
+                                        {% endif %}
+                                    </span>
                                     <span class="block volume">Inhoud: {{ product.volume }}</span>
                                 </p>
                                 {% if app.user %}
-                                    <p>
-                                        <select id="unit_of_measure_id">
-                                            {% for productUnitOfMeasure in productUnitOfMeasures %}
-                                                <option value="{{ productUnitOfMeasure.unitOfMeasure.id }}">
-                                                    {{ productUnitOfMeasure.unitOfMeasure.name }}
-                                                    {% if productUnitOfMeasure.qtyPerUnitOfMeasure > 1 %}{{ productUnitOfMeasure.qtyPerUnitOfMeasure }}){% endif %}
-                                                </option>
-                                            {% endfor %}
-                                        </select>
-                                        <span class="price">{{ product.price|price }}</span>
-                                        {% for productPrice in productPrices %}
-                                            {{ dump(productPrice) }}
-                                            {# <div class="prijs price_item" id="price_{{ productPrice.id}}">
-                                                <span class="euro">&euro;</span>
-                                                <span class="price_value">{{ productPrice.price }}</span>
-                                            </div>#}
-                                        {% endfor %}
-                                    </p>
-                                    <p>
+                                    {{ form_start(form, {'action': path('cart_product_add', {"product_id" : product.id}), 'method' : 'POST'}) }}
+                                        <div class="col-md-6 no-gutter">
+                                            {{ form_widget(form.product_unit_of_measure) }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="product-price">
+                                                <div class="price">
+                                                    {% for productPrice in productPrices %}
+                                                        <div class="prijs price_item" id="price_{{ productPrice.productUnitOfMeasureId }}">
+                                                            {{ productPrice.productPrice|price }}
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="add-to-cart">
-                                            <input type="text" placeholder="Aantal stuks">
+                                            {{ form_widget(form.qty) }}
                                             <button>Bestel</button>
                                         </div>
                                         <div class="add-to-orderlist">
                                             <a href="#" onclick="addToOrderList();return false;">Toevoegen aan bestellijst</a>
                                         </div>
-                                    {% else %}
-                                        <a href="{{ path('account_login') }}" class="btn btn-icon-label">
-                                            <span class="icon"><i class="fa fa-shopping-cart"></i></span>
-                                            <span class="label">Login om het product te bestellen</span>
-                                        </a>
-                                    {% endif %}
-                                </p>
+                                    {{ form_end(form) }}
+                                {% else %}
+                                    <a href="{{ path('account_login') }}" class="btn btn-icon-label">
+                                        <span class="icon"><i class="fa fa-shopping-cart"></i></span>
+                                        <span class="label">Login om het product te bestellen</span>
+                                    </a>
+                                {% endif %}
                                 <p>
                                     {{ product.description }}
                                 </p>
@@ -119,11 +124,11 @@
             alert('Actie');
         }
 
-        $("#unit_of_measure_id").change(function () {
-            //$(".price_item").hide();
-            $("#price_" + $(this).val()).show();
+        $("#add_to_cart_form_product_unit_of_measure").change(function () {
+            $(".price_item").hide();
+            $("#price_" + $(this).find('option:selected').data('unit-of-measure-id')).show();
         });
 
-        $("#unit_of_measure_id").trigger("change");
+        $("#add_to_cart_form_product_unit_of_measure").trigger("change");
     </script>
 {% endblock %}

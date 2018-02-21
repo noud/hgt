@@ -8,8 +8,8 @@ use HGT\Application\Catalog\Cart\Cart;
 class CartRepository extends EntityRepository
 {
     /**
-     * @param $id
-     * @return Cart
+     * @param int $id
+     * @return Cart|object
      */
     public function get($id)
     {
@@ -30,5 +30,17 @@ class CartRepository extends EntityRepository
     public function remove(Cart $cart)
     {
         $this->getEntityManager()->remove($cart);
+    }
+
+    /**
+     * @param int $customer_id
+     * @return null|Cart
+     */
+    public function getOpenCartForCustomer($customer_id)
+    {
+        return $this->findOneBy([
+            'state' => Cart::STATE_OPEN,
+            'customer' => $customer_id
+        ]);
     }
 }

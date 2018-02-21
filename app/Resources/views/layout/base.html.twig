@@ -70,8 +70,8 @@
                             <span class="icon"><i class="fa fa-list-ul"></i></span>
                             <span class="label">Mijn bestellijst</span>
                         </a>
-                        <a href="#" class="btn btn-icon-label shopping-cart js-shopping-cart">
-                            <span class="icon"><i class="fas fa-shopping-cart"></i><span>0</span></span>
+                        <a href="{{ path('cart_index') }}" class="btn btn-icon-label shopping-cart js-shopping-cart">
+                            <span class="icon"><i class="fas fa-shopping-cart"></i><span>{{ cart_manager.countProductsInCart }}</span></span>
                             <span class="label">Winkelwagen</span>
                         </a>
                     {% else %}
@@ -89,6 +89,15 @@
         </div>
     </header>
     <main class="page-main">
+        <div class="container">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
         {% block body %}{% endblock %}
     </main>
     <footer class="page-footer">

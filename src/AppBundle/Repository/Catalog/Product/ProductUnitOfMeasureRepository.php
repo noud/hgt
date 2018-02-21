@@ -3,7 +3,9 @@
 namespace HGT\AppBundle\Repository\Catalog\Product;
 
 use Doctrine\ORM\EntityRepository;
+use HGT\Application\Catalog\Product\Product;
 use HGT\Application\Catalog\Product\ProductUnitOfMeasure;
+use HGT\Application\Catalog\Product\UnitOfMeasure;
 
 class ProductUnitOfMeasureRepository extends EntityRepository
 {
@@ -33,31 +35,48 @@ class ProductUnitOfMeasureRepository extends EntityRepository
     }
 
     /**
-     * @param $product_id int
-     * @return array
+     * @param Product $product
+     * @return array|ProductUnitOfMeasure[]
      */
-    public function getProductUnitOfMeasureByProductId($product_id)
+    public function getProductUnitOfMeasureByProductId(Product $product)
     {
         return $this->findBy(
-            ['product' => $product_id]
+            ['product' => $product->getId()]
         );
     }
 
     /**
-     * @param $product_id
-     * @param $unit_of_measure_id
-     * @return object
+     * @param Product $product
+     * @param UnitOfMeasure $unit_of_measure
+     * @return ProductUnitOfMeasure|null|object
      */
-    public function getProductUnitOfMeasureForProductPrice($product_id, $unit_of_measure_id)
+    public function getProductUnitOfMeasureForProductPrice(Product $product, UnitOfMeasure $unit_of_measure)
     {
-        $return = $this->findOneBy(
+        return $this->findOneBy(
             [
-                'product' => $product_id,
-                'unit_of_measure' => $unit_of_measure_id
+                'product' => $product->getId(),
+                'unit_of_measure' => $unit_of_measure->getId()
             ]
         );
+    }
 
-        dump($return);
-        return $return;
+    /**
+     * @param Product $product
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getQueryBuilderForProductUnitOfMeasures(Product $product)
+    {
+        $queryBuilder = $this->createQueryBuilder('q');
+        $queryBuilder->where('q.product = :productId');
+        $queryBuilder->setParameter('productId', $product->getId());
+
+//        $queryBuilder = $this->createQueryBuilder('q');
+//        $queryBuilder->select('u.id', 'u.name', 'u.navision_id');
+//        $queryBuilder->join('q.unit_of_measure', 'u');
+//        $queryBuilder->where('q.product = :productId');
+//        $queryBuilder->setParameter('productId', $product->getId());
+//        dump($queryBuilder->getQuery()->getSQL());
+
+        return $queryBuilder;
     }
 }

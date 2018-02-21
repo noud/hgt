@@ -64,7 +64,7 @@ class ProductUnitOfMeasure
     }
 
     /**
-     * @return mixed
+     * @return UnitOfMeasure
      */
     public function getUnitOfMeasure()
     {
@@ -77,5 +77,16 @@ class ProductUnitOfMeasure
     public function getQtyPerUnitOfMeasure()
     {
         return $this->qty_per_unit_of_measure;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return sprintf('%s (%d)',
+            $this->getUnitOfMeasure()->getName(),
+            $this->getQtyPerUnitOfMeasure()
+        );
     }
 }
