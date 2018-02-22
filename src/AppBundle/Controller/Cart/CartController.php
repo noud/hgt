@@ -63,16 +63,17 @@ class CartController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            switch ($form->get('form_action')->getViewData()) {
+            switch ($command->form_action) {
                 case "update":
                     /** @var CartProduct $cartProductForm */
-                    foreach ($form->get('products')->getViewData() as $cartProductForm) {
+                    foreach ($command->products as $cartProductForm) {
                         $cartProductItem = $cartProductService->getCartProductById($cartProductForm->getId());
                         $cartProductItem->setQty($cartProductForm->getQty());
                     }
-                    $cart->setNote($form->get('note')->getViewData());
-                    $cart->setDeliveryDate(new \DateTime($form->get('delivery_date')->getViewData()));
-                    $cart->setReference($form->get('reference')->getViewData());
+
+                    $cart->setNote($command->note);
+                    $cart->setDeliveryDate($command->delivery_date);
+                    $cart->setReference($command->reference);
 
                     $this->addFlash('success', 'Winkelwagen succesvol bijgewerkt.');
                     break;
@@ -81,6 +82,7 @@ class CartController extends Controller
                     break;
             }
 
+            $em->persist($cart);
             $em->flush();
         }
 
