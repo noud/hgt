@@ -1,7 +1,7 @@
 ### CATEGORY
 
 HGT\Application\Catalog\Category\Category:
-    category_{1..50}:
+    category_{1..25}:
         navision_id: <numerify('#####')>
         name: <word()>
         short_description: <paragraph()>

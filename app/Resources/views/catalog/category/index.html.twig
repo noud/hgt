@@ -1,61 +1,37 @@
 {% extends 'layout/base.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        .title {padding-bottom:1em;margin-bottom:2em;border-bottom:1px solid #DDD;}
-        .title h1 {color:#ff671f;}
-        .categories nav ul li .active {font-weight:bold;}
-        .categories .category {border:1px solid #DDD;text-align:center;}
-    </style>
-{% endblock %}
+{% block bodyClass %}catalog-page{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row title">
-            <div class="col-md-9 col-md-push-3">
-                <h1>Ons assortiment</h1>
+    <div class="template-catalog container">
+        <div class="row">
+            <div class="col-md-3">
+               {% if categories %}
+                <ul class="item-list">
+                  {% for category in categories %}
+                    <li>
+                        <a href="{{ path('category_view', {'id': category.id }) }}" class="listing">
+                            {{ category.name }}
+                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="col-md-9">
+                <h1 class="page-title">Ons assortiment</h1>
+                <ul class="item-block-list row">
+                  {% for category in categories %}
+                    <li class="col-sm-4">
+                        <div class="item-block">
+                            <a rel="perma" href="{{ path('category_view', {'id': category.id }) }}"><img src="https://www.hgt-tilburg.nl/cache/images/userdata/category-images/198x165/0115084909-191-aardappelproducten.jpg" alt="{{ category.name }}" /></a>
+                            <h3><a href="{{ path('category_view', {'id': category.id }) }}">{{ category.name }} <span>({{ category.totalProductCount }})</span></a></h3>
+                        </div>
+                    </li>
+                  {% endfor %}
+                </ul>
             </div>
         </div>
-        {% if categories %}
-            <div class="row categories">
-                <div class="col-md-3">
-                    <ul>
-                        {% for category in categories %}
-                            <li>
-                                <a href="{{ path('category_view', {'id': category.id }) }}" class="listing">
-                                    {{ category.name }}
-                                    <span class="icon"><i class="fa fa-chevron-right"></i></span>
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="col-md-9">
-                    <div class="row">
-                        {% set i = 0 %}
-                        {% for category in categories %}
-                            {% set i = i + 1 %}
-                            <div class="col-md-4 category">
-                                <a href="{{ path('category_view', {'id': category.id }) }}">
-                                    <div>
-                                        <img src="http://via.placeholder.com/250x250{# category.picture #}" alt="{{ category.name }}" />
-                                    </div>
-                                    <div>
-                                        {{ category.name }}
-                                        <span class="amount">({{ category.totalProductCount }})</span>
-                                    </div>
-                                </a>
-                            </div>
-                            {% if i % 3 == 0 %}
-                                </div><div class="row">
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        {% else %}
-            <p>Geen categorieën gevonden.</p>
-        {% endif %}
     </div>
 {% endblock %}
