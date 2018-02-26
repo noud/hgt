@@ -6,31 +6,15 @@
     <div class="template-catalog container">
         <div class="row">
             <div class="col-md-3">
-               {% if categories %}
-                <ul class="item-list">
-                  {% for category in categories %}
-                    <li>
-                        <a href="{{ path('category_view', {'id': category.id }) }}" class="listing">
-                            {{ category.name }}
-                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
-                        </a>
-                    </li>
-                  {% endfor %}
-                </ul>
+                {% if categories %}
+                    {% include '_partials/catalog/category/list.html.twig' with {'categories' : categories } %}
                 {% endif %}
             </div>
             <div class="col-md-9">
                 <h1 class="page-title">Ons assortiment</h1>
-                <ul class="item-block-list row">
-                  {% for category in categories %}
-                    <li class="col-sm-4">
-                        <div class="item-block">
-                            <a rel="perma" href="{{ path('category_view', {'id': category.id }) }}"><img src="https://www.hgt-tilburg.nl/cache/images/userdata/category-images/198x165/0115084909-191-aardappelproducten.jpg" alt="{{ category.name }}" /></a>
-                            <h3><a href="{{ path('category_view', {'id': category.id }) }}">{{ category.name }} <span>({{ category.totalProductCount }})</span></a></h3>
-                        </div>
-                    </li>
-                  {% endfor %}
-                </ul>
+                {% if categories %}
+                    {% include '_partials/catalog/product/list.html.twig' with {'categories' : categories } %}
+                {% endif %}
             </div>
         </div>
     </div>
