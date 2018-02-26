@@ -1,0 +1,88 @@
+/* component
+  ---------------------------------------------------------------------------------------------------------------------- */
+
+/* ----- */
+.item-block {
+
+  border: @border;
+  padding: 10px;
+  text-align: center;
+
+  a[rel='perma'] {
+    display: block;
+  }
+
+  img {
+    max-width: 100%;
+    width: auto;
+    margin: 0 auto;
+  }
+
+  h3 {
+    font-family: @font-family;
+    font-weight: @font-weight;
+    font-size: @font-size;
+
+    a {
+      color: @primary-color;
+    }
+
+    span {
+      color: #808080;
+    }
+
+  }
+
+}
+
+/* modules
+  ---------------------------------------------------------------------------------------------------------------------- */
+
+/* ----- */
+.item-list {
+
+  .listing {
+    width: 100%;
+    margin-bottom: -1px;
+    top: -1px;
+    position: relative;
+  }
+
+}
+
+/* ----- */
+.item-block-list {
+
+  > li {
+    margin-bottom: @grid-gutter-width;
+    height: 250px;
+
+    @media @md {
+      height: 200px;
+    }
+  }
+
+  .item-block {
+    height: 100%;
+    position: relative;
+  }
+
+  .item-block h3 {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding-left: 10px;
+    padding-right: 10px;
+
+    @media @md {
+      font-size: @font-size * 0.75;
+    }
+
+  }
+
+  .item-block a[rel='perma'] {
+    margin-bottom: 50px;
+  }
+
+}
