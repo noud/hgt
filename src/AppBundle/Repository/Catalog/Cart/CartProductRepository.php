@@ -34,7 +34,6 @@ class CartProductRepository extends EntityRepository
     public function update(CartProduct $cartProduct)
     {
         $this->getEntityManager()->persist($cartProduct);
-        $this->getEntityManager()->flush();
     }
 
     /**
