@@ -6,8 +6,10 @@ use Doctrine\ORM\EntityManager;
 use HGT\AppBundle\Repository\Catalog\Cart\CartRepository;
 use HGT\Application\Catalog\Cart\Cart;
 use HGT\Application\Catalog\Cart\CartProduct;
+use HGT\Application\Catalog\Cart\Command\ReviseCartProductCommand;
 use HGT\Application\Catalog\Product\Product;
 use HGT\Application\User\Customer\Customer;
+use HGT\Application\User\CustomerService;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class CartService
@@ -28,41 +30,82 @@ class CartService
     private $productPriceService;
 
     /**
-     * @var TokenStorageInterface
+     * @var CustomerService
      */
-    private $tokenStorage;
+    private $customerService;
+
+    /**
+     * @var EntityManager
+     */
+    private $entityManager;
 
     /**
      * CartService constructor.
      * @param CartRepository $cartRepository
      * @param CartProductService $cartProductService
      * @param ProductPriceService $productPriceService
-     * @param TokenStorageInterface $tokenStorage
+     * @param CustomerService $customerService
+     * @param EntityManager $entityManager
      */
     public function __construct(
         CartRepository $cartRepository,
         CartProductService $cartProductService,
         ProductPriceService $productPriceService,
-        TokenStorageInterface $tokenStorage
+        CustomerService $customerService,
+        EntityManager $entityManager
     ) {
         $this->cartRepository = $cartRepository;
         $this->cartProductService = $cartProductService;
         $this->productPriceService = $productPriceService;
-        $this->tokenStorage = $tokenStorage;
+        $this->customerService = $customerService;
+        $this->entityManager = $entityManager;
+    }
+
+    /**
+     * @param bool $create_when_not_found
+     * @return Cart|null|object
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function getOpenCart($create_when_not_found = false)
+    {
+        $customer = $this->customerService->getCurrentCustomer();
+        $cart = $this->getOpenCartForCustomer($customer);
+
+        if ($cart === null && $create_when_not_found) {
+            $cart = $this->createCart();
+        }
+
+        return $cart;
     }
 
     /**
      * @return Cart
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function createCart()
+    private function createCart()
     {
         $cart = new Cart();
         $cart->setCreatedDate(new \DateTime);
         $cart->setState(Cart::STATE_OPEN);
         $cart->setNote('');
+        $cart->setCustomer($this->customerService->getCurrentCustomer());
         $cart->setIpAddress('');
 
+        $this->cartRepository->add($cart);
+
+        //@TODO: later misschien er uit halen
+        $this->entityManager->flush();
+
         return $cart;
+    }
+
+    /**
+     * @param Customer $customer
+     * @return Cart|null|object
+     */
+    public function getOpenCartForCustomer(Customer $customer)
+    {
+        return $this->cartRepository->getOpenCartForCustomer($customer);
     }
 
     /**
@@ -75,12 +118,18 @@ class CartService
         $cartProducts = $this->cartProductService->getCartProducts($cart);
 
         foreach ($cartProducts as $cartProduct) {
-
             /** @var Product $product */
             $product = $cartProduct->getProduct();
 
-            $cartProduct->setUnitPrice($this->productPriceService->getUnitPriceForCustomer($customer, $product,
-                $cartProduct->getUnitOfMeasure(), $cartProduct->getQty(), $cart->getDeliveryDate()));
+            $cartProduct->setUnitPrice(
+                $this->productPriceService->getUnitPriceForCustomer(
+                    $customer,
+                    $product,
+                    $cartProduct->getUnitOfMeasure(),
+                    $cartProduct->getQty(),
+                    $cart->getDeliveryDate()
+                )
+            );
 
             $this->cartProductService->updateCartProduct($cartProduct);
         }
@@ -88,13 +137,13 @@ class CartService
 
     /**
      * @return int
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function countProductsInCart()
     {
         $qty = 0;
 
-        $customer = $this->tokenStorage->getToken()->getUser();
-        $cart = $this->cartRepository->getOpenCartForCustomer($customer->getId());
+        $cart = $this->getOpenCart();
         $cartProducts = $this->cartProductService->getCartProducts($cart);
 
         /** @var CartProduct $cartProduct */
@@ -107,7 +156,7 @@ class CartService
 
     /**
      * @param Cart $cart
-     * @return float|int
+     * @return int
      */
     public function calculateTotalExTax(Cart $cart)
     {
@@ -120,39 +169,24 @@ class CartService
 
         return $totalExTax;
     }
-//
-//    /**
-//     * @param $cart_id
-//     * @return float|int
-//     */
-//    public function calculateTotalIncTax($cart_id)
-//    {
-//        $totalIncTax = 0;
-//
-//        foreach ($this->calculateTotalPerTax($cart_id) as $percentage => $subtotal) {
-//            $totalIncTax += $subtotal * (1 + ($percentage / 100));
-//        }
-//
-//        return $totalIncTax;
-//    }
-//
-//    /**
-//     * @param $cart_id
-//     * @return array
-//     */
-//    /public function calculateTotalPerTax($cart_id)
-//    {
-//        $taxes = array();
-//
-//        /** @var CartProduct $cartProduct */
-//        foreach ($this->cartProductService->getCartProducts($cart_id) as $cartProduct) {
-//            if (!isset($taxes[$cartProduct->getTaxPercentage()])) {
-//                $taxes[$cartProduct->getTaxPercentage()] = 0.0;
-//            }
-//
-//            $taxes[$cartProduct->getTaxPercentage()] += $cartProduct->getRowTotal();
-//        }
-//
-//        return $taxes;
-//    }
+
+    /**
+     * @param ReviseCartProductCommand $command
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function reviseCart(ReviseCartProductCommand $command)
+    {
+        $cart = $this->getOpenCart();
+
+        foreach ($command->products as $cartProductForm) {
+            $cartProductItem = $this->cartProductService->getCartProductById($cartProductForm->getId());
+            $cartProductItem->setQty($cartProductForm->getQty());
+        }
+
+        $cart->setNote($command->note);
+        $cart->setDeliveryDate($command->delivery_date);
+        $cart->setReference($command->reference);
+
+        $this->cartRepository->add($cart);
+    }
 }

@@ -13,15 +13,6 @@ class CartProduct
     public $rowTotal;
 
     /**
-     * CartProduct constructor.
-     * @param $rowTotal
-     */
-    public function __construct($rowTotal)
-    {
-        $this->rowTotal = $rowTotal;
-    }
-
-    /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
@@ -76,6 +67,22 @@ class CartProduct
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return Cart
+     */
+    public function getCart()
+    {
+        return $this->cart;
+    }
+
+    /**
+     * @param mixed $cart
+     */
+    public function setCart($cart)
+    {
+        $this->cart = $cart;
     }
 
     /**
@@ -148,6 +155,22 @@ class CartProduct
     public function getTaxPercentage()
     {
         return $this->tax_percentage;
+    }
+
+    /**
+     * @param float $tax_percentage
+     */
+    public function setTaxPercentage($tax_percentage)
+    {
+        $this->tax_percentage = $tax_percentage;
+    }
+
+    /**
+     * @param bool $is_action
+     */
+    public function setIsAction($is_action)
+    {
+        $this->is_action = $is_action;
     }
 
     /**

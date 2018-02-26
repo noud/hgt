@@ -2,14 +2,10 @@
 
 namespace HGT\Application\User;
 
-use Doctrine\ORM\EntityManager;
-use HGT\AppBundle\Repository\Catalog\Cart\CartRepository;
 use HGT\AppBundle\Repository\User\Customer\CustomerRepository;
 use HGT\AppBundle\Security\PasswordEncoder;
-use HGT\Application\Catalog\Cart\Cart;
-use HGT\Application\Catalog\CartService;
 use HGT\Application\User\Customer\Customer;
-//use HGT\Application\User\PasswordResetHash\Customer; --> Waarom geeft deze een conflict ?
+use HGT\Application\User\CustomerTaxGroup\CustomerTaxGroup;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class CustomerService
@@ -25,53 +21,29 @@ class CustomerService
     private $passwordEncoder;
 
     /**
-     * @var CartRepository
-     */
-    private $cartRepository;
-
-    /**
      * @var TokenStorageInterface
      */
     private $tokenStorage;
 
     /**
-     * @var CartService
-     */
-    private $cartService;
-
-    /**
-     * @var EntityManager
-     */
-    private $entityManager;
-
-    /**
      * CustomerService constructor.
      * @param CustomerRepository $customerRepository
      * @param PasswordEncoder $passwordEncoder
-     * @param CartRepository $cartRepository
-     * @param CartService $cartService
      * @param TokenStorageInterface $tokenStorage
-     * @param EntityManager $entityManager
      */
     public function __construct(
         CustomerRepository $customerRepository,
         PasswordEncoder $passwordEncoder,
-        CartRepository $cartRepository,
-        CartService $cartService,
-        TokenStorageInterface $tokenStorage,
-        EntityManager $entityManager
+        TokenStorageInterface $tokenStorage
     ) {
         $this->customerRepository = $customerRepository;
         $this->passwordEncoder = $passwordEncoder;
-        $this->cartRepository = $cartRepository;
         $this->tokenStorage = $tokenStorage;
-        $this->cartService = $cartService;
-        $this->entityManager = $entityManager;
     }
 
     /**
      * @param $username string
-     * @return \HGT\AppBundle\Repository\User\Customer\Customer|object
+     * @return Customer|object
      */
     public function getCustomerByUsername($username)
     {
@@ -84,6 +56,14 @@ class CustomerService
     public function getCurrentCustomer()
     {
         return $this->tokenStorage->getToken()->getUser();
+    }
+
+    /**
+     * @return CustomerTaxGroup
+     */
+    public function getCustomerTaxGroup()
+    {
+        return $this->getCurrentCustomer()->getCustomerTaxGroup();
     }
 
     /**
@@ -105,45 +85,20 @@ class CustomerService
     }
 
     /**
-     * @param bool $create_when_not_found
-     * @return Cart
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @param Customer $customer
+     * @return array
      */
-    public function getOpenCart($create_when_not_found = false)
+    public function getValidDeliveryDays(Customer $customer)
     {
-        /** @var Customer $customer */
-        $customer = $this->tokenStorage->getToken()->getUser();
-        $cart = $this->getOpenCartForCustomer($customer->getId());
+        $delivery_days = array();
+        $customerDeliveryDays = $this->customerRepository->getDeliveryDays($customer);
 
-        if (!$cart && $create_when_not_found) {
-            $em = $this->entityManager;
-            $cart = $this->_createCart();
-            $cart = $this->cartRepository->add($cart);
-            $em->flush();
+        for ($day = 1; $day <= 6; $day++) {
+            if ($customerDeliveryDays == "" || in_array($day, explode(",", $customerDeliveryDays))) {
+                $delivery_days[] = $day;
+            }
         }
 
-        return $cart;
-    }
-
-    /**
-     * @param $customer_id
-     * @return null|object
-     */
-    public function getOpenCartForCustomer($customer_id)
-    {
-        return $this->cartRepository->getOpenCartForCustomer($customer_id);
-    }
-
-    /**
-     * @return Cart
-     */
-    private function _createCart()
-    {
-        $customer = $this->tokenStorage->getToken()->getUser();
-
-        $cart = $this->cartService->createCart();
-        $cart->setCustomer($customer);
-
-        return $cart;
+        return $delivery_days;
     }
 }

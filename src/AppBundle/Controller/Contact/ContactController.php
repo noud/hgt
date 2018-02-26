@@ -11,11 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ContactController extends Controller
 {
-
     /**
-     *
      * @Route("/contact", name="contact_index")
-     *
      * @param Request $request
      * @param ContactSender $contactSender
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -38,7 +35,6 @@ class ContactController extends Controller
         return $this->render('contact/index.html.twig', [
             'form' => $form->createView(),
         ]);
-
     }
 
     /**
@@ -48,6 +44,4 @@ class ContactController extends Controller
     {
         return $this->render('contact/confirm.html.twig');
     }
-
-
 }

@@ -74,7 +74,7 @@
                                     <span class="block volume">Inhoud: {{ product.volume }}</span>
                                 </p>
                                 {% if app.user %}
-                                    {{ form_start(form, {'action': path('cart_product_add', {"product_id" : product.id}), 'method' : 'POST'}) }}
+                                    {{ form_start(form, {'attr': {'id': 'add_to_cart_form'}}) }}
                                         <div class="col-md-6 no-gutter">
                                             {{ form_widget(form.product_unit_of_measure) }}
                                         </div>
@@ -91,7 +91,7 @@
                                         </div>
                                         <div class="add-to-cart">
                                             {{ form_widget(form.qty) }}
-                                            <button>Bestel</button>
+                                            <a href="#" onclick="addToCart();return false;">Bestel</a>
                                         </div>
                                         <div class="add-to-orderlist">
                                             <a href="#" onclick="addToOrderList();return false;">Toevoegen aan bestellijst</a>
@@ -119,16 +119,22 @@
 
 {% block scripts %}
     {{ parent() }}
+
     <script type="text/javascript">
         function addToOrderList() {
             alert('Actie');
         }
 
-        $("#add_to_cart_form_product_unit_of_measure").change(function () {
+        function addToCart() {
+            $('#{{ form.vars.id }}_form_action').val('add');
+            $('#{{ form.vars.id }}').submit();
+        }
+
+        $("#{{ form.vars.id }}_product_unit_of_measure").change(function () {
             $(".price_item").hide();
             $("#price_" + $(this).find('option:selected').data('unit-of-measure-id')).show();
         });
 
-        $("#add_to_cart_form_product_unit_of_measure").trigger("change");
+        $("#{{ form.vars.id }}_product_unit_of_measure").trigger("change");
     </script>
 {% endblock %}

@@ -3,19 +3,18 @@
 {% block bodyClass %}checkout-cart-index{% endblock %}
 
 {% block body %}
-
     <div class="container">
         <h1 class="page-title">Winkelwagen</h1>
         {% if form.products %}
-            {{ form_start(form) }}
+            {{ form_start(form, {'attr': {'id': 'cart_form'} }) }}
             {% for product in form.products %}
                 {% set cartProduct = product.vars.data %}
                 <div class="row">
                     <div class="col-md-2">
-                        <a href="{{ path('cart_product_remove', {'product_id': cartProduct.id}) }}">
+                        <a href="{{ path('cart_product_remove', {'id': cartProduct.id}) }}">
                             <i class="fa fa-trash-alt"></i>
                         </a>
-                        <a href="{{ path('product_view', {'product_id': cartProduct.product.id} ) }}">
+                        <a href="{{ path('product_view', {'id': cartProduct.product.id} ) }}">
                             {{ cartProduct.product.name }}
                         </a>
                     </div>
@@ -41,13 +40,14 @@
             </div>
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
-                    <div>Opmerkingen:</div>
+                    <label for="{{ form.vars.id }}_note">Opmerkingen:</label>
                     {{ form_widget(form.note) }}
                 </div>
                 <div class="col-md-4">
-                    <div>Afleverdatum:</div>
+                    <label for="{{ form.vars.id }}_delivery_date">Afleverdatum:</label>
                     {{ form_widget(form.delivery_date) }}
-                    <div>Referentie:</div>
+                    {{ form_errors(form.delivery_date) }}
+                    <label for="{{ form.vars.id }}_reference">Referentie:</label>
                     {{ form_widget(form.reference) }}
                 </div>
                 <div class="col-md-offset-8 col-md-4">
@@ -60,10 +60,44 @@
             <p>Voeg eerst producten aan uw winkelwagen toe om een bestelling te kunnen plaatsen.</p>
         {% endif %}
     </div>
+    {{ validDeliveryDates|json_encode }}
 {% endblock %}
 
 {% block scripts %}
     <script type="text/javascript">
+        $('#{{ form.vars.id }}_delivery_date').datepicker({
+            dateFormat: 'dd-mm-yy',
+            minDate: "now + 1 Day",
+
+            beforeShowDay: function (date) {
+                var valid_delivery_days = {{ validDeliveryDays|json_encode|raw }};
+                var invalid_delivery_dates = {{ invalidDeliveryDates|json_encode|raw }};
+                var valid_delivery_dates = {{ validDeliveryDates|json_encode|raw }};
+
+                // Format date for comparison
+                var formattedDate = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2)
+
+                // Regular delivery dates
+                if ($.inArray(date.getDay(), valid_delivery_days) > -1) {
+                    return [true, "", "Beschikbaar"];
+                } else {
+                    return [false, "", "Niet beschikbaar"];
+                }
+
+                // Dates specifically excluded for delivery
+                if($.inArray(formattedDate, invalid_delivery_dates) > -1) {
+                    return [false, "", "Niet beschikbaar"];
+                }
+
+                if($.inArray(formattedDate, valid_delivery_dates) > -1) {
+                    return [true, "", "Beschikbaar"];
+                }
+            },
+            onSelect: function() {
+                updateCart();
+            }
+        });
+
         function updateCart() {
             $('#{{ form.vars.id }}_form_action').val('update');
             $('#{{ form.vars.id }}').submit();

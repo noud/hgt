@@ -84,9 +84,6 @@ class ProductUnitOfMeasure
      */
     public function getLabel()
     {
-        return sprintf('%s (%d)',
-            $this->getUnitOfMeasure()->getName(),
-            $this->getQtyPerUnitOfMeasure()
-        );
+        return sprintf('%s (%d)', $this->getUnitOfMeasure()->getName(), $this->getQtyPerUnitOfMeasure());
     }
 }

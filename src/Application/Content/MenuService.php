@@ -36,7 +36,7 @@ class MenuService
         $i = 1;
 
         foreach ($categories as $category) {
-            if($i <= $itemsPerList) {
+            if ($i <= $itemsPerList) {
                 $left_categories[] = $category;
             } else {
                 $right_categories[] = $category;

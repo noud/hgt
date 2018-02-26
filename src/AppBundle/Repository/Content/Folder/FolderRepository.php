@@ -46,5 +46,4 @@ class FolderRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
-
 }

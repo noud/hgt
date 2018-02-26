@@ -2,24 +2,18 @@
 
 namespace HGT\AppBundle\Form\Catalog\Product;
 
-use Doctrine\ORM\EntityRepository;
+use HGT\Application\Catalog\Product\Product;
 use HGT\Application\Catalog\Product\ProductUnitOfMeasure;
-use HGT\Application\Catalog\Product\UnitOfMeasure;
 use HGT\Application\Catalog\ProductService;
 use HGT\Application\Catalog\ProductUnitOfMeasureService;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class AddToCartForm extends AbstractType
 {
-    /**
-     * @var RequestStack
-     */
-    private $requestStack;
-
     /**
      * @var ProductUnitOfMeasureService
      */
@@ -32,13 +26,13 @@ class AddToCartForm extends AbstractType
 
     /**
      * AddToCartForm constructor.
-     * @param RequestStack $requestStack
      * @param ProductService $productService
      * @param ProductUnitOfMeasureService $productUnitOfMeasureService
      */
-    public function __construct(RequestStack $requestStack, ProductService $productService, ProductUnitOfMeasureService $productUnitOfMeasureService)
-    {
-        $this->requestStack = $requestStack;
+    public function __construct(
+        ProductService $productService,
+        ProductUnitOfMeasureService $productUnitOfMeasureService
+    ) {
         $this->productUnitOfMeasureService = $productUnitOfMeasureService;
         $this->productService = $productService;
     }
@@ -49,8 +43,10 @@ class AddToCartForm extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $product_id = $this->requestStack->getCurrentRequest()->attributes->get('product_id');
-        $product = $this->productService->getProductById($product_id);
+        /** @var Product $product */
+        $product = $this->productService->getProductById($options['data']->product);
+
+        $builder->add('form_action', HiddenType::class);
 
         $builder->add('product_unit_of_measure', EntityType::class, [
             'class' => ProductUnitOfMeasure::class,

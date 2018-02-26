@@ -10,14 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 class CategoryController extends Controller
 {
     /**
-     * IndexController constructor.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * @Route("/category", name="category_index")
      * @param Request $request
      * @param CategoryService $categoryService
@@ -46,7 +38,10 @@ class CategoryController extends Controller
         $parentCategory = $categoryService->getParentCategory($parentId);
         $superCategories = $categoryService->getCategoriesWithProducts($id);
 
-        $parentCategories = ($parentCategory !== null ? $categoryService->getSuperCategoriesWithProducts($parentId) : $categoryService->getCategoriesWithProducts("NULL"));
+        $parentCategories = ($parentCategory !== null ?
+            $categoryService->getSuperCategoriesWithProducts($parentId) :
+            $categoryService->getCategoriesWithProducts("NULL")
+        );
 
         return $this->render('catalog/category/view.html.twig', [
             'category' => $category,

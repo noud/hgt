@@ -2,7 +2,6 @@
 
 namespace HGT\AppBundle\Mailer\Sender;
 
-
 class ContactSender
 {
     /**
@@ -18,7 +17,6 @@ class ContactSender
     {
         $this->mailer = $mailer;
     }
-
 
     /**
      * @param $contactCommand

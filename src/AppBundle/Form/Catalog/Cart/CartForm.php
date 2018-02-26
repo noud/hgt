@@ -32,8 +32,8 @@ class CartForm extends AbstractType
         $builder->add('delivery_date', DateType::class, [
             'widget' => 'single_text',
             'label' => false,
-            'format' => 'yyyy-MM-dd',
-            'html5' => true,
+
+            'html5' => false,
         ]);
 
         $builder->add('reference', TextType::class, [

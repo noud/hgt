@@ -38,10 +38,14 @@ class ProductUnitOfMeasureRepository extends EntityRepository
      * @param Product $product
      * @return array|ProductUnitOfMeasure[]
      */
-    public function getProductUnitOfMeasureByProductId(Product $product)
+    public function getProductUnitOfMeasureByProduct(Product $product)
     {
         return $this->findBy(
-            ['product' => $product->getId()]
+            ['product' => $product->getId()],
+            [
+                'selected' => 'DESC',
+                'qty_per_unit_of_measure' => 'ASC'
+            ]
         );
     }
 
@@ -69,13 +73,8 @@ class ProductUnitOfMeasureRepository extends EntityRepository
         $queryBuilder = $this->createQueryBuilder('q');
         $queryBuilder->where('q.product = :productId');
         $queryBuilder->setParameter('productId', $product->getId());
-
-//        $queryBuilder = $this->createQueryBuilder('q');
-//        $queryBuilder->select('u.id', 'u.name', 'u.navision_id');
-//        $queryBuilder->join('q.unit_of_measure', 'u');
-//        $queryBuilder->where('q.product = :productId');
-//        $queryBuilder->setParameter('productId', $product->getId());
-//        dump($queryBuilder->getQuery()->getSQL());
+        $queryBuilder->addOrderBy('q.selected', 'DESC');
+        $queryBuilder->addOrderBy('q.qty_per_unit_of_measure', 'ASC');
 
         return $queryBuilder;
     }

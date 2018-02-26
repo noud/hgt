@@ -12,14 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 class IndexController extends Controller
 {
     /**
-     * IndexController constructor.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * @Route("/", name="homepage")
      * @param Request $request
      * @param HomeSlideService $homeSlideService
@@ -27,8 +19,12 @@ class IndexController extends Controller
      * @param CategoryService $categoryService
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request, HomeSlideService $homeSlideService, HomeBannerService $homeBannerService, CategoryService $categoryService)
-    {
+    public function indexAction(
+        Request $request,
+        HomeSlideService $homeSlideService,
+        HomeBannerService $homeBannerService,
+        CategoryService $categoryService
+    ) {
         $homeSlides = $homeSlideService->getHomeSlides();
         $homeBanners = $homeBannerService->getHomeBanners(2);
         $homeCategories = $categoryService->getHomeCategories();

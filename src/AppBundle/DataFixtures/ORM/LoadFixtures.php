@@ -24,15 +24,15 @@ class LoadFixtures implements FixtureInterface
         $quoteSeparator = preg_quote($separator, '#');
 
         $trans = array(
-            '&.+?;'                    => '',
-            '[^\w\d _-]'            => '',
-            '\s+'                    => $separator,
-            '('.$quoteSeparator.')+'=> $separator
+            '&.+?;' => '',
+            '[^\w\d _-]' => '',
+            '\s+' => $separator,
+            '(' . $quoteSeparator . ')+' => $separator
         );
 
         $string = strip_tags($string);
-        foreach ($trans as $key => $val){
-            $string = preg_replace('#'.$key.'#i', $val, $string);
+        foreach ($trans as $key => $val) {
+            $string = preg_replace('#' . $key . '#i', $val, $string);
         }
 
         $string = strtolower($string);

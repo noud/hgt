@@ -2,7 +2,10 @@
 
 namespace HGT\Application\Catalog;
 
-use HGT\AppBundle\Repository\Tax\TaxRepository;
+use HGT\AppBundle\Repository\Catalog\Tax\TaxRepository;
+use HGT\Application\Catalog\Product\ProductTaxGroup;
+use HGT\Application\Catalog\Tax\Tax;
+use HGT\Application\User\CustomerTaxGroup\CustomerTaxGroup;
 
 class TaxService
 {
@@ -18,5 +21,15 @@ class TaxService
     public function __construct(TaxRepository $taxRepository)
     {
         $this->taxRepository = $taxRepository;
+    }
+
+    /**
+     * @param CustomerTaxGroup $customerTaxGroup
+     * @param ProductTaxGroup $productTaxGroup
+     * @return Tax|object
+     */
+    public function getTaxByGroupIds(CustomerTaxGroup $customerTaxGroup, ProductTaxGroup $productTaxGroup)
+    {
+        return $this->taxRepository->getTaxByGroupIds($customerTaxGroup, $productTaxGroup);
     }
 }

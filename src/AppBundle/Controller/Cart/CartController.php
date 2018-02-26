@@ -2,25 +2,35 @@
 
 namespace HGT\AppBundle\Controller\Cart;
 
+use Doctrine\ORM\EntityManager;
 use HGT\AppBundle\Form\Catalog\Cart\CartForm;
 use HGT\Application\Catalog\Cart\Cart;
 use HGT\Application\Catalog\Cart\CartProduct;
-use HGT\Application\Catalog\Cart\Command\DefineCartProductCommand;
-use HGT\AppBundle\Form\Catalog\Product\AddToCartForm;
 use HGT\Application\Catalog\Cart\Command\ReviseCartProductCommand;
 use HGT\Application\Catalog\CartProductService;
 use HGT\Application\Catalog\CartService;
-use HGT\Application\Catalog\ProductService;
-use HGT\Application\Catalog\ProductUnitOfMeasureService;
+use HGT\Application\Catalog\InvalidDeliveryDateService;
 use HGT\Application\User\CustomerService;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends Controller
 {
+    /**
+     * @var EntityManager
+     */
+    private $entityManager;
+
+    /**
+     * CartController constructor.
+     * @param EntityManager $entityManager
+     */
+    public function __construct(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Route("/cart", name="cart_index")
      * @param Request $request
@@ -34,128 +44,76 @@ class CartController extends Controller
         Request $request,
         CartService $cartService,
         CustomerService $customerService,
-        CartProductService $cartProductService
+        CartProductService $cartProductService,
+        InvalidDeliveryDateService $invalidDeliveryDateService
     ) {
-        // redirect if user is not logged in
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('account_login');
-        }
-
         /** @var Cart $cart */
-        $cart = $customerService->getOpenCart();
+        $cart = $cartService->getOpenCart();
         $cartProducts = $cartProductService->getCartProducts($cart);
         $customer = $customerService->getCurrentCustomer();
 
         $cartService->updateProductPrices($customer, $cart);
 
         $command = new ReviseCartProductCommand($cartProducts, $cart);
-        $form = $this->createForm(CartForm::class, $command, [
-            'method' => 'post',
-            'action' => $this->generateUrl('cart_index'),
-            'attr' => [
-                'id' => 'cart_form',
-            ]
-        ]);
+        $form = $this->createForm(CartForm::class, $command);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $em = $this->getDoctrine()->getManager();
+            $cartService->reviseCart($command);
 
             switch ($command->form_action) {
-                case "update":
-                    /** @var CartProduct $cartProductForm */
-                    foreach ($command->products as $cartProductForm) {
-                        $cartProductItem = $cartProductService->getCartProductById($cartProductForm->getId());
-                        $cartProductItem->setQty($cartProductForm->getQty());
-                    }
-
-                    $cart->setNote($command->note);
-                    $cart->setDeliveryDate($command->delivery_date);
-                    $cart->setReference($command->reference);
-
+                case 'update':
                     $this->addFlash('success', 'Winkelwagen succesvol bijgewerkt.');
                     break;
-                case "finish":
-                    // bestelling afronden
+                case 'finish':
+                    return $this->redirectToRoute('cart_success');
                     break;
             }
 
-            $em->persist($cart);
-            $em->flush();
+            $this->entityManager->flush();
         }
 
         return $this->render('catalog/cart/index.html.twig', [
+            'validDeliveryDays' => $customerService->getValidDeliveryDays($customer),
+            'invalidDeliveryDates' => $invalidDeliveryDateService->getInvalidDeliveryDatesAsDateArray(),
+            'validDeliveryDates' => $invalidDeliveryDateService->getValidDeliveryDatesAsDateArray(),
             'cartTotal' => $cartService->calculateTotalExTax($cart),
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/cart/addproduct/{product_id}", name="cart_product_add")
-     * @Method("POST")
-     * @param Request $request
-     * @param ProductService $productService
+     * @Route("/cart/removeproduc   t/{id}", name="cart_product_remove")
+     * @param CartProduct $cartProduct
      * @param CartProductService $cartProductService
-     * @param ProductUnitOfMeasureService $productUnitOfMeasureService
+     * @param CartService $cartService
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function addProductAction(
-        Request $request,
-        ProductService $productService,
+    public function removeProductAction(
+        CartProduct $cartProduct,
         CartProductService $cartProductService,
-        ProductUnitOfMeasureService $productUnitOfMeasureService
+        CartService $cartService
     ) {
-        // redirect if user is not logged in
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('account_login');
+        $cart = $cartService->getOpenCart();
+
+        if ($cart !== null && $cartProduct->getCart()->getId() == $cart->getId()) {
+            $cartProductService->removeCartProduct($cartProduct);
         }
 
-        $product = $productService->getProductById($request->get('product_id'));
+        $this->entityManager->flush();
 
-        if ($product === null) {
-            throw new NotFoundHttpException();
-        }
-
-        $cartProductCommand = new DefineCartProductCommand($product);
-
-        $form = $this->createForm(AddToCartForm::class, $cartProductCommand);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            //dump($cartProductCommand); exit;
-            $em = $this->getDoctrine()->getManager();
-            $cartProductService->defineCartProduct($cartProductCommand);
-            $em->flush();
-
-            $this->addFlash('confirm', 'Product is toegevoegd aan uw winkelwagen.');
-        }
+        $this->addFlash('success', 'Product is verwijderd uit uw winkelwagen.');
 
         return $this->redirectToRoute('cart_index');
     }
 
     /**
-     * @Route("/cart/removeproduct/{product_id}", name="cart_product_remove")
-     * @param Request $request
-     * @param CartProductService $cartProductService
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/cart/success", name="cart_success")
      */
-    public function removeProductAction(Request $request, CartProductService $cartProductService)
+    public function successAction()
     {
-        // redirect if user is not logged in
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('account_login');
-        }
-
-        $em = $this->getDoctrine()->getManager();
-
-        $cartProduct = $cartProductService->getCartProductById($request->get('product_id'));
-        $cartProductService->removeCartProduct($cartProduct);
-
-        $em->flush();
-
-        $this->addFlash('confirm', 'Product is verwijderd uit uw winkelwagen.');
-        return $this->redirectToRoute('cart_index');
+        return $this->render('catalog/cart/success.html.twig');
     }
 }

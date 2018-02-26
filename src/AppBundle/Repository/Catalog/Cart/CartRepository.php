@@ -4,6 +4,7 @@ namespace HGT\AppBundle\Repository\Catalog\Cart;
 
 use Doctrine\ORM\EntityRepository;
 use HGT\Application\Catalog\Cart\Cart;
+use HGT\Application\User\Customer\Customer;
 
 class CartRepository extends EntityRepository
 {
@@ -33,14 +34,14 @@ class CartRepository extends EntityRepository
     }
 
     /**
-     * @param int $customer_id
-     * @return null|Cart
+     * @param Customer $customer
+     * @return Cart|null|object
      */
-    public function getOpenCartForCustomer($customer_id)
+    public function getOpenCartForCustomer(Customer $customer)
     {
         return $this->findOneBy([
             'state' => Cart::STATE_OPEN,
-            'customer' => $customer_id
+            'customer' => $customer
         ]);
     }
 }

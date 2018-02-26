@@ -40,4 +40,13 @@ class CustomerRepository extends EntityRepository
     {
         return $this->findOneBy(compact('username'));
     }
+
+    /**
+     * @param Customer $customer
+     * @return string
+     */
+    public function getDeliveryDays(Customer $customer)
+    {
+        return $this->get($customer)->getDeliveryDays();
+    }
 }

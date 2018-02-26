@@ -5,6 +5,8 @@ namespace HGT\AppBundle\Repository\Catalog\Cart;
 use Doctrine\ORM\EntityRepository;
 use HGT\Application\Catalog\Cart\Cart;
 use HGT\Application\Catalog\Cart\CartProduct;
+use HGT\Application\Catalog\Product\Product;
+use HGT\Application\Catalog\Product\UnitOfMeasure;
 
 class CartProductRepository extends EntityRepository
 {
@@ -44,13 +46,28 @@ class CartProductRepository extends EntityRepository
     }
 
     /**
-     * @param int $cart_id
+     * @param Cart $cart
      * @return CartProduct[]
      */
-    public function getCartProductsByCartId($cart_id)
+    public function getCartProductsByCart(Cart $cart)
     {
-        return $this->findBy([
-            'cart' => $cart_id
-        ]);
+        return $this->findBy(compact('cart'));
+    }
+
+    /**
+     * @param Cart $cart
+     * @param Product $product
+     * @param UnitOfMeasure $unit_of_measure
+     * @return CartProduct|null|object
+     */
+    public function getUniqueCartProduct(Cart $cart, Product $product, UnitOfMeasure $unit_of_measure)
+    {
+        return $this->findOneBy(
+            [
+                'cart' => $cart,
+                'product' => $product,
+                'unit_of_measure' => $unit_of_measure,
+            ]
+        );
     }
 }

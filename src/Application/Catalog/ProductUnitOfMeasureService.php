@@ -29,7 +29,7 @@ class ProductUnitOfMeasureService
      */
     public function getProductUnitOfMeasures(Product $product)
     {
-        return $this->productUnitOfMeasureRepository->getProductUnitOfMeasureByProductId($product);
+        return $this->productUnitOfMeasureRepository->getProductUnitOfMeasureByProduct($product);
     }
 
     /**
@@ -39,7 +39,10 @@ class ProductUnitOfMeasureService
      */
     public function getProductUnitOfMeasure(Product $product, UnitOfMeasure $unit_of_measure)
     {
-        return $this->productUnitOfMeasureRepository->getProductUnitOfMeasureForProductPrice($product, $unit_of_measure);
+        return $this->productUnitOfMeasureRepository->getProductUnitOfMeasureForProductPrice(
+            $product,
+            $unit_of_measure
+        );
     }
 
     /**

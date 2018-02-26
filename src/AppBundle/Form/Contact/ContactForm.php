@@ -12,7 +12,6 @@ class ContactForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Naam',
@@ -51,8 +50,6 @@ class ContactForm extends AbstractType
                     'autocomplete' => 'nofill',
                     'autocorrect' => 'off'
                 ]
-            ])
-        ;
-
+            ]);
     }
 }

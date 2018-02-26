@@ -39,10 +39,14 @@ class ProductPriceRepository extends EntityRepository
      * @param UnitOfMeasure $unit_of_measure
      * @param bool $is_action_price
      * @param \DateTime $date
-     * @return ProductPrice[]|array
+     * @return array|ProductPrice[]
      */
-    public function getActiveProductPrices(Product $product, UnitOfMeasure $unit_of_measure, $is_action_price = null, $date = null)
-    {
+    public function getActiveProductPrices(
+        Product $product,
+        UnitOfMeasure $unit_of_measure,
+        $is_action_price = null,
+        $date = null
+    ) {
         if ($date === null) {
             $date = date("Y-m-d");
         }
@@ -52,7 +56,7 @@ class ProductPriceRepository extends EntityRepository
             ->andWhere('q.unit_of_measure = :unit_of_measure_id')
             ->andWhere(':date BETWEEN q.start_date AND q.end_date OR (q.start_date <= :date AND q.end_date IS NULL)');
 
-        if($date !== null){
+        if ($date !== null) {
             $qb->andWhere('q.is_action_price = :is_action_price');
         }
 

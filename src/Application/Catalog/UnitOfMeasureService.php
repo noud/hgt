@@ -19,4 +19,13 @@ class UnitOfMeasureService
     {
         $this->unitOfMeasureRepository = $unitOfMeasureRepository;
     }
+
+    /**
+     * @param $unit_of_measure_id
+     * @return Product\UnitOfMeasure|object
+     */
+    public function getUnitOfMeasureById($unit_of_measure_id)
+    {
+        return $this->unitOfMeasureRepository->get($unit_of_measure_id);
+    }
 }

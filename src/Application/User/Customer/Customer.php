@@ -365,7 +365,7 @@ class Customer implements UserInterface
      */
     public function eraseCredentials()
     {
-
+        //
     }
 
     /**
@@ -390,8 +390,8 @@ class Customer implements UserInterface
     public function getName()
     {
         return implode(' ', [
-           $this->first_name,
-           $this->last_name,
+            $this->first_name,
+            $this->last_name,
         ]);
     }
 
@@ -417,6 +417,22 @@ class Customer implements UserInterface
     public function getCustomerGroup()
     {
         return $this->customer_group;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDeliveryDays()
+    {
+        return $this->delivery_days;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCustomerTaxGroup()
+    {
+        return $this->customer_tax_group;
     }
 
     /**

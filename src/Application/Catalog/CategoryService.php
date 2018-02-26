@@ -44,7 +44,7 @@ class CategoryService
      */
     public function getParentCategory($parent_id)
     {
-        if($parent_id !== null) {
+        if ($parent_id !== null) {
             return $this->categoryRepository->findOneById($parent_id);
         }
 
