@@ -37,6 +37,7 @@ class CartController extends Controller
      * @param CartService $cartService
      * @param CustomerService $customerService
      * @param CartProductService $cartProductService
+     * @param InvalidDeliveryDateService $invalidDeliveryDateService
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -49,7 +50,10 @@ class CartController extends Controller
     ) {
         /** @var Cart $cart */
         $cart = $cartService->getOpenCart();
+
+        //@TODO: Kun je deze producten niet via $cart->getCartProducts() ophalen?
         $cartProducts = $cartProductService->getCartProducts($cart);
+
         $customer = $customerService->getCurrentCustomer();
 
         $cartService->updateProductPrices($customer, $cart);
@@ -84,7 +88,7 @@ class CartController extends Controller
     }
 
     /**
-     * @Route("/cart/removeproduc   t/{id}", name="cart_product_remove")
+     * @Route("/cart/removeproduct/{id}", name="cart_product_remove")
      * @param CartProduct $cartProduct
      * @param CartProductService $cartProductService
      * @param CartService $cartService

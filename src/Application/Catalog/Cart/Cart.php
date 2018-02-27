@@ -12,13 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Cart
 {
-    protected $cartProducts;
-
-    public function __construct()
-    {
-        $this->cartProducts = new ArrayCollection();
-    }
-
     const STATE_OPEN = 'open';
     const STATE_FINISHED = 'finished';
     const STATE_EXPORTING = 'exporting';
@@ -177,13 +170,5 @@ class Cart
     public function setIpAddress($ip_address)
     {
         $this->ip_address = $ip_address;
-    }
-
-    /**
-     * @return ArrayCollection|CartProduct[]
-     */
-    public function getCartProducts()
-    {
-        return $this->cartProducts;
     }
 }

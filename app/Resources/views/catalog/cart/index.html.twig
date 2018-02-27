@@ -60,7 +60,6 @@
             <p>Voeg eerst producten aan uw winkelwagen toe om een bestelling te kunnen plaatsen.</p>
         {% endif %}
     </div>
-    {{ validDeliveryDates|json_encode }}
 {% endblock %}
 
 {% block scripts %}
@@ -70,26 +69,26 @@
             minDate: "now + 1 Day",
 
             beforeShowDay: function (date) {
-                var valid_delivery_days = {{ validDeliveryDays|json_encode|raw }};
-                var invalid_delivery_dates = {{ invalidDeliveryDates|json_encode|raw }};
-                var valid_delivery_dates = {{ validDeliveryDates|json_encode|raw }};
+                var validDeliveryDays = {{ validDeliveryDays|json_encode|raw }};
+                var invalidDeliveryDates = {{ invalidDeliveryDates|json_encode|raw }};
+                var validDeliveryDates = {{ validDeliveryDates|json_encode|raw }};
 
                 // Format date for comparison
                 var formattedDate = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2)
 
                 // Regular delivery dates
-                if ($.inArray(date.getDay(), valid_delivery_days) > -1) {
+                if ($.inArray(date.getDay(), validDeliveryDays) > -1) {
                     return [true, "", "Beschikbaar"];
                 } else {
                     return [false, "", "Niet beschikbaar"];
                 }
 
                 // Dates specifically excluded for delivery
-                if($.inArray(formattedDate, invalid_delivery_dates) > -1) {
+                if($.inArray(formattedDate, invalidDeliveryDates) > -1) {
                     return [false, "", "Niet beschikbaar"];
                 }
 
-                if($.inArray(formattedDate, valid_delivery_dates) > -1) {
+                if($.inArray(formattedDate, validDeliveryDates) > -1) {
                     return [true, "", "Beschikbaar"];
                 }
             },

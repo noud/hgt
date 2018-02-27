@@ -20,14 +20,8 @@ class FolderController extends Controller
     public function indexAction(Request $request, FolderService $folderService)
     {
         $activeFolders = $folderService->getActiveFolders();
-        $isEven = false;
-
-        if (count($activeFolders) % 2 == 0) {
-            $isEven = true;
-        }
 
         return $this->render('folder/index.html.twig', [
-            'isEven' => $isEven,
             'folders' => $activeFolders,
         ]);
     }

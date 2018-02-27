@@ -10,7 +10,6 @@ use HGT\Application\Catalog\Cart\Command\ReviseCartProductCommand;
 use HGT\Application\Catalog\Product\Product;
 use HGT\Application\User\Customer\Customer;
 use HGT\Application\User\CustomerService;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class CartService
 {
@@ -76,6 +75,10 @@ class CartService
         }
 
         return $cart;
+    }
+
+    public function getCartProducts() {
+        return null;
     }
 
     /**

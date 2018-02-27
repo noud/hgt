@@ -55,24 +55,24 @@ class ProductPriceService
     public function getActionProductPrice(
         Customer $customer,
         Product $product,
-        UnitOfMeasure $unit_of_measure,
+        UnitOfMeasure $unitOfMeasure,
         $qty = 1
     ) {
-        $unit_of_measure_ids = array();
+        $unitOfMeasureIds = array();
 
-        /** @var UnitOfMeasure $unitOfMeasure */
-        if ($unit_of_measure === null) {
-            foreach ($this->productUnitOfMeasureService->getProductUnitOfMeasures($product) as $unitOfMeasure) {
-                $unit_of_measure_ids[] = $unitOfMeasure->getId();
+        /** @var UnitOfMeasure $unitOfMeasureItem */
+        if ($unitOfMeasure === null) {
+            foreach ($this->productUnitOfMeasureService->getProductUnitOfMeasures($product) as $unitOfMeasureItem) {
+                $unitOfMeasureIds[] = $unitOfMeasureItem->getId();
             }
         } else {
-            $unit_of_measure_ids[] = $unit_of_measure->getId();
+            $unitOfMeasureIds[] = $unitOfMeasure->getId();
         }
 
         $foundPrice = null;
 
-        foreach ($unit_of_measure_ids as $unit_of_measure_id) {
-            foreach ($this->getActiveProductPrices($product, $unit_of_measure, 1) as $productPrice) {
+        foreach ($unitOfMeasureIds as $unitOfMeasureId) {
+            foreach ($this->getActiveProductPrices($product, $unitOfMeasure, 1) as $productPrice) {
                 if ($productPrice->getMinimumQty() > $qty) {
                     continue;
                 }
@@ -109,7 +109,7 @@ class ProductPriceService
     /**
      * @param Customer $customer
      * @param Product $product
-     * @param UnitOfMeasure $unit_of_measure
+     * @param UnitOfMeasure $unitOfMeasure
      * @param int $qty
      * @param \DateTime $date
      * @return float|null
@@ -117,20 +117,20 @@ class ProductPriceService
     public function getUnitPriceForCustomer(
         Customer $customer,
         Product $product,
-        UnitOfMeasure $unit_of_measure,
+        UnitOfMeasure $unitOfMeasure,
         $qty = 1,
         $date = null
     ) {
         $foundPrice = null;
 
         /** @var ProductUnitOfMeasure $productUnitOfMeasure */
-        $productUnitOfMeasure = $this->productUnitOfMeasureService->getProductUnitOfMeasure($product, $unit_of_measure);
+        $productUnitOfMeasure = $this->productUnitOfMeasureService->getProductUnitOfMeasure($product, $unitOfMeasure);
 
         if ($productUnitOfMeasure !== null) {
             foreach (array("0", "1") as $is_action_price) {
                 $activeProductPrices = $this->productPriceRepository->getActiveProductPrices(
                     $product,
-                    $unit_of_measure,
+                    $unitOfMeasure,
                     $is_action_price,
                     $date
                 );
@@ -188,21 +188,21 @@ class ProductPriceService
 
     /**
      * @param Product $product
-     * @param UnitOfMeasure $unit_of_measure
-     * @param int $is_action_price
+     * @param UnitOfMeasure $unitOfMeasure
+     * @param null $isActionPrice
      * @param \DateTime $date
      * @return array|ProductPrice[]
      */
     public function getActiveProductPrices(
         Product $product,
-        UnitOfMeasure $unit_of_measure,
-        $is_action_price = null,
+        UnitOfMeasure $unitOfMeasure,
+        $isActionPrice = null,
         $date = null
     ) {
         return $this->productPriceRepository->getActiveProductPrices(
             $product,
-            $unit_of_measure,
-            $is_action_price,
+            $unitOfMeasure,
+            $isActionPrice,
             $date
         );
     }

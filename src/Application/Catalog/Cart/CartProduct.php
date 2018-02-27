@@ -10,8 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CartProduct
 {
-    public $rowTotal;
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
