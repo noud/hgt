@@ -1,3 +1,8 @@
+/* components
+  ---------------------------------------------------------------------------------------------------------------------- */
+
+/* ----- */
+
 .alert {
   margin-bottom: 30px;
   font-size: @font-size-sm;
@@ -13,6 +18,7 @@
 
 }
 
+/* ----- */
 
 .help-block {
   font-size: @font-size-sm;
@@ -20,20 +26,21 @@
   color: red;
 }
 
-
-
-
+/* ----- */
 
 .control-label {
 
   font-weight: @font-weight-semi-bold;
   margin-bottom: 10px;
+  display: inline-block;
 
   &.required:after {
     content: ' *';
     color: red;
   }
 }
+
+/* ----- */
 
 .form-control {
   box-shadow: @form-control-shadow;
@@ -47,12 +54,18 @@
 
 }
 
+/* ----- */
+
 textarea.form-control {
   height: auto;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
+/* modules
+  ---------------------------------------------------------------------------------------------------------------------- */
+
+/* ----- */
 
 .form-sticky {
   display: flex;
@@ -69,37 +82,24 @@ textarea.form-control {
   }
 }
 
-.form-flex {
-
-  > .form-group {
-    display: flex;
-    flex-wrap: wrap;
-
-    .control-label {
-      width: 25%;
-      flex-shrink: 0;
-    }
-
-    .form-control {
-      flex-grow: 1;
-    }
-
-  }
-
-}
-
+/* ----- */
 
 .form-base {
 
   .help-block {
     margin-top: 10px;
+    display: block;
   }
 
-
-  > .form-group {
+  > .form-group-flex-row {
     &:not(:last-child) {
       margin-bottom: 10px;
     }
+  }
+
+  > .form-group {
+
+    margin-bottom: 10px;
 
     &.has-error {
       .form-control {
@@ -107,6 +107,10 @@ textarea.form-control {
       }
     }
 
+  }
+
+  .form-btn-group {
+    padding-top: 20px;
   }
 
   .meta {
@@ -125,13 +129,29 @@ textarea.form-control {
   }
 }
 
+/* ----- */
 
+.form-group-flex-row {
 
+  .form-group {
+    > div {
 
+      display: flex;
 
-/* specific
+      > div {
+        &:first-child {
+          margin-right: 20px;
+        }
+      }
+
+    }
+  }
+
+}
+
+/* specific modules
   ---------------------------------------------------------------------------------------------------------------------- */
-
+/* ----- */
 .newsletter {
 
   > div {
@@ -149,12 +169,10 @@ textarea.form-control {
   }
 }
 
+/* ----- */
 .search {
   .form-control {
     box-sizing: border-box;
   }
 
 }
-
-
-

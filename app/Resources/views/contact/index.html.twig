@@ -3,46 +3,55 @@
 
 {% block body %}
 
-  <div class="container">
-    <h1 class="page-title">Contactgegevens Horeca Groothandel Tilburg</h1>
-
-    <div class="content content-margin">
-      <h2>Contactinformatie</h2>
-      <p>
-        <strong>Telefoonnummer</strong>:	013-5711790 <br />
-        <strong>E-mailadres algemeen</strong>:	<a href="mailto:info@hgt-tilburg.nl">info@hgt-tilburg.nl</a> <br />
-        <strong>Nieuw!</strong> Stuur ons een bericht via Whatsapp	06-10993320
-      </p>
-      <p>
-        <strong class="special">Bezoekadres:</strong> Polluxstraat 6, 5047 RB Tilburg | Bedrijfsnummer 942 <br />
-        <strong class="special">KvK-nummer:</strong> 18046208 | <strong class="special">Btw-nummer:</strong> NL8072.96.533.B01
-      </p>
-      <h2>Openingstijden</h2>
-      <p>
-        Werkdagen 8.00 tot 17.00 uur <br />
-        Zaterdag van 09.00 tot 12.00 uur (alleen afhaal)
-      </p>
-    </div>
-
+  <div class="template-2-cols container">
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-sm-6">
 
-        {{ form_start(form, {'attr': {'class': 'form-base form-flex','novalidate': 'novalidate'}}) }}
+        <h1 class="page-title">Contact informatie</h1>
+
+        <aside class="meta-side">
+          <ul>
+            <li>
+              <div class="entries">
+                <div class="entry">
+                  <strong class="special">Bezoekadres:</strong> Polluxstraat 6, 5047 RB Tilburg | Bedrijfsnummer 942 <br/>
+                  <strong class="special">KvK-nummer:</strong> 18046208 | <strong class="special">Btw-nummer:</strong> NL8072.96.533.B01
+                </div>
+                <div class="entry">
+                  <strong>T:</strong> <a href="#">013 - 571 17 90</a> <br/>
+                  <strong>E:</strong> <a rel="mail" href="mailto:info@hgt-tilburg.nl">info@hgt-tilburg.nl</a> <br/>
+                  <strong>Whatsapp:</strong> <a href="mailto:info@hgt-tilburg.nl">06 - 10 993 320</a> <br/>
+                </div>
+                <h3>Openingstijden</h3>
+                <div class="entry">
+                  Werkdagen 8.00 tot 17.00 uur <br/>
+                  Zaterdag van 09.00 tot 12.00 uur (alleen afhaal)
+                </div>
+              </div>
+            </li>
+          </ul>
+        </aside>
+
+
+      </div>
+
+      <div class="col-sm-6">
+        {{ form_start(form, {'attr': {'class': 'form-base','novalidate': 'novalidate'}}) }}
         {{ form_errors(form) }}
         {{ form_row(form.name) }}
         {{ form_row(form.phone) }}
         {{ form_row(form.email) }}
         {{ form_row(form.message) }}
-        <button type="submit"  class="btn btn-highlight">Verstuur</button>
+        <div class="form-btn-group">
+          <button type="submit" class="btn btn-highlight">Verstuur</button>
+        </div>
         {{ form_end(form) }}
 
 
       </div>
 
     </div>
-
-
 
 
   </div>

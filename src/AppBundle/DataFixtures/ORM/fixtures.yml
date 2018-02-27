@@ -1,7 +1,7 @@
 ### CATEGORY
 
 HGT\Application\Catalog\Category\Category:
-    category_{1..50}:
+    category_{1..25}:
         navision_id: <numerify('#####')>
         name: <word()>
         short_description: <paragraph()>
@@ -307,3 +307,46 @@ HGT\Application\Catalog\Product\UnitOfMeasure:
     unit_of_measure_{1..25}:
         name: <word()>
         navision_id: <word()>
+
+### FOLDER
+
+HGT\Application\Content\Folder\Folder:
+    folder_{1..10}:
+        title: <word()>
+        start_date: <dateTimeBetween('-2 months', '-1 months')>
+        end_date: <dateTimeBetween('+6 months', '+7 months')>
+        url_key: <word()>
+        short_description: <paragraph()>
+        meta_title: <word()>
+        meta_keywords: <word()>
+        meta_description: <sentence()>
+        content: <paragraph()>
+        picture: <randomElement(['/tmp/images/folder-1.jpg','/tmp/images/folder-2.jpg'])>
+
+### FOLDER PAGE
+
+HGT\Application\Content\Folder\FolderPage:
+    folderpage_1_{1..50}:
+        folder_image: <randomElement(['/tmp/images/folder-1-1.jpg','/tmp/images/folder-1-2.jpg','/tmp/images/folder-2-1.jpg','/tmp/images/folder-2-2.jpg'])>
+        priority: <numberBetween(1, 10)>
+        folder: "@folder_*"
+
+### HOME SLIDE
+
+HGT\Application\Content\Home\HomeSlide:
+    home_slide_{1..10}:
+        title: <word()>
+        slide_image: <randomElement(['/tmp/images/slide-1.jpg','/tmp/images/slide-2.jpg','/tmp/images/slide-3.jpg'])>
+        url: '#'
+        priority: 0
+        date_from: <dateTimeBetween('-2 months', '-1 months')>
+        date_to: NULL
+
+### HOME BANNER
+
+HGT\Application\Content\Home\HomeBanner:
+    home_banner_{1..10}:
+        title: <word()>
+        banner_image: <randomElement(['/tmp/images/banner-1.jpg','/tmp/images/banner-2.jpg','/tmp/images/banner-3.jpg'])>
+        url: '#'
+        priority: 0

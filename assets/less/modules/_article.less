@@ -1,0 +1,106 @@
+/* components
+  ---------------------------------------------------------------------------------------------------------------------- */
+
+.article-img {
+  max-width: 100%;
+  width: auto;
+}
+
+
+.article-more {
+  color: @primary-color;
+  &:hover {
+    color: @primary-color;
+    //text-decoration: underline;
+  }
+}
+
+.article-gallery {
+
+  > li {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
+  }
+
+}
+
+/* modules
+  ---------------------------------------------------------------------------------------------------------------------- */
+
+/* ----- */
+
+.article-list {
+
+  > li {
+    margin-bottom: @section-space/2;
+    border-bottom: @border;
+    padding-bottom: @section-space/2;
+
+  }
+
+}
+
+
+/* ----- */
+
+.article {
+
+  display: flex;
+
+  @media @xs {
+    display: block;
+  }
+
+  > div {
+    &:first-child {
+      margin-right: 20px;
+      width: 25%;
+      flex-shrink: 0;
+      @media @xs {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+    }
+
+    &:last-child {
+      flex-grow: 1;
+    }
+
+  }
+
+  a[rel='perma'] {
+    display: block;
+  }
+
+  .content > h2 a {
+    color: @primary-color;
+  }
+
+}
+
+/* modifier: article article-single */
+
+.article-single {
+
+  @media @md {
+    border-bottom: @border;
+    padding-bottom: @section-space/2;
+    margin-bottom: @section-space/2;
+  }
+
+
+  > div {
+    &:first-child {
+      width: 75%;
+      @media @xs {
+        width: 100%;
+      }
+    }
+
+  }
+
+}
+
