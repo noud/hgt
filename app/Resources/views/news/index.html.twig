@@ -1,13 +1,17 @@
 {% extends 'layout/base.html.twig' %}
 
+{% block bodyClass %}template-sidebar{% endblock %}
+
 {% block body %}
-    <div class="template-sidebar container">
-        <div class="row">
+    <div class="container">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+
+        <div class="row main-row">
             <div class="col-sm-4 col-md-3">
               {{ include('_partials/page/sidebar.html.twig') }}
             </div>
             <div class="col-sm-8 col-md-9">
-                {% set newsSingle = true %}
+                {% set newsSingle = false %}
                 {% if newsSingle == false %}
                   {{ include('news/single.html.twig') }}
                 {% else %}

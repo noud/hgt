@@ -8,7 +8,6 @@
   {% if folders %}
   <ul class="row">
     {% for folder in folders %}
-
     <li class="col-md-6">
       <div class="folder-item">
         <h2><a href="{{ path('folder_view', {'id': folder.Id } ) }}">{{ folder.title }} {{ folder.id }}</a></h2>
@@ -35,6 +34,4 @@
     {% endif %}
   </ul>
   {% endif %}
-
-
 </div>

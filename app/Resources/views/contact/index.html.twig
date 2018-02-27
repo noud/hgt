@@ -1,11 +1,14 @@
 {% extends 'layout/base.html.twig' %}
 
+{% block bodyClass %}template-2-cols{% endblock %}
 
 {% block body %}
 
-  <div class="template-2-cols container">
+  <div class="container">
 
-    <div class="row">
+      {{ include('_partials/page/breadcrumbs.html.twig') }}
+
+    <div class="row main-row">
       <div class="col-sm-6">
 
         <h1 class="page-title">Contact informatie</h1>
@@ -32,8 +35,6 @@
             </li>
           </ul>
         </aside>
-
-
       </div>
 
       <div class="col-sm-6">

@@ -1,11 +1,9 @@
 {% extends 'layout/base.html.twig' %}
 
-
-
 {% block body %}
-
-
   <div class="template container">
+
+      {{ include('_partials/page/breadcrumbs.html.twig') }}
 
     <h1 class="page-title">{{ folder.title }}</h1>
 
@@ -15,28 +13,13 @@
     </div>
 
     <div class="folder-slider js-folder-slider">
-
       {% for image in folder_images %}
       <div>
         <img src="{{ image.folderImage }}" />
       </div>
       {% endfor %}
-
-
-
     </div>
 
-
-
-
-
-
-
-
-
   </div>
-
-
-
 
 {% endblock %}

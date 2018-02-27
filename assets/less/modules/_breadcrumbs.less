@@ -1,0 +1,29 @@
+.breadcrumbs {
+
+  @bc-spacing: 10px;
+  border-bottom: @border;
+
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+
+  > ul {
+    display: flex;
+
+    > li {
+      &:not(:last-child) {
+        margin-right: @bc-spacing;
+        &:after {
+          content: '\0203A';
+          margin-left: @bc-spacing;
+        }
+      }
+
+    }
+
+  }
+
+  a {
+    color: @primary-color;
+  }
+
+}
