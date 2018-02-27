@@ -12,45 +12,35 @@ use Symfony\Component\HttpFoundation\Request;
 class FolderController extends Controller
 {
     /**
-     * IndexController constructor.
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
      * @Route("/folder", name="folder_index")
+     * @param Request $request
+     * @param FolderService $folderService
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request, FolderService $folderService)
     {
-
-        $i = 0;
-        foreach($folderService->getActiveFolders() as $item) {
-            $i++;
-        }
-
-        if($i % 2 == 0) {
-            $isEven = true;
-        } else {
-            $isEven = false;
-        }
+        $activeFolders = $folderService->getActiveFolders();
 
         return $this->render('folder/index.html.twig', [
-            'isEven' => $isEven,
-            'folders' => $folderService->getActiveFolders(),
+            'folders' => $activeFolders,
         ]);
     }
 
     /**
      * @Route("/folder/view/{id}", name="folder_view")
+     * @param Request $request
+     * @param FolderPageService $folderPageService
+     * @param Folder $folder
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction(Request $request, FolderService $folderService, FolderPageService $folderPageService, $id)
-    {
+    public function viewAction(
+        Request $request,
+        FolderPageService $folderPageService,
+        Folder $folder
+    ) {
         return $this->render('folder/view.html.twig', [
-            'folder' => $folderService->getFolder($id),
-            'folder_images' => $folderPageService->getFolderPagesByFolderId($id),
+            'folder' => $folder,
+            'folder_images' => $folderPageService->getFolderPagesByFolderId($folder->getId()),
         ]);
     }
-
 }

@@ -36,6 +36,4 @@ class FolderService
     {
         return $this->folderRepository->getActiveFolders();
     }
-
-
 }

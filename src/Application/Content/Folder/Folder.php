@@ -253,8 +253,4 @@ class Folder
     {
         $this->picture = $picture;
     }
-
-
-
-
 }

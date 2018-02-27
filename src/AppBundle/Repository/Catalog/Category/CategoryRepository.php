@@ -55,7 +55,7 @@ class CategoryRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('q');
 
-        if($parent_id === "NULL") {
+        if ($parent_id === "NULL") {
             $qb->where('q.parent IS NULL');
         } else {
             $qb->where('q.parent = :parent_id')

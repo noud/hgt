@@ -29,4 +29,12 @@ class InvalidDeliveryDate
      * @ORM\Column(type="string")
      */
     private $note;
+
+    /**
+     * @return DateTime
+     */
+    public function getInvalidDeliveryDate()
+    {
+        return $this->invalid_delivery_date;
+    }
 }

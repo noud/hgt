@@ -29,16 +29,12 @@ class FolderPageService
         return $this->folderPageRepository->get($id);
     }
 
-    public function getFolderPageById()
-    {
-
-    }
-
+    /**
+     * @param $folder_id
+     * @return array
+     */
     public function getFolderPagesByFolderId($folder_id)
     {
         return $this->folderPageRepository->getFolderPagesByFolderId($folder_id);
     }
-
-
-
 }

@@ -25,11 +25,9 @@ class ContactCommand
      */
     public $email;
 
-
     /**
      * @Assert\NotBlank()
      * @var string
      */
     public $message;
-
 }

@@ -22,7 +22,9 @@
             </div>
             <div class="row">
                 <div class="col-sm-5">
-                    {{ product.manufacturer.name }}
+                    {% if product.manufacturer %}
+                        {{ product.manufacturer.name }}
+                    {% endif %}
                 </div>
                 <div class="col-sm-3">
                     <span class="amount">{{ product.volume }}</span>

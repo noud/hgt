@@ -32,12 +32,6 @@ class FolderPageRepository extends EntityRepository
         $this->getEntityManager()->remove($folderPage);
     }
 
-
-    public function getFolderPageById()
-    {
-
-    }
-
     /**
      * @param $folder_id
      * @return array
@@ -50,5 +44,4 @@ class FolderPageRepository extends EntityRepository
         $qb->orderBy('q.priority', 'DESC');
         return $qb->getQuery()->getResult();
     }
-
 }

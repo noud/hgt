@@ -31,7 +31,7 @@ class AccountSender
     public function sendPasswordResetLink(PasswordResetLink $passwordForgottenLink)
     {
         $subject = 'Bevestig wijzigen wachtwoord';
-        $body = $this->mailer->render('emails/customer/password-reset-link.html.twig',[]);
+        $body = $this->mailer->render('emails/customer/password-reset-link.html.twig', []);
 
         //create message
         $message = $this->mailer->createMessage($subject, $body, 'text/html');

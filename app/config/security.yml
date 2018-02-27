@@ -28,3 +28,4 @@ security:
 
     access_control:
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/cart, roles: ROLE_CUSTOM }

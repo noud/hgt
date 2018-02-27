@@ -3,6 +3,7 @@
 namespace HGT\Application\User\Customer;
 
 use Doctrine\ORM\Mapping as ORM;
+use HGT\Application\Content\SelectionCode\SelectionCode;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -364,7 +365,7 @@ class Customer implements UserInterface
      */
     public function eraseCredentials()
     {
-
+        //
     }
 
     /**
@@ -389,8 +390,8 @@ class Customer implements UserInterface
     public function getName()
     {
         return implode(' ', [
-           $this->first_name,
-           $this->last_name,
+            $this->first_name,
+            $this->last_name,
         ]);
     }
 
@@ -400,5 +401,45 @@ class Customer implements UserInterface
     public function isBlocked()
     {
         return $this->blocked;
+    }
+
+    /**
+     * @return SelectionCode
+     */
+    public function getSelectionCode()
+    {
+        return $this->selection_code;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCustomerGroup()
+    {
+        return $this->customer_group;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDeliveryDays()
+    {
+        return $this->delivery_days;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCustomerTaxGroup()
+    {
+        return $this->customer_tax_group;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCustomerPriceGroup()
+    {
+        return $this->customer_price_group;
     }
 }

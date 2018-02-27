@@ -98,13 +98,4 @@ class FolderPage
     {
         $this->priority = $priority;
     }
-
-
-
-
-
-
-
-
-
 }

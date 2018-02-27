@@ -1,0 +1,112 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block bodyClass %}checkout-cart-index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="page-title">Winkelwagen</h1>
+        {% if form.products %}
+            {{ form_start(form, {'attr': {'id': 'cart_form'} }) }}
+            {% for product in form.products %}
+                {% set cartProduct = product.vars.data %}
+                <div class="row">
+                    <div class="col-md-2">
+                        <a href="{{ path('cart_product_remove', {'id': cartProduct.id}) }}">
+                            <i class="fa fa-trash-alt"></i>
+                        </a>
+                        <a href="{{ path('product_view', {'id': cartProduct.product.id} ) }}">
+                            {{ cartProduct.product.name }}
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        {% if cartProduct.product.manufacturer %}
+                            {{ cartProduct.product.manufacturer.name }}
+                        {% endif %}
+                    </div>
+                    <div class="col-md-3">{{ cartProduct.product.volume }} | {{ cartProduct.unitOfMeasure.name }}</div>
+                    <div class="col-md-2">{{ cartProduct.getRowTotal|price }}</div>
+                    <div class="col-md-2">{{ form_widget(product) }}</div>
+                </div>
+            {% endfor %}
+            <div class="row">
+                <div class="col-md-2 col-md-offset-8">Totaalbedrag (excl. btw)</div>
+                <div class="col-md-2">{{ cartTotal|price }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{ path('category_index') }}" class="btn">Verder winkelen</a>
+                    <a href="#" onclick="updateCart(); return false;">Bijwerken</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <label for="{{ form.vars.id }}_note">Opmerkingen:</label>
+                    {{ form_widget(form.note) }}
+                </div>
+                <div class="col-md-4">
+                    <label for="{{ form.vars.id }}_delivery_date">Afleverdatum:</label>
+                    {{ form_widget(form.delivery_date) }}
+                    {{ form_errors(form.delivery_date) }}
+                    <label for="{{ form.vars.id }}_reference">Referentie:</label>
+                    {{ form_widget(form.reference) }}
+                </div>
+                <div class="col-md-offset-8 col-md-4">
+                    <a href="#" onclick="placeOrder(); return false;" class="btn">Plaats bestelling</a>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        {% else %}
+            <p>Er zitten nog geen producten in uw winkelwagen.</p>
+            <p>Voeg eerst producten aan uw winkelwagen toe om een bestelling te kunnen plaatsen.</p>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        $('#{{ form.vars.id }}_delivery_date').datepicker({
+            dateFormat: 'dd-mm-yy',
+            minDate: "now + 1 Day",
+
+            beforeShowDay: function (date) {
+                var validDeliveryDays = {{ validDeliveryDays|json_encode|raw }};
+                var invalidDeliveryDates = {{ invalidDeliveryDates|json_encode|raw }};
+                var validDeliveryDates = {{ validDeliveryDates|json_encode|raw }};
+
+                // Format date for comparison
+                var formattedDate = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2)
+
+                // Regular delivery dates
+                if ($.inArray(date.getDay(), validDeliveryDays) > -1) {
+                    return [true, "", "Beschikbaar"];
+                } else {
+                    return [false, "", "Niet beschikbaar"];
+                }
+
+                // Dates specifically excluded for delivery
+                if($.inArray(formattedDate, invalidDeliveryDates) > -1) {
+                    return [false, "", "Niet beschikbaar"];
+                }
+
+                if($.inArray(formattedDate, validDeliveryDates) > -1) {
+                    return [true, "", "Beschikbaar"];
+                }
+            },
+            onSelect: function() {
+                updateCart();
+            }
+        });
+
+        function updateCart() {
+            $('#{{ form.vars.id }}_form_action').val('update');
+            $('#{{ form.vars.id }}').submit();
+            return false;
+        }
+
+        function placeOrder() {
+            $('#{{ form.vars.id }}_form_action').val('finish');
+            $('#{{ form.vars.id }}').submit();
+            return false;
+        }
+    </script>
+{% endblock %}

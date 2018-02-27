@@ -44,6 +44,7 @@ twig:
     globals:
         config_manager: '@HGT\Application\Content\ConfigService'
         menu_manager: '@HGT\Application\Content\MenuService'
+        cart_manager: '@HGT\Application\Catalog\CartService'
 
 # Doctrine Configuration
 doctrine:

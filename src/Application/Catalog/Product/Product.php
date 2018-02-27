@@ -173,4 +173,12 @@ class Product
     {
         return $this->price;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProductTaxGroup()
+    {
+        return $this->product_tax_group;
+    }
 }

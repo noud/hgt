@@ -5,7 +5,7 @@ namespace HGT\Application\Catalog\Tax;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="HGT\AppBundle\Repository\Tax\TaxRepository")
+ * @ORM\Entity(repositoryClass="HGT\AppBundle\Repository\Catalog\Tax\TaxRepository")
  * @ORM\Table(name="tax")
  */
 class Tax
@@ -34,4 +34,12 @@ class Tax
      * @ORM\Column(type="float", precision=2)
      */
     private $percentage;
+
+    /**
+     * @return float
+     */
+    public function getPercentage()
+    {
+        return $this->percentage;
+    }
 }

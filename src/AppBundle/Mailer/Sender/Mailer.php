@@ -37,8 +37,12 @@ class Mailer
      * @param string $defaultFromEmail
      * @param string $defaultFromName
      */
-    public function __construct(Swift_Mailer $mailer, Twig_Environment $twig, $defaultFromEmail= '', $defaultFromName = '')
-    {
+    public function __construct(
+        Swift_Mailer $mailer,
+        Twig_Environment $twig,
+        $defaultFromEmail = '',
+        $defaultFromName = ''
+    ) {
         $this->mailer = $mailer;
         $this->twig = $twig;
         $this->defaultFromEmail = $defaultFromEmail;

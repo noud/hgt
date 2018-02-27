@@ -67,7 +67,7 @@
                 <div class="main">
                     {% for homeCategory in homeCategories %}
                         <div>
-                            <a class="listing" href="category/view/{{ homeCategory.id }}" title="{{ homeCategory.name }}">
+                            <a class="listing" href="{{ path('category_view', {'id': homeCategory.id}) }}" title="{{ homeCategory.name }}">
                                 {{ homeCategory.name }}
                                 <span class="icon"><i class="fa fa-chevron-right"></i></span>
                             </a>

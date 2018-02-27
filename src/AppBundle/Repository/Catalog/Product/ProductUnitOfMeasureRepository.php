@@ -3,7 +3,9 @@
 namespace HGT\AppBundle\Repository\Catalog\Product;
 
 use Doctrine\ORM\EntityRepository;
+use HGT\Application\Catalog\Product\Product;
 use HGT\Application\Catalog\Product\ProductUnitOfMeasure;
+use HGT\Application\Catalog\Product\UnitOfMeasure;
 
 class ProductUnitOfMeasureRepository extends EntityRepository
 {
@@ -33,13 +35,47 @@ class ProductUnitOfMeasureRepository extends EntityRepository
     }
 
     /**
-     * @param $product_id int
-     * @return array
+     * @param Product $product
+     * @return array|ProductUnitOfMeasure[]
      */
-    public function getProductUnitOfMeasureByProductId($product_id)
+    public function getProductUnitOfMeasureByProduct(Product $product)
     {
         return $this->findBy(
-            ['product' => $product_id]
+            ['product' => $product->getId()],
+            [
+                'selected' => 'DESC',
+                'qty_per_unit_of_measure' => 'ASC'
+            ]
         );
+    }
+
+    /**
+     * @param Product $product
+     * @param UnitOfMeasure $unit_of_measure
+     * @return ProductUnitOfMeasure|null|object
+     */
+    public function getProductUnitOfMeasureForProductPrice(Product $product, UnitOfMeasure $unit_of_measure)
+    {
+        return $this->findOneBy(
+            [
+                'product' => $product->getId(),
+                'unit_of_measure' => $unit_of_measure->getId()
+            ]
+        );
+    }
+
+    /**
+     * @param Product $product
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getQueryBuilderForProductUnitOfMeasures(Product $product)
+    {
+        $queryBuilder = $this->createQueryBuilder('q');
+        $queryBuilder->where('q.product = :productId');
+        $queryBuilder->setParameter('productId', $product->getId());
+        $queryBuilder->addOrderBy('q.selected', 'DESC');
+        $queryBuilder->addOrderBy('q.qty_per_unit_of_measure', 'ASC');
+
+        return $queryBuilder;
     }
 }

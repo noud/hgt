@@ -96,4 +96,52 @@ class ProductPrice
      * @ORM\ManyToOne(targetEntity="HGT\Application\Content\SelectionCode\SelectionCode", inversedBy="product_price")
      */
     private $selection_code;
+
+    /**
+     * @return mixed
+     */
+    public function getCustomerPriceGroup()
+    {
+        return $this->customer_price_group;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCustomerGroup()
+    {
+        return $this->customer_group;
+    }
+
+    /**
+     * @return float
+     */
+    public function getUnitPrice()
+    {
+        return $this->unit_price;
+    }
+
+    /**
+     * @return float
+     */
+    public function getMinimumQty()
+    {
+        return $this->minimum_qty;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSelectionCode()
+    {
+        return $this->selection_code;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPriceType()
+    {
+        return $this->price_type;
+    }
 }

@@ -13,20 +13,27 @@ class ProductService
     private $productRepository;
 
     /**
+     * @var TaxService
+     */
+    private $taxService;
+
+    /**
      * ProductService constructor.
      * @param ProductRepository $productRepository
+     * @param TaxService $taxService
      */
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(ProductRepository $productRepository, TaxService $taxService)
     {
         $this->productRepository = $productRepository;
+        $this->taxService = $taxService;
     }
 
     /**
-     * @param $id
+     * @param Product $product
      * @return Product|object
      */
-    public function getProductById($id)
+    public function getProductById(Product $product)
     {
-        return $this->productRepository->get($id);
+        return $this->productRepository->get($product);
     }
 }
