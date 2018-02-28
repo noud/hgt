@@ -3,55 +3,51 @@
 {% block bodyClass %}template-2-cols{% endblock %}
 
 {% block body %}
-  <div class="container">
-      {{ include('_partials/page/breadcrumbs.html.twig') }}
+    <div class="container">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
 
-    <h1 class="page-title">Inloggen</h1>
+        <h1 class="page-title">Inloggen</h1>
 
-    <div class="content content-margin hidden">
-      <p>Wilt u inloggen op onze webshop? Vul dan uw gebruikersnaam en wachtwoord in. Onze klanten kunnen een
-        webshop account aanvragen bij onze afdeling verkoop. Nog geen klant? Dan kunt u zich hieronder registreren door op de kkop "Klant worden" te klikken.</p>
+        <div class="row main-row">
+            <div class="col-md-4">
+                <div class="content content-margin">
+                    <p>Wilt u inloggen op onze webshop? Vul dan uw gebruikersnaam en wachtwoord in. Onze klanten kunnen
+                        een webshop account aanvragen bij onze afdeling verkoop. Nog geen klant? Dan kunt u zich
+                        hieronder registreren door op de kkop "Klant worden" te klikken.
+                    </p>
+                </div>
+                <div class="content">
+                    {% if static_block_manager.has('myaccount_login_login') %}
+                        <h2>{{ static_block_manager.get('myaccount_login_login').title }}</h2>
+                    {% endif %}
+                </div>
+                {% if error %}
+                    <div class="alert alert-danger">
+                        {% if error.messageKey %}
+                            {{ error.messageKey|trans(error.messageData, 'security') }}
+                        {% else %}
+                            {{ error.message|trans([], 'security') }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+                {{ form_start(form, {'attr': {'class': 'login-form form-base'}}) }}
+                {{ form_row(form.account_username) }}
+                {{ form_row(form.account_password) }}
+                <div class="meta">
+                    <button class="btn btn-special" type="submit">Inloggen</button>
+                    <a href="{{ path('account_password_forgotten') }}">Wachtwoord vergeten?</a>
+                </div>
+                {{ form_end(form) }}
+            </div>
+            <div class="col-md-8">
+                <div class="content">
+                    {% if static_block_manager.has('myaccount_login_register') %}
+                        <h2>{{ static_block_manager.get('myaccount_login_register').title }}</h2>
+                        <p>{{ static_block_manager.get('myaccount_login_register').content|raw }}</p>
+                    {% endif %}
+                </div>
+                <a class="btn btn-highlight" href="{{ path('account_signup') }}" role="button">Klant worden</a>
+            </div>
+        </div>
     </div>
-
-
-    <div class="row main-row">
-      <div class="col-md-4">
-
-        <div class="content content-margin">
-          <p>Wilt u inloggen op onze webshop? Vul dan uw gebruikersnaam en wachtwoord in. Onze klanten kunnen een
-            webshop account aanvragen bij onze afdeling verkoop. Nog geen klant? Dan kunt u zich hieronder registreren door op de kkop "Klant worden" te klikken.</p>
-        </div>
-
-        {% if error %}
-          <div class="alert alert-danger">
-            {% if error.messageKey %}
-                {{ error.messageKey|trans(error.messageData, 'security') }}
-            {% else %}
-                {{ error.message|trans([], 'security') }}
-            {% endif %}
-          </div>
-        {% endif %}
-
-        {{ form_start(form, {'attr': {'class': 'login-form form-base'}}) }}
-        {{ form_row(form.account_username) }}
-        {{ form_row(form.account_password) }}
-        <div class="meta">
-          <button class="btn btn-special" type="submit">Inloggen</button>
-          <a href="{{ path('account_password_forgotten') }}">Wachtwoord vergeten?</a>
-        </div>
-        {{ form_end(form) }}
-
-      </div>
-
-      <div class="col-md-8">
-        <div class="content">
-          <h2>Ook online bestellen bij Horeca Groothandel Tilburg?</h2>
-          <p>Klik op de groene knop en vul uw bedrijfsgegevens in. Wij maken een webshopaccount voor u aan na controle van
-            uw gegevens.</p>
-        </div>
-        <a class="btn btn-highlight" href="{{ path('account_signup') }}" role="button">Klant worden</a>
-      </div>
-
-    </div>
-  </div>
 {% endblock %}
