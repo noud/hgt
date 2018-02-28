@@ -18,6 +18,11 @@ class Cart
     const STATE_EXPORTED = 'exported';
 
     /**
+     * @ORM\OneToMany(targetEntity="HGT\Application\Catalog\Cart\CartProduct", mappedBy="cart")
+     */
+    private $cartProducts;
+
+    /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
@@ -83,6 +88,14 @@ class Cart
      * @ORM\Column(type="string")
      */
     private $ip_address;
+
+    /**
+     * Cart constructor.
+     */
+    public function __construct()
+    {
+        $this->cartProducts = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -170,5 +183,13 @@ class Cart
     public function setIpAddress($ip_address)
     {
         $this->ip_address = $ip_address;
+    }
+
+    /**
+     * @return CartProduct[]
+     */
+    public function getCartProducts()
+    {
+        return $this->cartProducts;
     }
 }

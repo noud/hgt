@@ -74,7 +74,9 @@
                 var validDeliveryDates = {{ validDeliveryDates|json_encode|raw }};
 
                 // Format date for comparison
-                var formattedDate = date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ("0" + date.getDate()).slice(-2)
+                var formattedDate = date.getFullYear() + '-' +
+                    ("0" + (date.getMonth() + 1)).slice(-2) + '-' +
+                    ("0" + date.getDate()).slice(-2);
 
                 // Regular delivery dates
                 if ($.inArray(date.getDay(), validDeliveryDays) > -1) {

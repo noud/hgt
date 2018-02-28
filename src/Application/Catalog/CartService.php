@@ -77,10 +77,6 @@ class CartService
         return $cart;
     }
 
-    public function getCartProducts() {
-        return null;
-    }
-
     /**
      * @return Cart
      * @throws \Doctrine\ORM\OptimisticLockException

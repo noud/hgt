@@ -49,6 +49,7 @@ class LockedAccount
     /**
      * @param DateTimeImmutable $now
      * @return bool
+     * @throws \Exception
      */
     public function isActiveAt(DateTimeImmutable $now)
     {
