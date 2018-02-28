@@ -4,7 +4,8 @@
 
 {% block body %}
     <div class="template-2-cols container">
-        <div class="row">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        <div class="main-row row">
             <div class="col-sm-6">
                 <h1 class="page-title">Registreren</h1>
                 <div class="content">

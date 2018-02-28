@@ -1,17 +1,28 @@
 {% extends 'layout/base.html.twig' %}
 
-{% block bodyClass %}catalog-page{% endblock %}
+{% block bodyClass %}catalog-page catalog-page-overview-main catalog-page-overview-has-product{% endblock %}
 
 {% block body %}
-    <div class="template-catalog container">
-        <div class="row">
+    <div class="container">
+
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+
+        <div class="page-title-container">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <h1 class="page-title">Ons assortiment</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row main-row">
             <div class="col-md-3">
                 {% if categories %}
                     {% include '_partials/catalog/category/list.html.twig' with {'categories' : categories } %}
                 {% endif %}
             </div>
             <div class="col-md-9">
-                <h1 class="page-title">Ons assortiment</h1>
                 {% if categories %}
                     {% include '_partials/catalog/product/list.html.twig' with {'categories' : categories } %}
                 {% endif %}

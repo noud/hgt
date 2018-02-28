@@ -1,10 +1,12 @@
 {% extends 'layout/base.html.twig' %}
 
-{% block bodyClass %}news-index{% endblock %}
+{% block bodyClass %}news-index template-sidebar{% endblock %}
 
 {% block body %}
-    <div class="template-sidebar container">
-        <div class="row">
+    <div class="container">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+
+        <div class="row main-row">
             <div class="col-sm-4 col-md-3">
                 <aside class="meta-side">
                     {% autoescape false %}
@@ -13,7 +15,7 @@
                 </aside>
             </div>
             <div class="col-sm-8 col-md-9">
-                {% set newsSingle = true %}
+                {% set newsSingle = false %}
                 {% if newsSingle == false %}
                   {{ include('news/single.html.twig') }}
                 {% else %}

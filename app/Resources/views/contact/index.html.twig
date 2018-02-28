@@ -1,10 +1,11 @@
 {% extends 'layout/base.html.twig' %}
 
-{% block bodyClass %}contact-index{% endblock %}
+{% block bodyClass %}contact-index template-2-cols{% endblock %}
 
 {% block body %}
-    <div class="template-2-cols container">
-        <div class="row">
+    <div class="container">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        <div class="row main-row">
             <div class="col-sm-6">
                 <h1 class="page-title">Contact informatie</h1>
                 <aside class="meta-side">

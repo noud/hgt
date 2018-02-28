@@ -3,28 +3,39 @@
 {% block bodyClass %}catalog-page{% endblock %}
 
 {% block body %}
-    <div class="template-catalog container">
-        <div class="row">
-            <div class="col-md-3">
-                {% if category.parent %}
-                    <a href="{{ path('category_view', {'id': category.parent.id }) }}" class="btn-border">
-                        <i class="fas fa-arrow-left"></i>
-                        <span>Terug</span>
-                    </a>
-                {% else %}
-                    <a href="{{ path('category_index') }}" class="btn-border">
-                        <i class="fas fa-arrow-left"></i>
-                        <span>Terug</span>
-                    </a>
-                {% endif %}
+    <div class="container">
 
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+
+        <div class="page-title-container">
+            <div class="row">
+                <div class="col-md-3">
+                    {% if category.parent %}
+                        <a href="{{ path('category_view', {'id': category.parent.id }) }}" class="btn-border">
+                            <i class="fas fa-arrow-left"></i>
+                            <span>Terug</span>
+                        </a>
+                    {% else %}
+                        <a href="{{ path('category_index') }}" class="btn-border">
+                            <i class="fas fa-arrow-left"></i>
+                            <span>Terug</span>
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <h1 class="page-title">{{ category.name }}</h1>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row main-row">
+            <div class="col-md-3">
                 {% if parentCategories %}
                     {% include '_partials/catalog/category/list.html.twig' with {'categories' : parentCategories } %}
                 {% endif %}
-
             </div>
             <div class="col-md-9">
-                <h1 class="page-title">{{ category.name }}</h1>
                 {% if categories %}
                     {% include '_partials/catalog/product/list.html.twig' with {'categories' : categories } %}
                 {% else %}

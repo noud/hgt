@@ -50,10 +50,7 @@ class CartController extends Controller
     ) {
         /** @var Cart $cart */
         $cart = $cartService->getOpenCart();
-
-        //@TODO: Kun je deze producten niet via $cart->getCartProducts() ophalen?
-        $cartProducts = $cartProductService->getCartProducts($cart);
-
+        $cartProducts = $cart->getCartProducts();
         $customer = $customerService->getCurrentCustomer();
 
         $cartService->updateProductPrices($customer, $cart);
