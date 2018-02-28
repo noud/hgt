@@ -14,9 +14,9 @@
                     <p><strong>LET OP! Particulieren kunnen geen webshop account aanvragen.</strong></p>
                 </div>
                 <aside class="meta-side">
-                    {% autoescape false %}
-                        {{ static_block_manager.getByIdentifier('klantenservice') }}
-                    {% endautoescape %}
+                    {% if static_block_manager.has('klantenservice') %}
+                        {{ static_block_manager.get('klantenservice').content|raw }}
+                    {% endif %}
                 </aside>
             </div>
             <div class="col-sm-6">
