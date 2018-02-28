@@ -1,9 +1,14 @@
 {% extends 'layout/base.html.twig' %}
 
+{% block bodyClass %}template-2-cols{% endblock %}
+
 {% block body %}
 
-  <div class="template-2-cols container">
-    <div class="row">
+  <div class="container">
+
+      {{ include('_partials/page/breadcrumbs.html.twig') }}
+
+    <div class="main-row row">
       <div class="col-sm-6">
 
         <h1 class="page-title">Registreren</h1>

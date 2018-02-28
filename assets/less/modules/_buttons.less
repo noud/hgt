@@ -12,6 +12,7 @@
   line-height: @form-control-height;
 }
 
+
 /* modifier: btn btn-icon */
 .btn-icon {
   background: @primary-color;
@@ -125,7 +126,6 @@
   position: relative;
   color: black;
   padding-right: 50px;
-  justify-content: space-between;
   display: inline-block;
 
   &:hover {
@@ -159,6 +159,25 @@
   }
 
 }
+
+/* modifier: listing listing-icon */
+
+.listing-icon {
+  display: flex;
+  align-items: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  &:before {
+    content: '\f46d';
+    font-weight: bold;
+    font-family: @fa;
+    font-size: 24px;
+    margin-right: 10px;
+    color: @primary-color;
+  }
+}
+
 
 /* ----- */
 .btn-border {

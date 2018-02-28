@@ -1,7 +1,7 @@
 <nav class="primary-menu">
     <ul>
         <li><a href="{{ path('homepage') }}" title="Home">Home</a></li>
-        <li class="has-sub">
+        <li class="active has-sub">
             <a href="{{ path('category_index') }}" title="Assortiment">Assortiment</a>
             <div>
                 {% for menu in menu_manager.getCategoriesForMenu() %}
@@ -13,7 +13,7 @@
                 {% endfor %}
             </div>
         </li>
-        <li><a href="#" title="Acties">Acties</a></li>
+        <li><a href="{{ path('action_index') }}" title="Acties">Acties</a></li>
         <li><a href="{{ path('folder_index') }}" title="Folder">Folder</a></li>
         <li><a href="#" title="Kerstpakketten">Kerstpakketten</a></li>
         <li><a href="{{ path('news_index') }}" title="Nieuws">Nieuws</a></li>
