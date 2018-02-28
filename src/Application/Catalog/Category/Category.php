@@ -11,11 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-    }
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -99,6 +94,14 @@ class Category
      * @ORM\Column(type="integer", options={"default":0})
      */
     private $level;
+
+    /**
+     * Category constructor.
+     */
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     /**
      * @return array
