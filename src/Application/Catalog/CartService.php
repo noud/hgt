@@ -114,7 +114,7 @@ class CartService
      */
     public function updateProductPrices(Customer $customer, Cart $cart)
     {
-        $cartProducts = $this->cartProductService->getCartProducts($cart);
+        $cartProducts = $cart->getCartProducts();
 
         foreach ($cartProducts as $cartProduct) {
             /** @var Product $product */
@@ -143,7 +143,7 @@ class CartService
         $qty = 0;
 
         $cart = $this->getOpenCart();
-        $cartProducts = $this->cartProductService->getCartProducts($cart);
+        $cartProducts = $cart->getCartProducts();
 
         /** @var CartProduct $cartProduct */
         foreach ($cartProducts as $cartProduct) {
@@ -162,7 +162,7 @@ class CartService
         $totalExTax = 0;
 
         /** @var CartProduct $cartProduct */
-        foreach ($this->cartProductService->getCartProducts($cart) as $cartProduct) {
+        foreach ($cart->getCartProducts($cart) as $cartProduct) {
             $totalExTax += $cartProduct->getRowTotal();
         }
 

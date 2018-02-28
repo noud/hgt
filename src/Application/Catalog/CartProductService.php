@@ -86,7 +86,7 @@ class CartProductService
         //@TODO: Duplicate cart products fixen
 
         $qty = $command->qty;
-        if ($command->qty <= 0) {
+        if ($qty <= 0) {
             $qty = 1;
         }
 
@@ -94,27 +94,30 @@ class CartProductService
         $customer = $this->customerService->getCurrentCustomer();
         $unitOfMeasure = $command->product_unit_of_measure->getUnitOfMeasure();
 
+        /** @var Product $product */
+        $product = $command->product;
+
         $taxPercentage = $this->productPriceService->getTaxPercentage(
             $customer->getCustomerTaxGroup(),
-            $command->product->getProductTaxGroup()
+            $product->getProductTaxGroup()
         );
 
         $unitPrice = $this->productPriceService->getUnitPriceForCustomer(
             $customer,
-            $command->product,
+            $product,
             $unitOfMeasure,
             $qty
         );
 
         $cartProduct->setCart($command->cart);
-        $cartProduct->setProduct($command->product);
+        $cartProduct->setProduct($product);
         $cartProduct->setUnitOfMeasure($unitOfMeasure);
         $cartProduct->setUnitPrice($unitPrice);
         $cartProduct->setQty($qty);
         $cartProduct->setTaxPercentage($taxPercentage);
         $cartProduct->setIsAction($this->productPriceService->getActionProductPrice(
             $customer,
-            $command->product,
+            $product,
             $unitOfMeasure,
             $qty
         ) ? "1" : "0");
@@ -122,15 +125,6 @@ class CartProductService
         $this->addCartProduct($cartProduct);
 
         return $cartProduct;
-    }
-
-    /**
-     * @param Cart $cart
-     * @return CartProduct[]
-     */
-    public function getCartProducts(Cart $cart)
-    {
-        return $this->cartProductRepository->getCartProductsByCart($cart);
     }
 
     /**
