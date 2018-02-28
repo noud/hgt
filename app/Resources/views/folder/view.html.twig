@@ -1,42 +1,22 @@
 {% extends 'layout/base.html.twig' %}
 
-
+{% block bodyClass %}folder-view{% endblock %}
 
 {% block body %}
-
-
-  <div class="template container">
-
-    <h1 class="page-title">{{ folder.title }}</h1>
-
-    <div class="content">
-      <p>Blader hier door onze brochure. Om uw bestelling te plaatsen neem contact op met onze afdeling verkoop:
-        013-5711790 of <a href="mailto:verkoop@hgt-tilburg.nl">verkoop@hgt-tilburg.nl</a>.</p>
+    <div class="template container">
+        <h1 class="page-title">{{ folder.title }}</h1>
+        <div class="content">
+            <p>
+                Blader hier door onze brochure. Om uw bestelling te plaatsen neem contact op met onze afdeling verkoop:
+                013-5711790 of <a href="mailto:verkoop@hgt-tilburg.nl">verkoop@hgt-tilburg.nl</a>.
+            </p>
+        </div>
+        <div class="folder-slider js-folder-slider">
+            {% for image in folder_images %}
+                <div>
+                    <img src="{{ image.folderImage }}" alt="{{ folder.title }}"/>
+                </div>
+            {% endfor %}
+        </div>
     </div>
-
-    <div class="folder-slider js-folder-slider">
-
-      {% for image in folder_images %}
-      <div>
-        <img src="{{ image.folderImage }}" />
-      </div>
-      {% endfor %}
-
-
-
-    </div>
-
-
-
-
-
-
-
-
-
-  </div>
-
-
-
-
 {% endblock %}

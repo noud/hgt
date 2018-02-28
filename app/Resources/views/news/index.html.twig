@@ -1,10 +1,16 @@
 {% extends 'layout/base.html.twig' %}
 
+{% block bodyClass %}news-index{% endblock %}
+
 {% block body %}
     <div class="template-sidebar container">
         <div class="row">
             <div class="col-sm-4 col-md-3">
-              {{ include('_partials/page/sidebar.html.twig') }}
+                <aside class="meta-side">
+                    {% autoescape false %}
+                        {{ static_block_manager.getByIdentifier('contact_folder') }}
+                    {% endautoescape %}
+                </aside>
             </div>
             <div class="col-sm-8 col-md-9">
                 {% set newsSingle = true %}

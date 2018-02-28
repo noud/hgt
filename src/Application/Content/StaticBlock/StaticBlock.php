@@ -40,4 +40,28 @@ class StaticBlock
      * @ORM\Column(type="string", options={"comment":"internal use only"})
      */
     private $name;
+
+    /**
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
 }

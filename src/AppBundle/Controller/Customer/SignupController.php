@@ -24,18 +24,16 @@ class SignupController extends Controller
      */
     public function indexAction(Request $request, SignupSender $signupSender)
     {
-
         $command = new SignupCommand();
         $form = $this->createForm(SignupForm::class, $command);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $signupSender->sendContactMessage($command);
             return $this->redirectToRoute('account_signup_confirm');
         }
 
-        return $this->render('signup/index.html.twig',[
+        return $this->render('signup/index.html.twig', [
             'testing' =>$command,
             'form' => $form->createView(),
         ]);

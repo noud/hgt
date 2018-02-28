@@ -1,0 +1,8 @@
+{% autoescape false %}
+    <div class="cms-tekst {{ staticBlock.identifier }}">
+        {% if staticBlock.title|trim != "" %}
+            <h2>{{ staticBlock.title }}</h2>
+        {% endif %}
+        {{ staticBlock.content }}
+    </div>
+{% endautoescape %}

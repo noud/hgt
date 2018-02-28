@@ -1,34 +1,15 @@
 {% extends 'layout/base.html.twig' %}
 
+{% block bodyClass %}folder-index{% endblock %}
+
 {% block body %}
     <div class="template-sidebar container">
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <aside class="meta-side">
-                    <ul>
-                        <li>
-                            <h3>Horeca Groothandel Tilburg B.V.</h3>
-                            <div class="entries">
-                                <div class="entry">
-                                    <strong>Bezoekadres:</strong><br/>
-                                    Polluxstraat<br/>
-                                    5047 RB Tilburg
-                                </div>
-                                <div class="entry">
-                                    <strong>Postadres:</strong><br/>
-                                    Postbus 1208<br/>
-                                    5004 BE Tilburg
-                                </div>
-                                <div class="entry">
-                                    <strong>T:</strong> <a href="tel:013 - 571 17 90">013 - 571 17 90</a> <br/>
-                                    <strong>E:</strong> <a rel="mail" href="mailto:verkoop@hgt-tilburg.nl">verkoop@hgt-tilburg.nl</a> <br/>
-                                </div>
-                                <div class="entry">
-                                    Kvk Tilburg : 18046208
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                    {% autoescape false %}
+                        {{ static_block_manager.getByIdentifier('contact_folder') }}
+                    {% endautoescape %}
                 </aside>
             </div>
             <div class="col-sm-8 col-md-9">

@@ -84,15 +84,15 @@
                 }
 
                 // Dates specifically excluded for delivery
-                if($.inArray(formattedDate, invalidDeliveryDates) > -1) {
+                if ($.inArray(formattedDate, invalidDeliveryDates) > -1) {
                     return [false, "", "Niet beschikbaar"];
                 }
 
-                if($.inArray(formattedDate, validDeliveryDates) > -1) {
+                if ($.inArray(formattedDate, validDeliveryDates) > -1) {
                     return [true, "", "Beschikbaar"];
                 }
             },
-            onSelect: function() {
+            onSelect: function () {
                 updateCart();
             }
         });
