@@ -1,5 +1,6 @@
 .content {
 
+  > h3,
   > h2 {
     font-size: @heading-xs;
     color: @primary-color;
@@ -9,6 +10,14 @@
       font-size: @heading-xs * 0.85;
     }
 
+  }
+
+  > ul {
+    margin-bottom: 20px;
+    > li {
+      list-style-type: square;
+    }
+    padding-left: 30px;
   }
 
   > p {
@@ -21,14 +30,16 @@
       }
     }
 
-    > a {
-      color: @primary-color;
-    }
+
 
     > strong.special {
       color: @primary-color;
     }
 
+  }
+
+  a {
+    color: @primary-color;
   }
 
 }
