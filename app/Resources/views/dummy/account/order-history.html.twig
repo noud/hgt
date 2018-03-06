@@ -1,0 +1,75 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block bodyClass %}account-index account-index-order-overview{% endblock %}
+
+{% block body %}
+    <div class="container layout-flip-sidebar">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        <div class="row main-row">
+            <div class="col-sm-3">
+                <ul class="item-list item-list-alt">
+                    <li><a href="#" class="listing">Bestellijst <span class="icon"><i class="fa fa-chevron-right"></i></span></a></li>
+                    <li><a href="#" class="listing">Bestelhistorie <span class="icon"><i class="fa fa-chevron-right"></i></span></a></li>
+                    <li><a href="#" class="listing">Bestellijst aanpassen <span class="icon"><i class="fa fa-chevron-right"></i></span></a></li>
+                    <li><a href="#" class="listing">Wachtwoord wijzigen <span class="icon"><i class="fa fa-chevron-right"></i></span></a></li>
+                    <li><a href="#" class="listing">Uitloggen <span class="icon"><i class="fa fa-chevron-right"></i></span></a></li>
+                </ul>
+            </div>
+            <div class="col-sm-9">
+                <h1 class="page-title">Bestelhistorie</h1>
+                <div class="content">
+                    <p>Als u net een bestelling geplaatst heeft, is deze tijdens kantooruren na 30 minuten zichtbaar in het onderstaande overzicht.</p>
+                    <p><em>Bij de "Nog te leveren" orders communiceren wij een verwachte leverdatum, deze datum is niet defintief. Mocht u hierover vragen hebben neem dan contact op via het chatvenster rechtsonder of telefonisch 013-5711790.</em></p>
+                </div>
+                <div class="tabs">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Nog te leveren</a></li>
+                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Afgeleverd</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            <div class="table-overview table-overview-rwd">
+                                <div class="table-overview-header">
+                                    <div>Besteldatum</div>
+                                    <div>Ordernummer</div>
+                                    <div>Totaalbedrag</div>
+                                </div>
+                                <ul class="table-3-col">
+                                    <li>
+                                        <div>
+                                            <span class="table-overview-header-meta">Besteldatum:</span>
+                                            <span>29-01-2015 dasf asd fas df sadf sadfasdasd asd asd</span>
+                                        </div>
+                                        <div>
+                                            <span class="table-overview-header-meta">Ordernummer:</span>
+                                            <span>WO-120154</span>
+                                        </div>
+                                        <div>
+                                            <span class="table-overview-header-meta">Totaalbedrag:</span>
+                                            <span>&euro; 314,35 (33 artikelen)</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <span class="table-overview-header-meta">Besteldatum:</span>
+                                            <span>29-01-2015</span>
+                                        </div>
+                                        <div>
+                                            <span class="table-overview-header-meta">Ordernummer:</span>
+                                            <span>WO-120154</span>
+                                        </div>
+                                        <div>
+                                            <span class="table-overview-header-meta">Totaalbedrag:</span>
+                                            <span>&euro; 314,35 (33 artikelen)</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="profile">2</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

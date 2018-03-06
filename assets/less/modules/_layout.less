@@ -1,0 +1,89 @@
+/* divider
+  ---------------------------------------------------------------------------------------------------------------------- */
+.is-section {
+  margin-bottom: @section-space;
+}
+
+.is-section-md {
+  margin-bottom: @section-space/2;
+}
+
+/* layout
+  ---------------------------------------------------------------------------------------------------------------------- */
+
+/* ----- */
+.layout-2-cols {
+
+  .main-row {
+
+    > div {
+      &:not(:last-child) {
+        margin-bottom: @section-space;
+      }
+    }
+
+  }
+}
+
+/* ----- */
+.layout-sidebar {
+
+  .meta-side {
+    padding-right: @grid-gutter-width/2;
+  }
+
+  .main-row {
+    @media @sm {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    > div {
+      &:last-child {
+        @media @sm {
+          margin-bottom: @section-space;
+        }
+      }
+    }
+  }
+}
+
+/* ----- */
+.layout-flip-sidebar {
+
+  .main-row {
+
+    @media @sm {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    > div {
+      &:last-child {
+        @media @sm {
+          margin-bottom: @section-space;
+        }
+      }
+    }
+  }
+
+}
+
+/* ----- */
+.layout-flip-sidebar-md {
+  .main-row {
+
+    @media @md {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    > div {
+      &:last-child {
+        @media @md {
+          margin-bottom: @section-space;
+        }
+      }
+    }
+  }
+}
