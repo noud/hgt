@@ -1,7 +1,35 @@
-/* component
-  ---------------------------------------------------------------------------------------------------------------------- */
+/* ===================================================================================================================== */
 
 /* ----- */
+/* components */
+.item-list {
+
+  .listing {
+    width: 100%;
+    margin-bottom: -1px;
+    top: -1px;
+    position: relative;
+  }
+
+}
+
+/* modifier: item-list */
+
+.item-list-alt {
+
+  > li {
+    &:first-child {
+      .listing {
+        border-top: 0;
+      }
+    }
+  }
+}
+
+/* ===================================================================================================================== */
+
+/* ----- */
+/* components */
 .item-block {
 
   border: @border;
@@ -30,50 +58,17 @@
     span {
       color: #808080;
     }
-
   }
-
 }
 
-/* modules
+
+/* main
   ---------------------------------------------------------------------------------------------------------------------- */
-
-/* ----- */
-.item-list {
-
-  .listing {
-    width: 100%;
-    margin-bottom: -1px;
-    top: -1px;
-    position: relative;
-  }
-
-}
-
-/* modifier: item-list item-list-alt */
-
-.item-list-alt {
-
-  > li {
-    &:first-child {
-      .listing {
-        border-top: 0;
-      }
-    }
-  }
-}
-
-
-/* ----- */
 .item-block-list {
 
   > li {
     margin-bottom: @grid-gutter-width;
     height: 250px;
-
-    @media @md {
-      height: 200px;
-    }
   }
 
   .item-block {
@@ -88,15 +83,142 @@
     transform: translate(-50%, 0);
     padding-left: 10px;
     padding-right: 10px;
-
-    @media @md {
-      font-size: @font-size * 0.75;
-    }
-
   }
 
   .item-block a[rel='perma'] {
     margin-bottom: 50px;
   }
 
+}
+
+/* responsive */
+
+.item-block-list-rwd {
+
+  .item-block-list {
+    > li {
+      @media @md {
+        height: 200px;
+      }
+    }
+
+    .item-block h3 {
+      @media @md {
+        font-size: @font-size * 0.75;
+      }
+    }
+  }
+
+}
+
+/* ===================================================================================================================== */
+
+/* ----- */
+/* components */
+.product-detail-spec-action-label {
+  background-color: @primary-color;
+  color: #ffffff;
+  padding: 10px 15px 10px 15px;
+  border-radius: @border-radius;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+
+.product-detail-spec-action {
+
+  > div {
+    &:last-child {
+      font-size: @font-size-sm;
+    }
+  }
+
+  .product-detail-spec-action-label {
+    margin-bottom: 5px;
+  }
+}
+
+/* ----- */
+/* components */
+.product-detail-spec-form-price {
+  font-size: @font-size-lg;
+  font-weight: @font-weight-bold;
+}
+
+.product-detail-spec-form {
+
+  > div {
+    &:first-child {
+      margin-bottom: 20px;
+    }
+
+    display: flex;
+    align-items: center;
+  }
+
+  select,
+  input {
+    margin-right: 20px;
+  }
+
+}
+
+/* ----- */
+/* components */
+
+.product-detail-spec {
+  > li {
+    &:not(:last-child) {
+      margin-bottom: @section-space/2;
+    }
+  }
+}
+
+
+/* main
+  ---------------------------------------------------------------------------------------------------------------------- */
+.product-detail {
+  display: flex;
+
+  > div {
+
+    &:first-child {
+      width: 35%;
+      flex-shrink: 0;
+    }
+
+    &:last-child {
+      flex-grow: 1;
+    }
+  }
+
+  .listing {
+    width: 100%;
+  }
+
+  .product-detail-spec-form {
+    select,
+    input {
+      width: 150px;
+    }
+  }
+
+
+}
+
+/* responsive */
+
+.product-detail-rwd {
+  @media @sm {
+    display: block;
+  }
+
+  > div {
+    &:first-child {
+      @media @sm {
+        width: 100%;
+      }
+    }
+
+  }
 }
