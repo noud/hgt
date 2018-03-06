@@ -1,8 +1,42 @@
-/* components
-  ---------------------------------------------------------------------------------------------------------------------- */
-/* ----- */
+/* ===================================================================================================================== */
 
-.action-label {
+/* ----- */
+/* components */
+.action-main-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.action-main-price {
+  text-align: right;
+  font-weight: @font-weight-bold;
+}
+
+/* main */
+.action-main  {
+  @action-spacing: 20px;
+  display: flex;
+  align-items: center;
+
+  > div {
+    flex-grow: 1;
+    &:not(:last-child) {
+      padding-right: @action-spacing;
+    }
+  }
+
+  > h2 {
+    width: 30%;
+    flex-shrink: 0;
+    padding-right: @action-spacing;
+    font-size: @heading-xs;
+  }
+}
+
+
+/* ----- */
+/* components */
+.action-sub-label {
   border-radius: @border-radius;
   text-align: center;
   text-transform: uppercase;
@@ -15,70 +49,11 @@
   display: inline-block;
 }
 
-
-/* modules
-  ---------------------------------------------------------------------------------------------------------------------- */
-/* ----- */
-.action-main  {
-  @action-spacing: 20px;
-
-  display: flex;
-  align-items: center;
-
-  @media @sm {
-    display: block;
-  }
-
-  > div {
-    flex-grow: 1;
-    &:not(:last-child) {
-      padding-right: @action-spacing;
-      @media @sm {
-        padding-right: 0;
-      }
-    }
-  }
-
-  > h2 {
-    width: 30%;
-    flex-shrink: 0;
-    padding-right: @action-spacing;
-    font-size: @heading-xs;
-
-    @media @sm {
-      width: 100%;
-      padding-right: 0;
-    }
-  }
-
-
-
-  .action-button {
-    display: flex;
-    justify-content: flex-end;
-    @media @sm {
-      justify-content: flex-start;
-    }
-  }
-
-  .action-price {
-    text-align: right;
-    font-weight: @font-weight-bold;
-    @media @sm {
-      margin-top: 20px;
-      margin-bottom: 20px;
-      text-align: left;
-    }
-  }
-
-
-}
-
 .action-sub {
   display: flex;
   align-items: center;
 
-  .action-label {
+  .action-sub-label {
     margin-right: 10px;
   }
 
@@ -89,13 +64,8 @@
 
 }
 
-
-
-
-/* main module
+/* main
   ---------------------------------------------------------------------------------------------------------------------- */
-/* ----- */
-
 .actions {
   > li {
     &:not(:last-child) {
@@ -107,6 +77,48 @@
 
   .action-main {
     margin-bottom: 10px;
+  }
+
+
+}
+
+/* responsive */
+
+.actions-rwd {
+
+  .action-main-button {
+    @media @sm {
+      justify-content: flex-start;
+    }
+  }
+
+  .action-main-price {
+    @media @sm {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+  }
+
+  .action-main  {
+    @media @sm {
+      display: block;
+    }
+
+    > div {
+      &:not(:last-child) {
+        @media @sm {
+          padding-right: 0;
+        }
+      }
+    }
+
+    > h2 {
+      @media @sm {
+        width: 100%;
+        padding-right: 0;
+      }
+    }
   }
 
 }
