@@ -26,22 +26,12 @@
 }
 
 /* ----- */
-.layout-sidebar {
-
-  .meta-side {
-    padding-right: @grid-gutter-width/2;
-  }
-
+.layout-sidebar-hide-content-md {
   .main-row {
-    @media @sm {
-      display: flex;
-      flex-direction: column-reverse;
-    }
-
     > div {
       &:last-child {
-        @media @sm {
-          margin-bottom: @section-space;
+        @media @md {
+          display: none;
         }
       }
     }
@@ -49,7 +39,7 @@
 }
 
 /* ----- */
-.layout-flip-sidebar {
+.layout-flip-sidebar-sm {
 
   .main-row {
 

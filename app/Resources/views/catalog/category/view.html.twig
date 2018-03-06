@@ -1,12 +1,10 @@
 {% extends 'layout/base.html.twig' %}
 
-{% block bodyClass %}catalog-page{% endblock %}
+{% block bodyClass %}{% endblock %}
 
 {% block body %}
-    <div class="container">
-
+    <div class="container {% if categories %}layout-sidebar-hide-content-md{% else %}{% if category.products %}{% else %}layout-flip-sidebar-md{% endif %}{% endif %}">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
-
         <div class="page-title-container">
             <div class="row">
                 <div class="col-md-3">
@@ -27,8 +25,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="row main-row">
             <div class="col-md-3">
                 {% if parentCategories %}
@@ -37,17 +33,19 @@
             </div>
             <div class="col-md-9">
                 {% if categories %}
-                    {% include '_partials/catalog/product/list.html.twig' with {'categories' : categories } %}
-                {% else %}
-                    <div class="content">
-                        {% if category.products %}
-                            {% for product in category.products %}
-                                {{ include('_partials/catalog/product/item.html.twig', {'product' : product }) }}
-                            {% endfor %}
-                        {% else %}
-                            <p>Geen categorieën/producten gevonden in deze categorie.</p>
-                        {% endif %}
+                    <div class="item-block-list-rwd">
+                        {% include '_partials/catalog/product/list.html.twig' with {'categories' : categories } %}
                     </div>
+                {% else %}
+                    {% if category.products %}
+                        {% for product in category.products %}
+                            {{ include('_partials/catalog/product/item.html.twig', {'product' : product }) }}
+                        {% endfor %}
+                    {% else %}
+                        <div class="content">
+                            <p>Geen categorieën/producten gevonden in deze categorie.</p>
+                        </div>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>
