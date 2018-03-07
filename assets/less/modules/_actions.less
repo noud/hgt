@@ -1,72 +1,9 @@
-/* ===================================================================================================================== */
-
-/* ----- */
-/* components */
-.action-main-button {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.action-main-price {
-  text-align: right;
-  font-weight: @font-weight-bold;
-}
-
-/* main */
-.action-main  {
-  @action-spacing: 20px;
-  display: flex;
-  align-items: center;
-
-  > div {
-    flex-grow: 1;
-    &:not(:last-child) {
-      padding-right: @action-spacing;
-    }
-  }
-
-  > h2 {
-    width: 30%;
-    flex-shrink: 0;
-    padding-right: @action-spacing;
-    font-size: @heading-xs;
-  }
-}
-
-
-/* ----- */
-/* components */
-.action-sub-label {
-  border-radius: @border-radius;
-  text-align: center;
-  text-transform: uppercase;
-  background-color: @primary-color;
-  font-size: @font-size-sm;
-  padding: 2px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #ffffff;
-  display: inline-block;
-}
-
-.action-sub {
-  display: flex;
-  align-items: center;
-
-  .action-sub-label {
-    margin-right: 10px;
-  }
-
-  > div:not(.action-label) {
-    font-style: italic;
-    font-size: @font-size-sm;
-  }
-
-}
-
-/* main
+/* components
   ---------------------------------------------------------------------------------------------------------------------- */
+
+/* ----- */
 .actions {
+
   > li {
     &:not(:last-child) {
       border-bottom: @border;
@@ -75,15 +12,70 @@
     }
   }
 
-  .action-main {
-    margin-bottom: 10px;
+  .action-main-price {
+    text-align: right;
+    font-weight: @font-weight-bold;
+  }
+
+  .action-main-button {
+    display: flex;
+    justify-content: flex-end;
   }
 
 
+  .action-main {
+
+    @action-spacing: 20px;
+
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+
+    > div {
+      flex-grow: 1;
+      &:not(:last-child) {
+        padding-right: @action-spacing;
+      }
+    }
+
+    > h2 {
+      width: 30%;
+      flex-shrink: 0;
+      padding-right: @action-spacing;
+      font-size: @heading-xs;
+    }
+  }
+
+
+  .action-sub {
+    display: flex;
+    align-items: center;
+
+    > div:not(.action-label) {
+      font-style: italic;
+      font-size: @font-size-sm;
+    }
+  }
+
+  .action-sub-label {
+    border-radius: @border-radius;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: @primary-color;
+    font-size: @font-size-sm;
+    padding: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #ffffff;
+    display: inline-block;
+    margin-right: 10px;
+  }
+
 }
 
-/* responsive */
 
+/* responsive
+  ---------------------------------------------------------------------------------------------------------------------- */
 .actions-rwd {
 
   .action-main-button {
@@ -100,7 +92,7 @@
     }
   }
 
-  .action-main  {
+  .action-main {
     @media @sm {
       display: block;
     }
@@ -122,5 +114,3 @@
   }
 
 }
-
-

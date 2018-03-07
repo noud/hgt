@@ -13,6 +13,6 @@ class IndexController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('dummy/account/order-history.html.twig');
+        return $this->render('dummy/account/order.html.twig');
     }
 }
