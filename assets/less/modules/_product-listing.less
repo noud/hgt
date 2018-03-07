@@ -1,13 +1,7 @@
 /* components
   ---------------------------------------------------------------------------------------------------------------------- */
+
 /* ----- */
-
-
-
-/* modules
-  ---------------------------------------------------------------------------------------------------------------------- */
-/* ----- */
-
 .product-listing {
   > li {
 
@@ -24,39 +18,26 @@
         width: 25%;
         margin-right: 20px;
         flex-shrink: 0;
-
-        @media @xs {
-          width: 30%;
-        }
       }
 
       &:last-child {
         flex-grow: 1;
-
       }
     }
-
   }
 
   h2 {
     font-size: @heading-xs;
     color: @primary-color;
     margin-bottom: 10px;
-
-
-    @media @md {
-      font-size: @heading-xs * 0.75;
-    }
-
     a {
       color: @primary-color;
     }
   }
 
-
   .product-listing-sr {
-    font-size: @font-size-sm;
     margin-top: 5px;
+    font-size: @font-size-sm;
     a {
       color: @primary-color;
     }
@@ -72,18 +53,10 @@
     margin-top: 10px;
     display: flex;
     justify-content: flex-end;
-
-    @media @xs {
-      justify-content: flex-start;
-    }
   }
 
   .product-listing-meta {
     display: flex;
-
-    @media @xs {
-      display: block;
-    }
 
     > li {
       width: 100%/3;
@@ -95,15 +68,53 @@
   .product-listing-meta-price {
     text-align: right;
     font-weight: @font-weight-bold;
-    @media @xs {
-      text-align: left;
-      margin-top: 20px;
-      font-size: @font-size * 1.25;
-    }
   }
 
   .product-listing-meta-weight {
     color: #808080;
   }
 
+}
+
+
+/* responsive
+  ---------------------------------------------------------------------------------------------------------------------- */
+.product-listing-rwd {
+
+  h2 {
+    @media @md {
+      font-size: @heading-xs * 0.75;
+    }
+  }
+
+  > li {
+
+    > div {
+      &:first-child {
+        @media @xs {
+          width: 30%;
+        }
+      }
+    }
+  }
+
+  .product-listing-button {
+    @media @xs {
+      justify-content: flex-start;
+    }
+  }
+
+  .product-listing-meta {
+    @media @xs {
+      display: block;
+    }
+  }
+
+  .product-listing-meta-price {
+    @media @xs {
+      text-align: left;
+      margin-top: 20px;
+      font-size: @font-size * 1.25;
+    }
+  }
 }

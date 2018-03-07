@@ -1,15 +1,24 @@
-/* ===================================================================================================================== */
-/* components */
-.table-order-article {
-  font-weight: @font-weight-bold;
+/* components
+  ---------------------------------------------------------------------------------------------------------------------- */
+
+/* ----- */
+.table-order-basic {
+  .table-base();
+
+  > li {
+    > div {
+      &:first-child {
+        width: 50%;
+      }
+    }
+  }
+
+  .table-order-basic-entry {
+    font-weight: @font-weight-bold;
+  }
 }
 
 /* ----- */
-.table-order-price {
-  text-align: right;
-}
-
-/* main */
 .table-order {
 
   .table-base();
@@ -24,9 +33,81 @@
       }
     }
   }
+
+  .table-order-article {
+    font-weight: @font-weight-bold;
+  }
+
+  .table-order-price {
+    text-align: right;
+  }
+
 }
 
-/* reponsive */
+/* ----- */
+.table-order-total {
+  display: flex;
+  background-color: @primary-color;
+  color: white;
+  padding: 15px;
+  font-weight: @font-weight-bold;
+
+  > div {
+    &:first-child {
+      width: 60%;
+      flex-shrink: 0;
+    }
+    &:last-child {
+      flex-grow: 1;
+    }
+  }
+
+  .table-order-total-price {
+    text-align: right;
+  }
+
+}
+
+/* ----- */
+
+.table-overview {
+
+  .table-overview-header-meta {
+    display: none;
+  }
+
+  .table-overview-table {
+
+    .table-base();
+    .table-bg();
+
+    > li {
+      > div {
+        width: 100%/3;
+      }
+    }
+  }
+
+  .table-overview-header {
+    font-weight: @font-weight-bold;
+    display: flex;
+
+    > div {
+      padding-left: 10px;
+      padding-right: 10px;
+      width: 100%/3;
+      flex-shrink: 0;
+      flex-grow: 1;
+    }
+  }
+
+}
+
+
+/* responsive
+  ---------------------------------------------------------------------------------------------------------------------- */
+
+/* ----- */
 .table-order-rwd {
 
   > li {
@@ -54,86 +135,7 @@
 
 }
 
-
-/* ===================================================================================================================== */
-/* components */
-.table-order-basic-entry {
-  font-weight: @font-weight-bold;
-}
-
-.table-order-basic {
-  .table-base();
-
-  > li {
-    > div {
-      &:first-child {
-        width: 50%;
-      }
-    }
-  }
-
-}
-
-/* ===================================================================================================================== */
-/* components */
-.table-order-total-price {
-  text-align: right;
-}
-
-/* main */
-.table-order-total {
-  display: flex;
-  background-color: @primary-color;
-  color: white;
-  padding: 15px;
-  font-weight: @font-weight-bold;
-
-  > div {
-    &:first-child {
-      width: 60%;
-      flex-shrink: 0;
-    }
-    &:last-child {
-      flex-grow: 1;
-    }
-
-  }
-}
-
-/* ===================================================================================================================== */
-/* components */
-.table-overview-table {
-
-  .table-base();
-  .table-bg();
-
-  > li {
-    > div {
-      width: 100%/3;
-    }
-  }
-}
-
-.table-overview-header {
-  font-weight: @font-weight-bold;
-  display: flex;
-
-  > div {
-    padding-left: 10px;
-    padding-right: 10px;
-    width: 100%/3;
-    flex-shrink: 0;
-    flex-grow: 1;
-  }
-}
-
-.table-overview-header-meta {
-  display: none;
-}
-
-/* reponsive */
-
-
+/* ----- */
 .table-overview-rwd {
 
   .table-overview-header {

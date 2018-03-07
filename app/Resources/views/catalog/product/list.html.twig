@@ -1,9 +1,9 @@
 {% extends 'layout/base.html.twig' %}
 
-{% block bodyClass %}catalog-page{% endblock %}
+{% block bodyClass %}{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container layout-flip-sidebar-md">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
 
 
@@ -38,7 +38,7 @@
                 </ul>
             </div>
             <div class="col-md-9">
-                <ul class="product-listing">
+                <ul class="product-listing product-listing-rwd">
                     <li>
                         <div class="product-listing-img">
                             <a href="#"><img src="https://www.hgt-tilburg.nl/cache/images/userdata/product-images/160x105/0519192032-326-100001010.jpg" alt="" /></a>
