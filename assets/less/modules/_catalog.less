@@ -1,4 +1,4 @@
-/* TODO: combine components */
+/* TODO: combine components (not brand-listing) */
 
 /* components
   ---------------------------------------------------------------------------------------------------------------------- */
@@ -167,6 +167,38 @@
 }
 
 
+/* ----- */
+
+.brand-listing {
+  columns: 200px 5;
+
+
+  > li {
+    break-inside: avoid;
+
+    &:not(:last-child) {
+      margin-bottom: @section-space/2;
+    }
+
+    > ul {
+      > li {
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        a {
+          color: #000;
+        }
+      }
+    }
+  }
+
+  .brand-listing-head {
+    font-size: @font-size-md-sub;
+    color: @primary-color;
+    font-weight: @font-weight-bold;
+  }
+
+}
 
 /* responsive
   ---------------------------------------------------------------------------------------------------------------------- */

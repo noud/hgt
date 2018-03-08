@@ -3,6 +3,7 @@
 namespace HGT\Application\Catalog;
 
 use HGT\AppBundle\Repository\Catalog\Manufacture\ManufacturerRepository;
+use HGT\Application\Catalog\Manufacture\Manufacturer;
 
 class ManufacturerService
 {
@@ -21,7 +22,7 @@ class ManufacturerService
     }
 
     /**
-     * @return Manufacture\Manufacturer[]
+     * @return Manufacturer[]
      */
     public function getManufacturers()
     {
@@ -29,7 +30,7 @@ class ManufacturerService
     }
 
     /**
-     * @return Manufacture\Manufacturer[]
+     * @return Manufacturer[]
      */
     public function getManufacturersWithProducts()
     {

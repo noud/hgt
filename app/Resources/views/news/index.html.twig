@@ -1,13 +1,17 @@
 {% extends 'layout/base.html.twig' %}
 
-{% block bodyClass %}{% endblock %}
+{% block bodyClass %}news-index{% endblock %}
 
 {% block body %}
     <div class="container layout-flip-sidebar-sm">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
         <div class="row main-row">
             <div class="col-sm-3">
-                {{ include('_partials/page/sidebar.html.twig') }}
+                <aside class="meta-side">
+                    {% if static_block_manager.has('side_contact') %}
+                        {{ static_block_manager.get('side_contact').content|raw }}
+                    {% endif %}
+                </aside>
             </div>
             <div class="col-sm-9">
                 <h1 class="page-title">Nieuws</h1>

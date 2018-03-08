@@ -3,20 +3,19 @@
 {% block bodyClass %}{% endblock %}
 
 {% block body %}
-    <style>
-        .testing {
-            columns: 234px 5;
-        }
-    </style>
     <div class="container layout-flip-sidebar-sm">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
-        <ul class="testing">
+
+        <h1 class="page-title page-title-border">Merken</h1>
+
+        <ul class="brand-listing">
             {% for letter, manufacturerCat in manufacturerCats %}
                 <li>
-                    <div>{{ letter }}</div>
+                    <div class="brand-listing-head">{{ letter }}</div>
                     <ul>
                         {% for catName in manufacturerCat %}
-                            <li>{{ catName }}</li>
+                            <li><a href="{{ catName.urlKey }}">{{ catName.name }} ({{ catName.totalProductCount }}
+                                    )</a></li>
                         {% endfor %}
                     </ul>
                 </li>

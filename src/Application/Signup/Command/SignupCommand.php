@@ -72,5 +72,4 @@ class SignupCommand
      * @var boolean
      */
     public $profit;
-
 }
