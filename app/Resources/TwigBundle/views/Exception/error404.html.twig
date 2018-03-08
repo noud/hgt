@@ -1,26 +1,21 @@
 {% extends 'layout/base.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        .error-404 {text-align:center;}
-        .error-404 h1 {font-size:140px;font-weight:200;color:#BBB;}
-    </style>
-{% endblock %}
-
 {% block body %}
     <div class="container">
-        <div class="col-md-12 error-404">
-            <h1>404</h1>
-            <div class="content">
-                <p>
-                    De pagina die u zoekt is mogelijk verwijderd, tijdelijk niet beschikbaar of de naam ervan is gewijzigd.<br />
-                    U kunt terug naar de vorige pagina gaan of het menu op deze pagina gebruiken om uw weg te vervolgen.
-                </p>
-                <p>
-                    <a href="{{ path('homepage') }}">Ga direct naar de homepage</a>
-                </p>
+        <div class="row">
+            <div class="col-sm-6">
+                <h1 class="page-title">Pagina niet gevonden</h1>
+                <div class="content is-section">
+                    <p>De pagina die u zoekt is mogelijk verwijderd, tijdelijk niet beschikbaar of de naam ervan is
+                        gewijzigd. U kunt terug naar de vorige pagina gaan of het menu op deze pagina gebruiken om uw
+                        weg te vervolgen.</p>
+                </div>
+                <a href="{{ path('homepage') }}" class="btn-border">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Ga direct naar de homepage</span>
+                </a>
             </div>
+            <div class="col-sm-6"></div>
         </div>
     </div>
 {% endblock %}

@@ -1,40 +1,21 @@
 {% extends 'layout/base.html.twig' %}
 
+{% block bodyClass %}folder-index{% endblock %}
+
 {% block body %}
-    <div class="template-sidebar container">
+    <div class="container layout-flip-sidebar-sm">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
-        <div class="row">
+        <div class="main-row row">
             <div class="col-sm-4 col-md-3">
                 <aside class="meta-side">
-                    <ul>
-                        <li>
-                            <h3>Horeca Groothandel Tilburg B.V.</h3>
-                            <div class="entries">
-                                <div class="entry">
-                                    <strong>Bezoekadres:</strong><br/>
-                                    Polluxstraat<br/>
-                                    5047 RB Tilburg
-                                </div>
-                                <div class="entry">
-                                    <strong>Postadres:</strong><br/>
-                                    Postbus 1208<br/>
-                                    5004 BE Tilburg
-                                </div>
-                                <div class="entry">
-                                    <strong>T:</strong> <a href="tel:013 - 571 17 90">013 - 571 17 90</a> <br/>
-                                    <strong>E:</strong> <a rel="mail" href="mailto:verkoop@hgt-tilburg.nl">verkoop@hgt-tilburg.nl</a> <br/>
-                                </div>
-                                <div class="entry">
-                                    Kvk Tilburg : 18046208
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                    {% if static_block_manager.has('side_contact') %}
+                        {{ static_block_manager.get('side_contact').content|raw }}
+                    {% endif %}
                 </aside>
             </div>
             <div class="col-sm-8 col-md-9">
                 <h1 class="page-title">Folder</h1>
-                <div class="content">
+                <div class="content is-section">
                     <p>Hier vindt u de op dit moment lopende folders.</p>
                 </div>
                 <div class="folder">
@@ -44,14 +25,16 @@
                                 <li class="col-md-6">
                                     <div class="folder-item">
                                         <h2>
-                                            <a href="{{ path('folder_view', {'id': folder.id } ) }}" title="{{ folder.title }}">
+                                            <a href="{{ path('folder_view', {'id': folder.id } ) }}"
+                                               title="{{ folder.title }}">
                                                 {{ folder.title }} {{ folder.id }}
                                             </a>
                                         </h2>
                                         <div>
                                             <div>
                                                 <div class="img">
-                                                    <a href="{{ path('folder_view', {'id': folder.id } ) }}" title="{{ folder.title }}">
+                                                    <a href="{{ path('folder_view', {'id': folder.id } ) }}"
+                                                       title="{{ folder.title }}">
                                                         <img src="{{ folder.picture }}" alt="{{ folder.title }}"/>
                                                     </a>
                                                 </div>

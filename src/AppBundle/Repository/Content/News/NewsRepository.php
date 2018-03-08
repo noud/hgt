@@ -9,9 +9,9 @@ class NewsRepository extends EntityRepository
 {
     /**
      * @param $id
-     * @return News|object
+     * @return News|null|object
      */
-    public function get($id)
+    public function getNewsById($id)
     {
         return $this->find($id);
     }
@@ -30,5 +30,17 @@ class NewsRepository extends EntityRepository
     public function remove(News $news)
     {
         $this->getEntityManager()->remove($news);
+    }
+
+    /**
+     * @return News[]
+     */
+    public function getActiveNews()
+    {
+        $qb = $this->createQueryBuilder('q');
+        $qb->where('q.start_date <= CURRENT_DATE()');
+        $qb->orderBy('q.start_date', 'DESC');
+
+        return $qb->getQuery()->getResult();
     }
 }

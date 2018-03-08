@@ -1,14 +1,23 @@
 .content {
 
+  > h3,
   > h2 {
     font-size: @heading-xs;
     color: @primary-color;
     margin-bottom: 10px;
 
     @media @sm {
-      font-size: @heading-xs * 0.85;
+      font-size: @heading-xs * 0.95;
     }
 
+  }
+
+  > ul {
+    margin-bottom: 20px;
+    > li {
+      list-style-type: square;
+    }
+    padding-left: 30px;
   }
 
   > p {
@@ -21,23 +30,17 @@
       }
     }
 
-    > a {
-      color: @primary-color;
-    }
-
     > strong.special {
       color: @primary-color;
     }
 
   }
 
-}
+  a {
+    color: @primary-color;
+  }
 
-/* modifier: content content-margin  */
-.content-margin {
-  margin-bottom: 50px;
 }
-
 
 /* ----- */
 
@@ -54,17 +57,19 @@
   }
 }
 
-/* modifier: content content-margin  */
+/* modifier: page-title  */
 .page-title-border {
   border-bottom: @border;
   padding-bottom: 10px;
   margin-bottom: 30px;
 }
 
+/* ----- */
+
 .page-title-container {
   border-bottom: @border;
   padding-bottom: 10px;
-  margin-bottom: 30px;
+  margin-bottom: @section-space/2;
 
   .row {
 
@@ -75,8 +80,20 @@
         }
       }
     }
-
   }
 
+}
+
+/* modifier: page-title-container  */
+.page-title-container-hide-md {
+  .row {
+    > div {
+      &:first-child {
+        @media @md {
+          display: none;
+        }
+      }
+    }
+  }
 }
 

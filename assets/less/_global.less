@@ -17,6 +17,9 @@ body {
   font-family: @font-family;
   font-weight: @font-weight;
 
+  @media @xs {
+    font-size: @font-size * 0.85;
+  }
 
   &.overflow {
     overflow-y: hidden;

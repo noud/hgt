@@ -10,7 +10,6 @@ $(document).ready(function () {
 
   var $body = $('body');
 
-
   $('.primary-menu-trigger, .overlay').click(function () {
     $body.toggleClass('primary-menu-open');
     $body.toggleClass('overflow');

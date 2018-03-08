@@ -1,73 +1,49 @@
 {% extends 'layout/base.html.twig' %}
 
-{% block bodyClass %}template-2-cols{% endblock %}
+{% block bodyClass %}signup-index{% endblock %}
 
 {% block body %}
-
-  <div class="container">
-
-      {{ include('_partials/page/breadcrumbs.html.twig') }}
-
-    <div class="main-row row">
-      <div class="col-sm-6">
-
-        <h1 class="page-title">Registreren</h1>
-
-        <div class="content">
-          <p>Om bij ons te kunnen winkelen hebt u een gebruikersnaam en wachtwoord nodig. U vult het onderstaande formulier in en dan nemen wij zo spoedig mogelijk contact met u op.</p>
-          <p><strong>LET OP! Particulieren kunnen geen webshop account aanvragen.</strong></p>
-        </div>
-
-        <aside class="meta-side">
-          <ul>
-            <li>
-              <h3>Klantenservice</h3>
-              <div class="entries">
-                <div class="entry">
-                  <div class="content">
-                    <p>Heeft u een specifieke vraag over het klant worden bij Horeca Groothandel Tilburg? Neem dan contact met ons op of stuur ons een e-mail.</p>
-                  </div>
+    <div class="container layout-2-cols-sm">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        <div class="main-row row">
+            <div class="col-sm-6">
+                <h1 class="page-title">Registreren</h1>
+                <div class="content">
+                    <p>Om bij ons te kunnen winkelen hebt u een gebruikersnaam en wachtwoord nodig. U vult het
+                        onderstaande formulier in en dan nemen wij zo spoedig mogelijk contact met u op.</p>
+                    <p><strong>LET OP! Particulieren kunnen geen webshop account aanvragen.</strong></p>
                 </div>
-                <div class="entry">
-                  <strong>T:</strong> <a href="#">013 - 571 17 90</a> <br/>
-                  <strong>E:</strong> <a rel="mail" href="mailto:info@hgt-tilburg.nl">info@hgt-tilburg.nl</a> <br/>
+                <aside class="meta-side">
+                    {% if static_block_manager.has('klantenservice') %}
+                        {{ static_block_manager.get('klantenservice').content|raw }}
+                    {% endif %}
+                </aside>
+            </div>
+            <div class="col-sm-6">
+                <div class="content">
+                    <h2>Registratieformulier</h2>
                 </div>
-                <div class="entry">
-                  <strong class="special">KvK-nummer:</strong> 18046208
+                {{ form_start(form, {'attr': {'class': 'form-base','novalidate': 'novalidate'}}) }}
+                {{ form_errors(form) }}
+                {{ form_row(form.companyName) }}
+                {{ form_row(form.companyNumber) }}
+                <div class="form-group-flex-row">
+                    {{ form_row(form.gender) }}
                 </div>
-              </div>
-            </li>
-          </ul>
-        </aside>
-
-      </div>
-
-      <div class="col-sm-6">
-
-        {{ form_start(form, {'attr': {'class': 'form-base','novalidate': 'novalidate'}}) }}
-        {{ form_errors(form) }}
-        {{ form_row(form.companyName) }}
-        {{ form_row(form.companyNumber) }}
-        <div class="form-group-flex-row">
-          {{ form_row(form.gender) }}
+                {{ form_row(form.contactPerson) }}
+                {{ form_row(form.phone) }}
+                {{ form_row(form.mobile) }}
+                {{ form_row(form.address) }}
+                {{ form_row(form.postal) }}
+                {{ form_row(form.place) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.profit) }}
+                <div class="form-btn-group">
+                    <button type="submit" class="btn btn-highlight">Aanmelden</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
         </div>
-        {{ form_row(form.contactPerson) }}
-        {{ form_row(form.phone) }}
-        {{ form_row(form.mobile) }}
-        {{ form_row(form.address) }}
-        {{ form_row(form.postal) }}
-        {{ form_row(form.place) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.profit) }}
-        <div class="form-btn-group">
-          <button type="submit"  class="btn btn-highlight">Aanmelden</button>
-        </div>
-        {{ form_end(form) }}
-
-      </div>
     </div>
-  </div>
-
-
-
 {% endblock %}
+

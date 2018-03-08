@@ -1,0 +1,89 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block bodyClass %}account-index account-index-order{% endblock %}
+
+{% block body %}
+    <div class="container layout-flip-sidebar-sm">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        <div class="row main-row">
+            <div class="col-sm-3">
+                <ul class="item-list item-list-alt">
+                    <li><a href="#" class="listing">Bestellijst <span class="icon"><i class="fa fa-chevron-right"></i></span></a></li>
+                    <li><a href="#" class="listing">Bestelhistorie <span class="icon"><i class="fa fa-chevron-right"></i></span></a></li>
+                    <li><a href="#" class="listing">Bestellijst aanpassen <span class="icon"><i class="fa fa-chevron-right"></i></span></a></li>
+                    <li><a href="#" class="listing">Wachtwoord wijzigen <span class="icon"><i class="fa fa-chevron-right"></i></span></a></li>
+                    <li><a href="#" class="listing">Uitloggen <span class="icon"><i class="fa fa-chevron-right"></i></span></a></li>
+                </ul>
+            </div>
+            <div class="col-sm-9">
+                <h1 class="page-title">Bestelling: WO-120154</h1>
+                <a href="#" class="btn-border is-section">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Naar bestelhistorie</span>
+                </a>
+                <ul class="table-order-basic is-section">
+                    <li>
+                        <div>Besteldatum zzzz z :</div>
+                        <div class="table-order-basic-entry">29-01-2015</div>
+                    </li>
+                    <li>
+                        <div>Leverdatum:</div>
+                        <div class="table-order-basic-entry">29-01-2015</div>
+                    </li>
+                    <li>
+                        <div>Totaalbedrag:</div>
+                        <div class="table-order-basic-entry">29-01-2015 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus commodo gravida libero, ut rutrum mauris pulvinar vel. Aenean et efficitur arcu. 29-01-2015 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus commodo gravida libero, ut rutrum mauris pulvinar vel. Aenean et efficitur arcu.</div>
+                    </li>
+                    <li>
+                        <div>Ordernummer:</div>
+                        <div class="table-order-basic-entry">29-01-2015 zzz z z z z</div>
+                    </li>
+                    <li>
+                        <div>Klantnummer:</div>
+                        <div class="table-order-basic-entry">29-01-2015</div>
+                    </li>
+                </ul>
+                <div class="content"><h2>Artikelen</h2></div>
+                <ul class="table-order table-order-rwd is-section-md">
+                    <li>
+                        <div class="table-order-article">Even wat dingen testen CACAO AUTOMAAT VH10 asd asd asd asd asd 29-01-2015 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus commodo gravida libero, ut rutrum mauris pulvinar vel. Aenean et efficitur arcu.</div>
+                        <div>van Houten 29-01-2015 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus commodo gravida libero, ut rutrum mauris pulvinar vel. Aenean et efficitur arcu.</div>
+                        <div>1kg | Zak</div>
+                        <div>Aantal: 5 | Zak</div>
+                        <div class="table-order-price">&euro; 26,75</div>
+                    </li>
+                    <li>
+                        <div class="table-order-article">CACAO AUTOMAAT VH10</div>
+                        <div>van Houten</div>
+                        <div>1kg | Zak</div>
+                        <div>Aantal: 5 | Zak</div>
+                        <div class="table-order-price">&euro; 26,75</div>
+                    </li>
+                    <li>
+                        <div class="table-order-article">CACAO AUTOMAAT  sadasdasdasd</div>
+                        <div>van Houten</div>
+                        <div>1kg | Zak</div>
+                        <div>Aantal: 5 | Zak</div>
+                        <div class="table-order-price">&euro; 26,75</div>
+                    </li>
+                    <li>
+                        <div class="table-order-article">CACAO AUTOMAATsss sa VH10</div>
+                        <div>van Houten</div>
+                        <div>1kg | Zak</div>
+                        <div>Aantal: 5 | Zak</div>
+                        <div class="table-order-price">&euro; 26,75</div>
+                    </li>
+                </ul>
+                <div class="row">
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <div class="table-order-total">
+                            <div>Totaalbedrag (excl. BTW)</div>
+                            <div class="table-order-total-price">&euro; 314,35</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
