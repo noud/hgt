@@ -1,0 +1,26 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block bodyClass %}{% endblock %}
+
+{% block body %}
+    <style>
+        .testing {
+            columns: 234px 5;
+        }
+    </style>
+    <div class="container layout-flip-sidebar-sm">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        <ul class="testing">
+            {% for letter, manufacturerCat in manufacturerCats %}
+                <li>
+                    <div>{{ letter }}</div>
+                    <ul>
+                        {% for catName in manufacturerCat %}
+                            <li>{{ catName }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

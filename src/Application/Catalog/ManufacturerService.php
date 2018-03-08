@@ -19,4 +19,20 @@ class ManufacturerService
     {
         $this->manufacturerRepository = $manufacturerRepository;
     }
+
+    /**
+     * @return Manufacture\Manufacturer[]
+     */
+    public function getManufacturers()
+    {
+        return $this->manufacturerRepository->getManufacturers();
+    }
+
+    /**
+     * @return Manufacture\Manufacturer[]
+     */
+    public function getManufacturersWithProducts()
+    {
+        return $this->manufacturerRepository->getManufacturersWithProducts();
+    }
 }
