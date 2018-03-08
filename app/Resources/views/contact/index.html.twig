@@ -13,14 +13,20 @@
                         <li>
                             <div class="entries">
                                 <div class="entry">
-                                    <strong class="special">Bezoekadres:</strong> Polluxstraat 6, 5047 RB Tilburg | Bedrijfsnummer 942 <br/>
-                                    <strong class="special">KvK-nummer:</strong> 18046208 |
-                                    <strong class="special">Btw-nummer:</strong> NL8072.96.533.B01
+                                    <strong class="special">Bezoekadres:</strong>
+                                    {{ config_manager.get('company_street', '') }},
+                                    {{ config_manager.get('company_zipcode', '') }}
+                                    {{ config_manager.get('company_city', '') }} |
+                                    {{ config_manager.get('company_number', '') }}<br/>
+                                    <strong class="special">KvK-nummer:</strong>
+                                    {{ config_manager.get('company_coc_number', '') }} |
+                                    <strong class="special">Btw-nummer:</strong>
+                                    {{ config_manager.get('company_vatnumber', '') }}
                                 </div>
                                 <div class="entry">
-                                    <strong>T:</strong> <a href="#">013 - 571 17 90</a><br/>
-                                    <strong>E:</strong> <a rel="mail" href="mailto:info@hgt-tilburg.nl">info@hgt-tilburg.nl</a><br/>
-                                    <strong>Whatsapp:</strong> <a href="mailto:info@hgt-tilburg.nl">06 - 10 993 320</a><br/>
+                                    <strong>T:</strong> <a href="{{ config_manager.get('company_phonenumber', '')|phone_href }}">{{ config_manager.get('company_phonenumber', '') }}</a><br/>
+                                    <strong>E:</strong> <a rel="mail" href="mailto:{{ config_manager.get('company_email', '') }}">{{ config_manager.get('company_email', '') }}</a><br/>
+                                    <strong>Whatsapp:</strong> <a href="{{ config_manager.get('company_whatsapp', '')|whatsapp_href }}">{{ config_manager.get('company_whatsapp', '') }}</a><br/>
                                 </div>
                                 <h3>Openingstijden</h3>
                                 <div class="entry">

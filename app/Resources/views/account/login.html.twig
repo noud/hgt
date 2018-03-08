@@ -1,20 +1,18 @@
 {% extends 'layout/base.html.twig' %}
 
-{% block bodyClass %}template-2-cols{% endblock %}
+{% block bodyClass %}{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container layout-2-cols-sm">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
-
         <h1 class="page-title">Inloggen</h1>
-
         <div class="row main-row">
-            <div class="col-md-4">
+            <div class="col-sm-6">
                 <div class="content content-margin">
                     <p>Wilt u inloggen op onze webshop? Vul dan uw gebruikersnaam en wachtwoord in. Onze klanten kunnen
-                        een webshop account aanvragen bij onze afdeling verkoop. Nog geen klant? Dan kunt u zich
-                        hieronder registreren door op de kkop "Klant worden" te klikken.
-                    </p>
+                        een
+                        webshop account aanvragen bij onze afdeling verkoop. Nog geen klant? Dan kunt u zich hieronder
+                        registreren door op de kkop "Klant worden" te klikken.</p>
                 </div>
                 <div class="content">
                     {% if static_block_manager.has('myaccount_login_login') %}
@@ -39,7 +37,7 @@
                 </div>
                 {{ form_end(form) }}
             </div>
-            <div class="col-md-8">
+            <div class="col-sm-6">
                 <div class="content">
                     {% if static_block_manager.has('myaccount_login_register') %}
                         <h2>{{ static_block_manager.get('myaccount_login_register').title }}</h2>

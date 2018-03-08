@@ -1,0 +1,37 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block bodyClass %}{% endblock %}
+
+{% block body %}
+    <div class="container layout-flip-sidebar-sm">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        <div class="row main-row">
+            <div class="col-sm-3">
+                {{ include('_partials/page/sidebar.html.twig') }}
+            </div>
+            <div class="col-sm-9">
+                {% if news %}
+                    <h1 class="page-title">{{ news.title }}</h1>
+                    <article class="article-single article-single-rwd">
+                        <div>
+                            <div class="content">
+                                <p>{{ news.description }}</p>
+                            </div>
+                            <ul class="article-gallery">
+                                <li>
+                                    <a rel="perma" href="#"><img src="https://www.hgt-tilburg.nl/userdata/Ola-2018.jpg" alt="" /></a>
+                                </li>
+                                <li>
+                                    <img src="https://www.hgt-tilburg.nl/userdata/Ola-2018.jpg" alt="" />
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <img class="article-img" src="https://www.hgt-tilburg.nl/cache/images/userdata/news-images/200x200/Kalender.jpg" alt="{{ news.metaTitle }}" />
+                        </div>
+                    </article>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

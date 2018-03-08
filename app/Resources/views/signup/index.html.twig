@@ -3,7 +3,7 @@
 {% block bodyClass %}signup-index{% endblock %}
 
 {% block body %}
-    <div class="template-2-cols container">
+    <div class="container layout-2-cols-sm">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
         <div class="main-row row">
             <div class="col-sm-6">
@@ -20,6 +20,9 @@
                 </aside>
             </div>
             <div class="col-sm-6">
+                <div class="content">
+                    <h2>Registratieformulier</h2>
+                </div>
                 {{ form_start(form, {'attr': {'class': 'form-base','novalidate': 'novalidate'}}) }}
                 {{ form_errors(form) }}
                 {{ form_row(form.companyName) }}

@@ -3,9 +3,9 @@
 {% block bodyClass %}folder-index{% endblock %}
 
 {% block body %}
-    <div class="template-sidebar container">
+    <div class="container layout-flip-sidebar-sm">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
-        <div class="row">
+        <div class="main-row row">
             <div class="col-sm-4 col-md-3">
                 <aside class="meta-side">
                     {% if static_block_manager.has('side_contact') %}
@@ -15,7 +15,7 @@
             </div>
             <div class="col-sm-8 col-md-9">
                 <h1 class="page-title">Folder</h1>
-                <div class="content">
+                <div class="content is-section">
                     <p>Hier vindt u de op dit moment lopende folders.</p>
                 </div>
                 <div class="folder">

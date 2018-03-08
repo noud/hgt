@@ -1,0 +1,61 @@
+/* components
+  ---------------------------------------------------------------------------------------------------------------------- */
+
+/* ----- */
+.nav-tabs {
+  border-bottom: @border;
+
+  display: flex;
+
+  > li {
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    &.active {
+      > a {
+        background-color: @primary-color;
+        color: white;
+      }
+    }
+
+    > a {
+      display: inline-block;
+      padding: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background-color: transparent;
+      border-top-right-radius: @border-radius;
+      border-top-left-radius: @border-radius;
+      border: @border;
+      border-bottom: none;
+      color: #000;
+
+      &:hover {
+        background-color: @primary-color;
+        color: white;
+      }
+
+    }
+
+  }
+
+}
+
+/* ----- */
+.tab-pane {
+
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+/* ----- */
+.tabs {
+  .tab-content {
+    padding-top: 30px;
+  }
+}

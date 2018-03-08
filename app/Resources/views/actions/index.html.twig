@@ -2,24 +2,20 @@
 
 {% set overview = true %}
 
-{% block bodyClass %}{% if overview == false %}catalog-page-product-detail{% endif %}{% endblock %}
+{% block bodyClass %}{% endblock %}
 
 {% block body %}
-
-
     {% if overview == true %}
         <div class="container">
-
             {{ include('_partials/page/breadcrumbs.html.twig') }}
-
-            <ul class="actions">
+            <ul class="actions actions-rwd">
                 <li>
                     <div class="action-main">
                         <h2>Houten lepel 16.5cm biodore</h2>
                         <div>Depa</div>
                         <div>Inhoud: 100st</div>
-                        <div class="action-price">&euro; 2,95</div>
-                        <div class="action-button">
+                        <div class="action-main-price">&euro; 2,95</div>
+                        <div class="action-main-button">
                             <a href="#" class="btn btn-icon-label">
                                 <span class="icon"><i class="fas fa-shopping-cart"></i></span>
                                 <span class="label">Bestel</span>
@@ -27,7 +23,7 @@
                         </div>
                     </div>
                     <div class="action-sub">
-                        <div class="action-label">Actie</div>
+                        <div class="action-sub-label">Actie</div>
                         <div>Actie geldig van 22 februari t/m 30 juni 2018</div>
                     </div>
                 </li>
@@ -36,8 +32,8 @@
                         <h2>Houten lepel 16.5cm biodore</h2>
                         <div>Depa</div>
                         <div>Inhoud: 100st</div>
-                        <div class="action-price">&euro; 2,95</div>
-                        <div class="action-button">
+                        <div class="action-main-price">&euro; 2,95</div>
+                        <div class="action-main-button">
                             <a href="#" class="btn btn-icon-label">
                                 <span class="icon"><i class="fas fa-shopping-cart"></i></span>
                                 <span class="label">Bestel</span>
@@ -45,19 +41,15 @@
                         </div>
                     </div>
                     <div class="action-sub">
-                        <div class="action-label">Actie</div>
+                        <div class="action-sub-label">Actie</div>
                         <div>Actie geldig van 22 februari t/m 30 juni 2018</div>
                     </div>
                 </li>
             </ul>
         </div>
-
     {% else %}
-        <div class="template-catalog container">
+        <div class="container">
             {{ include('_partials/page/breadcrumbs.html.twig') }}
-
-
-
             <div class="page-title-container">
                 <div class="row">
                     <div class="col-md-3">
@@ -71,61 +63,66 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-md-3">
-                    <ul class="item-list item-list-alt">
-                        <li><a href="#" class="listing">catname <span class="icon"><i
-                                            class="fa fa-chevron-right"></i></span></a></li>
-                        <li><a href="#" class="listing">catname <span class="icon"><i
-                                            class="fa fa-chevron-right"></i></span></a></li>
-                    </ul>
-                </div>
-                <div class="col-md-9">
-                    <div class="product-detail">
-                        <div class="product-detail-img">
-                            <img src="https://www.hgt-tilburg.nl/cache/images/userdata/product-images/220x220/310210.jpg"/>
-                        </div>
-                        <div class="product-detail-spec">
-                            <div class="product-detail-main">
-                                <div>Depa</div>
-                                <div>Inhoud: 100st</div>
-                            </div>
-
-
-                                <div class="product-detail-action">
-                                    <div class="product-detail-action-label">Actie</div>
-                                    <div>Actie geldig van 22 februari t/m 30 juni 2018</div>
+            <div class="layout-flip-sidebar-md">
+                <div class="main-row row">
+                    <div class="col-md-3">
+                        <ul class="item-list item-list-alt">
+                            <li><a href="#" class="listing">catname <span class="icon"><i class="fa fa-chevron-right"></i></span></a></li>
+                            <li><a href="#" class="listing">catname <span class="icon"><i class="fa fa-chevron-right"></i></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="product-detail product-detail-rwd">
+                            <div>
+                                <div class="product-detail-img">
+                                    <img src="https://www.hgt-tilburg.nl/cache/images/userdata/product-images/220x220/310210.jpg"/>
                                 </div>
-                                <form>
-                                    <div>
-                                        <select class="form-control-select">
-                                            <option>test</option>
-                                            <option>test</option>
-                                        </select>
-                                        <div class="product-detail-price">&euro; 2,95</div>
-                                    </div>
-                                    <div>
-                                        <input class="form-control" type="text"/>
-                                        <button class="btn" type="submit">Bestel</button>
-                                    </div>
-                                </form>
-                                <a href="#" class="listing listing-icon">Toevoegen aan bestellijst <span class="icon"><i
-                                                class="fa fa-chevron-right"></i></span>
-                                </a>
+                            </div>
+                            <div>
+                                <ul class="product-detail-spec">
+                                    <li>
+                                        <div class="product-detail-main">
+                                            <div>Depa</div>
+                                            <div>Inhoud: 100st</div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="product-detail-action">
+                                            <div class="product-detail-action-label">Actie</div>
+                                            <div>Actie geldig van 22 februari t/m 30 juni 2018</div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <form class="product-detail-form">
+                                            <div>
+                                                <select class="form-control-select">
+                                                    <option>test</option>
+                                                    <option>test</option>
+                                                </select>
+                                                <div class="product-detail-price">&euro; 2,95</div>
+                                            </div>
+                                            <div>
+                                                <input class="form-control" type="text"/>
+                                                <button class="btn" type="submit">Bestel</button>
+                                            </div>
+                                        </form>
+                                    </li>
 
-
-
-
-                            <div class="product-detail-desc content">
-                                <p>
-                                    <strong>Lepel, Hout, 165mm, naturel.</strong> <br/>
-                                    Geen feest of evenement zonder dit mooie houten wegwerpbestek. <br/><br/>
-                                    <strong>Lepel, Hout, 165mm, naturel.</strong> <br/>
-                                    Deze praktische houten lepel is een decoratieve aanwinst bij al je grote en kleine
-                                    <br/><br/>
-                                    evenementen, festivals, braderieën, picknicks, barbecues en tuinfeesten.
-                                </p>
+                                    <li>
+                                        <a href="#" class="listing listing-icon">Toevoegen aan bestellijst <span class="icon"><i class="fa fa-chevron-right"></i></span></a>
+                                    </li>
+                                    <li>
+                                        <div class="product-detail-spec-desc content">
+                                            <p>
+                                                <strong>Lepel, Hout, 165mm, naturel.</strong><br/>
+                                                Geen feest of evenement zonder dit mooie houten wegwerpbestek.<br/><br/>
+                                                <strong>Lepel, Hout, 165mm, naturel.</strong><br/>
+                                                Deze praktische houten lepel is een decoratieve aanwinst bij al je grote en kleine<br/><br/>
+                                                evenementen, festivals, braderieën, picknicks, barbecues en tuinfeesten.
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -133,5 +130,4 @@
             </div>
         </div>
     {% endif %}
-
 {% endblock %}

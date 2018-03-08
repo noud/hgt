@@ -1,54 +1,30 @@
 {% extends 'layout/base.html.twig' %}
 
-{% block bodyClass %}{% endblock %}
+{% block bodyClass %}template-flip-sidebar{% endblock %}
 
 {% block body %}
-    <div class="container layout-flip-sidebar-md">
+    <div class="container">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
-
-
-        <div class="page-title-container">
-            <div class="row">
-                <div class="col-md-3">
-                    <a href="#" class="btn-border">
-                        <i class="fas fa-arrow-left"></i>
-                        <span>Terug</span>
-                    </a>
-                </div>
-                <div class="col-md-6">
-                    <h1 class="page-title">Aviko</h1>
-                </div>
-            </div>
-        </div>
-
-
         <div class="row main-row">
             <div class="col-md-3">
-                <ul class="item-list item-list-alt">
-                    <li>
-                        <a href="#" class="listing"> test
-                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="listing"> test
-                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
-                        </a>
-                    </li>
-                </ul>
+                {{ include('dummy/search/list.html.twig') }}
             </div>
             <div class="col-md-9">
-                <ul class="product-listing product-listing-rwd">
+
+                <h1 class="page-title">Zoekresultaten</h1>
+
+                <ul class="product-listing">
                     <li>
                         <div class="product-listing-img">
-                            <a href="#"><img src="https://www.hgt-tilburg.nl/cache/images/userdata/product-images/160x105/0519192032-326-100001010.jpg" alt="" /></a>
+                            <a href="#"><img
+                                        src="https://www.hgt-tilburg.nl/cache/images/userdata/product-images/160x105/0519192032-326-100001010.jpg"
+                                        alt=""/></a>
                         </div>
                         <div>
                             <h2><a href="#">AARDAPPEL SCHIJFJES</a></h2>
                             <ul class="product-listing-meta">
                                 <li>Aviko</li>
                                 <li class="product-listing-meta-weight">2.5kg</li>
-                                <li class="product-listing-meta-price">&euro; 4,60</li>
                             </ul>
                             <div class="product-listing-button">
                                 <a href="#" class="btn btn-icon-label">
@@ -56,18 +32,20 @@
                                     <span class="label">Bestellen</span>
                                 </a>
                             </div>
+                            <div class="product-listing-sr">Gevonden in: <a href="#">Buitenhuis</a></div>
                         </div>
                     </li>
                     <li>
                         <div class="product-listing-img">
-                            <a href="#"><img src="https://www.hgt-tilburg.nl/cache/images/userdata/product-images/160x105/0519192032-326-100001010.jpg" alt="" /></a>
+                            <a href="#"><img
+                                        src="https://www.hgt-tilburg.nl/cache/images/userdata/product-images/160x105/0519192032-326-100001010.jpg"
+                                        alt=""/></a>
                         </div>
                         <div>
                             <h2><a href="#">AARDAPPEL SCHIJFJES</a></h2>
                             <ul class="product-listing-meta">
                                 <li>Aviko</li>
                                 <li class="product-listing-meta-weight">2.5kg</li>
-                                <li class="product-listing-meta-price">&euro; 4,60</li>
                             </ul>
                             <div class="product-listing-button">
                                 <a href="#" class="btn btn-icon-label">
@@ -75,9 +53,32 @@
                                     <span class="label">Bestellen</span>
                                 </a>
                             </div>
+                            <div class="product-listing-sr">Gevonden in: <a href="#">Buitenhuis</a></div>
                         </div>
                     </li>
                 </ul>
+                <div class="search-results">
+                    <div class="search-result content">
+                        <h3>Sesultaten in nieuws</h3>
+                        <ul>
+                            <li><a href="#">Test</a></li>
+                            <li><a href="#">Test</a></li>
+                            <li><a href="#">Test</a></li>
+                            <li><a href="#">Test</a></li>
+                            <li><a href="#">Test</a></li>
+                        </ul>
+                    </div>
+                    <div class="search-result content">
+                        <h3>Sesultaten in nieuws</h3>
+                        <ul>
+                            <li><a href="#">Test</a></li>
+                            <li><a href="#">Test</a></li>
+                            <li><a href="#">Test</a></li>
+                            <li><a href="#">Test</a></li>
+                            <li><a href="#">Test</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

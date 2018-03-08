@@ -34,7 +34,6 @@ class SignupController extends Controller
         }
 
         return $this->render('signup/index.html.twig', [
-            'testing' =>$command,
             'form' => $form->createView(),
         ]);
     }

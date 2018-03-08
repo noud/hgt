@@ -36,12 +36,6 @@ class StaticBlockService
      */
     public function get($identifier)
     {
-        $staticBlock = $this->staticBlockRepository->getByIdentifier($identifier);
-
-        if($staticBlock instanceof StaticBlock) {
-            return $staticBlock;
-        }
-
-        return null;
+        return $this->staticBlockRepository->getByIdentifier($identifier);
     }
 }

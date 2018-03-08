@@ -1,11 +1,10 @@
 {% extends 'layout/base.html.twig' %}
 
-{% block bodyClass %}news-index template-sidebar{% endblock %}
+{% block bodyClass %}news-index{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container layout-flip-sidebar-sm">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
-
         <div class="row main-row">
             <div class="col-sm-4 col-md-3">
                 <aside class="meta-side">
@@ -14,12 +13,33 @@
                     {% endif %}
                 </aside>
             </div>
-            <div class="col-sm-8 col-md-9">
-                {% set newsSingle = false %}
-                {% if newsSingle == false %}
-                  {{ include('news/single.html.twig') }}
-                {% else %}
-                  {{ include('news/overview.html.twig') }}
+            <div class="col-sm-9">
+                <h1 class="page-title">Nieuws</h1>
+                {% if news %}
+                    <ul class="article-list article-list-rwd">
+                        {% for news_item in news %}
+                            <li>
+                                <article class="article">
+                                    <div>
+                                        <a rel="perma" href="{{ path('news_view', {'id': news_item.id} ) }}"><img
+                                                    class="article-img"
+                                                    src="https://www.hgt-tilburg.nl/cache/images/userdata/news-images/200x200/kp-sjaal-verhaal.jpg"
+                                                    alt="{{ news_item.metaTitle }}"/></a>
+                                    </div>
+                                    <div>
+                                        <div class="content">
+                                            <h2><a rel="perma"
+                                                   href="{{ path('news_view', {'id': news_item.id} ) }}">{{ news_item.title }}</a>
+                                            </h2>
+                                            <p>{{ news_item.shortDescription }}</p>
+                                        </div>
+                                        <a class="article-more" href="{{ path('news_view', {'id': news_item.id} ) }}">Lees
+                                            meer</a>
+                                    </div>
+                                </article>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 {% endif %}
             </div>
         </div>
