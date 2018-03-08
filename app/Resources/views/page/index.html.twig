@@ -1,0 +1,50 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block metaTitle %}{{ page.metaTitle }}{% endblock %}
+{% block metaKeywords %}{{ page.metaKeywords }}{% endblock %}
+{% block metaDescription %}{{ page.metaDescription }}{% endblock %}
+
+{% block bodyClass %}cms-page{% endblock %}
+
+{% block body %}
+
+    {% if page.parent == null %}
+        {% set page = page %}
+    {% else %}
+        {% set page = page.parent %}
+    {% endif %}
+
+    <div class="container">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        {% if page.pageWidgets|length > 0 or page.subPages|length > 0 %}
+            <aside class="sidebar col-md-3">
+                <div class="block subpage">
+                    <div class="block-title">
+                        <a href="{{ path('page', {'id': page.id }) }}"><h2>{{ page.shortTitle }}</h2></a>
+                    </div>
+                    <div class="block-content cms-tekst">
+                        {% for subPage in page.subPages %}
+                            <li{% if app.request.get('id') == subPage.id %} class="active"{% endif %}>
+                                <a href="{{ path('page', {'id': subPage.id}) }}">{{ subPage.shortTitle }}</a>
+                            </li>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% for pageWidget in page.pageWidgets %}
+                    {{ dump(pageWidget.widget) }}
+                {% endfor %}
+            </aside>
+        {% endif %}
+        <section class="content col-md-9{% if page.pageWidgets|length == 0 and page.subPages|length == 0 %} full-width{% endif %}">
+            <article>
+                <header>
+                    <h1>{{ page.title }}</h1>
+                </header>
+                <div class="cms-tekst">
+                    {{ page.content|raw }}
+                </div>
+                <div class="clear">&nbsp;</div>
+            </article>
+        </section>
+    </div>
+{% endblock %}

@@ -11,6 +11,16 @@ use Doctrine\ORM\Mapping as ORM;
 class Page
 {
     /**
+     * @ORM\OneToMany(targetEntity="HGT\Application\Content\Page\PageWidget", mappedBy="page")
+     */
+    private $pageWidgets;
+
+    /**
+     * @ORM\OneToMany(targetEntity="HGT\Application\Content\Page\Page", mappedBy="parent")
+     */
+    private $subPages;
+
+    /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
@@ -87,4 +97,100 @@ class Page
      * @ORM\Column(type="boolean", options={"default":0})
      */
     private $show_in_menu;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMetaTitle()
+    {
+        return $this->meta_title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMetaKeywords()
+    {
+        return $this->meta_keywords;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMetaDescription()
+    {
+        return $this->meta_description;
+    }
+
+    /**
+     * @return Page
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrlKey()
+    {
+        return $this->url_key;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortTitle()
+    {
+        return $this->short_title;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isShowInMenu()
+    {
+        return $this->show_in_menu;
+    }
+
+    /**
+     * @return PageWidget[]
+     */
+    public function getPageWidgets()
+    {
+        return $this->pageWidgets;
+    }
+
+    /**
+     * @return Page[]
+     */
+    public function getSubPages()
+    {
+        return $this->subPages;
+    }
 }

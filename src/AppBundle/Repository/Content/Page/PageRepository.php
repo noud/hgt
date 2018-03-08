@@ -31,4 +31,16 @@ class PageRepository extends EntityRepository
     {
         $this->getEntityManager()->remove($page);
     }
+
+    /**
+     * @param Page $page
+     * @return Page[]
+     */
+    public function getByParentId(Page $page)
+    {
+        return $this->findBy(
+            ['parent' => $page],
+            ['sort' => 'ASC']
+        );
+    }
 }

@@ -34,4 +34,12 @@ class PageWidget
      * @ORM\Column(type="integer", options={"default":900})
      */
     private $priority;
+
+    /**
+     * @return mixed
+     */
+    public function getWidget()
+    {
+        return $this->widget;
+    }
 }
