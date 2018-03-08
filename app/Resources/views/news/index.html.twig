@@ -5,17 +5,37 @@
 {% block body %}
     <div class="container layout-flip-sidebar-sm">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
-
         <div class="row main-row">
             <div class="col-sm-3">
-              {{ include('_partials/page/sidebar.html.twig') }}
+                {{ include('_partials/page/sidebar.html.twig') }}
             </div>
             <div class="col-sm-9">
-                {% set newsSingle = true %}
-                {% if newsSingle == true %}
-                  {{ include('news/single.html.twig') }}
-                {% else %}
-                  {{ include('news/overview.html.twig') }}
+                <h1 class="page-title">Nieuws</h1>
+                {% if news %}
+                    <ul class="article-list article-list-rwd">
+                        {% for news_item in news %}
+                            <li>
+                                <article class="article">
+                                    <div>
+                                        <a rel="perma" href="{{ path('news_view', {'id': news_item.id} ) }}"><img
+                                                    class="article-img"
+                                                    src="https://www.hgt-tilburg.nl/cache/images/userdata/news-images/200x200/kp-sjaal-verhaal.jpg"
+                                                    alt="{{ news_item.metaTitle }}"/></a>
+                                    </div>
+                                    <div>
+                                        <div class="content">
+                                            <h2><a rel="perma"
+                                                   href="{{ path('news_view', {'id': news_item.id} ) }}">{{ news_item.title }}</a>
+                                            </h2>
+                                            <p>{{ news_item.shortDescription }}</p>
+                                        </div>
+                                        <a class="article-more" href="{{ path('news_view', {'id': news_item.id} ) }}">Lees
+                                            meer</a>
+                                    </div>
+                                </article>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 {% endif %}
             </div>
         </div>
