@@ -1,33 +1,35 @@
 {% extends 'layout/base.html.twig' %}
 
+{% block bodyClass %}index{% endblock %}
+
 {% block body %}
     <div class="container">
         <div class="feature-hero">
             <div>
-
                 {% if homeSlides %}
-                  <div class="hero js-hero">
-                    {% for homeSlide in homeSlides %}
-                        <div>
-                            <a href="{{ homeSlide.url }}" title="{{ homeSlide.title }}">
-                                <img src="{{ homeSlide.slideImage }}" alt="{{ homeSlide.title }}"/>
-                            </a>
-                        </div>
-                    {% endfor %}
-                  </div>
+                    <div class="hero js-hero">
+                        {% for homeSlide in homeSlides %}
+                            <div>
+                                <a href="{{ homeSlide.url }}" title="{{ homeSlide.title }}">
+                                    <img src="{{ homeSlide.slideImage }}" alt="{{ homeSlide.title }}"/>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
                 {% endif %}
             </div>
             <div>
                 <div>
                     <a href="#" title="Lees hier het laatste nieuws" class="banner">
-                        <img src="http://via.placeholder.com/380x145" alt="Lees hier het laatste nieuws" title="Lees hier het laatste nieuws" />
+                        <img src="http://via.placeholder.com/380x145" alt="Lees hier het laatste nieuws"
+                             title="Lees hier het laatste nieuws"/>
                     </a>
                 </div>
                 {% if homeBanners %}
                     {% for homeBanner in homeBanners %}
                         <div>
                             <a href="{{ homeBanner.url }}" title="{{ homeBanner.title }}" class="banner">
-                                <img src="{{ homeBanner.bannerImage }}" alt="{{ homeBanner.title }}" />
+                                <img src="{{ homeBanner.bannerImage }}" alt="{{ homeBanner.title }}"/>
                             </a>
                         </div>
                     {% endfor %}
@@ -67,7 +69,8 @@
                 <div class="main">
                     {% for homeCategory in homeCategories %}
                         <div>
-                            <a class="listing" href="{{ path('category_view', {'id': homeCategory.id}) }}" title="{{ homeCategory.name }}">
+                            <a class="listing" href="{{ path('category_view', {'id': homeCategory.id}) }}"
+                               title="{{ homeCategory.name }}">
                                 {{ homeCategory.name }}
                                 <span class="icon"><i class="fa fa-chevron-right"></i></span>
                             </a>

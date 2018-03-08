@@ -21,9 +21,7 @@ class IndexController extends Controller
     public function indexAction(
         Request $request,
         NewsService $newsService
-    )
-    {
-
+    ) {
         //todo: plaatjes kunnen al worden uitgelezen via het object, maar moeten later toevoegegd worden i.v.m. fixtures
 
         /** @var $news */
@@ -33,7 +31,6 @@ class IndexController extends Controller
             'news' => $news
         ]);
     }
-
 
     /**
      * @Route("/nieuws/{id}", name="news_view")
@@ -46,8 +43,7 @@ class IndexController extends Controller
         Request $request,
         NewsService $newsService,
         News $news
-    )
-    {
+    ) {
         //todo: plaatjes kunnen al worden uitgelezen via het object, maar moeten later toevoegegd worden i.v.m. fixtures
         //todo: moeten kijken hoe de content afbeeldingen worden uitgelezen, waarschijnlijk via de content editor
 
@@ -55,5 +51,4 @@ class IndexController extends Controller
             'news' => $news
         ]);
     }
-
 }

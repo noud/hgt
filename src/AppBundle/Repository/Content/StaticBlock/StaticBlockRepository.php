@@ -31,4 +31,15 @@ class StaticBlockRepository extends EntityRepository
     {
         $this->getEntityManager()->remove($staticBlock);
     }
+
+    /**
+     * @param $identifier
+     * @return StaticBlock|object
+     */
+    public function getByIdentifier($identifier)
+    {
+        return $this->findOneBy([
+            'identifier' => $identifier,
+        ]);
+    }
 }

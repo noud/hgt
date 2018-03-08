@@ -231,5 +231,4 @@ class News
     {
         $this->meta_description = $meta_description;
     }
-
 }

@@ -7,7 +7,6 @@ use HGT\Application\Content\News\News;
 
 class NewsRepository extends EntityRepository
 {
-
     /**
      * @param $id
      * @return News|null|object
@@ -38,14 +37,10 @@ class NewsRepository extends EntityRepository
      */
     public function getActiveNews()
     {
-
         $qb = $this->createQueryBuilder('q');
         $qb->where('q.start_date <= CURRENT_DATE()');
         $qb->orderBy('q.start_date', 'DESC');
 
         return $qb->getQuery()->getResult();
-
     }
-
-
 }

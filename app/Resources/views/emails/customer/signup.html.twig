@@ -1,23 +1,21 @@
 {% extends 'emails/base.html.twig' %}
+
 {% block body %}
-
-  <p>
-    Beste {{ command.contactPerson }},<br><br>
-    Hierbij verzenden wij u een bevesting op uw aanmelding.
-  </p>
-
-  <ul>
-    <li>Bedrijfsnaam: {{ command.companyName }} </li>
-    <li>KVK nummer: {{ command.companyNumber }} </li>
-    <li>Geslacht: {{ command.gender|default('n.v.t.') }} </li>
-    <li>Contactpersoon: {{ command.contactPerson }} </li>
-    <li>Telefoonnummer: {{ command.phone }} </li>
-    <li>Mobiel: {{ command.mobile }} </li>
-    <li>Adres: {{ command.address }} </li>
-    <li>Postcode: {{ command.postal }}</li>
-    <li>Plaats: {{ command.place }}</li>
-    <li>E-mailadres: {{ command.email }}</li>
-    <li>Voordelen: {{ command.profit}} {% if command.profit == 1 %}ja{% else %}nee{% endif %}</li>
-  </ul>
-
+    <p>
+        Beste {{ command.contactPerson }},<br><br>
+        Hierbij verzenden wij u een bevesting op uw aanmelding.
+    </p>
+    <ul>
+        <li>Bedrijfsnaam: {{ command.companyName }} </li>
+        <li>KVK nummer: {{ command.companyNumber }} </li>
+        <li>Geslacht: {{ command.gender|default('n.v.t.') }} </li>
+        <li>Contactpersoon: {{ command.contactPerson }} </li>
+        <li>Telefoonnummer: {{ command.phone }} </li>
+        <li>Mobiel: {{ command.mobile }} </li>
+        <li>Adres: {{ command.address }} </li>
+        <li>Postcode: {{ command.postal }}</li>
+        <li>Plaats: {{ command.place }}</li>
+        <li>E-mailadres: {{ command.email }}</li>
+        <li>Voordelen: {{ command.profit }} {% if command.profit == 1 %}ja{% else %}nee{% endif %}</li>
+    </ul>
 {% endblock %}

@@ -117,7 +117,8 @@ class SignupForm extends AbstractType
                 ]
             ])
             ->add('profit', CheckboxType::class, [
-                'label' => 'Ja, ik profiteer graag van alle voordelen en acties en schrijf me in voor de Horeca Groothandel Tilburg nieuwsbrief',
+                'label' => 'Ja, ik profiteer graag van alle voordelen en acties en schrijf me in voor de
+                Horeca Groothandel Tilburg nieuwsbrief',
                 'required' => false,
             ])
 
