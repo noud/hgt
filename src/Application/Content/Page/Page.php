@@ -2,6 +2,7 @@
 
 namespace HGT\Application\Content\Page;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,9 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Page
 {
     /**
-     * @ORM\OneToMany(targetEntity="HGT\Application\Content\Page\PageWidget", mappedBy="page")
+     * @ORM\OneToMany(targetEntity="HGT\Application\Content\Page\PageStaticBlock", mappedBy="page")
      */
-    private $pageWidgets;
+    private $pageStaticBlocks;
 
     /**
      * @ORM\OneToMany(targetEntity="HGT\Application\Content\Page\Page", mappedBy="parent")
@@ -99,6 +100,14 @@ class Page
     private $show_in_menu;
 
     /**
+     * Page constructor.
+     */
+    public function __construct()
+    {
+        $this->pageStaticBlocks = new ArrayCollection();
+    }
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -179,18 +188,18 @@ class Page
     }
 
     /**
-     * @return PageWidget[]
-     */
-    public function getPageWidgets()
-    {
-        return $this->pageWidgets;
-    }
-
-    /**
      * @return Page[]
      */
     public function getSubPages()
     {
         return $this->subPages;
+    }
+
+    /**
+     * @return PageStaticBlock[]|ArrayCollection
+     */
+    public function getPageStaticBlocks()
+    {
+        return $this->pageStaticBlocks;
     }
 }
