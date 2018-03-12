@@ -52,14 +52,14 @@
                                         <h3>Nieuws</h3>
                                         <ul>
                                             {% for newsItem in searchResult %}
-                                                <li>{{ newsItem.title }}</li>
+                                                <li><a href="{{ newsItem.urlKey }}">{{ newsItem.title }}</a></li>
                                             {% endfor %}
                                         </ul>
                                     {% elseif key == 'manufacturers' and searchResult is not empty %}
                                         <h3>Merken</h3>
                                         <ul>
                                             {% for manuItem in searchResult %}
-                                                <li>{{ manuItem.name }}</li>
+                                                <li><a href="{{ manuItem.urlKey }}">{{ manuItem.name }}</a></li>
                                             {% endfor %}
                                         </ul>
                                     {% endif %}
@@ -67,7 +67,10 @@
                             {% endif %}
                         {% endfor %}
                     </div>
+                {% else %}
+                    <div class="content"><p>Geen resultaten gevonden.</p></div>
                 {% endif %}
+
             </div>
         </div>
     </div>

@@ -31,6 +31,8 @@ class SearchController extends Controller
             }
         }
 
+        dump($searchResults);
+
         return $this->render('search/index.html.twig', [
             'searchResults' => $searchResults,
             'hasResults' => $hasResults
