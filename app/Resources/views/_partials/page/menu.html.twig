@@ -1,5 +1,47 @@
 <nav class="primary-menu">
-    <ul>
+    <ul class="mobile-menu">
+        <li>
+            <ul class="is-sub">
+                {% if app.user %}
+                    <li class="has-icon icon-logout"><a href="{{ path('logout') }}">Uitloggen</a></li>
+                {% else %}
+                    <li class="has-icon icon-login"><a href="{{ path('account_login') }}">Inloggen</a></li>
+                    <li class="has-icon icon-user"><a href="{{ path('account_signup') }}">Klant worden</a></li>
+                {% endif %}
+            </ul>
+        </li>
+        {% if app.user %}
+            <li>
+                <div class="mobile-menu-header">Account</div>
+                <ul class="is-sub">
+                    <li class="has-icon icon-list"><a href="#">Bestellijst</a></li>
+                    <li class="has-icon icon-history"><a href="#">Bestelhistorie</a></li>
+                    <li class="has-icon icon-edit"><a href="#">Bestellijst aanpassen</a></li>
+                    <li class="has-icon icon-password"><a href="#">Wachtwoord wijzigen</a></li>
+                </ul>
+            </li>
+        {% endif %}
+        <li>
+            <div class="mobile-menu-header">Winkelen</div>
+            <ul class="is-sub">
+                <li class="has-icon icon-cat"><a href="{{ path('category_index') }}">Categorieen</a></li>
+                {% if app.user %}
+                    <li class="has-icon icon-scart"><a href="{{ path('cart_index') }}">Winkelwagen (0)</a></li>
+                {% endif %}
+                <li class="has-icon icon-discount"><a href="{{ path('action_index') }}">Acties</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="mobile-menu-header">Overige</div>
+            <ul class="is-sub">
+                <li class="has-icon icon-folderlist"><a href="{{ path('folder_index') }}">Bekijk onze folder</a></li>
+                <li class="has-icon icon-newslist"><a href="{{ path('news_index') }}">Nieuws</a></li>
+                <li class="has-icon icon-aboutus"><a href="#">Over ons</a></li>
+                <li class="has-icon icon-contactus"><a href="{{ path('contact_index') }}">Contact</a></li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="desktop-menu">
         <li><a href="{{ path('homepage') }}" title="Home">Home</a></li>
         <li class="has-sub">
             <a href="{{ path('category_index') }}" title="Assortiment">Assortiment</a>
@@ -7,7 +49,8 @@
                 {% for menu in menu_manager.getCategoriesForMenu() %}
                     <ul class="sub">
                         {% for subMenu in menu %}
-                            <li><a href="{{ path('category_view', {'id': subMenu.id}) }}" title="{{ subMenu.name }}">{{ subMenu.name }}</a></li>
+                            <li><a href="{{ path('category_view', {'id': subMenu.id}) }}"
+                                   title="{{ subMenu.name }}">{{ subMenu.name }}</a></li>
                         {% endfor %}
                     </ul>
                 {% endfor %}
