@@ -19,29 +19,8 @@ class ManufacturerController extends controller
         Request $request,
         ManufacturerService $manufacturerService
     ) {
-        $manufacturersObjects = $manufacturerService->getManufacturersWithProducts();
-
-        $manufacturerCats = [];
-
-        foreach ($manufacturersObjects as $object) {
-            if (strpos(htmlentities($object->getName()), '&') === 0) {
-                $firstLetter = strtoupper(substr(trim(htmlentities($object->getName())), 1, 1));
-            } else {
-                $firstLetter = strtoupper(substr(trim($object->getName()), 0, 1));
-                if ($firstLetter < 'A' || $firstLetter > 'Z') {
-                    $firstLetter = '-';
-                }
-            }
-
-            if (!isset($manufacturerCats[$firstLetter])) {
-                $manufacturerCats[$firstLetter] = [];
-            }
-
-            $manufacturerCats[$firstLetter][] = $object;
-        }
-
         return $this->render('catalog/manufacture/index.html.twig', [
-            'manufacturerCats' => $manufacturerCats
+            'manufacturerCats' => $manufacturerService->getManufacturerLetterIndex(),
         ]);
     }
 }

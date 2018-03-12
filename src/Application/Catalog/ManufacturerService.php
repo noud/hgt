@@ -36,4 +36,27 @@ class ManufacturerService
     {
         return $this->manufacturerRepository->getManufacturersWithProducts();
     }
+
+    /**
+     * @return array
+     */
+    public function getManufacturerLetterIndex()
+    {
+        $manufacturerCats = array();
+
+        $manufacturersObjects = $this->getManufacturersWithProducts();
+
+        foreach ($manufacturersObjects as $manufacturersObject) {
+
+            $indexLetter = $manufacturersObject->getIndexLetter();
+
+            if (!isset($manufacturerCats[$indexLetter])) {
+                $manufacturerCats[$indexLetter] = [];
+            }
+
+            $manufacturerCats[$indexLetter][] = $manufacturersObject;
+        }
+
+        return $manufacturerCats;
+    }
 }

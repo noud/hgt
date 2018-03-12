@@ -56,14 +56,6 @@ class Manufacturer
     }
 
     /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
      * @return string
      */
     public function getNavisionBrand()
@@ -141,5 +133,21 @@ class Manufacturer
     public function setPicture($picture)
     {
         $this->picture = $picture;
+    }
+
+    /**
+     * @return bool|string
+     */
+    public function getIndexLetter()
+    {
+        $manufacturerName = strtoupper(htmlentities(trim($this->getName())));
+        $indexLetterIndex = (strpos($manufacturerName, '&') === 0) ? 1 : 0;
+        $indexLetter = substr($manufacturerName, $indexLetterIndex, 1);
+
+        if ($indexLetter < 'A' || $indexLetter > 'Z') {
+            $indexLetter = '-';
+        }
+
+        return $indexLetter;
     }
 }
