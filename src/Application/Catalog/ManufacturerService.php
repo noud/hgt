@@ -47,7 +47,6 @@ class ManufacturerService
         $manufacturersObjects = $this->getManufacturersWithProducts();
 
         foreach ($manufacturersObjects as $manufacturersObject) {
-
             $indexLetter = $manufacturersObject->getIndexLetter();
 
             if (!isset($manufacturerCats[$indexLetter])) {
