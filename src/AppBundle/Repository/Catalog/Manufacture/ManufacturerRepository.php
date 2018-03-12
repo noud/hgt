@@ -9,7 +9,7 @@ class ManufacturerRepository extends EntityRepository
 {
     /**
      * @param $id
-     * @return Manufacturer
+     * @return Manufacturer|null|object
      */
     public function get($id)
     {
@@ -30,5 +30,19 @@ class ManufacturerRepository extends EntityRepository
     public function remove(Manufacturer $manufacturer)
     {
         $this->getEntityManager()->remove($manufacturer);
+    }
+
+    /**
+     * @param $query
+     * @return Manufacturer[]
+     */
+    public function searchManufacturers($query)
+    {
+        $qb = $this->createQueryBuilder('q')
+            ->where('q.name LIKE :term')
+            ->orderBy('q.name', 'ASC')
+            ->setParameter('term', '%' . urldecode($query) . '%');
+
+        return $qb->getQuery()->getResult();
     }
 }

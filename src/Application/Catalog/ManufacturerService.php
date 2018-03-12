@@ -19,4 +19,13 @@ class ManufacturerService
     {
         $this->manufacturerRepository = $manufacturerRepository;
     }
+
+    /**
+     * @param $query
+     * @return Manufacture\Manufacturer[]
+     */
+    public function searchManufacturers($query)
+    {
+        return $this->manufacturerRepository->searchManufacturers($query);
+    }
 }
