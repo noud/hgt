@@ -1,7 +1,7 @@
 <nav class="primary-menu">
     <ul>
         <li><a href="{{ path('homepage') }}" title="Home">Home</a></li>
-        <li class="active has-sub">
+        <li class="has-sub">
             <a href="{{ path('category_index') }}" title="Assortiment">Assortiment</a>
             <div>
                 {% for menu in menu_manager.getCategoriesForMenu() %}

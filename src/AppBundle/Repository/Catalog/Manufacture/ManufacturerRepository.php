@@ -45,4 +45,24 @@ class ManufacturerRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * @return Manufacturer[]
+     */
+    public function getManufacturers()
+    {
+        return $this->findAll();
+    }
+
+    /**
+     * @return Manufacturer[]
+     */
+    public function getManufacturersWithProducts()
+    {
+        $qb = $this->createQueryBuilder('q');
+        $qb->where('q.total_product_count > 0')
+            ->orderBy('q.name', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
 }

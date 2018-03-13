@@ -44,9 +44,14 @@
 
       &.active {
         > a {
-
           color: white;
           background-color: @primary-color;
+
+          @media @md {
+            color: inherit;
+            background-color: transparent;
+          }
+
         }
       }
 
