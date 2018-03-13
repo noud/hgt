@@ -1,0 +1,132 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block bodyClass %}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        <h1 class="page-title">Winkelwagen</h1>
+        <div class="content is-section">
+            <p>Let op! Gelieve in het tekstveld "Opmerking" geen bestelling invullen. Voeg deze producten toe aan uw
+                winkelwagen of geef deze door via e-mail aan <a href="mailto:verkoop@hgt-tilburg.nl">verkoop@hgt-tilburg.nl</a>.
+                Hiermee helpt u foutieve levering of manco's voorkomen. Bij voorbaat dank!</p>
+        </div>
+        <ul class="cart-listing cart-listing-rwd">
+            <li>
+                <div>
+                    <div class="cart-listing-head">
+                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                        <h2><a href="#">Aardappel schijfjes asdf asdf asdf sdf</a></h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="cart-listing-meta-container">
+                        <div class="cart-listing-meta">Aviko</div>
+                        <div class="cart-listing-spec">2.5k | Zak</div>
+                    </div>
+
+                </div>
+                <div>
+                    <div class="cart-listing-unit">
+                        <div class="cart-listing-price">&euro; 4,60</div>
+                        <div class="cart-listing-unit-icon">
+                            <i class="far fa-clock"></i>
+                            <span>Dit artikel wordt nabesteld</span>
+                        </div>
+                        <div><input class="form-control" type="number"/></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <div class="cart-listing-head">
+                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                        <h2><a href="#">Aardappel schijfjes asdf asdf asdf sdf</a></h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="cart-listing-meta-container">
+                        <div class="cart-listing-meta">Aviko</div>
+                        <div class="cart-listing-spec">2.5k | Zak</div>
+                    </div>
+
+                </div>
+                <div>
+                    <div class="cart-listing-unit">
+                        <div class="cart-listing-price">&euro; 4,60</div>
+                        <div class="cart-listing-unit-icon">
+                            <i class="far fa-clock"></i>
+                            <span>Dit artikel wordt nabesteld</span>
+                        </div>
+                        <div><input class="form-control" type="number"/></div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <div class="cart-listing-head">
+                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                        <h2><a href="#">Aardappel schijfjes asdf asdf asdf sdf</a></h2>
+                    </div>
+                </div>
+                <div>
+                    <div class="cart-listing-meta-container">
+                        <div class="cart-listing-meta">Aviko</div>
+                        <div class="cart-listing-spec">2.5k | Zak</div>
+                    </div>
+
+                </div>
+                <div>
+                    <div class="cart-listing-unit">
+                        <div class="cart-listing-price">&euro; 4,60</div>
+                        <div class="cart-listing-unit-icon">
+                            <i class="far fa-clock"></i>
+                            <span>Dit artikel wordt nabesteld</span>
+                        </div>
+                        <div><input class="form-control" type="number"/></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="cart-total-overview cart-total-overview-rwd is-section">
+            <div>
+                <div class="cart-total-update">
+                    <button class="btn">Verder winkelen</button>
+                    <a role="button">Bijwerken</a>
+                </div>
+            </div>
+            <div>
+                <div class="cart-total-price">
+                    <div><strong>Totaalbedrag (excl. btw)</strong></div>
+                    <div>&euro; 31,30</div>
+                </div>
+            </div>
+        </div>
+        <div class="cart-misc">
+            <div class="row">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <div class="cart-misc-fields">
+                        <div class="form-base">
+                            <div class="form-group">
+                                <label class="control-label">Opmerking:</label>
+                                <textarea title="" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Selecteer afleverdag:</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Referenetie:</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                            <div class="form-btn-group">
+                                <button class="btn btn-highlight">Plaats bestelling</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
