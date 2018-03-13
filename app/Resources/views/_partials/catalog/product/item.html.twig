@@ -1,50 +1,27 @@
-<style>
-    .product {border-bottom:1px solid #AAA;padding:1em 0;}
-    .product .product-image img {width:133px;height:105px}
-    .amount {color:#808080;}
-    .price, .add-to-cart {text-align:right;}
-</style>
-
-<div class="product">
-    <div class="row">
-        <div class="col-md-3 product-image">
-            <img src="http://via.placeholder.com/133x105{# product.picture.filename #}" alt="{{ product.name }}" />
-        </div>
-        <div class="col-md-9">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>
-                        <a href="{{ path('product_view', { 'id': product.id }) }}">
-                            {{ product.name|upper }}
-                        </a>
-                    </h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-5">
-                    {% if product.manufacturer %}
-                        {{ product.manufacturer.name }}
-                    {% endif %}
-                </div>
-                <div class="col-sm-3">
-                    <span class="amount">{{ product.volume }}</span>
-                </div>
-                <div class="col-sm-4 price">
-                    {% if app.user %}
-                        <strong>{{ product.price|price }}</strong>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12 add-to-cart">
-                    <div>
-                        <a href="#" class="btn btn-icon-label">
-                            <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-                            <span class="label">Bestel</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<li class="">
+    <div class="product-listing-img">
+        <a href="{{ path('product_view', { 'id': product.id }) }}"><img
+                    src="https://www.hgt-tilburg.nl/cache/images/userdata/product-images/160x105/0519192032-326-100001010.jpg"
+                    alt="{{ product.name }}"/></a>
     </div>
-</div>
+    <div>
+        <h2><a href="{{ path('product_view', { 'id': product.id }) }}">{{ product.name|upper }}</a></h2>
+        <ul class="product-listing-meta">
+            <li>
+                {% if product.manufacturer %}
+                    {{ product.manufacturer.name }}
+                {% endif %}
+            </li>
+            <li class="product-listing-meta-weight">{{ product.volume }}</li>
+            <li class="product-listing-meta-price">&euro; {{ product.price }}</li>
+        </ul>
+        {#{% if app.user %}#}
+        <div class="product-listing-button">
+            <a href="#" class="btn btn-icon-label">
+                <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+                <span class="label">Bestellen</span>
+            </a>
+        </div>
+        {#{% endif %}#}
+    </div>
+</li>
