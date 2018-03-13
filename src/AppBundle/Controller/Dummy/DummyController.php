@@ -13,6 +13,6 @@ class DummyController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('catalog/product/list.html.twig');
+        return $this->render('dummy/cart/index.html.twig');
     }
 }
