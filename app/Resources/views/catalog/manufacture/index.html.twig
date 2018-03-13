@@ -1,0 +1,25 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block bodyClass %}{% endblock %}
+
+{% block body %}
+    <div class="container layout-flip-sidebar-sm">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+
+        <h1 class="page-title page-title-border">Merken</h1>
+
+        <ul class="brand-listing">
+            {% for letter, manufacturerCat in manufacturerCats %}
+                <li>
+                    <div class="brand-listing-head">{{ letter }}</div>
+                    <ul>
+                        {% for catName in manufacturerCat %}
+                            <li><a href="{{ catName.urlKey }}">{{ catName.name }} ({{ catName.totalProductCount }})</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
