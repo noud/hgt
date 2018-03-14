@@ -68,9 +68,10 @@ class CartService
     public function getOpenCart($create_when_not_found = false)
     {
         $customer = $this->customerService->getCurrentCustomer();
+
         $cart = $this->getOpenCartForCustomer($customer);
 
-        if ($cart === null && $create_when_not_found) {
+        if ($cart === null || $create_when_not_found) {
             $cart = $this->createCart();
         }
 

@@ -55,8 +55,14 @@ class ProductController extends Controller
     ) {
         /** @var Category $productCategory */
         $productCategory = $product->getCategory()->getParent()->getId();
+
+
+
         $parentCategories = $categoryService->getCategoriesWithProducts($productCategory);
         $productUnitOfMeasures = $productUnitOfMeasureService->getProductUnitOfMeasures($product);
+
+        dump($product);
+
 
         $productPrices = array();
         foreach ($productUnitOfMeasures as $productUnitOfMeasure) {
@@ -71,6 +77,8 @@ class ProductController extends Controller
         }
 
         $cart = $cartService->getOpenCart();
+        
+
         $command = new DefineCartProductCommand($product, $cart);
 
         $form = $this->createForm(AddToCartForm::class, $command);
