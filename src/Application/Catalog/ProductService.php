@@ -36,4 +36,14 @@ class ProductService
     {
         return $this->productRepository->get($product);
     }
+
+    /**
+     * @param $query
+     * @return Product[]
+     */
+    public function searchProducts($query)
+    {
+        return $this->productRepository->searchProducts($query);
+    }
+
 }

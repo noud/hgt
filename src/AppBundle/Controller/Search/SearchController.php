@@ -16,18 +16,22 @@ class SearchController extends Controller
         Request $request,
         SearchService $searchService
     ) {
-        $query = $request->query->get('q');
 
+        $query = $request->query->get('q');
         $searchResults = null;
         $hasResults = false;
 
-        if (trim($query) !== "") {
-            $searchResults = $searchService->searchAllStuff($query);
-
-            foreach ($searchResults as $searchResult) {
-                if (count($searchResult) > 0) {
-                    $hasResults = true;
+        if(isset($query)) {
+            if (trim($query) !== "") {
+                $searchResults = $searchService->searchAllStuff($query);
+                foreach ($searchResults as $searchResult) {
+                    if (count($searchResult) > 0) {
+                        $hasResults = true;
+                    }
                 }
+            } else {
+                $this->addFlash('search_notice', 'Vul a.u.b. een zoekopdracht in van minimaal 3 tekens.');
+                return $this->redirectToRoute('search_index');
             }
         }
 
@@ -35,6 +39,8 @@ class SearchController extends Controller
 
         return $this->render('search/index.html.twig', [
             'searchResults' => $searchResults,
+            'resultNumber' => count($searchResults, COUNT_RECURSIVE) - count($searchResults),
+            'searchQuery' => $query,
             'hasResults' => $hasResults
         ]);
     }

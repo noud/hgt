@@ -31,4 +31,18 @@ class ProductRepository extends EntityRepository
     {
         $this->getEntityManager()->remove($product);
     }
+
+    /**
+     * @param $query
+     * @return Product[]
+     */
+    public function searchProducts($query)
+    {
+        $qb = $this->createQueryBuilder('q')
+            ->where('q.name LIKE :term')
+            ->orderBy('q.name', 'ASC')
+            ->setParameter('term', '%' . urldecode($query) . '%');
+
+        return $qb->getQuery()->getResult();
+    }
 }

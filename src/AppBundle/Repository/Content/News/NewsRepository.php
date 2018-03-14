@@ -44,6 +44,10 @@ class NewsRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @param $query
+     * @return News[]
+     */
     public function searchNews($query)
     {
         $qb = $this->createQueryBuilder('q')

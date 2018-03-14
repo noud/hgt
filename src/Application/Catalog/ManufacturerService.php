@@ -27,7 +27,7 @@ class ManufacturerService
      */
     public function searchManufacturers($query)
     {
-        return $this->manufacturerRepository->getManufacturers();
+        return $this->manufacturerRepository->searchManufacturers($query);
     }
 
     /**
