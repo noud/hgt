@@ -3,7 +3,7 @@
 {% block bodyClass %}{% endblock %}
 
 {% block body %}
-    <div class="container {% if categories %}layout-sidebar-hide-content-md{% else %}{% if category.products %}{% else %}layout-flip-sidebar-md{% endif %}{% endif %}">
+    <div class="container {% if categories %}layout-sidebar-hide-content-md{% else %}layout-flip-sidebar-md{% endif %}">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
         <div class="page-title-container">
             <div class="row">
@@ -38,9 +38,11 @@
                     </div>
                 {% else %}
                     {% if category.products %}
-                        {% for product in category.products %}
-                            {{ include('_partials/catalog/product/item.html.twig', {'product' : product }) }}
-                        {% endfor %}
+                        <ul class="product-listing product-listing-rwd">
+                            {% for product in category.products %}
+                                {{ include('_partials/catalog/product/item.html.twig', {'product' : product }) }}
+                            {% endfor %}
+                        </ul>
                     {% else %}
                         <div class="content">
                             <p>Geen categorieën/producten gevonden in deze categorie.</p>
@@ -51,3 +53,4 @@
         </div>
     </div>
 {% endblock %}
+
