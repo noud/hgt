@@ -46,4 +46,8 @@ class ProductService
         return $this->productRepository->searchProducts($query);
     }
 
+    public function getPagedProducts($currentPage, $perPage, $query)
+    {
+        return $this->productRepository->getPagedProducts($currentPage, $perPage, $query);
+    }
 }

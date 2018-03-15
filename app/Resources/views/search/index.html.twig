@@ -12,11 +12,11 @@
             <div class="col-sm-9">
                 <h1 class="page-title">Zoekresultaten</h1>
                 <form class="form-base is-section" action="{{ path('search_index') }}" novalidate>
-                    {% for message in app.flashes('search_notice') %}
+                    {% if error is defined %}
                         <div class="alert alert-danger">
-                            {{ message }}
+                            {{ error }}
                         </div>
-                    {% endfor %}
+                    {% endif %}
                     <div class="form-group">
                         <label class="control-label" for="q">Zoekterm</label>
                         <input type="text" id="q" name="q" placeholder="" autocomplete="nofill" class="form-control"
@@ -26,16 +26,34 @@
                         <button type="submit" class="btn">Zoeken</button>
                     </div>
                 </form>
-                {% if searchResults %}
+                {% if searchResults is defined %}
                     <div class="content">
                         <p><strong>Je zoekopdracht "{{ searchQuery }}" geeft {{ resultNumber }} resultaten.</strong></p>
                     </div>
-                    {% if hasResults %}
+                    {% if resultNumber > 0 %}
                         <div class="search-results">
                             {% for key, searchResult in searchResults %}
                                 {% if searchResult is not empty %}
                                     <div class="search-result">
                                         {% if key == 'products' %}
+                                            <div class="paging paging-top paging-rwd">
+                                                <div>
+                                                    {% include '_partials/page/pagination.html.twig' with {
+                                                        paginateData: pagination,
+                                                        query: searchQuery,
+                                                        routeName: 'search_index',
+                                                        perPage: perPage
+                                                    } %}
+                                                </div>
+                                                <div>
+                                                    {% include '_partials/page/pageLengthSelector.html.twig' with {
+                                                        currentPage: pagination.current,
+                                                        query: searchQuery,
+                                                        routeName: 'search_index',
+                                                        perPage: perPage
+                                                    } %}
+                                                </div>
+                                            </div>
                                             <ul class="product-listing">
                                                 {% for productItem in searchResult %}
                                                     <li>
@@ -63,6 +81,24 @@
                                                     </li>
                                                 {% endfor %}
                                             </ul>
+                                            <div class="paging paging-bottom paging-rwd">
+                                                <div>
+                                                    {% include '_partials/page/pagination.html.twig' with {
+                                                        paginateData: pagination,
+                                                        query: searchQuery,
+                                                        routeName: 'search_index',
+                                                        perPage: perPage
+                                                    } %}
+                                                </div>
+                                                <div>
+                                                    {% include '_partials/page/pageLengthSelector.html.twig' with {
+                                                        currentPage: pagination.current,
+                                                        query: searchQuery,
+                                                        routeName: 'search_index',
+                                                        perPage: perPage
+                                                    } %}
+                                                </div>
+                                            </div>
                                         {% elseif key == 'news' %}
                                             <div class="content">
                                                 <h3>Nieuws</h3>

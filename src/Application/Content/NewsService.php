@@ -46,5 +46,4 @@ class NewsService
     {
         return $this->newsRepository->searchNews($query);
     }
-
 }

@@ -2,6 +2,7 @@
 
 namespace HGT\AppBundle\Controller\Search;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use HGT\Application\Search\SearchService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -11,37 +12,56 @@ class SearchController extends Controller
 {
     /**
      * @Route("/zoeken", name="search_index")
+     * @param Request $request
+     * @param SearchService $searchService
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(
         Request $request,
         SearchService $searchService
     ) {
+        $query = $request->query->has('q') ?
+            trim($request->query->get('q')) : false;
 
-        $query = $request->query->get('q');
-        $searchResults = null;
-        $hasResults = false;
+        $currentPage = $request->query->has('p') ?
+            (int)$request->query->get('p') : 1;
 
-        if(isset($query)) {
-            if (trim($query) !== "") {
-                $searchResults = $searchService->searchAllStuff($query);
-                foreach ($searchResults as $searchResult) {
-                    if (count($searchResult) > 0) {
-                        $hasResults = true;
-                    }
-                }
-            } else {
-                $this->addFlash('search_notice', 'Vul a.u.b. een zoekopdracht in van minimaal 3 tekens.');
-                return $this->redirectToRoute('search_index');
-            }
+        $perPage = $request->query->has('limit') ?
+            (int)$request->query->get('limit') : 1;
+
+        if (!$query || strlen($query) < 3) {
+            return $this->render('search/index.html.twig', [
+                'error' => 'Vul a.u.b. een zoekopdracht in van minimaal 3 tekens.'
+            ]);
+        }
+
+        $resultNumber = 0;
+        $searchResults = $searchService->searchAll($currentPage, $perPage, $query);
+
+        /** @var Paginator $paginator */
+        $paginator = $searchResults['products'];
+
+        $pagination = array(
+            'current' => $currentPage,
+            'pages' => ceil($paginator->count() / $perPage)
+        );
+
+        if ($currentPage != 1 && ($currentPage > $pagination['pages'] || $currentPage < 1)) {
+            throw $this->createNotFoundException();
+        }
+
+        foreach ($searchResults as $searchResult) {
+            $resultNumber += count($searchResult);
         }
 
         dump($searchResults);
 
         return $this->render('search/index.html.twig', [
             'searchResults' => $searchResults,
-            'resultNumber' => count($searchResults, COUNT_RECURSIVE) - count($searchResults),
+            'resultNumber' => $resultNumber,
             'searchQuery' => $query,
-            'hasResults' => $hasResults
+            'perPage' => $perPage,
+            'pagination' => $pagination
         ]);
     }
 }
