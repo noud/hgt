@@ -1,0 +1,133 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block bodyClass %}{% endblock %}
+
+{% block body %}
+    <div class="container layout-flip-sidebar-sm">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        <div class="row main-row">
+            <div class="col-sm-3">
+                {{ include('dummy/search/list.html.twig') }}
+            </div>
+            <div class="col-sm-9">
+                <h1 class="page-title">Zoekresultaten</h1>
+                <form class="form-base is-section" action="{{ path('search_index') }}" novalidate>
+                    {% if error is defined %}
+                        <div class="alert alert-danger">
+                            {{ error }}
+                        </div>
+                    {% endif %}
+                    <div class="form-group">
+                        <label class="control-label" for="q">Zoekterm</label>
+                        <input type="text" id="q" name="q" placeholder="" autocomplete="nofill" class="form-control"
+                               required="required">
+                    </div>
+                    <div class="form-btn-group">
+                        <button type="submit" class="btn">Zoeken</button>
+                    </div>
+                </form>
+                {% if searchResults is defined %}
+                    <div class="content">
+                        <p><strong>Je zoekopdracht "{{ searchQuery }}" geeft {{ resultNumber }} resultaten.</strong></p>
+                    </div>
+                    {% if resultNumber > 0 %}
+                        <div class="search-results">
+                            {% for key, searchResult in searchResults %}
+                                {% if searchResult is not empty %}
+                                    <div class="search-result">
+                                        {% if key == 'products' %}
+                                            <div class="paging paging-top paging-rwd">
+                                                <div>
+                                                    {% include '_partials/page/pagination.html.twig' with {
+                                                        paginateData: pagination,
+                                                        query: searchQuery,
+                                                        routeName: 'search_index',
+                                                        perPage: perPage
+                                                    } %}
+                                                </div>
+                                                <div>
+                                                    {% include '_partials/page/pageLengthSelector.html.twig' with {
+                                                        currentPage: pagination.current,
+                                                        query: searchQuery,
+                                                        routeName: 'search_index',
+                                                        perPage: perPage
+                                                    } %}
+                                                </div>
+                                            </div>
+                                            <ul class="product-listing">
+                                                {% for productItem in searchResult %}
+                                                    <li>
+                                                        <div class="product-listing-img">
+                                                            <a href="#"><img
+                                                                        src="https://www.hgt-tilburg.nl/cache/images/userdata/product-images/160x105/0519192032-326-100001010.jpg"
+                                                                        alt=""/></a>
+                                                        </div>
+                                                        <div>
+                                                            <h2><a href="#">{{ productItem.name }}</a></h2>
+                                                            <ul class="product-listing-meta">
+                                                                <li>{{ productItem.manufacturer.name }}</li>
+                                                                <li class="product-listing-meta-weight">{{ productItem.volume }}</li>
+                                                            </ul>
+                                                            <div class="product-listing-button">
+                                                                <a href="#" class="btn btn-icon-label">
+                                                                    <span class="icon"><i
+                                                                                class="fas fa-shopping-cart"></i></span>
+                                                                    <span class="label">Bestellen</span>
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-listing-sr">Gevonden in: <a href="#">Buitenhuis</a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                            <div class="paging paging-bottom paging-rwd">
+                                                <div>
+                                                    {% include '_partials/page/pagination.html.twig' with {
+                                                        paginateData: pagination,
+                                                        query: searchQuery,
+                                                        routeName: 'search_index',
+                                                        perPage: perPage
+                                                    } %}
+                                                </div>
+                                                <div>
+                                                    {% include '_partials/page/pageLengthSelector.html.twig' with {
+                                                        currentPage: pagination.current,
+                                                        query: searchQuery,
+                                                        routeName: 'search_index',
+                                                        perPage: perPage
+                                                    } %}
+                                                </div>
+                                            </div>
+                                        {% elseif key == 'news' %}
+                                            <div class="content">
+                                                <h3>Nieuws</h3>
+                                                <ul>
+                                                    {% for newsItem in searchResult %}
+                                                        <li><a href="{{ newsItem.urlKey }}">{{ newsItem.title }}</a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        {% elseif key == 'manufacturers' %}
+                                            <div class="content">
+                                                <h3>Merken</h3>
+                                                <ul>
+                                                    {% for manuItem in searchResult %}
+                                                        <li><a href="{{ manuItem.urlKey }}">{{ manuItem.name }}</a></li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="content hidden"><p>Geen resultaten gevonden.</p></div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

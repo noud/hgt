@@ -33,6 +33,20 @@ class ManufacturerRepository extends EntityRepository
     }
 
     /**
+     * @param $query
+     * @return Manufacturer[]
+     */
+    public function searchManufacturers($query)
+    {
+        $qb = $this->createQueryBuilder('q')
+            ->where('q.name LIKE :term')
+            ->orderBy('q.name', 'ASC')
+            ->setParameter('term', '%' . urldecode($query) . '%');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * @return Manufacturer[]
      */
     public function getManufacturers()

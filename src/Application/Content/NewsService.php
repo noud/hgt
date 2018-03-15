@@ -37,4 +37,13 @@ class NewsService
     {
         return $this->newsRepository->getActiveNews();
     }
+
+    /**
+     * @param $query
+     * @return News[]
+     */
+    public function searchNews($query)
+    {
+        return $this->newsRepository->searchNews($query);
+    }
 }

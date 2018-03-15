@@ -43,4 +43,18 @@ class NewsRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * @param $query
+     * @return News[]
+     */
+    public function searchNews($query)
+    {
+        $qb = $this->createQueryBuilder('q')
+            ->where('q.description LIKE :term')
+            ->orderBy('q.start_date', 'DESC')
+            ->setParameter('term', '%' . urldecode($query) . '%');
+
+        return $qb->getQuery()->getResult();
+    }
 }

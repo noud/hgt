@@ -22,11 +22,12 @@ class ManufacturerService
     }
 
     /**
+     * @param $query
      * @return Manufacturer[]
      */
-    public function getManufacturers()
+    public function searchManufacturers($query)
     {
-        return $this->manufacturerRepository->getManufacturers();
+        return $this->manufacturerRepository->searchManufacturers($query);
     }
 
     /**
