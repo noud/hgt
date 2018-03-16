@@ -17,7 +17,30 @@
 }
 
 /* ----- */
+.highlight-label-rec {
+  display: flex;
+  background-color: @primary-color;
+  color: white;
+  padding: 15px;
+  font-weight: @font-weight-bold;
 
+  > div {
+    &:first-child {
+      width: 60%;
+      flex-shrink: 0;
+    }
+    &:last-child {
+      flex-grow: 1;
+    }
+  }
+
+  .highlight-label-rec-price {
+    text-align: right;
+  }
+
+}
+
+/* ----- */
 .order-timer {
   display: flex;
   align-items: center;
