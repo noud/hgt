@@ -13,7 +13,7 @@ class AccountController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('account/order-history.html.twig', [
+        return $this->render('account/order-list.html.twig', [
         ]);
     }
 
