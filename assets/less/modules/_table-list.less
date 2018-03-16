@@ -97,7 +97,6 @@
 }
 
 /* ----- */
-
 .table-overview {
 
   .table-overview-header-meta {
@@ -170,3 +169,134 @@
     }
   }
 }
+
+/* ----- */
+.table-number {
+  display: flex;
+  align-items: center;
+  > div {
+    width: 20%;
+    flex-grow: 1;
+    &:not(:last-child) {
+      padding-right: 20px;
+    }
+    &:first-child {
+      width: 15%;
+    }
+    &:nth-child(2) {
+      width: 40%;
+    }
+  }
+
+  h2 {
+    font-size: @heading-xs;
+    color: @primary-color;
+  }
+
+  .table-number-price {
+    text-align: right;
+    font-size: @font-size-md-sub;
+    font-weight: @font-weight-bold;
+  }
+
+  /* modifier: table-number-price */
+  .table-number-price-icon {
+    &:after {
+      content: '\f017';
+      font-family: @fa;
+      font-weight: @font-weight-bold;
+    }
+  }
+
+  .table-number-meta {
+    color: @low-key-color;
+  }
+
+}
+
+
+/* ----- */
+.unit-list {
+
+  .listing-base();
+
+  .unit-list-meta {
+    margin-top: 10px;
+    display: flex;
+    align-items: flex-start;
+    > div {
+      flex-grow: 1;
+      width: 50%;
+      &:last-child {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  .highlight-label {
+    .highlight-label-head {
+      max-width: 200px;
+    }
+  }
+
+}
+
+/* rwd */
+.unit-list-rwd {
+
+  .unit-list-meta {
+    @media @sm {
+      display: block;
+    }
+
+    > div {
+      @media @sm {
+        width: 100%;
+      }
+      &:last-child {
+        @media @sm {
+          margin-top: 10px;
+          display: block;
+        }
+      }
+    }
+  }
+
+  .table-number {
+    @media @sm {
+      display: block;
+    }
+
+    h2 {
+      @media @md {
+        font-size: @heading-xs * 0.75;
+      }
+    }
+
+    > div {
+      @media @sm {
+        width: 100%;
+      }
+
+      &:not(:last-child) {
+        @media @sm {
+          padding-right: 0;
+          margin-bottom: 10px;
+        }
+      }
+      &:first-child {
+        @media @sm {
+          width: 100%;
+        }
+      }
+      &:nth-child(2) {
+        @media @sm {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+
