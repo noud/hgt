@@ -16,6 +16,5 @@
 /web/bundles/
 .idea
 /node_modules/
-web/assets/css/main.css
 web/assets/css/main.css.map
 /web/tmp
