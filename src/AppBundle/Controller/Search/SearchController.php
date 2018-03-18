@@ -54,8 +54,6 @@ class SearchController extends Controller
             $resultNumber += count($searchResult);
         }
 
-        dump($searchResults);
-
         return $this->render('search/index.html.twig', [
             'searchResults' => $searchResults,
             'resultNumber' => $resultNumber,
