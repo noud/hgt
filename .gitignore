@@ -16,7 +16,6 @@
 /web/bundles/
 .idea
 /node_modules/
-gulpfile.js
 web/assets/css/main.css
 web/assets/css/main.css.map
 /web/tmp
