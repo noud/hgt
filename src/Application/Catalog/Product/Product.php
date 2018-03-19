@@ -181,4 +181,20 @@ class Product
     {
         return $this->product_tax_group;
     }
+
+    /**
+     * @return bool
+     */
+    public function isOrderProduct()
+    {
+        return $this->is_order_product;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMailOrderToSupplier()
+    {
+        return $this->mail_order_to_supplier;
+    }
 }

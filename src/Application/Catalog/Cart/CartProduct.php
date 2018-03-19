@@ -3,6 +3,7 @@
 namespace HGT\Application\Catalog\Cart;
 
 use Doctrine\ORM\Mapping as ORM;
+use HGT\Application\Catalog\Product\Product;
 
 /**
  * @ORM\Entity(repositoryClass="HGT\AppBundle\Repository\Catalog\Cart\CartProductRepository")
@@ -84,7 +85,7 @@ class CartProduct
     }
 
     /**
-     * @return mixed
+     * @return Product
      */
     public function getProduct()
     {

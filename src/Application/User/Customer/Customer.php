@@ -369,6 +369,14 @@ class Customer implements UserInterface
     }
 
     /**
+     * @return bool
+     */
+    public function canSeePrices()
+    {
+        return $this->show_prices;
+    }
+
+    /**
      * @return string
      */
     public function getEmail()
@@ -382,6 +390,14 @@ class Customer implements UserInterface
     public function getCompany()
     {
         return $this->company;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->first_name;
     }
 
     /**
@@ -412,7 +428,7 @@ class Customer implements UserInterface
     }
 
     /**
-     * @return mixed
+     * @return CustomerGroup
      */
     public function getCustomerGroup()
     {

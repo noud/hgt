@@ -1,0 +1,62 @@
+{% extends 'emails/base.html.twig' %}
+
+{% block body %}
+    <p>Beste,</p>
+
+    <p>
+        Er is zojuist een bestelling geplaatst op
+        <a href="{{ app.request.getSchemeAndHttpHost() }}">{{ app.request.getSchemeAndHttpHost() }}</a>,
+        hieronder tref je de details van de bestelling aan.
+    </p>
+
+    <p><strong>Bestelling: WO-{{ webOrder.id }}</strong></p>
+
+    <table class="decorated-table">
+        <tbody>
+        <tr>
+            <td class="label">Naam klant:</td>
+            <td class="value">
+                {{ webOrder.cart.customer.name }}
+                {% if webOrder.cart.customer.company %}
+                    {{ webOrder.cart.customer.company }}
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td class="label">Ordernummer:</td>
+            <td class="value">WO-{{ webOrder.id }}</td>
+        </tr>
+        <tr>
+            <td class="label">Besteldatum:</td>
+            <td class="value">{{ webOrder.cart.finishedDate|date("d-m-Y") }}</td>
+        </tr>
+        <tr>
+            <td class="label">Gewenste leverdatum:</td>
+            <td class="value">{{ webOrder.cart.deliveryDate|date("d-m-Y") }}</td>
+        </tr>
+        <tr>
+            <td class="label">Referentie:</td>
+            <td class="value">{{ webOrder.cart.reference }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <p><strong>Artikelen</strong></p>
+    <table class="decorated-table">
+        <tbody>
+        {% for cartProduct in webOrder.cart.cartProducts %}
+            {% set product = cartProduct.product %}
+            {% set unitOfMeasure = cartProduct.unitOfMeasure %}
+            <tr class="{{ cycle(['odd', 'even'], loop.index0) }}">
+                <td class="product-name">{{ product.name }}</td>
+                <td class="product-manufacturer">
+                    {% if product.manufacturer %}
+                        {{ product.manufacturer.name }}
+                    {% endif %}
+                </td>
+                <td class="product-volume">{{ product.volume }}</td>
+                <td class="product-qty">Aantal: {{ cartProduct.qty }} | {{ unitOfMeasure.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

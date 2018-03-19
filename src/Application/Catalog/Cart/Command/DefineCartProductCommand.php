@@ -25,9 +25,6 @@ class DefineCartProductCommand
 
     public $form_action;
 
-    /**
-     * @var Product
-     */
     public $product;
 
     /**

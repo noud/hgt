@@ -22,4 +22,12 @@ class CustomerGroup
      * @ORM\Column(type="string", length=16, options={"comment":"InvoiceDiscountGroup"})
      */
     private $navision_id;
+
+    /**
+     * @return string
+     */
+    public function getNavisionId()
+    {
+        return $this->navision_id;
+    }
 }
