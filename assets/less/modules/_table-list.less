@@ -66,6 +66,21 @@
   }
 }
 
+.table-section-base-header {
+  font-size: @heading-xs;
+  color: @primary-color;
+}
+
+.table-section-base-price {
+  text-align: right;
+  font-size: @font-size-md-sub;
+  font-weight: @font-weight-bold;
+}
+
+.table-section-base-meta {
+  color: @low-key-color;
+}
+
 /* specific
   ---------------------------------------------------------------------------------------------------------------------- */
 
@@ -159,7 +174,7 @@
 /* ----- */
 .unit-list {
 
-  .listing-base();
+  .list-base();
 
   .unit-list-meta {
     margin-top: 10px;
@@ -194,33 +209,7 @@
         width: 40%;
       }
     }
-
-    h2 {
-      font-size: @heading-xs;
-      color: @primary-color;
-    }
-
-    .table-number-price {
-      text-align: right;
-      font-size: @font-size-md-sub;
-      font-weight: @font-weight-bold;
-    }
-
-    /* modifier: table-number-price */
-    .table-number-price-icon {
-      &:after {
-        content: '\f017';
-        font-family: @fa;
-        font-weight: @font-weight-bold;
-      }
-    }
-
-    .table-number-meta {
-      color: @low-key-color;
-    }
-
   }
-
 
 }
 
@@ -250,12 +239,6 @@
       display: block;
     }
 
-    h2 {
-      @media @md {
-        font-size: @heading-xs * 0.75;
-      }
-    }
-
     > div {
       @media @sm {
         width: 100%;
@@ -278,5 +261,15 @@
         }
       }
     }
+  }
+}
+
+/* ----- */
+
+.list-order-edit {
+  .list-base();
+
+  .table-order-edit {
+    .table-section-base();
   }
 }

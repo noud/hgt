@@ -1,0 +1,52 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block bodyClass %}account-index account-index-order-overview{% endblock %}
+
+{% block body %}
+    <div class="container layout-flip-sidebar-sm">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        <div class="row main-row">
+            <div class="col-sm-3">
+                <ul class="item-list item-list-alt">
+                    <li>
+                        <a href="#" class="listing">Bestellijst <span class="icon"><i
+                                        class="fa fa-chevron-right"></i></span></a>
+                    </li>
+                    <li>
+                        <a href="#" class="listing">Bestelhistorie <span class="icon"><i
+                                        class="fa fa-chevron-right"></i></span></a>
+                    </li>
+                    <li>
+                        <a href="#" class="listing">Bestellijst aanpassen <span class="icon"><i
+                                        class="fa fa-chevron-right"></i></span></a>
+                    </li>
+                    <li>
+                        <a href="#" class="listing">Wachtwoord wijzigen <span class="icon"><i
+                                        class="fa fa-chevron-right"></i></span></a>
+                    </li>
+                    <li>
+                        <a href="#" class="listing">Uitloggen <span class="icon"><i
+                                        class="fa fa-chevron-right"></i></span></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-9">
+                <h1 class="page-title">Bestellijst aanpassen</h1>
+                <ul class="list-order-edit">
+                    <li>
+                        <div class="table-order-edit">
+                            <div>
+                                <div class="table-order-edit">
+
+                                </div>
+                            </div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
