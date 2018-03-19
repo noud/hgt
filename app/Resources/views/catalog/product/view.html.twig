@@ -2,117 +2,115 @@
 
 {% block bodyClass %}catalog-product-view{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        .title {padding-bottom:1em;margin-bottom:2em;border-bottom:1px solid #DDD;}
-        .title h1 {color:#ff671f;}
-        .categories nav ul li .active {font-weight:bold;}
-        .categories .category {border:1px solid #BBB;text-align:center;}
-        .product-detail #unit_of_measure_id {margin-right:20px;}
-        .product-detail .price { font-size: 24px;}
-        .product-detail .block {display:block;}
-        .product-detail .block.volume {color:#BBB;}
-        .product-detail .add-to-cart {display:flex;width:260px;background-color:orange;padding:1em;border-radius:10px}
-        .product-detail .add-to-cart input[type=text] {padding:10px;border-radius:10px;margin-right:10px;}
-        .product-detail .add-to-orderlist {border-bottom:1px solid #DDD;border-top:1px solid #DDD;margin-top:1em;padding:1em;}
-        .product-detail .prijs.price_item {display:inline-block;font-size:25px;font-weight:bold;}
-        .product-price .select, .product-price .price {float:left;}
-        .product-price .select select {height:40px;}
-        .product-price:after {clear:both;content:'';display:block;margin-bottom:1em;}
-        .no-gutter {padding:0;}
-    </style>
-{% endblock %}
-
 {% block body %}
-    <div class="container product">
-        <div class="row title">
-            {% if product %}
+    <div class="container">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        {% if product %}
+            <div class="page-title-container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="#" onclick="window.history.back();" class="btn-border">
+                            <i class="fas fa-arrow-left"></i>
+                            <span>Terug</span>
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <h1 class="page-title">{{ product.name }}</h1>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="page-title-container">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <h1 class="page-title">Product niet gevonden</h1>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="layout-flip-sidebar-md">
+            <div class="main-row row">
                 <div class="col-md-3">
-                    <a href="{{ path('category_index') }} ">Terug</a>
-                </div>
-                <div class="col-md-9">
-                    <h1>{{ product.name|upper }}</h1>
-                </div>
-            {% else %}
-                <div class="col-md-12">
-                    <h1>Product niet gevonden</h1>
-                </div>
-            {% endif %}
-        </div>
-        <p class="row">
-            {% if product %}
-                <div class="col-md-3 categories">
                     {% if parentCategories %}
-                        <nav>
-                            <ul>
-                                {% for parentCategory in parentCategories %}
-                                    <li>
-                                        <a href="{{ path('category_view', {'id': parentCategory.id }) }}" class="listing{% if product.category.id == parentCategory.id %} active{% endif %}">
-                                            {{ parentCategory.name }}
-                                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </nav>
+                        {% include '_partials/catalog/category/list.html.twig' with {'categories' : parentCategories } %}
                     {% endif %}
                 </div>
                 <div class="col-md-9">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img src="http://via.placeholder.com/250x250{# product.mainPicture #}" />
+                    <div class="product-detail product-detail-rwd">
+                        <div>
+                            <div class="product-detail-img">
+                                <img src="https://www.hgt-tilburg.nl/cache/images/userdata/product-images/220x220/310210.jpg"/>
+                            </div>
                         </div>
-                        <div class="col-md-9">
-                            <div class="product-detail content">
-                                <p>
-                                    <span class="block">
+                        <div>
+                            <ul class="product-detail-spec">
+                                <li>
+                                    <div class="product-detail-main">
                                         {% if product.manufacturer %}
-                                            <a href="#">{{ product.manufacturer.name }}</a>
+                                            <div><a href="#">{{ product.manufacturer.name }}</a></div>
                                         {% endif %}
-                                    </span>
-                                    <span class="block volume">Inhoud: {{ product.volume }}</span>
-                                </p>
-                                {% if app.user %}
-                                    {{ form_start(form, {'attr': {'id': 'add_to_cart_form'}}) }}
-                                        <div class="col-md-6 no-gutter">
+                                        <div class="volume">Inhoud: {{ product.volume }}</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    {{ form_start(form, {'attr': {'id': 'add_to_cart_form', 'class': 'product-detail-form'}}) }}
+                                    <div class="product-select-price is-section-md">
+                                        <div>
                                             {{ form_widget(form.product_unit_of_measure) }}
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="product-price">
-                                                <div class="price">
-                                                    {% for productPrice in productPrices %}
-                                                        <div class="prijs price_item" id="price_{{ productPrice.productUnitOfMeasureId }}">
-                                                            {{ productPrice.productPrice|price }}
-                                                        </div>
-                                                    {% endfor %}
+                                        <div>
+                                            {% for productPrice in productPrices %}
+                                                <div class="product-detail-price price_item"
+                                                     id="price_{{ productPrice.productUnitOfMeasureId }}">
+                                                    {{ productPrice.productPrice|price }}
                                                 </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="product-order-unit is-section-md">
+                                        <div>{{ form_widget(form.qty) }}</div>
+                                        <div>
+                                            <a href="#" class="btn" onclick="addToCart();return false;">Bestel</a>
+                                            <button class="btn hidden" type="submit">Bestel</button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <a href="#" onclick="addToOrderList();return false;"
+                                           class="listing listing-icon">Toevoegen aan bestellijst <span
+                                                    class="icon"><i class="fa fa-chevron-right"></i></span></a>
+                                    </div>
+                                    {{ form_end(form) }}
+                                    <form class="product-detail-form hidden">
+                                        <div class="product-select-price is-section-md">
+                                            <div>
+                                                <select class="form-control-select">
+                                                    <option>test</option>
+                                                    <option>test</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <div class="product-detail-price">&euro; 2,95</div>
                                             </div>
                                         </div>
-                                        <div class="add-to-cart">
-                                            {{ form_widget(form.qty) }}
-                                            <a href="#" onclick="addToCart();return false;">Bestel</a>
+                                        <div class="product-order-unit">
+                                            <div><input class="form-control" type="text"/></div>
+                                            <div>
+                                                <button class="btn" type="submit">Bestel</button>
+                                            </div>
                                         </div>
-                                        <div class="add-to-orderlist">
-                                            <a href="#" onclick="addToOrderList();return false;">Toevoegen aan bestellijst</a>
-                                        </div>
-                                    {{ form_end(form) }}
-                                {% else %}
-                                    <a href="{{ path('account_login') }}" class="btn btn-icon-label">
-                                        <span class="icon"><i class="fa fa-shopping-cart"></i></span>
-                                        <span class="label">Login om het product te bestellen</span>
-                                    </a>
-                                {% endif %}
-                                <p>
-                                    {{ product.description }}
-                                </p>
-                            </div>
+                                    </form>
+                                </li>
+                                <li>
+                                    <div class="product-detail-spec-desc content">
+                                        <p>{{ product.description }}</p>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            {% else %}
-                <p>Het product dat je probeert te bekijken bestaat niet.</p>
-            {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}

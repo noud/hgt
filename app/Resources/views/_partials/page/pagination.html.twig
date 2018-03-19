@@ -1,0 +1,21 @@
+{% if paginateData is defined and paginateData.pages > 1 %}
+    <ul class="paging-number">
+        {% if paginateData.current > 1 %}
+            <li><a href="{{ path(routeName, {p: paginateData.current - 1, q: query}) }}"><i class="fas fa-arrow-left"></i></a></li>
+        {% endif %}
+        {% for i in 1..paginateData.pages %}
+            {% if paginateData.current == i %}
+                <li class="active">{{ i }}</li>
+            {% else %}
+                {% if paginateData.pages < 7 %}
+                    <li>
+                        <a href="{{ path(routeName, {p: i, q: query}) }}">{{ i }}</a>
+                    </li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        {% if paginateData.current < paginateData.pages %}
+            <li><a href="{{ path(routeName, {p: paginateData.current + 1, q: query}) }}"><i class="fas fa-arrow-right"></i></a></li>
+        {% endif %}
+    </ul>
+{% endif %}

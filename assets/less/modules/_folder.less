@@ -1,6 +1,3 @@
-/* TODO: seperate responsive from components */
-
-
 /* components
   ---------------------------------------------------------------------------------------------------------------------- */
 
@@ -82,7 +79,6 @@
 }
 
 /* ----- */
-
 .folder-slider {
   max-width: 920px;
   margin: 0 auto;
@@ -103,5 +99,19 @@
       }
     }
   }
+}
 
+/* rwd */
+.folder-slider-rwd {
+  .slick-arrow {
+    @media @sm {
+      width: 40px;
+      height: 40px;
+    }
+    i {
+      @media @sm {
+        font-size: initial;
+      }
+    }
+  }
 }

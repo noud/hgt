@@ -1,0 +1,113 @@
+/* mixins
+  ---------------------------------------------------------------------------------------------------------------------- */
+
+.paging-circle {
+
+  @size: 30px;
+  width: @size;
+  height: @size;
+  line-height: @size;
+  border-radius: 50%;
+  text-align: center;
+}
+
+
+/* components
+  ---------------------------------------------------------------------------------------------------------------------- */
+
+/* ----- */
+.paging {
+  display: flex;
+  align-items: center;
+
+  > div {
+    &:first-child {
+      width: 50%;
+      flex-shrink: 0;
+    }
+    &:last-child {
+      display: flex;
+      justify-content: flex-end;
+      flex-grow: 1;
+    }
+  }
+
+  .paging-number {
+    display: flex;
+
+    &.has-many-results {
+      flex-wrap: wrap;
+    }
+
+    > li {
+
+      flex-shrink: 0;
+      margin-bottom: 5px;
+
+      &:not(:last-child) {
+        margin-right: 5px;
+      }
+      &.active {
+        .paging-circle();
+        background-color: @primary-color;
+        border: 1px solid @primary-color;
+        color: white;
+      }
+
+      > a {
+        .paging-circle();
+        display: block;
+        color: #000;
+        border: @border;
+
+        &:hover {
+          background-color: @primary-color;
+          border-color: @primary-color;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+/* modifier: paging */
+.paging-top {
+  border-bottom: @border;
+  padding-bottom: @section-space/2;
+  margin-bottom: @section-space/2;
+}
+/* modifier: paging */
+.paging-bottom {
+  border-top: @border;
+  padding-top: @section-space/2;
+  margin-top: @section-space/2;
+}
+
+/* rwd */
+
+.paging-rwd {
+
+  > div {
+    &:first-child {
+      @media @md {
+        width: 100%;
+      }
+    }
+    &:last-child {
+
+    }
+  }
+
+  .paging-number {
+    @media @md {
+      flex-wrap: wrap;
+    }
+  }
+
+  .paging-select {
+    @media @md {
+      display: none;
+    }
+  }
+
+}

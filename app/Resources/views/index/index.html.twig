@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="container">
-        <div class="feature-hero">
+        <div class="feature-hero feature-hero-rwd">
             <div>
                 {% if homeSlides %}
                     <div class="hero js-hero">
@@ -36,7 +36,7 @@
                 {% endif %}
             </div>
         </div>
-        <div class="feature-buttons">
+        <div class="feature-buttons feature-buttons-rwd">
             <div>
                 <a href="#" class="btn btn-icon-label btn-icon-label-lg">
                     <span class="icon"><i class="fas fa-tag"></i></span>
@@ -46,7 +46,7 @@
                 </a>
             </div>
             <div>
-                <a href="#" class="btn btn-icon-label btn-icon-label-lg">
+                <a href="{{ path('folder_index') }}" class="btn btn-icon-label btn-icon-label-lg">
                     <span class="icon"><i class="fas fa-bookmark"></i></span>
                     <span class="label">
                         <span>Bekijk onze folder</span>
@@ -54,7 +54,7 @@
                 </a>
             </div>
             <div>
-                <a href="#" class="btn btn-icon-label btn-icon-label-lg">
+                <a href="{{ path('account_signup') }}" class="btn btn-icon-label btn-icon-label-lg">
                     <span class="icon"><i class="fas fa-cart-arrow-down"></i></span>
                     <span class="label">
                         <span>Direct bestellen?</span>
@@ -64,7 +64,7 @@
             </div>
         </div>
         {% if homeCategories %}
-            <div class="feature-cat">
+            <div class="feature-cat feature-cat-rwd">
                 <h2>Populaire categorieën</h2>
                 <div class="main">
                     {% for homeCategory in homeCategories %}

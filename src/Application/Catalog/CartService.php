@@ -68,9 +68,10 @@ class CartService
     public function getOpenCart($create_when_not_found = false)
     {
         $customer = $this->customerService->getCurrentCustomer();
+
         $cart = $this->getOpenCartForCustomer($customer);
 
-        if ($cart === null && $create_when_not_found) {
+        if ($cart === null || $create_when_not_found) {
             $cart = $this->createCart();
         }
 
@@ -143,11 +144,14 @@ class CartService
         $qty = 0;
 
         $cart = $this->getOpenCart();
-        $cartProducts = $cart->getCartProducts();
 
-        /** @var CartProduct $cartProduct */
-        foreach ($cartProducts as $cartProduct) {
-            $qty += $cartProduct->getQty();
+        if ($cart !== null) {
+            $cartProducts = $cart->getCartProducts();
+
+            /** @var CartProduct $cartProduct */
+            foreach ($cartProducts as $cartProduct) {
+                $qty += $cartProduct->getQty();
+            }
         }
 
         return $qty;

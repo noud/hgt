@@ -1,9 +1,9 @@
 {% extends 'layout/base.html.twig' %}
 
-{% block bodyClass %}contact-index template-2-cols{% endblock %}
+{% block bodyClass %}contact-index{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container layout-2-cols-sm">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
         <div class="row main-row">
             <div class="col-sm-6">
@@ -39,6 +39,7 @@
                 </aside>
             </div>
             <div class="col-sm-6">
+                <div class="content"><h2>Contact formulier</h2></div>
                 {{ form_start(form, {'attr': {'class': 'form-base','novalidate': 'novalidate'}}) }}
                 {{ form_errors(form) }}
                 {{ form_row(form.name) }}

@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class IndexController extends Controller
 {
-
     /**
      * @Route("/nieuws", name="news_index")
      * @param Request $request
