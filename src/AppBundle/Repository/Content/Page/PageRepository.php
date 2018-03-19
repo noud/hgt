@@ -39,8 +39,7 @@ class PageRepository extends EntityRepository
     public function getByParentId(Page $page)
     {
         return $this->findBy(
-            ['parent' => $page],
-            ['sort' => 'ASC']
+            ['parent' => $page]
         );
     }
 }

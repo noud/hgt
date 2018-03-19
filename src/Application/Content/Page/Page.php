@@ -13,11 +13,13 @@ class Page
 {
     /**
      * @ORM\OneToMany(targetEntity="HGT\Application\Content\Page\PageStaticBlock", mappedBy="page")
+     * @ORM\OrderBy({"sort" = "ASC"})
      */
     private $pageStaticBlocks;
 
     /**
      * @ORM\OneToMany(targetEntity="HGT\Application\Content\Page\Page", mappedBy="parent")
+     * @ORM\OrderBy({"sort" = "ASC"})
      */
     private $subPages;
 
