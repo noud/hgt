@@ -1,0 +1,314 @@
+/* components
+  ---------------------------------------------------------------------------------------------------------------------- */
+
+/* ----- */
+.slick-arrow {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: @primary-color;
+  border-radius: 50%;
+
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+
+  z-index: 1;
+
+  &.slick-prev {
+    left: 15px;
+  }
+
+  &.slick-next {
+    right: 15px;
+
+  }
+
+  &.slick-disabled {
+    opacity: 0;
+  }
+
+  i {
+    display: block;
+    color: white;
+  }
+
+}
+
+/* ----- */
+.meta-side {
+
+  h3 {
+    color: @primary-color;
+    font-size: @font-size-md-sub;
+    margin-bottom: 10px;
+  }
+
+  .entries {
+
+    > div {
+      &:not(:last-child) {
+        margin-bottom: 15px;
+      }
+
+    }
+
+  }
+
+  .entry {
+
+    a {
+      color: black;
+    }
+
+    a[rel='mail'] {
+      color: @primary-color;
+    }
+
+  }
+
+}
+
+/* ----- */
+.breadcrumbs {
+
+  @bc-spacing: 10px;
+  border-bottom: @border;
+
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+
+  > ul {
+    display: flex;
+
+    > li {
+      &:not(:last-child) {
+        margin-right: @bc-spacing;
+        &:after {
+          content: '\0203A';
+          margin-left: @bc-spacing;
+        }
+      }
+
+    }
+
+  }
+
+  a {
+    color: @primary-color;
+  }
+
+}
+
+/* ----- */
+.alert {
+  margin-bottom: 30px;
+  font-size: @font-size-sm;
+  font-weight: @font-weight-semi-bold;
+
+  &.alert-danger {
+    color: red;
+  }
+
+  &.alert-success {
+    color: green;
+  }
+
+}
+
+/* ----- */
+.help-block {
+  font-size: @font-size-sm;
+  font-weight: @font-weight-semi-bold;
+  color: red;
+}
+
+/* ----- */
+.nav-tabs {
+  border-bottom: @border;
+
+  display: flex;
+
+  > li {
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    &.active {
+      > a {
+        background-color: @primary-color;
+        color: white;
+      }
+    }
+
+    > a {
+      display: inline-block;
+      padding: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background-color: transparent;
+      border-top-right-radius: @border-radius;
+      border-top-left-radius: @border-radius;
+      border: @border;
+      border-bottom: none;
+      color: #000;
+
+      &:hover {
+        background-color: @primary-color;
+        color: white;
+      }
+
+    }
+
+  }
+
+}
+
+/* ----- */
+.tab-pane {
+
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+/* ----- */
+.tabs {
+  .tab-content {
+    padding-top: 30px;
+  }
+}
+
+/* ----- */
+.search-results {
+
+  margin-top: @section-space;
+
+  > div {
+
+    &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+
+  }
+
+}
+
+/* ----- */
+/* mixins: paging */
+
+.paging-circle {
+
+  @size: 30px;
+  width: @size;
+  height: @size;
+  line-height: @size;
+  border-radius: 50%;
+  text-align: center;
+}
+
+/* ----- */
+.paging {
+  display: flex;
+  align-items: center;
+
+  > div {
+    &:first-child {
+      width: 50%;
+      flex-shrink: 0;
+    }
+    &:last-child {
+      display: flex;
+      justify-content: flex-end;
+      flex-grow: 1;
+    }
+  }
+
+  .paging-number {
+    display: flex;
+
+    &.has-many-results {
+      flex-wrap: wrap;
+    }
+
+    > li {
+
+      flex-shrink: 0;
+      margin-bottom: 5px;
+
+      &:not(:last-child) {
+        margin-right: 5px;
+      }
+      &.active {
+        .paging-circle();
+        background-color: @primary-color;
+        border: 1px solid @primary-color;
+        color: white;
+      }
+
+      > a {
+        .paging-circle();
+        display: block;
+        color: #000;
+        border: @border;
+
+        &:hover {
+          background-color: @primary-color;
+          border-color: @primary-color;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+/* modifier: paging */
+.paging-top {
+  border-bottom: @border;
+  padding-bottom: @section-space/2;
+  margin-bottom: @section-space/2;
+}
+
+/* modifier: paging */
+.paging-bottom {
+  border-top: @border;
+  padding-top: @section-space/2;
+  margin-top: @section-space/2;
+}
+
+/* rwd */
+
+.paging-rwd {
+
+  > div {
+    &:first-child {
+      @media @md {
+        width: 100%;
+      }
+    }
+    &:last-child {
+
+    }
+  }
+
+  .paging-number {
+    @media @md {
+      flex-wrap: wrap;
+    }
+  }
+
+  .paging-select {
+    @media @md {
+      display: none;
+    }
+  }
+
+}
+
+
