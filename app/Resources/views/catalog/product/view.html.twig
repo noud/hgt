@@ -5,30 +5,19 @@
 {% block body %}
     <div class="container">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
-        {% if product %}
-            <div class="page-title-container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <a href="#" onclick="window.history.back();" class="btn-border">
-                            <i class="fas fa-arrow-left"></i>
-                            <span>Terug</span>
-                        </a>
-                    </div>
-                    <div class="col-md-6">
-                        <h1 class="page-title">{{ product.name }}</h1>
-                    </div>
+        <div class="page-title-container">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="#" onclick="window.history.back();" class="btn-border">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Terug</span>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <h1 class="page-title">{{ product.name }}</h1>
                 </div>
             </div>
-        {% else %}
-            <div class="page-title-container">
-                <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-6">
-                        <h1 class="page-title">Product niet gevonden</h1>
-                    </div>
-                </div>
-            </div>
-        {% endif %}
+        </div>
         <div class="layout-flip-sidebar-md">
             <div class="main-row row">
                 <div class="col-md-3">
@@ -53,54 +42,43 @@
                                         <div class="volume">Inhoud: {{ product.volume }}</div>
                                     </div>
                                 </li>
-                                <li>
-                                    {{ form_start(form, {'attr': {'id': 'add_to_cart_form', 'class': 'product-detail-form'}}) }}
-                                    <div class="product-select-price is-section-md">
-                                        <div>
-                                            {{ form_widget(form.product_unit_of_measure) }}
-                                        </div>
-                                        <div>
-                                            {% for productPrice in productPrices %}
-                                                <div class="product-detail-price price_item"
-                                                     id="price_{{ productPrice.productUnitOfMeasureId }}">
-                                                    {{ productPrice.productPrice|price }}
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                    <div class="product-order-unit is-section-md">
-                                        <div>{{ form_widget(form.qty) }}</div>
-                                        <div>
-                                            <a href="#" class="btn" onclick="addToCart();return false;">Bestel</a>
-                                            <button class="btn hidden" type="submit">Bestel</button>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <a href="#" onclick="addToOrderList();return false;"
-                                           class="listing listing-icon">Toevoegen aan bestellijst <span
-                                                    class="icon"><i class="fa fa-chevron-right"></i></span></a>
-                                    </div>
-                                    {{ form_end(form) }}
-                                    <form class="product-detail-form hidden">
+
+                                {% if isCustomer and addToCartForm is defined %}
+                                    <li>
+                                        {{ form_start(addToCartForm, {'attr': {'id': 'add_to_cart_form', 'class': 'product-detail-form'}}) }}
                                         <div class="product-select-price is-section-md">
                                             <div>
-                                                <select class="form-control-select">
-                                                    <option>test</option>
-                                                    <option>test</option>
-                                                </select>
+                                                {{ form_widget(addToCartForm.product_unit_of_measure) }}
                                             </div>
                                             <div>
-                                                <div class="product-detail-price">&euro; 2,95</div>
+                                                {% for productPrice in productPrices %}
+                                                    <div class="product-detail-price price_item"
+                                                         id="price_{{ productPrice.productUnitOfMeasureId }}">
+                                                        {{ productPrice.productPrice|price }}
+                                                    </div>
+                                                {% endfor %}
                                             </div>
                                         </div>
-                                        <div class="product-order-unit">
-                                            <div><input class="form-control" type="text"/></div>
+                                        <div class="product-order-unit is-section-md">
+                                            <div>{{ form_widget(addToCartForm.qty) }}</div>
                                             <div>
-                                                <button class="btn" type="submit">Bestel</button>
+                                                <a href="#" class="btn" onclick="addToCart();return false;">Bestel</a>
                                             </div>
                                         </div>
-                                    </form>
-                                </li>
+                                        <div>
+                                            <a href="#" onclick="addToOrderList();return false;"
+                                               class="listing listing-icon">
+                                                Toevoegen aan bestellijst <span
+                                                        class="icon"><i class="fa fa-chevron-right"></i></span></a>
+                                        </div>
+                                        {{ form_end(addToCartForm) }}
+                                    </li>
+                                {% else %}
+                                    <a href="{{ path('account_login') }}" class="btn btn-icon-label is-section-md">
+                                        <span class="icon"><i class="fas fa-lock"></i></span>
+                                        <span class="label">Login om het product te bestellen</span>
+                                    </a>
+                                {% endif %}
                                 <li>
                                     <div class="product-detail-spec-desc content">
                                         <p>{{ product.description }}</p>
@@ -116,23 +94,25 @@
 {% endblock %}
 
 {% block scripts %}
-    {{ parent() }}
+    {% if isCustomer and addToCartForm is defined %}
+        {{ parent() }}
 
-    <script type="text/javascript">
-        function addToOrderList() {
-            alert('Actie');
-        }
+        <script>
+            function addToOrderList() {
+                alert('Actie');
+            }
 
-        function addToCart() {
-            $('#{{ form.vars.id }}_form_action').val('add');
-            $('#{{ form.vars.id }}').submit();
-        }
+            function addToCart() {
+                $('#{{ addToCartForm.vars.id }}_form_action').val('add');
+                $('#{{ addToCartForm.vars.id }}').submit();
+            }
 
-        $("#{{ form.vars.id }}_product_unit_of_measure").change(function () {
-            $(".price_item").hide();
-            $("#price_" + $(this).find('option:selected').data('unit-of-measure-id')).show();
-        });
+            $("#{{ addToCartForm.vars.id }}_product_unit_of_measure").change(function () {
+                $(".price_item").hide();
+                $("#price_" + $(this).find('option:selected').data('unit-of-measure-id')).show();
+            });
 
-        $("#{{ form.vars.id }}_product_unit_of_measure").trigger("change");
-    </script>
+            $("#{{ addToCartForm.vars.id }}_product_unit_of_measure").trigger("change");
+        </script>
+    {% endif %}
 {% endblock %}

@@ -15,6 +15,7 @@ use HGT\Application\Catalog\ProductUnitOfMeasureService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class ProductController extends Controller
 {
@@ -53,16 +54,14 @@ class ProductController extends Controller
         CartService $cartService,
         Product $product
     ) {
-        /** @var Category $productCategory */
-        $productCategory = $product->getCategory()->getParent()->getId();
+        $productCategory = $product->getCategory();
 
-
+        if ($productCategory->getParent()) {
+            $productCategory = $productCategory->getParent()->getId();
+        }
 
         $parentCategories = $categoryService->getCategoriesWithProducts($productCategory);
         $productUnitOfMeasures = $productUnitOfMeasureService->getProductUnitOfMeasures($product);
-
-        dump($product);
-
 
         $productPrices = array();
         foreach ($productUnitOfMeasures as $productUnitOfMeasure) {
@@ -76,33 +75,38 @@ class ProductController extends Controller
             ];
         }
 
-        $cart = $cartService->getOpenCart();
-        
-
-        $command = new DefineCartProductCommand($product, $cart);
-
-        $form = $this->createForm(AddToCartForm::class, $command);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            switch ($command->form_action) {
-                case "add":
-                    $cartProductService->defineCartProduct($command);
-                    break;
-            }
-
-            $this->entityManager->flush();
-
-            $this->addFlash('success', 'Product is toegevoegd aan uw winkelwagen.');
-            return $this->redirectToRoute('cart_index');
-        }
-
-        return $this->render('catalog/product/view.html.twig', [
+        $viewData = [
             'product' => $product,
             'parentCategories' => $parentCategories,
             'productPrices' => $productPrices,
-            'form' => $form->createView(),
-        ]);
+            'isCustomer' => false
+        ];
+
+        if ($this->isGranted('ROLE_CUSTOMER')) {
+            $cart = $cartService->getOpenCart();
+            $command = new DefineCartProductCommand($product, $cart);
+
+            $form = $this->createForm(AddToCartForm::class, $command);
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                switch ($command->form_action) {
+                    case "add":
+                        $cartProductService->defineCartProduct($command);
+                        break;
+                }
+
+                $this->entityManager->flush();
+
+                $this->addFlash('success', 'Product is toegevoegd aan uw winkelwagen.');
+                return $this->redirectToRoute('cart_index');
+            }
+
+            $viewData['addToCartForm'] = $form->createView();
+            $viewData['isCustomer'] = true;
+        }
+
+        return $this->render('catalog/product/view.html.twig', $viewData);
     }
 }
