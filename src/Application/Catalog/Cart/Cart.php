@@ -186,7 +186,7 @@ class Cart
     }
 
     /**
-     * @return CartProduct[]
+     * @return CartProduct[]|ArrayCollection
      */
     public function getCartProducts()
     {
