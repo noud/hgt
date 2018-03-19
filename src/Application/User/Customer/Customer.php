@@ -4,6 +4,7 @@ namespace HGT\Application\User\Customer;
 
 use Doctrine\ORM\Mapping as ORM;
 use HGT\Application\Content\SelectionCode\SelectionCode;
+use HGT\Application\User\CustomerGroup\CustomerGroup;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**

@@ -52,7 +52,7 @@ class WebOrderRepository extends EntityRepository
     {
         $webOrder = $this->get($webOrder);
 
-        if($webOrder) {
+        if ($webOrder) {
             $webOrder->setExportDate(new \DateTime());
             $this->getEntityManager()->flush();
         }

@@ -104,7 +104,7 @@ class CartService
     public function finish(Cart $cart)
     {
         if ($cart->getState() !== Cart::STATE_FINISHED) {
-            //$cart->setState(Cart::STATE_FINISHED);
+            $cart->setState(Cart::STATE_FINISHED);
             $cart->setFinishedDate(new \DateTime());
             $cart->setTotalExTax($this->calculateTotalExTax($cart));
             $cart->setTotalIncTax($this->calculateTotalIncTax($cart));
@@ -113,7 +113,7 @@ class CartService
         //create weborder
         $webOrder = $this->webOrderService->getWeborderByCartId($cart);
 
-        if($webOrder === null) {
+        if ($webOrder === null) {
             $webOrder = $this->webOrderService->createWebOrder($cart);
         }
 
