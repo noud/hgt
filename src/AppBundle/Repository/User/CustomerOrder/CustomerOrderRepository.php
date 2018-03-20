@@ -3,10 +3,20 @@
 namespace HGT\AppBundle\Repository\User\CustomerOrder;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\User\CustomerOrder\CustomerOrder;
 
 class CustomerOrderRepository extends ServiceEntityRepository
 {
+    /**
+     * CustomerOrderRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, CustomerOrder::class);
+    }
+
     /**
      * @param $id
      * @return CustomerOrder|object
