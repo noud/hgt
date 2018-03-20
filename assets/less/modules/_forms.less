@@ -1,5 +1,12 @@
-/* components
+/* vendor
   ---------------------------------------------------------------------------------------------------------------------- */
+
+/* ----- */
+.help-block {
+  font-size: @font-size-sm;
+  font-weight: @font-weight-semi-bold;
+  color: red;
+}
 
 /* ----- */
 .control-label {
@@ -32,6 +39,22 @@ textarea.form-control {
   height: auto;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+/* components
+  ---------------------------------------------------------------------------------------------------------------------- */
+
+/* ----- */
+.block-form-meta {
+  display: flex;
+  align-items: center;
+  a {
+    color: @primary-color;
+  }
+
+  button {
+    margin-right: 20px;
+  }
 }
 
 /* ----- */
@@ -89,19 +112,8 @@ textarea.form-control {
     padding-top: 20px;
   }
 
-  .meta {
+  .block-form-meta {
     margin-top: 20px;
-    display: flex;
-    align-items: center;
-
-    a {
-      color: @primary-color;
-    }
-
-    button {
-      margin-right: 20px;
-    }
-
   }
 }
 

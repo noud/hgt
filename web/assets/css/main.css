@@ -2399,8 +2399,60 @@ main {
     margin-bottom: 50px;
   }
 }
-/* components
+/* vendor
   ---------------------------------------------------------------------------------------------------------------------- */
+/* ----- */
+.alert {
+  margin-bottom: 30px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.alert.alert-danger {
+  color: red;
+}
+.alert.alert-success {
+  color: green;
+}
+/* ----- */
+.tabs .tab-content {
+  padding-top: 30px;
+}
+.tabs .tab-pane {
+  display: none;
+}
+.tabs .tab-pane.active {
+  display: block;
+}
+.tabs .nav-tabs {
+  border-bottom: 1px solid #cccccc;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.tabs .nav-tabs > li:not(:last-child) {
+  margin-right: 10px;
+}
+.tabs .nav-tabs > li.active > a {
+  background-color: #ff671e;
+  color: white;
+}
+.tabs .nav-tabs > li > a {
+  display: inline-block;
+  padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: transparent;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border: 1px solid #cccccc;
+  border-bottom: none;
+  color: #000;
+}
+.tabs .nav-tabs > li > a:hover {
+  background-color: #ff671e;
+  color: white;
+}
 /* ----- */
 .slick-arrow {
   display: -webkit-box;
@@ -2439,6 +2491,8 @@ main {
   display: block;
   color: white;
 }
+/* components
+  ---------------------------------------------------------------------------------------------------------------------- */
 /* ----- */
 .meta-side h3 {
   color: #ff671e;
@@ -2477,80 +2531,11 @@ main {
   color: #ff671e;
 }
 /* ----- */
-.alert {
-  margin-bottom: 30px;
-  font-size: 12px;
-  font-weight: 600;
-}
-.alert.alert-danger {
-  color: red;
-}
-.alert.alert-success {
-  color: green;
-}
-/* ----- */
-.help-block {
-  font-size: 12px;
-  font-weight: 600;
-  color: red;
-}
-/* ----- */
-.nav-tabs {
-  border-bottom: 1px solid #cccccc;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-.nav-tabs > li:not(:last-child) {
-  margin-right: 10px;
-}
-.nav-tabs > li.active > a {
-  background-color: #ff671e;
-  color: white;
-}
-.nav-tabs > li > a {
-  display: inline-block;
-  padding: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: transparent;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
-  border: 1px solid #cccccc;
-  border-bottom: none;
-  color: #000;
-}
-.nav-tabs > li > a:hover {
-  background-color: #ff671e;
-  color: white;
-}
-/* ----- */
-.tab-pane {
-  display: none;
-}
-.tab-pane.active {
-  display: block;
-}
-/* ----- */
-.tabs .tab-content {
-  padding-top: 30px;
-}
-/* ----- */
 .search-results {
   margin-top: 50px;
 }
 .search-results > div:not(:last-child) {
   margin-bottom: 30px;
-}
-/* ----- */
-/* mixins: paging */
-.paging-circle {
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  border-radius: 50%;
-  text-align: center;
 }
 /* ----- */
 .paging {
@@ -2562,6 +2547,13 @@ main {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
+}
+.paging .paging-circle {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  text-align: center;
 }
 .paging > div:first-child {
   width: 50%;
@@ -2595,10 +2587,10 @@ main {
           flex-wrap: wrap;
 }
 .paging .paging-number > li {
-  -webkit-flex-shrink: 0;
-      -ms-flex-negative: 0;
-          flex-shrink: 0;
-  margin-bottom: 5px;
+  -webkit-box-flex: 0;
+  -webkit-flex-grow: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
 }
 .paging .paging-number > li:not(:last-child) {
   margin-right: 5px;
@@ -2645,15 +2637,11 @@ main {
   .paging-rwd > div:first-child {
     width: 100%;
   }
-}
-@media (max-width: 991px) {
   .paging-rwd .paging-number {
     -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
             flex-wrap: wrap;
   }
-}
-@media (max-width: 991px) {
   .paging-rwd .paging-select {
     display: none;
   }
@@ -3451,8 +3439,14 @@ main {
     color: black;
   }
 }
-/* components
+/* vendor
   ---------------------------------------------------------------------------------------------------------------------- */
+/* ----- */
+.help-block {
+  font-size: 12px;
+  font-weight: 600;
+  color: red;
+}
 /* ----- */
 .control-label {
   font-weight: 600;
@@ -3479,6 +3473,25 @@ textarea.form-control {
   height: auto;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+/* components
+  ---------------------------------------------------------------------------------------------------------------------- */
+/* ----- */
+.block-form-meta {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.block-form-meta a {
+  color: #ff671e;
+}
+.block-form-meta button {
+  margin-right: 20px;
 }
 /* ----- */
 .form-control-select {
@@ -3521,22 +3534,8 @@ textarea.form-control {
 .form-base .form-btn-group {
   padding-top: 20px;
 }
-.form-base .meta {
+.form-base .block-form-meta {
   margin-top: 20px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-.form-base .meta a {
-  color: #ff671e;
-}
-.form-base .meta button {
-  margin-right: 20px;
 }
 /* ----- */
 .form-group-flex-row .form-group > div {
@@ -4748,24 +4747,21 @@ textarea.form-control {
   display: -ms-flexbox;
   display: flex;
 }
-.article > div:first-child {
-  margin-right: 20px;
-  width: 25%;
-  -webkit-flex-shrink: 0;
-      -ms-flex-negative: 0;
-          flex-shrink: 0;
-}
-.article > div:last-child {
+.article > div {
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
 }
-.article a[rel='perma'] {
-  display: block;
+.article > div:first-child {
+  margin-right: 20px;
+  width: 25%;
 }
-.article .content > h2 a {
-  color: #ff671e;
+.article > div:last-child {
+  width: 75%;
+}
+.article .article-permalink {
+  display: block;
 }
 .article .article-img {
   max-width: 100%;

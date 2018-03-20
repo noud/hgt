@@ -4,28 +4,25 @@
 /* ----- */
 .article {
 
+  @article-width: percentage(0.25);
+
   display: flex;
 
   > div {
+    flex-grow: 1;
     &:first-child {
-      margin-right: 20px;
-      width: 25%;
-      flex-shrink: 0;
+      margin-right: @table-cell-space;
+      width: @article-width;
     }
-
     &:last-child {
-      flex-grow: 1;
+      width: (percentage(1) - @article-width) / 1;
     }
-
   }
 
-  a[rel='perma'] {
+  .article-permalink {
     display: block;
   }
 
-  .content > h2 a {
-    color: @primary-color;
-  }
 
   .article-img {
     max-width: 100%;
