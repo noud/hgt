@@ -19,19 +19,19 @@ class CartProduct
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Cart\Cart", inversedBy="cart_product")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Cart\Cart", inversedBy="cartProducts")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $cart;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\Product", inversedBy="cart_product")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\Product")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $product;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\UnitOfMeasure", inversedBy="cart_product")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\UnitOfMeasure")
      * @ORM\JoinColumn(nullable=false)
      */
     private $unit_of_measure;

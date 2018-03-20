@@ -15,19 +15,12 @@ class WebOrderService
     private $webOrderRepository;
 
     /**
-     * @var EntityManager
-     */
-    private $entityManager;
-
-    /**
      * WebOrderService constructor.
      * @param WebOrderRepository $webOrderRepository
-     * @param EntityManager $entityManager
      */
-    public function __construct(WebOrderRepository $webOrderRepository, EntityManager $entityManager)
+    public function __construct(WebOrderRepository $webOrderRepository)
     {
         $this->webOrderRepository = $webOrderRepository;
-        $this->entityManager = $entityManager;
     }
 
     /**
@@ -42,25 +35,22 @@ class WebOrderService
     /**
      * @param Cart $cart
      * @return WebOrder
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function createWebOrder(Cart $cart)
     {
-        //@TODO: Export maken van deze order
+        //@TODO: Export maken van deze order (HGT-201)
 
         $webOrder = new WebOrder();
         $webOrder->setExportDate(new \DateTime());
         $webOrder->setCart($cart);
 
         $this->webOrderRepository->add($webOrder);
-        $this->entityManager->flush();
 
         return $webOrder;
     }
 
     /**
      * @param WebOrder $webOrder
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function exportToNavision(WebOrder $webOrder)
     {

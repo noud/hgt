@@ -31,7 +31,7 @@ class Cart
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\User\Customer\Customer", inversedBy="cart")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\User\Customer\Customer")
      * @ORM\JoinColumn(nullable=false,onDelete="CASCADE")
      */
     private $customer;

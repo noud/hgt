@@ -2,21 +2,21 @@
 
 namespace HGT\Application\User;
 
-use HGT\AppBundle\Repository\User\CustomerDiscountGroup\CustomerDiscountGroupRepository;
+use HGT\AppBundle\Repository\User\CustomerGroup\CustomerGroupRepository;
 
 class CustomerGroupService
 {
     /**
-     * @var CustomerDiscountGroupRepository
+     * @var CustomerGroupRepository
      */
-    private $customerDiscountGroupRepository;
+    private $customerGroupRepository;
 
     /**
      * CustomerGroupService constructor.
-     * @param CustomerDiscountGroupRepository $customerDiscountGroupRepository
+     * @param CustomerGroupRepository $customerGroupRepository
      */
-    public function __construct(CustomerDiscountGroupRepository $customerDiscountGroupRepository)
+    public function __construct(CustomerGroupRepository $customerGroupRepository)
     {
-        $this->customerDiscountGroupRepository = $customerDiscountGroupRepository;
+        $this->customerGroupRepository = $customerGroupRepository;
     }
 }

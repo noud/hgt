@@ -35,4 +35,6 @@ class ReviseCartProductCommand
     public $delivery_date;
 
     public $reference;
+
+    public $client_ip;
 }

@@ -18,7 +18,7 @@ class ProductUnitOfMeasure
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\Product", inversedBy="product_unit_of_measure")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\Product")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $product;

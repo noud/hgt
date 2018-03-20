@@ -30,23 +30,23 @@ class ProductPrice
     private $navision_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\Product", inversedBy="product_price")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\Product")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $product;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerPriceGroup\CustomerPriceGroup", inversedBy="product_price")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerPriceGroup\CustomerPriceGroup")
      */
     private $customer_price_group;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerGroup\CustomerGroup", inversedBy="product_price")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerGroup\CustomerGroup")
      */
     private $customer_group;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\UnitOfMeasure", inversedBy="product_price")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\UnitOfMeasure")
      */
     private $unit_of_measure;
 
@@ -93,7 +93,7 @@ class ProductPrice
     private $is_web_action;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Content\SelectionCode\SelectionCode", inversedBy="product_price")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Content\SelectionCode\SelectionCode")
      */
     private $selection_code;
 

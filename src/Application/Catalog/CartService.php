@@ -8,8 +8,10 @@ use HGT\AppBundle\Repository\Catalog\Cart\CartRepository;
 use HGT\Application\Catalog\Cart\Cart;
 use HGT\Application\Catalog\Cart\CartProduct;
 use HGT\Application\Catalog\Cart\Command\ReviseCartProductCommand;
+use HGT\Application\Catalog\Order\WebOrder;
 use HGT\Application\User\Customer\Customer;
 use HGT\Application\User\CustomerService;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class CartService
 {
@@ -99,7 +101,6 @@ class CartService
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function finish(Cart $cart)
     {
@@ -122,10 +123,19 @@ class CartService
 
         //send emails
         $this->orderSender->sendOrderToCustomer($webOrder);
-        $this->orderSender->sendOrdersToSuppliers($webOrder, $cart->getCustomer());
+        $this->orderSender->sendOrdersToSuppliers($webOrder);
 
         //
-        //@TODO: $this->saveToPreviousCartSession();
+        $this->saveToPreviousCartSession($webOrder);
+    }
+
+    /**
+     * @param WebOrder $webOrder
+     */
+    private function saveToPreviousCartSession(WebOrder $webOrder)
+    {
+        $session = new Session();
+        $session->set('webOrderId', $webOrder->getId());
     }
 
     /**
@@ -273,7 +283,7 @@ class CartService
 
         $cart->setDeliveryDate($command->delivery_date);
         $cart->setReference($command->reference);
-        $cart->setIpAddress($_SERVER['REMOTE_ADDR']);
+        $cart->setIpAddress($command->client_ip);
 
         $this->cartRepository->add($cart);
     }

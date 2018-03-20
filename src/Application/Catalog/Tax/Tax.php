@@ -18,13 +18,13 @@ class Tax
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\ProductTaxGroup", inversedBy="tax")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\ProductTaxGroup")
      * @ORM\JoinColumn(nullable=false)
      */
     private $product_tax_group;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerTaxGroup\CustomerTaxGroup", inversedBy="tax")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerTaxGroup\CustomerTaxGroup")
      * @ORM\JoinColumn(nullable=false)
      */
     private $customer_tax_group;

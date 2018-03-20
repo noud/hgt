@@ -61,11 +61,6 @@ services:
         arguments:
             - HGT\Application\User\CustomerDiscountGroup\CustomerDiscountGroup
 
-    HGT\AppBundle\Repository\User\CustomerGroup\CustomerGroupRepository:
-        factory: ["@doctrine.orm.default_entity_manager", getRepository]
-        arguments:
-            - HGT\Application\User\CustomerGroup\CustomerGroup
-
     HGT\AppBundle\Repository\User\CustomerOrder\CustomerOrderRepository:
         factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments:
@@ -229,8 +224,15 @@ services:
             - "%mailer_default_from_email%"
             - "%mailer_default_from_name%"
 
+    HGT\AppBundle\Mailer\Cart\OrderSender:
+        arguments:
+            - "%mailer_default_to_order_cc_name%"
+            - "%mailer_default_to_order_cc_email%"
+            - "%mailer_default_to_order_name%"
+            - "%mailer_default_to_order_email%"
+            - ""
+
     HGT\AppBundle\Security\PasswordEncoder:
         arguments:
             - ""
             - "%salt%"
-

@@ -46,15 +46,13 @@ class WebOrderRepository extends EntityRepository
 
     /**
      * @param WebOrder $webOrder
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function exportToNavision(WebOrder $webOrder)
     {
         $webOrder = $this->get($webOrder);
 
-        if ($webOrder) {
+        if ($webOrder !== null) {
             $webOrder->setExportDate(new \DateTime());
-            $this->getEntityManager()->flush();
         }
     }
 }

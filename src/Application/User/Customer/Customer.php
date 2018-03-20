@@ -81,12 +81,12 @@ class Customer implements UserInterface
     private $show_prices;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerPriceGroup\CustomerPriceGroup", inversedBy="customer")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerPriceGroup\CustomerPriceGroup")
      */
     private $customer_price_group;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerGroup\CustomerGroup", inversedBy="customer")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerGroup\CustomerGroup", inversedBy="customers")
      */
     private $customer_group;
 
@@ -103,7 +103,7 @@ class Customer implements UserInterface
     private $delivery_days;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerTaxGroup\CustomerTaxGroup", inversedBy="customer")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerTaxGroup\CustomerTaxGroup")
      * @ORM\JoinColumn(nullable=false)
      */
     private $customer_tax_group;
@@ -235,7 +235,7 @@ class Customer implements UserInterface
     private $payment_terms;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerDiscountGroup\CustomerDiscountGroup", inversedBy="customer")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerDiscountGroup\CustomerDiscountGroup")
      */
     private $customer_discount_group;
 
@@ -252,7 +252,7 @@ class Customer implements UserInterface
     private $customer_vat_number;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Content\SelectionCode\SelectionCode", inversedBy="customer")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Content\SelectionCode\SelectionCode")
      */
     private $selection_code;
 

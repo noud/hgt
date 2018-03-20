@@ -20,7 +20,7 @@ class WebOrder
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Cart\Cart", inversedBy="web_order")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Cart\Cart")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $cart;
@@ -32,7 +32,7 @@ class WebOrder
     private $export_date;
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {

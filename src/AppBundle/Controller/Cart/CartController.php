@@ -60,17 +60,17 @@ class CartController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $command->client_ip = $request->getClientIp();
             $cartService->reviseCart($command);
 
             switch ($command->form_action) {
                 case 'update':
                     $this->addFlash('success', 'Winkelwagen succesvol bijgewerkt.');
-                    $this->entityManager->flush();
                     break;
                 case 'finish':
                     $cartService->finish($cart);
                     $this->entityManager->flush();
-                    //return $this->redirectToRoute('cart_success');
+                    return $this->redirectToRoute('cart_success');
                     break;
             }
         }
