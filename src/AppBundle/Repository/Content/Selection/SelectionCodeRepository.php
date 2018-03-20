@@ -2,11 +2,21 @@
 
 namespace HGT\AppBundle\Repository\Content\Selection;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Content\SelectionCode\SelectionCode;
 
-class SelectionCodeRepository extends EntityRepository
+class SelectionCodeRepository extends ServiceEntityRepository
 {
+    /**
+     * SelectionCodeRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, SelectionCode::class);
+    }
+
     /**
      * @param $id
      * @return SelectionCode|object

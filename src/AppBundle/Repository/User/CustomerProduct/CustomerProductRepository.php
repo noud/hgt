@@ -2,11 +2,21 @@
 
 namespace HGT\AppBundle\Repository\User\CustomerProduct;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\User\CustomerProduct\CustomerProduct;
 
-class CustomerProductRepository extends EntityRepository
+class CustomerProductRepository extends ServiceEntityRepository
 {
+    /**
+     * CustomerProductRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, CustomerProduct::class);
+    }
+
     /**
      * @param $id
      * @return CustomerProduct|object

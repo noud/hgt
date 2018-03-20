@@ -2,10 +2,10 @@
 
 namespace HGT\AppBundle\Repository\User\CustomerOrder;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use HGT\Application\User\CustomerOrder\CustomerOrder;
 
-class CustomerOrderRepository extends EntityRepository
+class CustomerOrderRepository extends ServiceEntityRepository
 {
     /**
      * @param $id

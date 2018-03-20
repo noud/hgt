@@ -2,11 +2,21 @@
 
 namespace HGT\AppBundle\Repository\Catalog\Order;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Catalog\Order\InvalidDeliveryDate;
 
-class InvalidDeliveryDateRepository extends EntityRepository
+class InvalidDeliveryDateRepository extends ServiceEntityRepository
 {
+    /**
+     * InvalidDeliveryDateRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, InvalidDeliveryDate::class);
+    }
+
     /**
      * @param $id
      * @return InvalidDeliveryDate|object

@@ -2,11 +2,21 @@
 
 namespace HGT\AppBundle\Repository\Content\Folder;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Content\Folder\FolderPage;
 
-class FolderPageRepository extends EntityRepository
+class FolderPageRepository extends ServiceEntityRepository
 {
+    /**
+     * FolderPageRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, FolderPage::class);
+    }
+
     /**
      * @param $id
      * @return FolderPage|object
