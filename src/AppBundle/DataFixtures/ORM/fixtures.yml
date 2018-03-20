@@ -216,7 +216,43 @@ HGT\Application\Content\News\News:
         meta_description: <sentence()>
 
 ### PAGE
-#
+HGT\Application\Content\Page\Page:
+    page_1:
+        id: 1
+        title: 'Over ons'
+        content: '<p>Al 35 jaar zijn wij d&eacute; Noord-Brabantse groothandel voor kleine en middelgrote horecabedrijven, maar ook voor retailers en foodgroothandels. Ons assortiment is breed genoeg om een totaalleverancier te zijn. Bekijk <a href="http://www.hgt-tilburg.nl/alle-categorieen">alle productcategorie&euml;n hier</a>.&nbsp;</p><p>HGT, zoals onze klanten ons noemen, is een bezorggrossier. Wij leveren alle benodigdheden aan cafetaria, sportclub, bedrijfsrestaurant, instellingskeuken, lunchroom, restaurant, slagerij, bakkerij, groentewinkel en verwerkers in de groenten- of vleessector.&nbsp;</p><div><p>Landelijk leveren wij een&nbsp;<a href="http://www.hgt-tilburg.nl/asperge-en-landwinkels">gespecialiseerd assortiment</a>&nbsp;aan aspergeboerderijen, landwinkels en delicatessenzaken.</p><div><p>Versproducten leveren wij van onze vaste partners:&nbsp;<a href="http://excellentagf.nl/">Excellent AGF</a>,&nbsp;<a href="http://www.wylax.nl/">Wylax visspecialiteiten</a>,&nbsp;<a href="http://www.bakkerfloorvanlieshout.nl/">Bakkerij Floor van Lieshout</a>,&nbsp;<a href="http://www.kroonzuivel.nl/index.php?page=1&amp;id=2&amp;taal=">Zuivelgroothandel Kroon</a>&nbsp;en&nbsp;<a href="http://www.olphen.nl/pg-17677-7-22794/pagina/vleesgroothandel.html">Van Olphen Vleesgroothandel</a>.&nbsp;</p></div><div><p>Bent u ge&iuml;nteresseerd in een vrijblijvend kennismakingsgesprek bij ons of bij u in de zaak? <a href="http://www.hgt-tilburg.nl/aanmelden">Vul hier uw gegevens in en een van onze verkoopadviseurs neemt contact met u op.</a></p><p><img alt="Vrachtwagen HGT" height="376" src="/userdata/HGT.jpg" title="Vrachtwagen HGT" width="600" /></p></div></div><p>&nbsp;</p>'
+        meta_title: 'Over Horeca Groothandel Tilburg'
+        meta_keywords: 'Over Horeca Groothandel Tilburg'
+        meta_description: 'Wij zijn een familiebedrijf met alles in huis voor de horeca. Tevens verkopen wij kerstpakketten.'
+        short_title: 'Over ons'
+        show_in_menu: 1
+        show_in_search: 1
+        url_key: 'url-key'
+        sort: 30
+    page_2:
+        title: 'Een sterk team'
+        content: '<p>Onze afdeling verkoop helpt u graag verder met een vraagstuk of het verzorgen van een offerte.<br />Neem contact op met <a href="mailto:verkoop@hgt-tilburg.nl?subject=Contactaanvraag%20">Anja of Violette</a> van de verkoop binnendienst:&nbsp;<br /><strong style="color: rgb(255, 140, 0); font-family: Arial; font-size: 18px;"><a href="mailto:verkoop@hgt-tilburg.nl">verkoop@hgt-tilburg.nl</a> of 013-5711790</strong></p><p>Zij helpen u graag verder of maken direct een afspraak met een van onze medewerkers van de verkoop buitendienst.</p><div><p><img align="left" alt="" height="333" src="/userdata/HGT-LR17.jpg" style="float: left;" title="" width="500" /></p></div><p>&nbsp;</p>'
+        meta_title: 'Ons team | Horeca Groothandel Tilburg'
+        meta_keywords: 'Niek Kwantes Ad Kloet Frits Brabers Jan Govers Adr...'
+        meta_description: 'Afspraak maken met vertegenwoordiger voor de horeca'
+        short_title: 'Verkoop team'
+        show_in_menu: 1
+        show_in_search: 1
+        url_key: 'verkoop-team'
+        sort: 10
+        parent: "@page_1"
+    page_3:
+        title: 'Producten voor aspergebedrijven en landwinkels'
+        content: '<p>We hebben een overzichtelijk assortiment samengesteld speciaal voor aspergeboerderijen en aardbeienkwekers.</p><p><a href="http://www.hgt-tilburg.nl/asperge-en-landwinkels">Klik hier voor onze speciale producten</a></p><p>&nbsp;</p>'
+        meta_title: 'Assortiment | asperge, aardbeien en kersen bedrijven'
+        meta_keywords: 'assortiment kopen asperge sauzen soepen verpakkingen zakken specialiteiten'
+        meta_description: 'Groothandel voor aspergertelers'
+        short_title: 'Assortiment landwinkels'
+        show_in_menu: 1
+        show_in_search: 1
+        url_key: 'assortiment-landwinkels'
+        sort: 20
+        parent: "@page_1"
 
 ### PAGE TYPE
 #
