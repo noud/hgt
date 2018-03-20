@@ -8,10 +8,10 @@
 
         <h1 class="page-title page-title-border">Merken</h1>
 
-        <ul class="brand-listing">
+        <ul class="list-col">
             {% for letter, manufacturerCat in manufacturerCats %}
                 <li>
-                    <div class="brand-listing-head">{{ letter }}</div>
+                    <div class="list-col-head">{{ letter }}</div>
                     <ul>
                         {% for catName in manufacturerCat %}
                             <li><a href="{{ catName.urlKey }}">{{ catName.name }} ({{ catName.totalProductCount }})</a>

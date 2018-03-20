@@ -1,4 +1,4 @@
-/* components
+/* main
   ---------------------------------------------------------------------------------------------------------------------- */
 
 /* ----- */
@@ -194,20 +194,18 @@
       }
 
       > div {
-        flex-shrink: 0;
+        flex-grow: 1;
         width: 100%/3;
 
         @media @sm {
           width: 100%;
         }
 
-        &:nth-child(2) {
-          padding-left: 25px;
-          padding-right: 25px;
+        &:not(:last-child) {
+          margin-right: @section-space/2;
           @media @sm {
-            margin-top: 50px;
-            margin-bottom: 50px;
-            padding: 0;
+            margin-right: 0;
+            margin-bottom: @section-space;
           }
         }
       }
@@ -224,17 +222,19 @@
   }
 }
 
-
+/* specific
+  ---------------------------------------------------------------------------------------------------------------------- */
 
 /* ----- */
-.newsletter {
+.form-newsletter {
 
   > div {
+    flex-grow: 1;
     &:first-child {
       width: 60%;
     }
     &:last-child {
-      flex-grow: 1;
+      width: 40%;
     }
   }
 
