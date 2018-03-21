@@ -90,8 +90,8 @@ class ProductRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('q')
             ->innerJoin('q.categories', 'c')
-            ->where('c.id IN(:categories)')
-            ->setParameter('categories', [$category])
+            ->where('c.id = :categories')
+            ->setParameter('categories', $category)
             ->orderBy('q.name', 'ASC');
 
         $paginator = new Paginator($qb->getQuery());
