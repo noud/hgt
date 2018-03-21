@@ -21,8 +21,6 @@ class IndexController extends Controller
         Request $request,
         NewsService $newsService
     ) {
-        //todo: plaatjes kunnen al worden uitgelezen via het object, maar moeten later toevoegegd worden i.v.m. fixtures
-
         /** @var $news */
         $news = $newsService->getActiveNews();
 
@@ -43,9 +41,6 @@ class IndexController extends Controller
         NewsService $newsService,
         News $news
     ) {
-        //todo: plaatjes kunnen al worden uitgelezen via het object, maar moeten later toevoegegd worden i.v.m. fixtures
-        //todo: moeten kijken hoe de content afbeeldingen worden uitgelezen, waarschijnlijk via de content editor
-
         return $this->render('news/view.html.twig', [
             'news' => $news
         ]);

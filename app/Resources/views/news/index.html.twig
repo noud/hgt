@@ -21,15 +21,14 @@
                             <li>
                                 <article class="article">
                                     <div>
-                                        <a rel="perma" href="{{ path('news_view', {'id': news_item.id} ) }}"><img
+                                        <a class="article-permalink" href="{{ path('news_view', {'id': news_item.id} ) }}"><img
                                                     class="article-img"
                                                     src="https://www.hgt-tilburg.nl/cache/images/userdata/news-images/200x200/kp-sjaal-verhaal.jpg"
                                                     alt="{{ news_item.metaTitle }}"/></a>
                                     </div>
                                     <div>
                                         <div class="content">
-                                            <h2><a rel="perma"
-                                                   href="{{ path('news_view', {'id': news_item.id} ) }}">{{ news_item.title }}</a>
+                                            <h2><a href="{{ path('news_view', {'id': news_item.id} ) }}">{{ news_item.title }}</a>
                                             </h2>
                                             <p>{{ news_item.shortDescription }}</p>
                                         </div>
