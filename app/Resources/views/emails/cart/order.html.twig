@@ -1,0 +1,86 @@
+{% extends 'emails/base.html.twig' %}
+
+{% block body %}
+    <p>Beste {{ data.customerName }},</p>
+
+    <p>
+        U heeft zojuist een bestelling geplaatst op
+        <a href="{{ url('homepage') }}">{{ url('homepage') }}</a>,
+        hieronder tref je de details van de bestelling aan.
+    </p>
+
+    <p><strong>Bestelling: WO-{{ data.webOrderId }}</strong></p>
+
+    <table class="decorated-table">
+        <tbody>
+        <tr>
+            <td class="label" valign="top">Naam:</td>
+            <td class="value">
+                {{ data.customerName }}
+                {% if data.customerCompany %}
+                    {{ data.customerCompany }}
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td class="label">Ordernummer:</td>
+            <td class="value">WO-{{ data.webOrderId }}</td>
+        </tr>
+        <tr>
+            <td class="label">Besteldatum:</td>
+            <td class="value">{{ data.cartFinishedDate|date("d-m-Y") }}</td>
+        </tr>
+        <tr>
+            <td class="label">Gewenste leverdatum:</td>
+            <td class="value">{{ data.cartDeliveryDate|date("d-m-Y") }}</td>
+        </tr>
+        <tr>
+            <td class="label">Klantnummer:</td>
+            <td class="value">{{ data.customerGroupNavisionId }}</td>
+        </tr>
+        <tr>
+            <td class="label">Totaalbedrag:</td>
+            <td class="value">&euro; {{ data.cartTotalExTax|to_money }}</td>
+        </tr>
+        <tr>
+            <td class="label">Referentie:</td>
+            <td class="value">{{ data.cartReference }}</td>
+        </tr>
+        <tr>
+            <td class="label">Opmerkingen:</td>
+            <td class="value">{{ data.cartNote }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <p><strong>Artikelen</strong></p>
+    <table class="decorated-table">
+        <tbody>
+        {% for cartProduct in data.cartProducts %}
+            {% set product = cartProduct.product %}
+            {% set unitOfMeasure = cartProduct.unitOfMeasure %}
+            {# $actionProductPrice = $product->getActionProductPrice($this->cart->getCustomer(), $unitOfMeasure->unit_of_measure_id, 1); #}
+            <tr class="{{ cycle(['odd', 'even'], loop.index0) }}">
+                <td class="product-name">{{ product.name }}</td>
+                <td class="product-manufacturer">
+                    {% if product.manufacturer %}
+                        {{ product.manufacturer.name }}
+                    {% endif %}
+                </td>
+                <td class="product-volume">{{ product.volume }}</td>
+                <td class="product-qty">{{ cartProduct.qty }} | {{ unitOfMeasure.name }}</td>
+                {% if data.customerCanSeePrices or isCopy %}
+                    <td class="product-euro">&euro;</td>
+                    <td class="product-total">{{ cartProduct.rowTotal|to_money }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        {% if data.customerCanSeePrices or isCopy %}
+            <tr>
+                <td style="text-align: right;" colspan="4"><strong>Totaalbedrag (excl. btw)</strong></td>
+                <td class="product-euro"><strong>&euro;</strong></td>
+                <td class="product-total"><strong>{{ data.cartTotalExTax|to_money }}</strong></td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

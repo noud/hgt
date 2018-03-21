@@ -9,5 +9,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class IsInvalidDeliveryDate extends Constraint
 {
-    public $message = 'U heeft een ongeldige datum geselecteerd';
+    public $message = '';
 }

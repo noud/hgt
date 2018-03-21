@@ -41,4 +41,27 @@ class WebOrderRepository extends ServiceEntityRepository
     {
         $this->getEntityManager()->remove($webOrder);
     }
+
+    /**
+     * @param Cart $cart
+     * @return WebOrder|null|object
+     */
+    public function getByCartId(Cart $cart)
+    {
+        return $this->findOneBy([
+            'cart' => $cart
+        ]);
+    }
+
+    /**
+     * @param WebOrder $webOrder
+     */
+    public function exportToNavision(WebOrder $webOrder)
+    {
+        $webOrder = $this->get($webOrder);
+
+        if ($webOrder !== null) {
+            $webOrder->setExportDate(new \DateTime());
+        }
+    }
 }

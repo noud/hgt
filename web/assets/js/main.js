@@ -29084,8 +29084,8 @@ var effectsEffectTransfer = effect;
 
     datepicker.regional.nl = {
         closeText: "Sluiten",
-        prevText: "←",
-        nextText: "→",
+        prevText: "<",
+        nextText: ">",
         currentText: "Vandaag",
         monthNames: [ "januari", "februari", "maart", "april", "mei", "juni",
             "juli", "augustus", "september", "oktober", "november", "december" ],

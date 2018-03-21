@@ -5,6 +5,7 @@ namespace HGT\Application\Catalog\Cart;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use HGT\Application\User\Customer\Customer;
 
 /**
  * @ORM\Entity(repositoryClass="HGT\AppBundle\Repository\Catalog\Cart\CartRepository")
@@ -30,7 +31,7 @@ class Cart
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\User\Customer\Customer", inversedBy="cart")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\User\Customer\Customer")
      * @ORM\JoinColumn(nullable=false,onDelete="CASCADE")
      */
     private $customer;
@@ -106,6 +107,14 @@ class Cart
     }
 
     /**
+     * @return Customer
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
      * @param mixed $customer
      */
     public function setCustomer($customer)
@@ -124,6 +133,22 @@ class Cart
     /**
      * @return DateTime
      */
+    public function getFinishedDate()
+    {
+        return $this->finished_date;
+    }
+
+    /**
+     * @param DateTime $finished_date
+     */
+    public function setFinishedDate($finished_date)
+    {
+        $this->finished_date = $finished_date;
+    }
+
+    /**
+     * @return DateTime
+     */
     public function getDeliveryDate()
     {
         return $this->delivery_date;
@@ -135,6 +160,14 @@ class Cart
     public function setDeliveryDate($delivery_date)
     {
         $this->delivery_date = $delivery_date;
+    }
+
+    /**
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
     }
 
     /**
@@ -175,6 +208,30 @@ class Cart
     public function setNote($note)
     {
         $this->note = $note;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTotalExTax()
+    {
+        return $this->total_ex_tax;
+    }
+
+    /**
+     * @param float $total_ex_tax
+     */
+    public function setTotalExTax($total_ex_tax)
+    {
+        $this->total_ex_tax = $total_ex_tax;
+    }
+
+    /**
+     * @param float $total_inc_tax
+     */
+    public function setTotalIncTax($total_inc_tax)
+    {
+        $this->total_inc_tax = $total_inc_tax;
     }
 
     /**

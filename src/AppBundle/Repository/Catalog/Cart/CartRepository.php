@@ -37,6 +37,15 @@ class CartRepository extends ServiceEntityRepository
 
     /**
      * @param Cart $cart
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function update(Cart $cart)
+    {
+        $this->getEntityManager()->flush($cart);
+    }
+
+    /**
+     * @param Cart $cart
      */
     public function remove(Cart $cart)
     {

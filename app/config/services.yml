@@ -38,6 +38,14 @@ services:
             - "%mailer_default_from_email%"
             - "%mailer_default_from_name%"
 
+    HGT\AppBundle\Mailer\Cart\OrderSender:
+        arguments:
+            - "%mailer_default_to_order_cc_name%"
+            - "%mailer_default_to_order_cc_email%"
+            - "%mailer_default_to_order_name%"
+            - "%mailer_default_to_order_email%"
+            - ""
+
     HGT\AppBundle\Security\PasswordEncoder:
         arguments:
             - ""

@@ -39,29 +39,32 @@ class IsInvalidDeliveryDateValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         $throwError = false;
-        $dateFormatted = $value->format('Y-m-d');
 
-        if ($this->invalidDeliveryDateService->isInvalidDeliveryDateByDate($value)) {
-            $throwError = true;
-        }
+        if ($value !== null) {
+            $dateFormatted = $value->format('Y-m-d');
 
-        if (!in_array($dateFormatted, $this->invalidDeliveryDateService->getValidDeliveryDatesAsDateArray())) {
-            $weekDay = date("w", strtotime($dateFormatted));
-            if (!in_array(
-                $weekDay,
-                $this->customerService->getValidDeliveryDays($this->customerService->getCurrentCustomer())
-            )) {
+            if ($this->invalidDeliveryDateService->isInvalidDeliveryDateByDate($value)) {
                 $throwError = true;
             }
-        }
 
-        if (strtotime($dateFormatted) < time()) {
-            $throwError = true;
-        }
+            if (!in_array($dateFormatted, $this->invalidDeliveryDateService->getValidDeliveryDatesAsDateArray())) {
+                $weekDay = date("w", strtotime($dateFormatted));
+                if (!in_array(
+                    $weekDay,
+                    $this->customerService->getValidDeliveryDays($this->customerService->getCurrentCustomer())
+                )) {
+                    $throwError = true;
+                }
+            }
 
-        if ($throwError) {
-            $this->context->buildViolation($constraint->message)
-                ->addViolation();
+            if (strtotime($dateFormatted) < time()) {
+                $throwError = true;
+            }
+
+            if ($throwError) {
+                $this->context->buildViolation($constraint->message)
+                    ->addViolation();
+            }
         }
     }
 }
