@@ -24,6 +24,8 @@ parameters:
     mailer_default_to_order_cc_email: erwinsmolders@hgt-tilburg.nl
 
     salt: ''
+    mailchimp_api_key: ~
+    mailchimp_list_id: ~
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt

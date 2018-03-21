@@ -2,12 +2,22 @@
 
 namespace HGT\AppBundle\Repository\Catalog\Cart;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Catalog\Cart\Cart;
 use HGT\Application\User\Customer\Customer;
 
-class CartRepository extends EntityRepository
+class CartRepository extends ServiceEntityRepository
 {
+    /**
+     * CartRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Cart::class);
+    }
+
     /**
      * @param int $id
      * @return Cart|object
