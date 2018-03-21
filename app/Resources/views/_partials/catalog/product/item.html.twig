@@ -16,7 +16,7 @@
             <li class="table-section-base-price">{{ product.price|price }}</li>
         </ul>
         <div class="list-product-btn">
-            <a href="#" class="btn btn-icon-label">
+            <a href="{{ path('product_view', { 'id': product.id }) }}" class="btn btn-icon-label">
                 <span class="icon"><i class="fas fa-shopping-cart"></i></span>
                 <span class="label">Bestellen</span>
             </a>

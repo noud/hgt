@@ -37,7 +37,7 @@
                         {% include '_partials/catalog/product/list.html.twig' with {'categories' : categories } %}
                     </div>
                 {% else %}
-                    {% if products %}
+                    {% if products is defined %}
                         <div class="paging paging-top paging-rwd">
                             <div>
                                 {% include '_partials/catalog/category/pagination.html.twig' with {

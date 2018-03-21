@@ -45,6 +45,12 @@ class CategoryController extends Controller
             $categoryService->getCategoriesWithProducts("NULL")
         );
 
+        $viewData = array();
+
+        $viewData['category'] = $category;
+        $viewData['categories'] = $superCategories;
+        $viewData['parentCategories'] = $parentCategories;
+
         if ($category->getProducts()) {
             $currentPage = $request->query->has('p') ? (int)$request->query->get('p') : 1;
             $perPage = $request->query->has('limit') ? (int)$request->query->get('limit') : 10;
@@ -65,15 +71,12 @@ class CategoryController extends Controller
             foreach ($results as $result) {
                 $resultNumber += count($result);
             }
+
+            $viewData['products'] = $results;
+            $viewData['pagination'] = $pagination;
+            $viewData['perPage'] = $perPage;
         }
 
-        return $this->render('catalog/category/view.html.twig', [
-            'category' => $category,
-            'products' => $results,
-            'categories' => $superCategories,
-            'parentCategories' => $parentCategories,
-            'pagination' => $pagination,
-            'perPage' => $perPage
-        ]);
+        return $this->render('catalog/category/view.html.twig', $viewData);
     }
 }
