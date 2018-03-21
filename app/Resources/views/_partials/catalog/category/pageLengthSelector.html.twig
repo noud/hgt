@@ -1,0 +1,5 @@
+<select class="paging-select form-control-select" onchange="window.location = this.value;">
+    {% for pageLength in [1, 10, 25, 50, 60, 100] %}
+        <option value="{{ path(routeName, {id: categoryId, limit: pageLength}) }}"{% if perPage == pageLength %} selected="selected"{% endif %}>{{ pageLength }}</option>
+    {% endfor %}
+</select>

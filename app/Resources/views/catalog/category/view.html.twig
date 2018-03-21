@@ -37,12 +37,48 @@
                         {% include '_partials/catalog/product/list.html.twig' with {'categories' : categories } %}
                     </div>
                 {% else %}
-                    {% if category.products %}
+                    {% if products %}
+                        <div class="paging paging-top paging-rwd">
+                            <div>
+                                {% include '_partials/catalog/category/pagination.html.twig' with {
+                                    paginateData: pagination,
+                                    routeName: 'category_view',
+                                    categoryId: category.id,
+                                    perPage: perPage
+                                } %}
+                            </div>
+                            <div>
+                                {% include '_partials/catalog/category/pageLengthSelector.html.twig' with {
+                                    currentPage: pagination.current,
+                                    routeName: 'category_view',
+                                    categoryId: category.id,
+                                    perPage: perPage
+                                } %}
+                            </div>
+                        </div>
                         <ul class="list-product list-product-rwd">
-                            {% for product in category.products %}
+                            {% for product in products %}
                                 {{ include('_partials/catalog/product/item.html.twig', {'product' : product }) }}
                             {% endfor %}
                         </ul>
+                        <div class="paging paging-bottom paging-rwd">
+                            <div>
+                                {% include '_partials/catalog/category/pagination.html.twig' with {
+                                    paginateData: pagination,
+                                    routeName: 'category_view',
+                                    categoryId: category.id,
+                                    perPage: perPage
+                                } %}
+                            </div>
+                            <div>
+                                {% include '_partials/catalog/category/pageLengthSelector.html.twig' with {
+                                    currentPage: pagination.current,
+                                    routeName: 'category_view',
+                                    categoryId: category.id,
+                                    perPage: perPage
+                                } %}
+                            </div>
+                        </div>
                     {% else %}
                         <div class="content">
                             <p>Geen categorieën/producten gevonden in deze categorie.</p>

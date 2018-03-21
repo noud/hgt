@@ -3,6 +3,7 @@
 namespace HGT\Application\Catalog;
 
 use HGT\AppBundle\Repository\Catalog\Product\ProductRepository;
+use HGT\Application\Catalog\Category\Category;
 use HGT\Application\Catalog\Product\Product;
 
 class ProductService
@@ -46,8 +47,25 @@ class ProductService
         return $this->productRepository->searchProducts($query);
     }
 
+    /**
+     * @param $currentPage
+     * @param $perPage
+     * @param $query
+     * @return \Doctrine\ORM\Tools\Pagination\Paginator
+     */
     public function getPagedProducts($currentPage, $perPage, $query)
     {
         return $this->productRepository->getPagedProducts($currentPage, $perPage, $query);
+    }
+
+    /**
+     * @param $currentPage
+     * @param $perPage
+     * @param Category $category
+     * @return \Doctrine\ORM\Tools\Pagination\Paginator
+     */
+    public function getPagedCategoryProducts($currentPage, $perPage, Category $category)
+    {
+        return $this->productRepository->getPagedCategoryProducts($currentPage, $perPage, $category);
     }
 }

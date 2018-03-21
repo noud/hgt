@@ -13,15 +13,13 @@
                 {% endif %}
             </li>
             <li class="table-section-base-meta">{{ product.volume }}</li>
-            <li class="table-section-base-price">&euro; {{ product.price }}</li>
+            <li class="table-section-base-price">{{ product.price|price }}</li>
         </ul>
-        {#{% if app.user %}#}
         <div class="list-product-btn">
             <a href="#" class="btn btn-icon-label">
                 <span class="icon"><i class="fas fa-shopping-cart"></i></span>
                 <span class="label">Bestellen</span>
             </a>
         </div>
-        {#{% endif %}#}
     </div>
 </li>
