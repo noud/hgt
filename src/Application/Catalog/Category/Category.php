@@ -19,7 +19,7 @@ class Category
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="HGT\Application\Catalog\Product\Product", mappedBy="category")
+     * @ORM\ManyToMany(targetEntity="HGT\Application\Catalog\Product\Product", mappedBy="categories")
      */
     private $products;
 
@@ -120,7 +120,7 @@ class Category
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getId()
     {

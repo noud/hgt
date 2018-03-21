@@ -13,15 +13,15 @@
                 {% endif %}
             </li>
             <li class="product-listing-meta-weight">{{ product.volume }}</li>
-            <li class="product-listing-meta-price">&euro; {{ product.price }}</li>
+            <li class="product-listing-meta-price">{{ product.price|price }}</li>
         </ul>
-        {#{% if app.user %}#}
-        <div class="product-listing-button">
-            <a href="#" class="btn btn-icon-label">
-                <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-                <span class="label">Bestellen</span>
-            </a>
-        </div>
-        {#{% endif %}#}
+        {% if app.user %}
+            <div class="product-listing-button">
+                <a href="#" class="btn btn-icon-label">
+                    <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+                    <span class="label">Bestellen</span>
+                </a>
+            </div>
+        {% endif %}
     </div>
 </li>

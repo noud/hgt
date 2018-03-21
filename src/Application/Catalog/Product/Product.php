@@ -2,6 +2,7 @@
 
 namespace HGT\Application\Catalog\Product;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
@@ -29,7 +30,7 @@ class Product
      *     inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")}
      *     )
      */
-    private $category;
+    private $categories;
 
     /**
      * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Manufacture\Manufacturer", inversedBy="product")
@@ -107,15 +108,23 @@ class Product
     private $mail_order_to_supplier;
 
     /**
+     * Product constructor.
+     */
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
+
+    /**
      * @return Category|null
      */
     public function getCategory()
     {
-        if ($this->category->count() === 0) {
+        if ($this->categories->count() === 0) {
             return null;
         }
 
-        return $this->category->first();
+        return $this->categories->first();
     }
 
     /**
