@@ -2,11 +2,21 @@
 
 namespace HGT\AppBundle\Repository\Catalog\Order;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Catalog\Order\WebOrder;
 
-class WebOrderRepository extends EntityRepository
+class WebOrderRepository extends ServiceEntityRepository
 {
+    /**
+     * WebOrderRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, WebOrder::class);
+    }
+
     /**
      * @param $id
      * @return WebOrder|object

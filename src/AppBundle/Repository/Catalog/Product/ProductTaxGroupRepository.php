@@ -2,11 +2,21 @@
 
 namespace HGT\AppBundle\Repository\Catalog\Product;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Catalog\Product\ProductTaxGroup;
 
-class ProductTaxGroupRepository extends EntityRepository
+class ProductTaxGroupRepository extends ServiceEntityRepository
 {
+    /**
+     * ProductTaxGroupRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, ProductTaxGroup::class);
+    }
+
     /**
      * @param $id
      * @return ProductTaxGroup|object

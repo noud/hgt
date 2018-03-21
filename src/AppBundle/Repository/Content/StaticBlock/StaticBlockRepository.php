@@ -2,11 +2,21 @@
 
 namespace HGT\AppBundle\Repository\Content\StaticBlock;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Content\StaticBlock\StaticBlock;
 
-class StaticBlockRepository extends EntityRepository
+class StaticBlockRepository extends ServiceEntityRepository
 {
+    /**
+     * StaticBlockRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, StaticBlock::class);
+    }
+
     /**
      * @param $id
      * @return StaticBlock|object

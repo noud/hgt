@@ -2,14 +2,24 @@
 
 namespace HGT\AppBundle\Repository\User\CustomerPriceGroup;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\User\CustomerPriceGroup\CustomerPriceGroup;
 
-class CustomerPriceGroupRepository extends EntityRepository
+class CustomerPriceGroupRepository extends ServiceEntityRepository
 {
     /**
+     * CustomerPriceGroupRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, CustomerPriceGroup::class);
+    }
+
+    /**
      * @param $id
-     * @return CustomerPriceGroup
+     * @return CustomerPriceGroup|object
      */
     public function get($id)
     {
