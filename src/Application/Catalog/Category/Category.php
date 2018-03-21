@@ -19,12 +19,16 @@ class Category
     private $id;
 
     /**
+<<<<<<< HEAD
      * @ORM\ManyToMany(targetEntity="HGT\Application\Catalog\Product\Product", mappedBy="categories")
+=======
+     * @ORM\ManyToMany(targetEntity="HGT\Application\Catalog\Product\Product")
+>>>>>>> master
      */
     private $products;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Category\Category", inversedBy="category")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Category\Category")
      * @ORM\JoinColumn(name="parent_id", onDelete="CASCADE", referencedColumnName="id")
      */
     private $parent;

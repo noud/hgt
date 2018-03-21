@@ -3,13 +3,15 @@
 namespace HGT\Application\Catalog;
 
 use Doctrine\ORM\EntityManager;
+use HGT\AppBundle\Mailer\Cart\OrderSender;
 use HGT\AppBundle\Repository\Catalog\Cart\CartRepository;
 use HGT\Application\Catalog\Cart\Cart;
 use HGT\Application\Catalog\Cart\CartProduct;
 use HGT\Application\Catalog\Cart\Command\ReviseCartProductCommand;
-use HGT\Application\Catalog\Product\Product;
+use HGT\Application\Catalog\Order\WebOrder;
 use HGT\Application\User\Customer\Customer;
 use HGT\Application\User\CustomerService;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class CartService
 {
@@ -39,25 +41,41 @@ class CartService
     private $entityManager;
 
     /**
+     * @var OrderSender
+     */
+    private $orderSender;
+
+    /**
+     * @var WebOrderService
+     */
+    private $webOrderService;
+
+    /**
      * CartService constructor.
      * @param CartRepository $cartRepository
      * @param CartProductService $cartProductService
      * @param ProductPriceService $productPriceService
      * @param CustomerService $customerService
      * @param EntityManager $entityManager
+     * @param OrderSender $orderSender
+     * @param WebOrderService $webOrderService
      */
     public function __construct(
         CartRepository $cartRepository,
         CartProductService $cartProductService,
         ProductPriceService $productPriceService,
         CustomerService $customerService,
-        EntityManager $entityManager
+        EntityManager $entityManager,
+        OrderSender $orderSender,
+        WebOrderService $webOrderService
     ) {
         $this->cartRepository = $cartRepository;
         $this->cartProductService = $cartProductService;
         $this->productPriceService = $productPriceService;
         $this->customerService = $customerService;
         $this->entityManager = $entityManager;
+        $this->orderSender = $orderSender;
+        $this->webOrderService = $webOrderService;
     }
 
     /**
@@ -76,6 +94,48 @@ class CartService
         }
 
         return $cart;
+    }
+
+    /**
+     * @param Cart $cart
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function finish(Cart $cart)
+    {
+        if ($cart->getState() !== Cart::STATE_FINISHED) {
+            $cart->setState(Cart::STATE_FINISHED);
+            $cart->setFinishedDate(new \DateTime());
+            $cart->setTotalExTax($this->calculateTotalExTax($cart));
+            $cart->setTotalIncTax($this->calculateTotalIncTax($cart));
+        }
+
+        //create weborder
+        $webOrder = $this->webOrderService->getWeborderByCartId($cart);
+
+        if ($webOrder === null) {
+            $webOrder = $this->webOrderService->createWebOrder($cart);
+        }
+
+        //export weborder to navision
+        $this->webOrderService->exportToNavision($webOrder);
+
+        //send emails
+        $this->orderSender->sendOrderToCustomer($webOrder);
+        $this->orderSender->sendOrdersToSuppliers($webOrder);
+
+        //
+        $this->saveToPreviousCartSession($webOrder);
+    }
+
+    /**
+     * @param WebOrder $webOrder
+     */
+    private function saveToPreviousCartSession(WebOrder $webOrder)
+    {
+        $session = new Session();
+        $session->set('webOrderId', $webOrder->getId());
     }
 
     /**
@@ -118,9 +178,7 @@ class CartService
         $cartProducts = $cart->getCartProducts();
 
         foreach ($cartProducts as $cartProduct) {
-            /** @var Product $product */
             $product = $cartProduct->getProduct();
-
             $cartProduct->setUnitPrice(
                 $this->productPriceService->getUnitPriceForCustomer(
                     $customer,
@@ -159,18 +217,51 @@ class CartService
 
     /**
      * @param Cart $cart
+     * @return array
+     */
+    public function calculateTotalPerTax(Cart $cart)
+    {
+        $taxes = array();
+
+        foreach ($cart->getCartProducts() as $cartProduct) {
+            if (!isset($taxes[$cartProduct->getTaxPercentage()])) {
+                $taxes[$cartProduct->getTaxPercentage()] = 0.0;
+            }
+
+            $taxes[$cartProduct->getTaxPercentage()] += $cartProduct->getRowTotal();
+        }
+
+        return $taxes;
+    }
+
+    /**
+     * @param Cart $cart
      * @return int
      */
     public function calculateTotalExTax(Cart $cart)
     {
         $totalExTax = 0;
 
-        /** @var CartProduct $cartProduct */
-        foreach ($cart->getCartProducts($cart) as $cartProduct) {
+        foreach ($cart->getCartProducts() as $cartProduct) {
             $totalExTax += $cartProduct->getRowTotal();
         }
 
         return $totalExTax;
+    }
+
+    /**
+     * @param Cart $cart
+     * @return float|int
+     */
+    public function calculateTotalIncTax(Cart $cart)
+    {
+        $totalIncTax = 0;
+
+        foreach ($this->calculateTotalPerTax($cart) as $percentage => $subtotal) {
+            $totalIncTax += $subtotal * (1+($percentage/100));
+        }
+
+        return $totalIncTax;
     }
 
     /**
@@ -186,9 +277,13 @@ class CartService
             $cartProductItem->setQty($cartProductForm->getQty());
         }
 
-        $cart->setNote($command->note);
+        if ($command->note) {
+            $cart->setNote($command->note);
+        }
+
         $cart->setDeliveryDate($command->delivery_date);
         $cart->setReference($command->reference);
+        $cart->setIpAddress($command->client_ip);
 
         $this->cartRepository->add($cart);
     }

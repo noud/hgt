@@ -2,11 +2,21 @@
 
 namespace HGT\AppBundle\Repository\Content\Home;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Content\Home\HomeBanner;
 
-class HomeBannerRepository extends EntityRepository
+class HomeBannerRepository extends ServiceEntityRepository
 {
+    /**
+     * HomeBannerRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, HomeBanner::class);
+    }
+
     /**
      * @param $id
      * @return HomeBanner|object

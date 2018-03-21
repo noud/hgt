@@ -9,15 +9,16 @@
         <div class="row main-row">
             <div class="col-sm-6">
                 <div class="content is-section-md">
-                    <p>Wilt u inloggen op onze webshop? Vul dan uw gebruikersnaam en wachtwoord in. Onze klanten kunnen
-                        een
-                        webshop account aanvragen bij onze afdeling verkoop. Nog geen klant? Dan kunt u zich hieronder
-                        registreren door op de kkop "Klant worden" te klikken.</p>
+                    <p>
+                        Wilt u inloggen op onze webshop? Vul dan uw gebruikersnaam en wachtwoord in. Onze klanten
+                        kunnen een webshop account aanvragen bij onze afdeling verkoop. Nog geen klant? Dan kunt u
+                        zich hieronder registreren door op de kkop "Klant worden" te klikken.
+                    </p>
                 </div>
                 {#<div class="content">#}
-                    {#{% if static_block_manager.has('myaccount_login_login') %}#}
-                        {#<h2>{{ static_block_manager.get('myaccount_login_login').title }}</h2>#}
-                    {#{% endif %}#}
+                {#{% if static_block_manager.has('myaccount_login_login') %}#}
+                {#<h2>{{ static_block_manager.get('myaccount_login_login').title }}</h2>#}
+                {#{% endif %}#}
                 {#</div>#}
                 {% if error %}
                     <div class="alert alert-danger">
@@ -28,10 +29,10 @@
                         {% endif %}
                     </div>
                 {% endif %}
-                {{ form_start(form, {'attr': {'class': 'login-form form-base'}}) }}
+                {{ form_start(form, {'attr': {'class': 'form-base'}}) }}
                 {{ form_row(form.account_username) }}
                 {{ form_row(form.account_password) }}
-                <div class="meta">
+                <div class="block-form-meta">
                     <button class="btn btn-special" type="submit">Inloggen</button>
                     <a href="{{ path('account_password_forgotten') }}">Wachtwoord vergeten?</a>
                 </div>

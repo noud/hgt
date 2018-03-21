@@ -42,7 +42,6 @@
                                         <div class="volume">Inhoud: {{ product.volume }}</div>
                                     </div>
                                 </li>
-
                                 {% if isCustomer and addToCartForm is defined %}
                                     <li>
                                         {{ form_start(addToCartForm, {'attr': {'id': 'add_to_cart_form', 'class': 'product-detail-form'}}) }}

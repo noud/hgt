@@ -33,12 +33,12 @@ class Product
     private $categories;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Manufacture\Manufacturer", inversedBy="product")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Manufacture\Manufacturer")
      */
     private $manufacturer;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\ProductPicture", inversedBy="product")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\ProductPicture")
      */
     private $main_picture;
 
@@ -91,7 +91,7 @@ class Product
     private $url_key;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\ProductTaxGroup", inversedBy="product")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\ProductTaxGroup")
      * @ORM\JoinColumn(nullable=false)
      */
     private $product_tax_group;
@@ -189,5 +189,21 @@ class Product
     public function getProductTaxGroup()
     {
         return $this->product_tax_group;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOrderProduct()
+    {
+        return $this->is_order_product;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMailOrderToSupplier()
+    {
+        return $this->mail_order_to_supplier;
     }
 }

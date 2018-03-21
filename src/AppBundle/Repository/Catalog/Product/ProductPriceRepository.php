@@ -2,13 +2,23 @@
 
 namespace HGT\AppBundle\Repository\Catalog\Product;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Catalog\Product\Product;
 use HGT\Application\Catalog\Product\ProductPrice;
 use HGT\Application\Catalog\Product\UnitOfMeasure;
 
-class ProductPriceRepository extends EntityRepository
+class ProductPriceRepository extends ServiceEntityRepository
 {
+    /**
+     * ProductPriceRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, ProductPrice::class);
+    }
+
     /**
      * @param int $id
      * @return ProductPrice|object

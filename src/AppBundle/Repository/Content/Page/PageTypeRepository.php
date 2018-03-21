@@ -2,11 +2,21 @@
 
 namespace HGT\AppBundle\Repository\Content\Page;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Content\Page\PageType;
 
-class PageTypeRepository extends EntityRepository
+class PageTypeRepository extends ServiceEntityRepository
 {
+    /**
+     * PageTypeRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, PageType::class);
+    }
+
     /**
      * @param $id
      * @return PageType|object

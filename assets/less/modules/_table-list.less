@@ -121,9 +121,9 @@
 }
 
 /* ----- */
-.item-list {
+.list-item {
 
-  .listing {
+  .btn-list {
     width: 100%;
     margin-bottom: -1px;
     top: -1px;
@@ -133,11 +133,10 @@
 }
 
 /* modifier: item-list */
-.item-list-alt {
-
+.list-item-alt {
   > li {
     &:first-child {
-      .listing {
+      .btn-list {
         border-top: 0;
       }
     }
@@ -145,48 +144,14 @@
 }
 
 /* ----- */
-.item-block {
 
-  border: @border;
-  padding: 10px;
-  text-align: center;
-  height: 100%;
-  position: relative;
-
-  a[rel='perma'] {
-    display: block;
-  }
-
-  img {
-    max-width: 100%;
-    width: auto;
-    margin: 0 auto;
-  }
-
-  h3 {
-    font-family: @font-family;
-    font-weight: @font-weight;
-    font-size: @font-size;
-
-    a {
-      color: @primary-color;
-    }
-
-    span {
-      color: #808080;
-    }
-  }
-}
-
-/* ----- */
-.item-block-list {
-
+.list-block {
   > li {
     margin-bottom: @grid-gutter-width;
     height: 250px;
   }
 
-  .item-block {
+  .block-item {
     h3 {
       position: absolute;
       bottom: 10px;
@@ -200,30 +165,26 @@
       margin-bottom: 50px;
     }
   }
-
 }
 
 /* responsive */
-.item-block-list-rwd {
-
-  .item-block-list {
-    > li {
-      @media @md {
+@media @md {
+  .list-block-rwd {
+    .list-block {
+      > li {
         height: 200px;
       }
-    }
-
-    .item-block h3 {
-      @media @md {
-        font-size: @font-size * 0.75;
+      .block-item {
+        h3 {
+          font-size: @font-size * 0.75;
+        }
       }
     }
   }
 }
 
 /* ----- */
-/* todo: make this generic list-col */
-.brand-listing {
+.list-col {
   columns: 200px 5;
 
   > li {
@@ -245,7 +206,7 @@
     }
   }
 
-  .brand-listing-head {
+  .list-col-head {
     font-size: @font-size-md-sub;
     color: @primary-color;
     font-weight: @font-weight-bold;
@@ -254,6 +215,84 @@
 }
 
 
+/* ----- */
+.list-product {
+
+  .list-base();
+
+  > li {
+
+    display: flex;
+
+    > div {
+      flex-grow: 1;
+      &:first-child {
+        width: 25%;
+        margin-right: @table-cell-space;
+      }
+      &:last-child {
+        width: 75%;
+      }
+    }
+  }
+
+  .list-product-search-results {
+    margin-top: 5px;
+    font-size: @font-size-sm;
+    a {
+      color: @primary-color;
+    }
+  }
+
+  .list-product-img {
+    a {
+      display: block;
+    }
+    img {
+      margin: 0 auto;
+    }
+  }
+
+  .list-product-btn {
+    margin-top: @table-cell-space/2;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .list-product-meta {
+    display: flex;
+
+    > li {
+      width: 100%/3;
+      flex-grow: 1;
+    }
+
+  }
+
+}
+
+/* rwd */
+@media @xs {
+
+  .list-product-rwd {
+
+    > li {
+      > div {
+        &:first-child {
+          width: 30%;
+        }
+      }
+    }
+
+    .list-product-meta {
+      display: block;
+      > li {
+        width: 100%;
+      }
+    }
+  }
+
+}
 
 /* specific
   ---------------------------------------------------------------------------------------------------------------------- */
@@ -309,64 +348,51 @@
 }
 
 /* rwd */
-.table-order-rwd {
-
-  > li {
-    @media @md {
+@media @md {
+  .table-order-rwd {
+    > li {
       display: block;
-    }
-
-    > div {
-      @media @md {
+      > div {
         width: 100%;
-      }
-      &:first-child {
-        @media @md {
+        &:first-child {
           width: 100%;
         }
       }
     }
   }
-
 }
 
 /* ----- */
-/* rwd */
-.table-history-rwd {
+.table-history {
+}
 
-  .table-w-head-header {
-    @media @sm {
+/* rwd */
+@media @sm {
+  .table-history-rwd {
+
+    .table-w-head-header {
       display: none;
     }
-  }
 
-  .table-w-head-meta {
-    @media @sm {
+    .table-w-head-meta {
       display: flex;
-    }
-    > div {
-      @media @sm {
+
+      > div {
         flex-grow: 1;
         width: 50%;
-      }
-      &:first-child {
-        @media @sm {
+
+        &:first-child {
           padding-right: 10px;
           width: 25%;
           display: block;
         }
       }
     }
-  }
 
-  .table-3-col {
-    > li {
-      @media @sm {
+    .table-3-col {
+      > li {
         display: block;
-      }
-
-      > div {
-        @media @sm {
+        > div {
           width: 100%;
         }
       }
@@ -401,26 +427,23 @@
 
   .table-number {
 
-    @width1: percentage(0.15);
-    @width2: percentage(0.3);
+    @table-number-width1: percentage(0.15);
+    @table-number-width2: percentage(0.3);
 
     .table-section-base();
 
     > div {
-      width: (percentage(1) - @width1 - @width2) / 3;
+      width: (percentage(1) - @table-number-width1 - @table-number-width2) / 3;
       &:first-child {
-        width: @width1;
+        width: @table-number-width1;
       }
       &:nth-child(2) {
-        width: @width2;
+        width: @table-number-width2;
       }
     }
   }
 
 }
-
-
-
 
 /* rwd */
 
@@ -588,9 +611,6 @@
   }
 }
 
-
-
-
 /* ----- */
 
 .list-action {
@@ -673,124 +693,3 @@
 
   }
 }
-
-
-
-/* ----- */
-.product-listing {
-  > li {
-
-    display: flex;
-
-    &:not(:last-child) {
-      border-bottom: @border;
-      margin-bottom: 20px;
-      padding-bottom: 20px;
-    }
-
-    > div {
-      &:first-child {
-        width: 25%;
-        margin-right: 20px;
-        flex-shrink: 0;
-      }
-
-      &:last-child {
-        flex-grow: 1;
-      }
-    }
-  }
-
-  h2 {
-    font-size: @heading-xs;
-    color: @primary-color;
-    margin-bottom: 10px;
-    a {
-      color: @primary-color;
-    }
-  }
-
-  .product-listing-sr {
-    margin-top: 5px;
-    font-size: @font-size-sm;
-    a {
-      color: @primary-color;
-    }
-  }
-
-  .product-listing-img {
-    img {
-      margin: 0 auto;
-    }
-  }
-
-  .product-listing-button {
-    margin-top: 10px;
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .product-listing-meta {
-    display: flex;
-
-    > li {
-      width: 100%/3;
-      flex-shrink: 0;
-    }
-
-  }
-
-  .product-listing-meta-price {
-    text-align: right;
-    font-weight: @font-weight-bold;
-  }
-
-  .product-listing-meta-weight {
-    color: #808080;
-  }
-
-}
-
-/* rwd */
-.product-listing-rwd {
-
-  h2 {
-    @media @md {
-      font-size: @heading-xs * 0.75;
-    }
-  }
-
-  > li {
-
-    > div {
-      &:first-child {
-        @media @xs {
-          width: 30%;
-        }
-      }
-    }
-  }
-
-  .product-listing-button {
-    @media @xs {
-      justify-content: flex-start;
-    }
-  }
-
-  .product-listing-meta {
-    @media @xs {
-      display: block;
-    }
-  }
-
-  .product-listing-meta-price {
-    @media @xs {
-      text-align: left;
-      margin-top: 20px;
-      font-size: @font-size * 1.25;
-    }
-  }
-}
-
-
-

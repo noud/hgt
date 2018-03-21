@@ -2,14 +2,24 @@
 
 namespace HGT\AppBundle\Repository\Catalog\Cart;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Catalog\Cart\Cart;
 use HGT\Application\Catalog\Cart\CartProduct;
 use HGT\Application\Catalog\Product\Product;
 use HGT\Application\Catalog\Product\UnitOfMeasure;
 
-class CartProductRepository extends EntityRepository
+class CartProductRepository extends ServiceEntityRepository
 {
+    /**
+     * CartProductRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, CartProduct::class);
+    }
+
     /**
      * @param int $id
      * @return CartProduct|object
@@ -29,7 +39,6 @@ class CartProductRepository extends EntityRepository
 
     /**
      * @param CartProduct $cartProduct
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function update(CartProduct $cartProduct)
     {

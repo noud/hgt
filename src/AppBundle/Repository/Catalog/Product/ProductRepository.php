@@ -2,13 +2,23 @@
 
 namespace HGT\AppBundle\Repository\Catalog\Product;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use HGT\Application\Catalog\Category\Category;
 use HGT\Application\Catalog\Product\Product;
 
-class ProductRepository extends EntityRepository
+class ProductRepository extends ServiceEntityRepository
 {
+    /**
+     * ProductRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Product::class);
+    }
+
     /**
      * @param $id
      * @return Product|object

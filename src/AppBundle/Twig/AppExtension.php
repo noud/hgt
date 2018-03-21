@@ -13,6 +13,7 @@ class AppExtension extends \Twig_Extension
             new \Twig_SimpleFilter('price', array($this, 'priceFilter'), array('is_safe' => array('html'))),
             new \Twig_SimpleFilter('phone_href', [$this, 'phoneHref']),
             new \Twig_SimpleFilter('whatsapp_href', [$this, 'whatsappHref']),
+            new \Twig_SimpleFilter('to_money', [$this, 'toMoney']),
         );
     }
 
@@ -46,5 +47,14 @@ class AppExtension extends \Twig_Extension
     public function whatsappHref($phoneNumber)
     {
         return 'whatsapp://' . preg_replace('/[^0-9]/', '', $phoneNumber);
+    }
+
+    /**
+     * @param $price
+     * @return string
+     */
+    public function toMoney($price)
+    {
+        return number_format($price, 2, ",", ".");
     }
 }

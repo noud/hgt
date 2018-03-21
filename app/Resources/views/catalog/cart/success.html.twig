@@ -4,7 +4,15 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="page-title">Bestelling afgerond</h1>
-        <p>Uw bestelling is succesvol afgerond. Bedankt.</p>
+        <h1 class="page-title">Bestelling geplaatst</h1>
+        <div class="content">
+            <p>Hartelijk dank voor uw bestelling (WO-{{ app.session.get('webOrderId') }}).</p>
+            <p>U ontvangt van ons een orderbevestiging op uw e-mailadres.</p>
+            <p>
+                Controleer deze e-mail goed, dit is de bestelling zoals wij hem van u ontvangen in ons ordersysteem,
+                deze order gaan wij voor u picken.
+            </p>
+            <p>De bestelling is tijdens kantooruren na 30 minuten zichtbaar in het order overzicht.</p>
+        </div>
     </div>
 {% endblock %}
