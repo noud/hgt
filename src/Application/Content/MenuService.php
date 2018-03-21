@@ -45,6 +45,7 @@ class MenuService
         }
 
         return [
+            'hasItems' => (count($left_categories) + count($right_categories)) > 0 ? true : false,
             'left_categories' => $left_categories,
             'right_categories' => $right_categories,
         ];
