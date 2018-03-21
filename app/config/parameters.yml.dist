@@ -18,6 +18,8 @@ parameters:
     mailer_default_from_name: 'Horeca Groothandel Tilburg'
 
     salt: ''
+    mailchimp_api_key: ~
+    mailchimp_list_id: ~
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt

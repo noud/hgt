@@ -43,3 +43,6 @@ services:
             - ""
             - "%salt%"
 
+    HGT\Application\Content\NewsletterService:
+        arguments:
+            - "%mailchimp_api_key%"

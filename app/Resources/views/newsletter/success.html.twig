@@ -1,0 +1,13 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block bodyClass %}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        <h1 class="page-title">Aangemeld</h1>
+        <div class="content is-section">
+            <p>U bent succesvol aangemeld voor de nieuwsbrief.</p>
+        </div>
+    </div>
+{% endblock %}
