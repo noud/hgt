@@ -2,11 +2,21 @@
 
 namespace HGT\AppBundle\Repository\User\LockedAccount;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\User\LockedAccount\LockedAccount;
 
-class LockedAccountRepository extends EntityRepository
+class LockedAccountRepository extends ServiceEntityRepository
 {
+    /**
+     * LockedAccountRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, LockedAccount::class);
+    }
+
     /**
      * @param string $username
      * @return LockedAccount|null|object

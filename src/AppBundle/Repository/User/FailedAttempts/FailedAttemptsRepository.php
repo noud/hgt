@@ -2,11 +2,21 @@
 
 namespace HGT\AppBundle\Repository\User\FailedAttempts;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\User\FailedAttempts\FailedAttempts;
 
-class FailedAttemptsRepository extends EntityRepository
+class FailedAttemptsRepository extends ServiceEntityRepository
 {
+    /**
+     * FailedAttemptsRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, FailedAttempts::class);
+    }
+
     /**
      * @param FailedAttempts $failedAttempts
      */

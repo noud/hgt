@@ -2,11 +2,21 @@
 
 namespace HGT\AppBundle\Repository\Content\News;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Content\News\News;
 
-class NewsRepository extends EntityRepository
+class NewsRepository extends ServiceEntityRepository
 {
+    /**
+     * NewsRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, News::class);
+    }
+
     /**
      * @param $id
      * @return News|null|object

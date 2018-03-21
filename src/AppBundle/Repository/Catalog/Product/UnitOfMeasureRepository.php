@@ -2,11 +2,21 @@
 
 namespace HGT\AppBundle\Repository\Catalog\Product;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Catalog\Product\UnitOfMeasure;
 
-class UnitOfMeasureRepository extends EntityRepository
+class UnitOfMeasureRepository extends ServiceEntityRepository
 {
+    /**
+     * UnitOfMeasureRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, UnitOfMeasure::class);
+    }
+
     /**
      * @param $id
      * @return UnitOfMeasure|object

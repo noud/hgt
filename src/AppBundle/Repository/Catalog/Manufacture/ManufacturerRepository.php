@@ -2,11 +2,21 @@
 
 namespace HGT\AppBundle\Repository\Catalog\Manufacture;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Catalog\Manufacture\Manufacturer;
 
-class ManufacturerRepository extends EntityRepository
+class ManufacturerRepository extends ServiceEntityRepository
 {
+    /**
+     * ManufacturerRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Manufacturer::class);
+    }
+
     /**
      * @param $id
      * @return Manufacturer|null|object
