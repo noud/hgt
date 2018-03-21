@@ -19,11 +19,7 @@ class Category
     private $id;
 
     /**
-<<<<<<< HEAD
      * @ORM\ManyToMany(targetEntity="HGT\Application\Catalog\Product\Product", mappedBy="categories")
-=======
-     * @ORM\ManyToMany(targetEntity="HGT\Application\Catalog\Product\Product")
->>>>>>> master
      */
     private $products;
 
