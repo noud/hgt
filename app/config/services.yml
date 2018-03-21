@@ -15,7 +15,7 @@ services:
         resource: '../../src/AppBundle/*'
         # you can exclude directories or files
         # but if a service is unused, it's removed anyway
-        exclude: '../../src/AppBundle/{Entity,Repository,DataFixtures,Traits}'
+        exclude: '../../src/AppBundle/{Entity,DataFixtures,Traits}'
 
     HGT\Application\:
         resource: '../../src/Application/*'
@@ -27,10 +27,6 @@ services:
         resource: '../../src/AppBundle/Controller'
         public: true
         tags: ['controller.service_arguments']
-
-    HGT\AppBundle\Repository\:
-        resource: '../../src/AppBundle/Repository'
-        tags: ['doctrine.repository_service']
 
     HGT\AppBundle\DataFixtures\ORM\LoadFixtures:
         tags: ['doctrine.fixture.orm']
