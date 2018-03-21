@@ -2,11 +2,21 @@
 
 namespace HGT\AppBundle\Repository\Content\Home;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Content\Home\HomeSlide;
 
-class HomeSlideRepository extends EntityRepository
+class HomeSlideRepository extends ServiceEntityRepository
 {
+    /**
+     * HomeSlideRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, HomeSlide::class);
+    }
+
     /**
      * @param $id
      * @return HomeSlide|object

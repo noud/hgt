@@ -2,14 +2,24 @@
 
 namespace HGT\AppBundle\Repository\Content\Config;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Content\Config\Config;
 
-class ConfigRepository extends EntityRepository
+class ConfigRepository extends ServiceEntityRepository
 {
     /**
+     * ConfigRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Config::class);
+    }
+
+    /**
      * @param $id integer
-     * @return null|Config
+     * @return Config|object
      */
     public function get($id)
     {
@@ -34,7 +44,7 @@ class ConfigRepository extends EntityRepository
 
     /**
      * @param $name string
-     * @return null|Config
+     * @return Config|object
      */
     public function getConfigByName($name)
     {

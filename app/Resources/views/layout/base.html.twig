@@ -98,15 +98,15 @@
         </div>
     </header>
     <main class="page-main">
-        {#<div class="container">#}
-            {#{% for label, messages in app.flashes %}#}
-                {#{% for message in messages %}#}
-                    {#<div class="alert alert-{{ label }}">#}
-                        {#{{ message }}#}
-                    {#</div>#}
-                {#{% endfor %}#}
-            {#{% endfor %}#}
-        {#</div>#}
+        <div class="container">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
         {% block body %}{% endblock %}
     </main>
     <footer class="page-footer">
@@ -119,9 +119,9 @@
                     </h2>
                 </div>
                 <div>
-                    <form class="form-newsletter form-sticky">
+                    <form action="{{ path('newsletter_subscribe') }}" method="post" class="form-newsletter form-sticky">
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Uw e-mailadres">
+                            <input type="email" class="form-control" name="email" placeholder="Uw e-mailadres">
                         </div>
                         <div>
                             <button class="btn">Aanmelden</button>

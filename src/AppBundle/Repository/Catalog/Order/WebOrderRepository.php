@@ -2,11 +2,21 @@
 
 namespace HGT\AppBundle\Repository\Catalog\Order;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Catalog\Order\WebOrder;
 
-class WebOrderRepository extends EntityRepository
+class WebOrderRepository extends ServiceEntityRepository
 {
+    /**
+     * WebOrderRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, WebOrder::class);
+    }
+
     /**
      * @param $id
      * @return WebOrder|object
@@ -30,5 +40,28 @@ class WebOrderRepository extends EntityRepository
     public function remove(WebOrder $webOrder)
     {
         $this->getEntityManager()->remove($webOrder);
+    }
+
+    /**
+     * @param Cart $cart
+     * @return WebOrder|null|object
+     */
+    public function getByCartId(Cart $cart)
+    {
+        return $this->findOneBy([
+            'cart' => $cart
+        ]);
+    }
+
+    /**
+     * @param WebOrder $webOrder
+     */
+    public function exportToNavision(WebOrder $webOrder)
+    {
+        $webOrder = $this->get($webOrder);
+
+        if ($webOrder !== null) {
+            $webOrder->setExportDate(new \DateTime());
+        }
     }
 }

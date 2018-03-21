@@ -9,10 +9,33 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CartForm extends AbstractType
 {
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'validation_groups' => function (FormInterface $form) {
+
+                $data = $form->getData();
+
+                $groups = array('Default');
+
+                if ($data->form_action === 'update') {
+                    $groups[] = 'Update';
+                }
+
+                if ($data->form_action === 'finish') {
+                    $groups[] = 'Finish';
+                }
+
+                return $groups;
+            },
+        ));
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options

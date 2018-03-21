@@ -2,11 +2,21 @@
 
 namespace HGT\AppBundle\Repository\Content\Rewrite;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Content\Rewrite\Rewrite;
 
-class RewriteRepository extends EntityRepository
+class RewriteRepository extends ServiceEntityRepository
 {
+    /**
+     * RewriteRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Rewrite::class);
+    }
+
     /**
      * @param $id
      * @return Rewrite|object

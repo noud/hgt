@@ -4,7 +4,6 @@ namespace HGT\AppBundle\Controller\Cart;
 
 use Doctrine\ORM\EntityManager;
 use HGT\AppBundle\Form\Catalog\Cart\CartForm;
-use HGT\Application\Catalog\Cart\Cart;
 use HGT\Application\Catalog\Cart\CartProduct;
 use HGT\Application\Catalog\Cart\Command\ReviseCartProductCommand;
 use HGT\Application\Catalog\CartProductService;
@@ -36,19 +35,19 @@ class CartController extends Controller
      * @param Request $request
      * @param CartService $cartService
      * @param CustomerService $customerService
-     * @param CartProductService $cartProductService
      * @param InvalidDeliveryDateService $invalidDeliveryDateService
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function indexAction(
         Request $request,
         CartService $cartService,
         CustomerService $customerService,
-        CartProductService $cartProductService,
         InvalidDeliveryDateService $invalidDeliveryDateService
     ) {
-        /** @var Cart $cart */
         $cart = $cartService->getOpenCart();
         $cartProducts = $cart->getCartProducts();
         $customer = $customerService->getCurrentCustomer();
@@ -61,6 +60,7 @@ class CartController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $command->client_ip = $request->getClientIp();
             $cartService->reviseCart($command);
 
             switch ($command->form_action) {
@@ -68,11 +68,11 @@ class CartController extends Controller
                     $this->addFlash('success', 'Winkelwagen succesvol bijgewerkt.');
                     break;
                 case 'finish':
+                    $cartService->finish($cart);
+                    $this->entityManager->flush();
                     return $this->redirectToRoute('cart_success');
                     break;
             }
-
-            $this->entityManager->flush();
         }
 
         return $this->render('catalog/cart/index.html.twig', [

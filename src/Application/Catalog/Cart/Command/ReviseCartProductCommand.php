@@ -22,13 +22,19 @@ class ReviseCartProductCommand
     }
 
     public $products;
+
     public $form_action;
+
     public $note;
 
     /**
-     * @Assert\Range(min = "+ 1 day", minMessage="invalid delivery_date")
+     * @Assert\Range(min = "+ 1 day", minMessage="U heeft een ongeldige datum geselecteerd")
      * @HgtAssert\IsInvalidDeliveryDate()
+     * @Assert\NotBlank(groups={"Finish"})
      */
     public $delivery_date;
+
     public $reference;
+
+    public $client_ip;
 }

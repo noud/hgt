@@ -4,9 +4,10 @@ namespace HGT\AppBundle\Form\Catalog\Cart;
 
 use HGT\Application\Catalog\Cart\CartProduct;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class CartProductForm extends AbstractType
 {
@@ -16,8 +17,9 @@ class CartProductForm extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('qty', TextType::class, [
+        $builder->add('qty', IntegerType::class, [
             'label' => false,
+            'constraints' => new NotBlank(array('message' => 'Vul het aantal in'))
         ]);
     }
 
