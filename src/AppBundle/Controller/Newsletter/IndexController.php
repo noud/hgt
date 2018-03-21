@@ -31,8 +31,9 @@ class IndexController extends Controller
     public function subscribeAction(Request $request)
     {
         $referer = $request->headers->get('referer');
+        $email = filter_var($request->get('email'), FILTER_SANITIZE_EMAIL);
 
-        if (!$this->checkValidEmail($request->get('email'))) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $this->addFlash('danger', 'Vul een (geldig) e-mailadres in.');
             return $this->redirect($referer);
         } else {
