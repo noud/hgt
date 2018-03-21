@@ -45,9 +45,22 @@ class MenuService
         }
 
         return [
-            'hasItems' => (count($left_categories) + count($right_categories)) > 0 ? true : false,
             'left_categories' => $left_categories,
             'right_categories' => $right_categories,
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    public function checkMenuHasItems()
+    {
+        $itemCount = 0;
+
+        foreach ($this->getCategoriesForMenu() as $menuSide ) {
+            $itemCount += count($menuSide);
+        }
+
+        return $itemCount > 0;
     }
 }

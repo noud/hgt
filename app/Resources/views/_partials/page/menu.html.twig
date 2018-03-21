@@ -43,21 +43,21 @@
     </ul>
     <ul class="desktop-menu">
         <li><a href="{{ path('homepage') }}" title="Home">Home</a></li>
-            <li class="{{ menu_manager.getCategoriesForMenu().hasItems ? "has-sub" : "" }}">
-                <a href="{{ path('category_index') }}" title="Assortiment">Assortiment</a>
-                {% if menu_manager.getCategoriesForMenu().hasItems %}
-                    <div>
-                        {% for menu in menu_manager.getCategoriesForMenu() %}
-                            <ul class="sub">
-                                {% for subMenu in menu %}
-                                    <li><a href="{{ path('category_view', {'id': subMenu.id}) }}"
-                                           title="{{ subMenu.name }}">{{ subMenu.name }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </li>
+        <li class="{{ menu_manager.checkMenuHasItems() ? "has-sub" : "" }}">
+            <a href="{{ path('category_index') }}" title="Assortiment">Assortiment</a>
+            {% if menu_manager.checkMenuHasItems() %}
+                <div>
+                    {% for menu in menu_manager.getCategoriesForMenu() %}
+                        <ul class="sub">
+                            {% for subMenu in menu %}
+                                <li><a href="{{ path('category_view', {'id': subMenu.id}) }}"
+                                       title="{{ subMenu.name }}">{{ subMenu.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </li>
         <li><a href="{{ path('action_index') }}" title="Acties">Acties</a></li>
         <li><a href="{{ path('folder_index') }}" title="Folder">Folder</a></li>
         <li><a href="#" title="Kerstpakketten">Kerstpakketten</a></li>
