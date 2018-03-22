@@ -2,7 +2,6 @@
 
 namespace HGT\Application\Catalog;
 
-use Doctrine\ORM\EntityManager;
 use HGT\AppBundle\Repository\Catalog\Order\WebOrderRepository;
 use HGT\Application\Catalog\Cart\Cart;
 use HGT\Application\Catalog\Order\WebOrder;

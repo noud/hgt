@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0"/>
     <meta name="keywords" content="{% block metaKeywords %}{{ page.metaKeywords|default('') }}{% endblock %}"/>
     <meta name="description" content="{% block metaDescription %}{{ page.metaDescription|default('') }}{% endblock %}"/>
-    {#<link href="//use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet" />#}
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/fontawesome-all.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}"/>
@@ -101,7 +100,7 @@
         <div class="container">
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
-                    <div class="alert alert-{{ label }}">
+                    <div class="alert alert-{{ label }} is-section-md">
                         {{ message }}
                     </div>
                 {% endfor %}
