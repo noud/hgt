@@ -3,7 +3,7 @@
         <li class="col-sm-4">
             <div class="block-item">
                 <a class="block-item-permalink" href="{{ path('category_view', {'id': category.id }) }}"><img
-                            src="https://www.hgt-tilburg.nl/cache/images/userdata/category-images/198x165/0115084909-191-aardappelproducten.jpg"
+                            src="{{ category.picture }}"
                             alt="{{ category.name }}"/></a>
                 <h3><a href="{{ path('category_view', {'id': category.id }) }}">{{ category.name }}
                         <span>({{ category.totalProductCount }})</span></a></h3>
