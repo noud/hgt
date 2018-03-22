@@ -49,4 +49,18 @@ class MenuService
             'right_categories' => $right_categories,
         ];
     }
+
+    /**
+     * @return bool
+     */
+    public function checkMenuHasItems()
+    {
+        $itemCount = 0;
+
+        foreach ($this->getCategoriesForMenu() as $menuSide ) {
+            $itemCount += count($menuSide);
+        }
+
+        return $itemCount > 0;
+    }
 }

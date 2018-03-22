@@ -3,7 +3,6 @@
 namespace HGT\Application\Search;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use HGT\AppBundle\Repository\Catalog\Manufacture\ManufacturerRepository;
 use HGT\Application\Catalog\ManufacturerService;
 use HGT\Application\Catalog\ProductService;
 use HGT\Application\Content\NewsService;
@@ -19,6 +18,7 @@ class SearchService
      * @var ManufacturerService
      */
     private $manufacturerService;
+
     /**
      * @var ProductService
      */
@@ -26,6 +26,9 @@ class SearchService
 
     /**
      * SearchService constructor.
+     * @param NewsService $newsService
+     * @param ManufacturerService $manufacturerService
+     * @param ProductService $productService
      */
     public function __construct(
         NewsService $newsService,

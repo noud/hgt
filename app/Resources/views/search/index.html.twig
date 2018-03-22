@@ -58,13 +58,13 @@
                                                 {% for productItem in searchResult %}
                                                     <li>
                                                         <div class="list-product-img">
-                                                            <a href="#"><img
+                                                            <a href="{{ path('product_view', { 'id': productItem.id }) }}"><img
                                                                         src="https://www.hgt-tilburg.nl/cache/images/userdata/product-images/160x105/0519192032-326-100001010.jpg"
                                                                         alt=""/></a>
                                                         </div>
                                                         <div>
                                                             <h2 class="table-section-base-header"><a
-                                                                        href="#">{{ productItem.name }}</a></h2>
+                                                                        href="{{ path('product_view', { 'id': productItem.id }) }}">{{ productItem.name }}</a></h2>
                                                             <ul class="list-product-meta">
                                                                 <li>{{ productItem.manufacturer.name }}</li>
                                                                 <li class="product-listing-meta-weight">{{ productItem.volume }}</li>
@@ -72,7 +72,7 @@
                                                                     &euro; {{ productItem.price }}</li>
                                                             </ul>
                                                             <div class="list-product-btn">
-                                                                <a href="#" class="btn btn-icon-label">
+                                                                <a href="{{ path('product_view', { 'id': productItem.id }) }}" class="btn btn-icon-label">
                                                                     <span class="icon"><i
                                                                                 class="fas fa-shopping-cart"></i></span>
                                                                     <span class="label">Bestellen</span>
@@ -108,7 +108,7 @@
                                                 <h3>Nieuws</h3>
                                                 <ul>
                                                     {% for newsItem in searchResult %}
-                                                        <li><a href="{{ newsItem.urlKey }}">{{ newsItem.title }}</a>
+                                                        <li><a href="{{ path('news_view', {'id': newsItem.id} ) }}">{{ newsItem.title }}</a>
                                                         </li>
                                                     {% endfor %}
                                                 </ul>
@@ -118,7 +118,7 @@
                                                 <h3>Merken</h3>
                                                 <ul>
                                                     {% for manuItem in searchResult %}
-                                                        <li><a href="{{ manuItem.urlKey }}">{{ manuItem.name }}</a></li>
+                                                        <li><a href="#">{{ manuItem.name }}</a></li>
                                                     {% endfor %}
                                                 </ul>
                                             </div>
