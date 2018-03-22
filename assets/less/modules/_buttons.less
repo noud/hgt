@@ -6,12 +6,23 @@
   padding-right: 15px;
   border-radius: @border-radius;
   font-size: @font-size;
-  font-weight: @font-weight-bold;
   background-color: @secondary-color;
   display: inline-block;
   line-height: @form-control-height;
 }
 
+/* modifier: btn */
+.btn-link-light {
+  color: #fff;
+}
+
+/* modifier: btn */
+.btn-link-dark {
+  color: #000;
+  &:hover {
+    color: #000;
+  }
+}
 
 /* modifier: btn */
 .btn-icon {
@@ -201,5 +212,13 @@
   i {
     margin-right: 10px;
     color: @primary-color;
+  }
+}
+
+/* ----- */
+.btn-group {
+  display: flex;
+  > div {
+    margin-right: @table-cell-space/2;
   }
 }

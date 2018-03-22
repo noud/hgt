@@ -30,12 +30,12 @@ class ProductService
     }
 
     /**
-     * @param Product $product
+     * @param int $id
      * @return Product|object
      */
-    public function getProductById(Product $product)
+    public function getProductById($id)
     {
-        return $this->productRepository->get($product);
+        return $this->productRepository->get($id);
     }
 
     /**

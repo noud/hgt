@@ -19,8 +19,8 @@ class WebOrderRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $id
-     * @return WebOrder|object
+     * @param int $id
+     * @return null|object
      */
     public function get($id)
     {
@@ -59,8 +59,6 @@ class WebOrderRepository extends ServiceEntityRepository
      */
     public function exportToNavision(WebOrder $webOrder)
     {
-        $webOrder = $this->get($webOrder);
-
         if ($webOrder !== null) {
             $webOrder->setExportDate(new \DateTime());
         }

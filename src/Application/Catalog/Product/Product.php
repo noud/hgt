@@ -38,7 +38,7 @@ class Product
     private $manufacturer;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\ProductPicture")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\ProductPicture", fetch="EAGER")
      */
     private $main_picture;
 

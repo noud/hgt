@@ -58,13 +58,16 @@
                                                 {% for productItem in searchResult %}
                                                     <li>
                                                         <div class="list-product-img">
-                                                            <a href="{{ path('product_view', { 'id': productItem.id }) }}"><img
-                                                                        src="https://www.hgt-tilburg.nl/cache/images/userdata/product-images/160x105/0519192032-326-100001010.jpg"
-                                                                        alt=""/></a>
+                                                            {% if productItem.mainPicture %}
+                                                                <a href="{{ path('product_view', { 'id': productItem.id }) }}"><img
+                                                                            src="{{ productItem.mainPicture.filename }}"
+                                                                            alt="{{ productItem.name }}"/></a>
+                                                            {% endif %}
                                                         </div>
                                                         <div>
                                                             <h2 class="table-section-base-header"><a
-                                                                        href="{{ path('product_view', { 'id': productItem.id }) }}">{{ productItem.name }}</a></h2>
+                                                                        href="{{ path('product_view', { 'id': productItem.id }) }}">{{ productItem.name }}</a>
+                                                            </h2>
                                                             <ul class="list-product-meta">
                                                                 <li>{{ productItem.manufacturer.name }}</li>
                                                                 <li class="product-listing-meta-weight">{{ productItem.volume }}</li>
@@ -72,15 +75,18 @@
                                                                     &euro; {{ productItem.price }}</li>
                                                             </ul>
                                                             <div class="list-product-btn">
-                                                                <a href="{{ path('product_view', { 'id': productItem.id }) }}" class="btn btn-icon-label">
+                                                                <a href="{{ path('product_view', { 'id': productItem.id }) }}"
+                                                                   class="btn btn-icon-label">
                                                                     <span class="icon"><i
                                                                                 class="fas fa-shopping-cart"></i></span>
                                                                     <span class="label">Bestellen</span>
                                                                 </a>
                                                             </div>
-                                                            <div class="list-product-search-results">Gevonden in: <a
-                                                                        href="#">Buitenhuis</a>
-                                                            </div>
+                                                            {% if productItem.category %}
+                                                                <div class="list-product-search-results">Gevonden in: <a
+                                                                            href="{{ path('category_view', {id: productItem.category.id } ) }}">{{ productItem.category.name }}</a>
+                                                                </div>
+                                                            {% endif %}
                                                         </div>
                                                     </li>
                                                 {% endfor %}
@@ -108,7 +114,8 @@
                                                 <h3>Nieuws</h3>
                                                 <ul>
                                                     {% for newsItem in searchResult %}
-                                                        <li><a href="{{ path('news_view', {'id': newsItem.id} ) }}">{{ newsItem.title }}</a>
+                                                        <li>
+                                                            <a href="{{ path('news_view', {'id': newsItem.id} ) }}">{{ newsItem.title }}</a>
                                                         </li>
                                                     {% endfor %}
                                                 </ul>

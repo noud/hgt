@@ -3,6 +3,7 @@
 namespace HGT\AppBundle\Controller\Catalog;
 
 use HGT\Application\Catalog\CategoryService;
+use HGT\Application\Catalog\Product\Product;
 use HGT\Application\Catalog\ProductService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
