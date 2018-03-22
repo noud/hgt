@@ -37,9 +37,8 @@ class IndexController extends Controller
             $this->addFlash('danger', 'Vul een (geldig) e-mailadres in.');
             return $this->redirect($referer);
         } else {
-            $subscribe = $this->newsletterService->listSubscribe(
-                $this->getParameter('mailchimp_list_id'), $request->get('email')
-            );
+            $mailchimpListId = $this->getParameter('mailchimp_list_id');
+            $subscribe = $this->newsletterService->listSubscribe($mailchimpListId, $request->get('email'));
 
             if ($subscribe['status'] == 400) {
                 $this->addFlash('danger', 'Dit e-mailadres is al aangemeld voor de nieuwsbrief.');

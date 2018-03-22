@@ -219,7 +219,6 @@
 
 }
 
-
 /* ----- */
 .list-product {
 
@@ -697,4 +696,72 @@
     }
 
   }
+}
+
+/* ----- */
+
+.list-edit {
+  .list-base();
+
+
+  > li {
+    cursor: grab;
+  }
+
+  .table-edit-icon {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .table-edit {
+    @table-edit-width: percentage(0.35);
+    display: flex;
+    align-items: center;
+
+    > div {
+      flex-grow: 1;
+      width: (percentage(1) - @table-edit-width ) / 3;
+      &:not(:last-child) {
+        margin-right: @table-cell-space;
+      }
+      &:first-child {
+        width: @table-edit-width;
+      }
+    }
+  }
+
+  .table-edit-head {
+    display: flex;
+    align-items: center;
+
+    .checkbox {
+      margin-right: @table-cell-space/2;
+      input {
+        display: block;
+      }
+    }
+  }
+
+}
+
+/* ----- */
+@media @sm {
+
+  .list-edit-rwd {
+
+    .table-edit {
+      display: block;
+      > div {
+        width: 100%;
+        &:not(:last-child) {
+          margin-bottom: @table-cell-space/2;
+        }
+        &:first-child {
+          width: 100%;
+        }
+      }
+    }
+
+  }
+
 }

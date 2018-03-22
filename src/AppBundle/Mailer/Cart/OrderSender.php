@@ -60,7 +60,11 @@ class OrderSender
         $data->cartDeliveryDate = $cart->getDeliveryDate();
         $data->cartTotalExTax = $cart->getTotalExTax();
         $data->cartReference = $cart->getReference();
-        $data->customerGroupNavisionId = $customer->getCustomerGroup()->getNavisionId();
+
+        if ($customer->getCustomerGroup()) {
+            $data->customerGroupNavisionId = $customer->getCustomerGroup()->getNavisionId();
+        }
+
         $data->cartNote = $cart->getNote();
         $data->cartProducts = $cart->getCartProducts();
         $data->customerCanSeePrices = $customer->canSeePrices();

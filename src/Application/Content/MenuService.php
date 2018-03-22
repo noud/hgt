@@ -57,7 +57,7 @@ class MenuService
     {
         $itemCount = 0;
 
-        foreach ($this->getCategoriesForMenu() as $menuSide ) {
+        foreach ($this->getCategoriesForMenu() as $menuSide) {
             $itemCount += count($menuSide);
         }
 

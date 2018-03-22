@@ -1,8 +1,10 @@
 <li>
     <div class="list-product-img">
-        <a href="{{ path('product_view', { 'id': product.id }) }}"><img
-                    src="https://www.hgt-tilburg.nl/cache/images/userdata/product-images/160x105/0519192032-326-100001010.jpg"
+        {% if product.mainPicture %}
+            <a href="{{ path('product_view', { 'id': product.id }) }}"><img
+                    src="{{ product.mainPicture.filename }}"
                     alt="{{ product.name }}"/></a>
+        {% endif %}
     </div>
     <div>
         <h2 class="table-section-base-header"><a href="{{ path('product_view', { 'id': product.id }) }}">{{ product.name|upper }}</a></h2>
