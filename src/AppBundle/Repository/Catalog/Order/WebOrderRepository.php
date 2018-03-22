@@ -4,6 +4,7 @@ namespace HGT\AppBundle\Repository\Catalog\Order;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use HGT\Application\Catalog\Cart\Cart;
 use HGT\Application\Catalog\Order\WebOrder;
 
 class WebOrderRepository extends ServiceEntityRepository

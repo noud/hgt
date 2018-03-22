@@ -1738,38 +1738,38 @@ a.ui-button:active,
 }
 /* Icons
 ----------------------------------*/
-/* states and images */
+/* states and ../images/jquery-ui */
 .ui-icon {
   width: 16px;
   height: 16px;
 }
 .ui-icon,
 .ui-widget-content .ui-icon {
-  background-image: url("images/ui-icons_444444_256x240.png");
+  background-image: url("../images/jquery-ui/ui-icons_444444_256x240.png");
 }
 .ui-widget-header .ui-icon {
-  background-image: url("images/ui-icons_444444_256x240.png");
+  background-image: url("../images/jquery-ui/ui-icons_444444_256x240.png");
 }
 .ui-state-hover .ui-icon,
 .ui-state-focus .ui-icon,
 .ui-button:hover .ui-icon,
 .ui-button:focus .ui-icon {
-  background-image: url("images/ui-icons_555555_256x240.png");
+  background-image: url("../images/jquery-ui/ui-icons_555555_256x240.png");
 }
 .ui-state-active .ui-icon,
 .ui-button:active .ui-icon {
-  background-image: url("images/ui-icons_ffffff_256x240.png");
+  background-image: url("../images/jquery-ui/ui-icons_ffffff_256x240.png");
 }
 .ui-state-highlight .ui-icon,
 .ui-button .ui-state-highlight.ui-icon {
-  background-image: url("images/ui-icons_777620_256x240.png");
+  background-image: url("../images/jquery-ui/ui-icons_777620_256x240.png");
 }
 .ui-state-error .ui-icon,
 .ui-state-error-text .ui-icon {
-  background-image: url("images/ui-icons_cc0000_256x240.png");
+  background-image: url("../images/jquery-ui/ui-icons_cc0000_256x240.png");
 }
 .ui-button .ui-icon {
-  background-image: url("images/ui-icons_777777_256x240.png");
+  background-image: url("../images/jquery-ui/ui-icons_777777_256x240.png");
 }
 /* positioning */
 .ui-icon-blank {
@@ -2573,15 +2573,18 @@ main {
   ---------------------------------------------------------------------------------------------------------------------- */
 /* ----- */
 .alert {
-  margin-bottom: 30px;
   font-size: 12px;
   font-weight: 600;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  display: inline-block;
 }
 .alert.alert-danger {
-  color: red;
+  background-color: red;
 }
 .alert.alert-success {
-  color: green;
+  background-color: #009900;
 }
 /* ----- */
 .tabs .tab-content {
@@ -3839,9 +3842,12 @@ textarea.form-control {
       -ms-flex-align: center;
           align-items: center;
 }
-.table-summary .table-summary-update a {
+.table-summary .table-summary-update .table-summary-permalink {
   color: #ff671e;
-  margin-left: 10px;
+}
+.table-summary .table-summary-update .btn {
+  color: #000;
+  margin-right: 10px;
 }
 .table-summary .table-summary-price {
   display: -webkit-box;
