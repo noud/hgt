@@ -40,6 +40,11 @@
                     <div>
                         <a class="logo" href="{{ path('homepage') }}"
                            title="{{ config_manager.get('company_name', '') }}">
+                            <img src="{{ asset('assets/images/logo.png') }}"
+                                 alt="{{ config_manager.get('company_name', '') }}" />
+                        </a>
+                        <a class="logo-alt" href="{{ path('homepage') }}"
+                           title="{{ config_manager.get('company_name', '') }}">
                             <img src="{{ asset('assets/images/logo.svg') }}"
                                  alt="{{ config_manager.get('company_name', '') }}" />
                         </a>

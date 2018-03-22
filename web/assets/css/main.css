@@ -2822,14 +2822,30 @@ main {
   ---------------------------------------------------------------------------------------------------------------------- */
 /* ----- */
 .logo {
-  width: 135px;
-  height: auto;
+  width: 230px;
+  height: 168px;
   display: block;
+  position: relative;
 }
 .logo img {
-  position: relative;
-  bottom: -55px;
-  margin-bottom: -30px;
+  position: absolute;
+  bottom: -45px;
+  width: 100%;
+  max-width: none;
+}
+@media (max-width: 1199px) {
+  .logo {
+    display: none;
+  }
+}
+.logo-alt {
+  width: 40px;
+  display: none;
+}
+@media (max-width: 1199px) {
+  .logo-alt {
+    display: block;
+  }
 }
 /* ----- */
 .overlay {
@@ -2862,18 +2878,28 @@ main {
 .header-main {
   position: relative;
   z-index: 1;
-  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1);
-  background: #ffffff;
-  background: -webkit-linear-gradient(top, #ffffff 0%, #f5f5f5 100%);
-  background: linear-gradient(to bottom, #ffffff 0%, #f5f5f5 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f5f5f5', GradientType=0);
+  background-image: url('../images/header.png');
+  background-repeat: repeat-x;
+  background-position: left bottom;
 }
 /* ----- */
 .header-sub {
-  background-color: #fec62b;
   padding-top: 20px;
   padding-bottom: 20px;
-  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  background-image: url('../images/header-bottom.png');
+  background-repeat: repeat-x;
+  background-position: left top;
+  background-color: #fec62b;
+  -webkit-transition-property: opacity, -webkit-transform;
+  transition-property: opacity, -webkit-transform;
+  transition-property: transform, opacity;
+  transition-property: transform, opacity, -webkit-transform;
+  -webkit-transition-duration: 0.25s;
+          transition-duration: 0.25s;
+  -webkit-transition-timing-function: ease-in-out;
+          transition-timing-function: ease-in-out;
+  -webkit-transition-delay: 0s;
+          transition-delay: 0s;
 }
 .header-sub .container {
   display: -webkit-box;
@@ -3051,6 +3077,14 @@ main {
   left: 0;
   top: 0;
   z-index: 9;
+  -webkit-transition-property: top;
+  transition-property: top;
+  -webkit-transition-duration: 0.25s;
+          transition-duration: 0.25s;
+  -webkit-transition-timing-function: ease-in-out;
+          transition-timing-function: ease-in-out;
+  -webkit-transition-delay: 0s;
+          transition-delay: 0s;
 }
 /* top level
   ---------------------------------------------------------------------------------------------------------------------- */
@@ -3064,11 +3098,10 @@ main {
   }
 }
 .sticky-header .logo {
-  width: 45px;
+  display: none;
 }
-.sticky-header .logo img {
-  bottom: auto;
-  margin-bottom: auto;
+.sticky-header .logo-alt {
+  display: block;
 }
 .sticky-header .header-branding {
   height: 70px;
@@ -3345,6 +3378,14 @@ main {
 }
 .primary-menu {
   position: relative;
+  -webkit-transition-property: right;
+  transition-property: right;
+  -webkit-transition-duration: 0.25s;
+          transition-duration: 0.25s;
+  -webkit-transition-timing-function: ease-in-out;
+          transition-timing-function: ease-in-out;
+  -webkit-transition-delay: 0s;
+          transition-delay: 0s;
 }
 @media (max-width: 991px) {
   .primary-menu {
