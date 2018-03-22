@@ -45,11 +45,11 @@ class CategoryController extends Controller
             $categoryService->getCategoriesWithProducts("NULL")
         );
 
-        $productCategoryList = array();
+        $productCategoryData = array();
 
-        $productCategoryList['category'] = $category;
-        $productCategoryList['categories'] = $superCategories;
-        $productCategoryList['parentCategories'] = $parentCategories;
+        $productCategoryData['category'] = $category;
+        $productCategoryData['categories'] = $superCategories;
+        $productCategoryData['parentCategories'] = $parentCategories;
 
         if ($category->getProducts()) {
             $currentPage = $request->query->has('p') ? (int)$request->query->get('p') : 1;
@@ -72,11 +72,11 @@ class CategoryController extends Controller
                 $resultNumber += count($result);
             }
 
-            $productCategoryList['products'] = $results;
-            $productCategoryList['pagination'] = $pagination;
-            $productCategoryList['perPage'] = $perPage;
+            $productCategoryData['products'] = $results;
+            $productCategoryData['pagination'] = $pagination;
+            $productCategoryData['perPage'] = $perPage;
         }
 
-        return $this->render('catalog/category/view.html.twig', $productCategoryList);
+        return $this->render('catalog/category/view.html.twig', $productCategoryData);
     }
 }

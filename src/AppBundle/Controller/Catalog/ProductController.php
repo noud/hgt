@@ -75,7 +75,7 @@ class ProductController extends Controller
             ];
         }
 
-        $viewData = [
+        $singleProductData = [
             'product' => $product,
             'parentCategories' => $parentCategories,
             'productPrices' => $productPrices,
@@ -103,10 +103,10 @@ class ProductController extends Controller
                 return $this->redirectToRoute('cart_index');
             }
 
-            $viewData['addToCartForm'] = $form->createView();
-            $viewData['isCustomer'] = true;
+            $singleProductData['addToCartForm'] = $form->createView();
+            $singleProductData['isCustomer'] = true;
         }
 
-        return $this->render('catalog/product/view.html.twig', $viewData);
+        return $this->render('catalog/product/view.html.twig', $singleProductData);
     }
 }
