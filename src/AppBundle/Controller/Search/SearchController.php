@@ -3,6 +3,7 @@
 namespace HGT\AppBundle\Controller\Search;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use HGT\Application\Catalog\CategoryService;
 use HGT\Application\Search\SearchService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,8 +19,11 @@ class SearchController extends Controller
      */
     public function indexAction(
         Request $request,
-        SearchService $searchService
+        SearchService $searchService,
+        CategoryService $categoryService
     ) {
+        $homeCategories = $categoryService->getHomeCategories();
+
         $query = $request->query->has('q') ?
             trim($request->query->get('q')) : false;
 
@@ -55,6 +59,7 @@ class SearchController extends Controller
         }
 
         return $this->render('search/index.html.twig', [
+            'homeCategories' => $homeCategories,
             'searchResults' => $searchResults,
             'resultNumber' => $resultNumber,
             'searchQuery' => $query,

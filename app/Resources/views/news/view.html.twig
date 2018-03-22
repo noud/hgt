@@ -17,17 +17,11 @@
                             <div class="content">
                                 <p>{{ news.description }}</p>
                             </div>
-                            <ul class="article-gallery">
-                                <li>
-                                    <a rel="perma" href="#"><img src="https://www.hgt-tilburg.nl/userdata/Ola-2018.jpg" alt="" /></a>
-                                </li>
-                                <li>
-                                    <img src="https://www.hgt-tilburg.nl/userdata/Ola-2018.jpg" alt="" />
-                                </li>
-                            </ul>
                         </div>
                         <div>
-                            <img class="article-img" src="https://www.hgt-tilburg.nl/cache/images/userdata/news-images/200x200/Kalender.jpg" alt="{{ news.metaTitle }}" />
+                            {% if news.picture %}
+                                <img class="article-img" src="{{ news.picture }}" alt="{{ news.metaTitle }}"/>
+                            {% endif %}
                         </div>
                     </article>
                 {% endif %}
