@@ -206,4 +206,9 @@ class ProductPriceService
             $date
         );
     }
+
+    public function getActionProducts()
+    {
+        return $this->productPriceRepository->getActionProducts();
+    }
 }

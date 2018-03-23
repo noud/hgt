@@ -16,6 +16,9 @@ class ActionController extends Controller
         Request $request,
         ProductPriceService $productPriceService
     ) {
+
+        dump($productPriceService->getActionProducts());
+
         return $this->render('actions/index.html.twig', []);
     }
 }

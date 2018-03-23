@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Catalog\Product\Product;
 use HGT\Application\Catalog\Product\ProductPrice;
 use HGT\Application\Catalog\Product\UnitOfMeasure;
+use HGT\Application\User\Customer\Customer;
 
 class ProductPriceRepository extends ServiceEntityRepository
 {
@@ -78,6 +79,22 @@ class ProductPriceRepository extends ServiceEntityRepository
         ]);
 
         $qb->orderBy('q.is_action_price');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getActionProducts()
+    {
+        $qb = $this->createQueryBuilder('q')
+            ->leftJoin('q.product', 'product')
+            ->leftJoin('q.customer_group', 'customer')
+            ->leftJoin('q.unit_of_measure', 'unit')
+            ->addSelect('product', 'customer','unit')
+
+            ->where("q.price_type = 'global' AND q.is_action_price = '1'")
+            ->where("q.is_action_price = '1'")
+            ->where('q.start_date <= CURDATE() AND')
+        ;
 
         return $qb->getQuery()->getResult();
     }
