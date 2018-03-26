@@ -5,7 +5,7 @@ namespace HGT\Application\User\Customer;
 interface PasswordResetListener
 {
     /**
-     * @param string $username
+     * @param string $ip
      */
-    public function onPasswordReset($username);
+    public function onPasswordReset($ip);
 }

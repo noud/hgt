@@ -18,7 +18,7 @@ class FailedAttempts
      * @ORM\Column(type="string")
      * @ORM\Id
      */
-    private $username;
+    private $ipAddress;
 
     /**
      * @var DateTimeImmutable
@@ -35,12 +35,12 @@ class FailedAttempts
     private $numberOfFailures;
 
     /**
-     * @param string $username
+     * @param string $ipAddress
      * @param DateTimeImmutable $lastFailure
      */
-    public function __construct($username, DateTimeImmutable $lastFailure)
+    public function __construct($ipAddress, DateTimeImmutable $lastFailure)
     {
-        $this->username = $username;
+        $this->ipAddress = $ipAddress;
         $this->lastFailure = $lastFailure;
         $this->numberOfFailures = 1;
     }
@@ -51,15 +51,15 @@ class FailedAttempts
     public function addFailure(DateTimeImmutable $lastFailure)
     {
         $this->lastFailure = $lastFailure;
-        $this->numberOfFailures += 1;
+        ++$this->numberOfFailures;
     }
 
     /**
      * @return string
      */
-    public function getUsername()
+    public function getIpAddress()
     {
-        return $this->username;
+        return $this->ipAddress;
     }
 
     /**

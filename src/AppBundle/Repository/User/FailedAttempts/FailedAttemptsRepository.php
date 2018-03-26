@@ -19,6 +19,7 @@ class FailedAttemptsRepository extends ServiceEntityRepository
 
     /**
      * @param FailedAttempts $failedAttempts
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
      */
     public function add(FailedAttempts $failedAttempts)
     {
@@ -26,22 +27,22 @@ class FailedAttemptsRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $username
+     * @param string $ip
      * @return FailedAttempts|null|object
      */
-    public function findByUsername($username)
+    public function findByIp($ip)
     {
-        return $this->findOneBy(compact('username'));
+        return $this->findOneBy(['ipAddress' => $ip]);
     }
 
     /**
-     * @param string $username
+     * @param string $ip
      */
-    public function removeByUsername($username)
+    public function removeByIp($ip)
     {
         $self = FailedAttempts::class;
-        $query = $this->getEntityManager()->createQuery("DELETE FROM {$self} fa WHERE fa.username = :username");
+        $query = $this->getEntityManager()->createQuery("DELETE FROM {$self} fa WHERE fa.ipAddress = :ip");
 
-        $query->execute(compact('username'));
+        $query->execute(compact('ip'));
     }
 }

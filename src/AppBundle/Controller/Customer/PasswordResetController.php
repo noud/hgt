@@ -89,7 +89,7 @@ class PasswordResetController extends Controller
             return $this->redirectToRoute('account_password_forgotten');
         }
 
-        if (!$this->passwordResetService->resetPassword($hash)) {
+        if (!$this->passwordResetService->resetPassword($hash, $request->getClientIp())) {
             $this->addFlash(
                 'error',
                 'Het is niet gelukt om je wachtwoord te resetten.'

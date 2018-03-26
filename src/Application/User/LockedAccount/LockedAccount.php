@@ -19,7 +19,7 @@ class LockedAccount
      * @ORM\Column(type="string")
      * @ORM\Id
      */
-    private $username;
+    private $ipAddress;
 
     /**
      * @var DateTimeImmutable
@@ -29,21 +29,21 @@ class LockedAccount
     private $lockedSince;
 
     /**
-     * @param string $username
+     * @param string $ipAddress
      * @param DateTimeImmutable $lockedSince
      */
-    public function __construct($username, DateTimeImmutable $lockedSince)
+    public function __construct($ipAddress, DateTimeImmutable $lockedSince)
     {
-        $this->username = $username;
+        $this->ipAddress = $ipAddress;
         $this->lockedSince = $lockedSince;
     }
 
     /**
      * @return string
      */
-    public function getUsername()
+    public function getIpAddress()
     {
-        return $this->username;
+        return $this->ipAddress;
     }
 
     /**

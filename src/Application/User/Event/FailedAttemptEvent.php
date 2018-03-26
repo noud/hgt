@@ -9,7 +9,7 @@ class FailedAttemptEvent
     /**
      * @var string
      */
-    public $username;
+    public $ip;
 
     /**
      * @var DateTimeImmutable
