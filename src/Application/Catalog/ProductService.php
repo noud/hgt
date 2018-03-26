@@ -68,4 +68,14 @@ class ProductService
     {
         return $this->productRepository->getPagedCategoryProducts($currentPage, $perPage, $category);
     }
+
+    /**
+     * @param bool $loggedIn
+     * @return mixed
+     */
+    public function getActionProducts($loggedIn = false)
+    {
+        return $this->productRepository->getActionProducts($loggedIn);
+    }
+
 }

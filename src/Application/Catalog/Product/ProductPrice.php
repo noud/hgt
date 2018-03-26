@@ -30,7 +30,7 @@ class ProductPrice
     private $navision_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\Product")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\Product", inversedBy="productPrices")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $product;

@@ -6,6 +6,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use HGT\Application\Catalog\Product\Product;
 use HGT\Application\Catalog\Product\ProductPrice;
+use HGT\Application\Catalog\Product\ProductUnitOfMeasure;
 use HGT\Application\Catalog\Product\UnitOfMeasure;
 use HGT\Application\User\Customer\Customer;
 
@@ -62,39 +63,23 @@ class ProductPriceRepository extends ServiceEntityRepository
             $date = date("Y-m-d");
         }
 
-        $qb = $this->createQueryBuilder('q');
-        $qb->where('q.product = :product_id')
-            ->andWhere('q.unit_of_measure = :unit_of_measure_id')
-            ->andWhere(':date BETWEEN q.start_date AND q.end_date OR (q.start_date <= :date AND q.end_date IS NULL)');
+        $qb = $this->createQueryBuilder("q");
+        $qb->where("q.product = :product_id")
+            ->andWhere("q.unit_of_measure = :unit_of_measure_id")
+            ->andWhere(":date BETWEEN q.start_date AND q.end_date OR (q.start_date <= :date AND q.end_date IS NULL)");
 
         if ($date !== null) {
-            $qb->andWhere('q.is_action_price = :is_action_price');
+            $qb->andWhere("q.is_action_price = :is_action_price");
         }
 
         $qb->setParameters([
-            'product_id' => $product->getId(),
-            'unit_of_measure_id' => $unit_of_measure->getId(),
-            'date' => $date,
-            'is_action_price' => $is_action_price
+            "product_id" => $product->getId(),
+            "unit_of_measure_id" => $unit_of_measure->getId(),
+            "date" => $date,
+            "is_action_price" => $is_action_price
         ]);
 
-        $qb->orderBy('q.is_action_price');
-
-        return $qb->getQuery()->getResult();
-    }
-
-    public function getActionProducts()
-    {
-        $qb = $this->createQueryBuilder('q')
-            ->leftJoin('q.product', 'product')
-            ->leftJoin('q.customer_group', 'customer')
-            ->leftJoin('q.unit_of_measure', 'unit')
-            ->addSelect('product', 'customer','unit')
-
-            ->where("q.price_type = 'global' AND q.is_action_price = '1'")
-            ->where("q.is_action_price = '1'")
-            ->where('q.start_date <= CURDATE() AND')
-        ;
+        $qb->orderBy("q.is_action_price");
 
         return $qb->getQuery()->getResult();
     }

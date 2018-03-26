@@ -108,11 +108,35 @@ class Product
     private $mail_order_to_supplier;
 
     /**
+     * @var ArrayCollection|ProductPrice[]
+     *
+     * @ORM\OneToMany(targetEntity="HGT\Application\Catalog\Product\ProductPrice", mappedBy="product")
+     */
+    private $productPrices;
+
+    /**
      * Product constructor.
      */
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->productPrices = new ArrayCollection();
+    }
+
+    /**
+     * @return ArrayCollection|ProductPrice[]
+     */
+    public function getProductPrices()
+    {
+        return $this->productPrices;
+    }
+
+    /**
+     * @param ArrayCollection|ProductPrice[] $productPrices
+     */
+    public function setProductPrices($productPrices)
+    {
+        $this->productPrices = $productPrices;
     }
 
     /**

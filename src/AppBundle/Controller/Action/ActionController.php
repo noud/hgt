@@ -2,7 +2,7 @@
 
 namespace HGT\AppBundle\Controller\Action;
 
-use HGT\Application\Catalog\ProductPriceService;
+use HGT\Application\Catalog\ProductService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,10 +14,10 @@ class ActionController extends Controller
      */
     public function indexAction(
         Request $request,
-        ProductPriceService $productPriceService
+        ProductService $productService
     ) {
 
-        dump($productPriceService->getActionProducts());
+        dump($productService->getActionProducts(true));
 
         return $this->render('actions/index.html.twig', []);
     }
