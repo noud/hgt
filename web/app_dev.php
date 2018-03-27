@@ -14,7 +14,8 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
     || !(in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1', '172.20.0.1'], true) || PHP_SAPI === 'cli-server')
 ) {
-    if (strpos($_SERVER['REMOTE_ADDR'], '192.168.0.') !== 0) {
+    if (strpos($_SERVER['REMOTE_ADDR'], '192.168.0.') !== 0 &&
+        strpos($_SERVER['REMOTE_ADDR'], '172.23.0.') !== 0) {
         header('HTTP/1.0 403 Forbidden');
         exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
     }

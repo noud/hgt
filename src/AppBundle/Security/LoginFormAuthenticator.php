@@ -86,11 +86,16 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $this->router->generate('account_login');
     }
 
-    private function isCustomerLocked($username)
+    /**
+     * @param Request $request
+     * @return bool
+     * @throws \Exception
+     */
+    private function isIpAddressLocked(Request $request)
     {
         // Check if the user is locked
         $query = new IsAccountLockedQuery();
-        $query->username = $username;
+        $query->ip = $request->getClientIp();
         $query->timestamp = new DateTimeImmutable();
 
         return $this->lockingService->isAccountLockedAt($query);
@@ -98,25 +103,37 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     /**
      * @param Request $request
+     * @return bool
+     */
+    public function supports(Request $request)
+    {
+        return ($request->get('_route') === 'account_login' && $request->isMethod('POST'));
+    }
+
+    /**
+     * @param Request $request
      * @return array
+     * @throws \Exception
      */
     public function getCredentials(Request $request)
     {
-        $isLoginSubmit = ($request->get('_route') === 'account_login' && $request->isMethod('POST'));
-
-        if (!$isLoginSubmit) {
-            // skip authentication
-            return;
+        // Check if the account is locked
+        if ($this->isIpAddressLocked($request)) {
+            throw new LockedException('Client is locked.');
         }
 
         $form = $this->formFactory->create(LoginForm::class);
         $form->handleRequest($request);
         $data = $form->getData();
+        $data['ip_address'] = $request->getClientIp();
 
-        $request->getSession()->set(
-            Security::LAST_USERNAME,
-            $data['account_username']
-        );
+        // Set the last username
+        if ($session = $request->getSession()) {
+            $session->set(
+                Security::LAST_USERNAME,
+                $data['account_username']
+            );
+        }
 
         return $data;
     }
@@ -124,15 +141,15 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     /**
      * @param mixed $credentials
      * @param UserProviderInterface $userProvider
-     *
      * @return null|UserInterface
+     * @throws \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $user = $this->customerService->getCustomerByUsername($credentials['account_username']);
 
         if (null === $user) {
-            throw new UsernameNotFoundException();
+            throw new UsernameNotFoundException('Username not found');
         }
 
         return $user;
@@ -143,17 +160,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      * @param UserInterface $user
      *
      * @return bool
+     * @throws \Symfony\Component\Security\Core\Exception\LockedException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function checkCredentials($credentials, UserInterface $user)
     {
-        // Check if the account is locked
-        if ($this->isCustomerLocked($credentials['account_username'])) {
-            throw new LockedException('Customer account is locked.');
-        }
-
         $password = $credentials['account_password'];
-        $success = false;
 
         if ($user instanceof Customer) {
             /** @var Customer $customer */
@@ -186,10 +198,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $success;
     }
 
+    /**
+     * @param $credentials
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     private function onSuccessfulLoginEvent($credentials)
     {
         $event = new SuccessfulLoginEvent();
-        $event->username = $credentials['account_username'];
+        $event->ip = $credentials['ip_address'];
         $event->timestamp = new DateTimeImmutable();
 
         $this->lockingService->handleSuccessfulLogin($event);

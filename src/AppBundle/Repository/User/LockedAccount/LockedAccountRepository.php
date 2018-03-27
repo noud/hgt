@@ -18,16 +18,17 @@ class LockedAccountRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $username
+     * @param string $ip
      * @return LockedAccount|null|object
      */
-    public function findByUsername($username)
+    public function findByIp($ip)
     {
-        return $this->findOneBy(compact('username'));
+        return $this->findOneBy(['ipAddress' => $ip]);
     }
 
     /**
      * @param LockedAccount $lockedAccount
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
      */
     public function add(LockedAccount $lockedAccount)
     {
@@ -35,13 +36,13 @@ class LockedAccountRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $username
+     * @param string $ip
      */
-    public function removeByUsername($username)
+    public function removeByIp($ip)
     {
         $self = LockedAccount::class;
-        $query = $this->getEntityManager()->createQuery("DELETE FROM {$self} la WHERE la.username = :username");
+        $query = $this->getEntityManager()->createQuery("DELETE FROM {$self} la WHERE la.ipAddress = :ip");
 
-        $query->execute(compact('username'));
+        $query->execute(compact('ip'));
     }
 }

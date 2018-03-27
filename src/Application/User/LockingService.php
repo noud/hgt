@@ -40,13 +40,14 @@ class LockingService
 
     /**
      * @param FailedAttemptEvent $event
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
      */
     public function handleFailedAttempt(FailedAttemptEvent $event)
     {
-        $failedAttempts = $this->failedAttemptsRepository->findByUsername($event->username);
+        $failedAttempts = $this->failedAttemptsRepository->findByIp($event->ip);
 
         if ($failedAttempts === null) {
-            $failedAttempts = new FailedAttempts($event->username, $event->timestamp);
+            $failedAttempts = new FailedAttempts($event->ip, $event->timestamp);
 
             $this->failedAttemptsRepository->add($failedAttempts);
         } else {
@@ -54,17 +55,18 @@ class LockingService
         }
 
         if ($failedAttempts->isTooMany()) {
-            $this->lockAccount($event->username, $event->timestamp);
+            $this->lockAccount($event->ip, $event->timestamp);
         }
     }
 
     /**
      * @param IsAccountLockedQuery $query
      * @return bool
+     * @throws \Exception
      */
     public function isAccountLockedAt(IsAccountLockedQuery $query)
     {
-        $lockedAccount = $this->lockedAccountRepository->findByUsername($query->username);
+        $lockedAccount = $this->lockedAccountRepository->findByIp($query->ip);
 
         if ($lockedAccount === null) {
             return false;
@@ -74,24 +76,28 @@ class LockingService
     }
 
     /**
-     * @param string $username
+     * @param string $ipAddress
      * @param DateTimeImmutable $timestamp
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
      */
-    private function lockAccount($username, DateTimeImmutable $timestamp)
+    private function lockAccount($ipAddress, DateTimeImmutable $timestamp)
     {
-        $lockedAccount = $this->lockedAccountRepository->findByUsername($username);
+        $lockedAccount = $this->lockedAccountRepository->findByIp($ipAddress);
 
         if ($lockedAccount === null) {
-            $lockedAccount = new LockedAccount($username, $timestamp);
+            $lockedAccount = new LockedAccount($ipAddress, $timestamp);
 
             $this->lockedAccountRepository->add($lockedAccount);
         }
     }
 
-    private function resetAttemptsAndLockedAccountForUsername($username)
+    /**
+     * @param $ipAddress
+     */
+    private function resetAttemptsAndLockedAccountForIpAddress($ipAddress)
     {
-        $this->lockedAccountRepository->removeByUsername($username);
-        $this->failedAttemptsRepository->removeByUsername($username);
+        $this->lockedAccountRepository->removeByIp($ipAddress);
+        $this->failedAttemptsRepository->removeByIp($ipAddress);
     }
 
     /**
@@ -99,7 +105,7 @@ class LockingService
      */
     public function handleSuccessfulLogin(SuccessfulLoginEvent $event)
     {
-        $this->resetAttemptsAndLockedAccountForUsername($event->username);
+        $this->resetAttemptsAndLockedAccountForIpAddress($event->ip);
     }
 
     /**
@@ -107,6 +113,6 @@ class LockingService
      */
     public function handlePasswordReset(PasswordResetEvent $event)
     {
-        $this->resetAttemptsAndLockedAccountForUsername($event->username);
+        $this->resetAttemptsAndLockedAccountForIpAddress($event->ip);
     }
 }

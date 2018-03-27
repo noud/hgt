@@ -9,7 +9,7 @@ class SuccessfulLoginEvent
     /**
      * @var string
      */
-    public $username;
+    public $ip;
 
     /**
      * @var DateTimeImmutable

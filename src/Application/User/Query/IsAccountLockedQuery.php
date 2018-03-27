@@ -9,7 +9,7 @@ class IsAccountLockedQuery
     /**
      * @var string
      */
-    public $username;
+    public $ip;
 
     /**
      * @var DateTimeImmutable

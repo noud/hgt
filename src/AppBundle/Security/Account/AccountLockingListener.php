@@ -7,11 +7,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use HGT\Application\User\Customer\PasswordResetListener;
 use HGT\Application\User\Event\FailedAttemptEvent;
 use HGT\Application\User\Event\PasswordResetEvent;
-use HGT\Application\User\Event\SuccessfulLoginEvent;
 use HGT\Application\User\LockingService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\AuthenticationEvents;
-use Symfony\Component\Security\Core\Event\AuthenticationEvent;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 
 class AccountLockingListener implements EventSubscriberInterface, PasswordResetListener
@@ -51,10 +49,10 @@ class AccountLockingListener implements EventSubscriberInterface, PasswordResetL
     public function onAuthenticationFailure(AuthenticationFailureEvent $authenticationEvent)
     {
         $credentials = $authenticationEvent->getAuthenticationToken()->getCredentials();
-        $username = isset($credentials['account_username']) ? $credentials['account_username'] : false;
+        $ip = isset($credentials['ip_address']) ? $credentials['ip_address'] : false;
 
         $event = new FailedAttemptEvent();
-        $event->username = $username;
+        $event->ip = $ip;
         $event->timestamp = new DateTimeImmutable();
 
         $this->lockingService->handleFailedAttempt($event);
@@ -62,12 +60,12 @@ class AccountLockingListener implements EventSubscriberInterface, PasswordResetL
     }
 
     /**
-     * @param string $username
+     * @param string $ip
      */
-    public function onPasswordReset($username)
+    public function onPasswordReset($ip)
     {
         $event = new PasswordResetEvent();
-        $event->username = $username;
+        $event->ip = $ip;
         $event->timestamp = new DateTimeImmutable();
 
         $this->lockingService->handlePasswordReset($event);

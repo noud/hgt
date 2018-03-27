@@ -87,15 +87,16 @@ class PasswordResetService
 
     /**
      * @param string $hash
+     * @param $ip
      * @return bool
      *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function resetPassword($hash)
+    public function resetPassword($hash, $ip)
     {
-        // 1. Find customer
+        // Find customer
         $username = $this->passwordResetHashService->get($hash);
         $customer = $this->customerService->getCustomerByUsername($username);
 
@@ -103,13 +104,13 @@ class PasswordResetService
             return false;
         }
 
-        // 2. Generate new password
+        // Generate new password
         $newPassword = $this->randomPasswordGenerator->generatePassword();
 
-        // 3. Add the new password to the customer
+        // Add the new password to the customer
         $this->customerService->updatePassword($customer->getId(), $newPassword);
 
-        // 5. Send new password email to the customer
+        // Send new password email to the customer
         $newPasswordData = new NewPassword();
         $newPasswordData->name = $customer->getName();
         $newPasswordData->email = $customer->getEmail();
@@ -119,9 +120,9 @@ class PasswordResetService
         $this->accountSender->sendNewPassword($newPasswordData);
 
         // Reset login attempts and locked account
-        $this->passwordResetListener->onPasswordReset($username);
+        $this->passwordResetListener->onPasswordReset($ip);
 
-        // 6. Clear all password reset hashes
+        // Clear all password reset hashes
         $this->passwordResetHashService->makeAllUserHashesInvalid($username);
 
         return true;
