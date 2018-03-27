@@ -115,12 +115,20 @@ class Product
     private $productPrices;
 
     /**
+     * @var ArrayCollection|ProductUnitOfMeasure[]
+     *
+     * @ORM\OneToMany(targetEntity="HGT\Application\Catalog\Product\ProductUnitOfMeasure", mappedBy="product")
+     */
+    private $productUnitOfMeasures;
+
+    /**
      * Product constructor.
      */
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->productPrices = new ArrayCollection();
+        $this->productUnitOfMeasures = new ArrayCollection();
     }
 
     /**
@@ -129,6 +137,39 @@ class Product
     public function getProductPrices()
     {
         return $this->productPrices;
+    }
+
+    /**
+     * @return ProductPrice|mixed|null
+     */
+    public function getLowestProductPrice()
+    {
+        /** @var ProductPrice|null $lowestProductPrice */
+        $lowestProductPrice = $this->getProductPrices()->first();
+
+        foreach ($this->getProductPrices() as $productPrice) {
+            if ($productPrice->getUnitPrice() < $lowestProductPrice->getUnitPrice()) {
+                $lowestProductPrice = $productPrice;
+            }
+        }
+
+        return $lowestProductPrice;
+    }
+
+    /**
+     * @return ArrayCollection|ProductUnitOfMeasure[]
+     */
+    public function getProductUnitOfMeasures()
+    {
+        return $this->productUnitOfMeasures;
+    }
+
+    /**
+     * @param ArrayCollection|ProductUnitOfMeasure[] $productUnitOfMeasure
+     */
+    public function setProductUnitOfMeasures($productUnitOfMeasures)
+    {
+        $this->productUnitOfMeasures = $productUnitOfMeasures;
     }
 
     /**

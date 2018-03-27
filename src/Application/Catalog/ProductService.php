@@ -71,11 +71,10 @@ class ProductService
 
     /**
      * @param bool $loggedIn
-     * @return mixed
+     * @return Product[]
      */
     public function getActionProducts($loggedIn = false)
     {
         return $this->productRepository->getActionProducts($loggedIn);
     }
-
 }

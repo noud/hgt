@@ -144,4 +144,132 @@ class ProductPrice
     {
         return $this->price_type;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNavisionId()
+    {
+        return $this->navision_id;
+    }
+
+    /**
+     * @param string $navision_id
+     */
+    public function setNavisionId($navision_id)
+    {
+        $this->navision_id = $navision_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param mixed $product
+     */
+    public function setProduct($product)
+    {
+        $this->product = $product;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUnitOfMeasure()
+    {
+        return $this->unit_of_measure;
+    }
+
+    /**
+     * @param mixed $unit_of_measure
+     */
+    public function setUnitOfMeasure($unit_of_measure)
+    {
+        $this->unit_of_measure = $unit_of_measure;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getStartDate()
+    {
+        return $this->start_date;
+    }
+
+    /**
+     * @param DateTime $start_date
+     */
+    public function setStartDate($start_date)
+    {
+        $this->start_date = $start_date;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->end_date;
+    }
+
+    /**
+     * @param DateTime $end_date
+     */
+    public function setEndDate($end_date)
+    {
+        $this->end_date = $end_date;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActionPrice()
+    {
+        return $this->is_action_price;
+    }
+
+    /**
+     * @param bool $is_action_price
+     */
+    public function setIsActionPrice($is_action_price)
+    {
+        $this->is_action_price = $is_action_price;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isWebAction()
+    {
+        return $this->is_web_action;
+    }
+
+    /**
+     * @param bool $is_web_action
+     */
+    public function setIsWebAction($is_web_action)
+    {
+        $this->is_web_action = $is_web_action;
+    }
 }

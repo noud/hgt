@@ -1,160 +1,71 @@
 {% extends 'layout/base.html.twig' %}
 
-{% set overview = true %}
-
 {% block bodyClass %}{% endblock %}
 
 {% block body %}
-    {% if overview == true %}
-        <div class="container">
-            {{ include('_partials/page/breadcrumbs.html.twig') }}
 
-            <h1 class="page-title page-title-border">Acties</h1>
 
+
+    <div class="container">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        <h1 class="page-title page-title-border">Acties</h1>
+        {% if actionProducts is not empty %}
             <ul class="list-action list-action-rwd">
-                <li>
-                    <div class="list-action-table">
-                        <div>
-                            <h2 class="table-section-base-header">Houten lepel 16.5cm biodore</h2>
-                        </div>
-                        <div>
-                            <div>Depa</div>
-                        </div>
-                        <div>
-                            <div class="table-section-base-meta">Inhoud: 100st</div>
-                        </div>
-                        <div>
-                            <div class="table-section-base-price">&euro; 2,95</div>
-                        </div>
-                        <div>
-                            <div class="list-action-button">
-                                <a href="#" class="btn btn-icon-label">
-                                    <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-                                    <span class="label">Bestel</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-action-sub">
-                        <div class="list-action-label">Actie</div>
-                        <div class="list-action-expire">Actie geldig van 22 februari t/m 30 juni 2018</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="list-action-table">
-                        <div>
-                            <h2 class="table-section-base-header">Houten lepel 16.5cm biodore</h2>
-                        </div>
-                        <div>
-                            <div>Depa</div>
-                        </div>
-                        <div>
-                            <div class="table-section-base-meta">Inhoud: 100st</div>
-                        </div>
-                        <div>
-                            <div class="table-section-base-price">&euro; 2,95</div>
-                        </div>
-                        <div>
-                            <div class="list-action-button">
-                                <a href="#" class="btn btn-icon-label">
-                                    <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-                                    <span class="label">Bestel</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-action-sub">
-                        <div class="list-action-label">Actie</div>
-                        <div class="list-action-expire">Actie geldig van 22 februari t/m 30 juni 2018</div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    {% else %}
-        <div class="container">
-            {{ include('_partials/page/breadcrumbs.html.twig') }}
-            <div class="page-title-container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <a href="#" class="btn-border">
-                            <i class="fas fa-arrow-left"></i>
-                            <span>Terug</span>
-                        </a>
-                    </div>
-                    <div class="col-md-6">
-                        <h1 class="page-title">HOUTEN LEPEL 16.5CM Biodore</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="layout-flip-sidebar-md">
-                <div class="main-row row">
-                    <div class="col-md-3">
-                        <ul class="item-list item-list-alt">
-                            <li><a href="#" class="listing">catname <span class="icon"><i class="fa fa-chevron-right"></i></span></a></li>
-                            <li><a href="#" class="listing">catname <span class="icon"><i class="fa fa-chevron-right"></i></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="product-detail product-detail-rwd">
+                {% for actionProduct in actionProducts %}
+                    <li>
+                        <div class="list-action-table">
                             <div>
-                                <div class="product-detail-img">
-                                    <img src="https://www.hgt-tilburg.nl/cache/images/userdata/product-images/220x220/310210.jpg"/>
+                                <h2 class="table-section-base-header"><a
+                                            href="{{ path('product_view', { 'id': actionProduct.id }) }}">{{ actionProduct.name }}</a>
+                                </h2>
+                            </div>
+                            <div>
+                                <div>{{ actionProduct.manufacturer.name }}</div>
+                            </div>
+                            <div>
+                                <div class="table-section-base-meta">{{ actionProduct.volume }}</div>
+                            </div>
+                            <div>
+                                <div class="table-section-base-price">
+                                    &euro; {{ actionProduct.lowestProductPrice.unitPrice }}
+                                    {#{% for productUnitOfMeasure in actionProduct.productUnitOfMeasures %}#}
+                                        {#{% if productUnitOfMeasure.selected %}#}
+                                            {#{{ dump(productUnitOfMeasure.product.productPrices) }}#}
+                                        {#{% endif %}#}
+                                        {#{% for actionProductPrice in productUnitOfMeasure.product.productPrices %}#}
+                                            {#{% if productUnitOfMeasure.selected %}#}
+                                                {#&euro; {{ actionProductPrice.unitPrice }}#}
+                                            {#{% endif %}#}
+                                        {#{% endfor %}#}
+                                    {#{% endfor %}#}
                                 </div>
                             </div>
                             <div>
-                                <ul class="product-detail-spec">
-                                    <li>
-                                        <div class="product-detail-main">
-                                            <div>Depa</div>
-                                            <div>Inhoud: 100st</div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="product-detail-action">
-                                            <div class="product-detail-action-label">Actie</div>
-                                            <div>Actie geldig van 22 februari t/m 30 juni 2018</div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <form class="product-detail-form">
-                                            <div class="product-select-price is-section-md">
-                                                <div>
-                                                    <select class="form-control-select">
-                                                        <option>test</option>
-                                                        <option>test</option>
-                                                    </select>
-                                                </div>
-                                                <div>
-                                                    <div class="product-detail-price">&euro; 2,95</div>
-                                                </div>
-                                            </div>
-                                            <div class="product-order-unit">
-                                                <div><input class="form-control" type="text"/></div>
-                                                <div><button class="btn" type="submit">Bestel</button></div>
-                                            </div>
-                                        </form>
-                                    </li>
-
-                                    <li>
-                                        <a href="#" class="listing listing-icon">Toevoegen aan bestellijst <span class="icon"><i class="fa fa-chevron-right"></i></span></a>
-                                    </li>
-                                    <li>
-                                        <div class="product-detail-spec-desc content">
-                                            <p>
-                                                <strong>Lepel, Hout, 165mm, naturel.</strong><br/>
-                                                Geen feest of evenement zonder dit mooie houten wegwerpbestek.<br/><br/>
-                                                <strong>Lepel, Hout, 165mm, naturel.</strong><br/>
-                                                Deze praktische houten lepel is een decoratieve aanwinst bij al je grote en kleine<br/><br/>
-                                                evenementen, festivals, braderieën, picknicks, barbecues en tuinfeesten.
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
+                                <div class="list-action-button">
+                                    <a href="{{ path('product_view', { 'id': actionProduct.id }) }}"
+                                       class="btn btn-icon-label">
+                                        <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+                                        <span class="label">Bestel</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                        <div class="list-action-sub">
+                            <div class="list-action-label">Actie</div>
+                            <div class="list-action-expire">
+                                Actie geldig van
+                                {{ actionProduct.productPrices|first.startDate|date('d F') }}
+                                t/m
+                                {{ actionProduct.productPrices|first.endDate|date('d F Y') }}
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="content">
+                <p>Geen acties beschikbaar.</p>
             </div>
-        </div>
-    {% endif %}
+        {% endif %}
+    </div>
 {% endblock %}
