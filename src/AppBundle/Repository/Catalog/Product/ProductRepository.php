@@ -115,7 +115,6 @@ class ProductRepository extends ServiceEntityRepository
             ->where('pum.product = p.id')
             ->getQuery();
 
-
         $query = $this->createQueryBuilder('p');
         $query->leftJoin('p.productPrices', 'pp')
             ->where('p.enabled = true')
@@ -124,11 +123,8 @@ class ProductRepository extends ServiceEntityRepository
             ->setParameter('global','global')
             ->andWhere('pp.start_date <= CURRENT_DATE()')
             ->andWhere('pp.end_date >= CURRENT_DATE() OR pp.end_date IS NULL')
-            //->andWhere('pp.product IN (22)')
             ->andWhere($query->expr()->in('pp.unit_of_measure', $subQuery->getDQL()))
             ;
-
-
 
         if ($loggedIn) {
             $query->andWhere('pp.is_web_action = false');

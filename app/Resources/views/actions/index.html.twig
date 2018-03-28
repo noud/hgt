@@ -3,9 +3,6 @@
 {% block bodyClass %}{% endblock %}
 
 {% block body %}
-
-
-
     <div class="container">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
         <h1 class="page-title page-title-border">Acties</h1>
@@ -28,16 +25,6 @@
                             <div>
                                 <div class="table-section-base-price">
                                     &euro; {{ actionProduct.lowestProductPrice.unitPrice }}
-                                    {#{% for productUnitOfMeasure in actionProduct.productUnitOfMeasures %}#}
-                                        {#{% if productUnitOfMeasure.selected %}#}
-                                            {#{{ dump(productUnitOfMeasure.product.productPrices) }}#}
-                                        {#{% endif %}#}
-                                        {#{% for actionProductPrice in productUnitOfMeasure.product.productPrices %}#}
-                                            {#{% if productUnitOfMeasure.selected %}#}
-                                                {#&euro; {{ actionProductPrice.unitPrice }}#}
-                                            {#{% endif %}#}
-                                        {#{% endfor %}#}
-                                    {#{% endfor %}#}
                                 </div>
                             </div>
                             <div>
