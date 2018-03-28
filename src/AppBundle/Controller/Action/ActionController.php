@@ -21,11 +21,7 @@ class ActionController extends Controller
         ProductService $productService,
         ProductUnitOfMeasureService $productUnitOfMeasureService
     ) {
-        if ($this->isGranted('ROLE_CUSTOMER')) {
-            $actionProducts = $productService->getActionProducts(true);
-        } else {
-            $actionProducts = $productService->getActionProducts(false);
-        }
+        $actionProducts = $productService->getActionProducts($this->isGranted('ROLE_CUSTOMER'));
 
         return $this->render('actions/index.html.twig', [
             'actionProducts' => $actionProducts
