@@ -74,7 +74,7 @@ class ProductRepository extends ServiceEntityRepository
 
         $paginator = new Paginator($qb->getQuery());
         $paginator->getQuery()
-            ->setFirstResult($perPage * ($currentPage - 1)) // Offset
+            ->setFirstResult($perPage * ($currentPage - 1))// Offset
             ->setMaxResults($perPage); // Limit
 
         return $paginator;
@@ -97,7 +97,7 @@ class ProductRepository extends ServiceEntityRepository
 
         $paginator = new Paginator($qb->getQuery());
         $paginator->getQuery()
-            ->setFirstResult($perPage * ($currentPage - 1)) // Offset
+            ->setFirstResult($perPage * ($currentPage - 1))// Offset
             ->setMaxResults($perPage); // Limit
 
         return $paginator;
@@ -120,11 +120,10 @@ class ProductRepository extends ServiceEntityRepository
             ->where('p.enabled = true')
             ->andWhere('pp.is_action_price = true')
             ->andWhere('pp.price_type = :global')
-            ->setParameter('global','global')
+            ->setParameter('global', 'global')
             ->andWhere('pp.start_date <= CURRENT_DATE()')
             ->andWhere('pp.end_date >= CURRENT_DATE() OR pp.end_date IS NULL')
-            ->andWhere($query->expr()->in('pp.unit_of_measure', $subQuery->getDQL()))
-            ;
+            ->andWhere($query->expr()->in('pp.unit_of_measure', $subQuery->getDQL()));
 
         if ($loggedIn) {
             $query->andWhere('pp.is_web_action = false');
