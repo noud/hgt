@@ -108,11 +108,76 @@ class Product
     private $mail_order_to_supplier;
 
     /**
+     * @var ArrayCollection|ProductPrice[]
+     *
+     * @ORM\OneToMany(targetEntity="HGT\Application\Catalog\Product\ProductPrice", mappedBy="product")
+     */
+    private $productPrices;
+
+    /**
+     * @var ArrayCollection|ProductUnitOfMeasure[]
+     *
+     * @ORM\OneToMany(targetEntity="HGT\Application\Catalog\Product\ProductUnitOfMeasure", mappedBy="product")
+     */
+    private $productUnitOfMeasures;
+
+    /**
      * Product constructor.
      */
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->productPrices = new ArrayCollection();
+        $this->productUnitOfMeasures = new ArrayCollection();
+    }
+
+    /**
+     * @return ArrayCollection|ProductPrice[]
+     */
+    public function getProductPrices()
+    {
+        return $this->productPrices;
+    }
+
+    /**
+     * @return ProductPrice|mixed|null
+     */
+    public function getLowestProductPrice()
+    {
+        /** @var ProductPrice|null $lowestProductPrice */
+        $lowestProductPrice = $this->getProductPrices()->first();
+
+        foreach ($this->getProductPrices() as $productPrice) {
+            if ($productPrice->getUnitPrice() < $lowestProductPrice->getUnitPrice()) {
+                $lowestProductPrice = $productPrice;
+            }
+        }
+
+        return $lowestProductPrice;
+    }
+
+    /**
+     * @return ArrayCollection|ProductUnitOfMeasure[]
+     */
+    public function getProductUnitOfMeasures()
+    {
+        return $this->productUnitOfMeasures;
+    }
+
+    /**
+     * @param ArrayCollection|ProductUnitOfMeasure[] $productUnitOfMeasure
+     */
+    public function setProductUnitOfMeasures($productUnitOfMeasures)
+    {
+        $this->productUnitOfMeasures = $productUnitOfMeasures;
+    }
+
+    /**
+     * @param ArrayCollection|ProductPrice[] $productPrices
+     */
+    public function setProductPrices($productPrices)
+    {
+        $this->productPrices = $productPrices;
     }
 
     /**

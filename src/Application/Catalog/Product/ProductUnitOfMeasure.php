@@ -86,4 +86,36 @@ class ProductUnitOfMeasure
     {
         return sprintf('%s (%d)', $this->getUnitOfMeasure()->getName(), $this->getQtyPerUnitOfMeasure());
     }
+
+    /**
+     * @return int
+     */
+    public function getNavisionId()
+    {
+        return $this->navision_id;
+    }
+
+    /**
+     * @param int $navision_id
+     */
+    public function setNavisionId($navision_id)
+    {
+        $this->navision_id = $navision_id;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSelected()
+    {
+        return $this->selected;
+    }
+
+    /**
+     * @param bool $selected
+     */
+    public function setSelected($selected)
+    {
+        $this->selected = $selected;
+    }
 }

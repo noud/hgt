@@ -42,6 +42,19 @@
                                         <div class="volume">Inhoud: {{ product.volume }}</div>
                                     </div>
                                 </li>
+                                {% if product.productPrices is not empty %}
+                                    <li>
+                                        <div class="highlight-label">
+                                            <div class="highlight-label-head">Actie</div>
+                                            <div class="highlight-label-sub">
+                                                Actie geldig van
+                                                {{ product.productPrices|first.startDate|date('d F') }}
+                                                t/m
+                                                {{ product.productPrices|first.endDate|date('d F Y') }}
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endif %}
                                 {% if isCustomer and addToCartForm is defined %}
                                     <li>
                                         {{ form_start(addToCartForm, {'attr': {'id': 'add_to_cart_form', 'class': 'product-detail-form'}}) }}

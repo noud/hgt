@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use HGT\Application\Catalog\Category\Category;
 use HGT\Application\Catalog\Product\Product;
+use HGT\Application\Catalog\Product\ProductUnitOfMeasure;
 
 class ProductRepository extends ServiceEntityRepository
 {
@@ -73,7 +74,7 @@ class ProductRepository extends ServiceEntityRepository
 
         $paginator = new Paginator($qb->getQuery());
         $paginator->getQuery()
-            ->setFirstResult($perPage * ($currentPage - 1)) // Offset
+            ->setFirstResult($perPage * ($currentPage - 1))// Offset
             ->setMaxResults($perPage); // Limit
 
         return $paginator;
@@ -96,9 +97,38 @@ class ProductRepository extends ServiceEntityRepository
 
         $paginator = new Paginator($qb->getQuery());
         $paginator->getQuery()
-            ->setFirstResult($perPage * ($currentPage - 1)) // Offset
+            ->setFirstResult($perPage * ($currentPage - 1))// Offset
             ->setMaxResults($perPage); // Limit
 
         return $paginator;
+    }
+
+    /**
+     * @param bool $loggedIn
+     * @return Product[]
+     */
+    public function getActionProducts($loggedIn = false)
+    {
+        $subQuery = $this->_em->createQueryBuilder()
+            ->from(ProductUnitOfMeasure::class, 'pum')
+            ->select('IDENTITY(pum.unit_of_measure)')
+            ->where('pum.product = p.id')
+            ->getQuery();
+
+        $query = $this->createQueryBuilder('p');
+        $query->leftJoin('p.productPrices', 'pp')
+            ->where('p.enabled = true')
+            ->andWhere('pp.is_action_price = true')
+            ->andWhere('pp.price_type = :global')
+            ->setParameter('global', 'global')
+            ->andWhere('pp.start_date <= CURRENT_DATE()')
+            ->andWhere('pp.end_date >= CURRENT_DATE() OR pp.end_date IS NULL')
+            ->andWhere($query->expr()->in('pp.unit_of_measure', $subQuery->getDQL()));
+
+        if ($loggedIn) {
+            $query->andWhere('pp.is_web_action = false');
+        }
+
+        return $query->getQuery()->getResult();
     }
 }
