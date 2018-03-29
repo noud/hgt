@@ -3,156 +3,116 @@
 {% block bodyClass %}account-index account-index-order{% endblock %}
 
 {% block body %}
-
-
     <div class="container layout-flip-sidebar-sm">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
         <div class="row main-row">
             <div class="col-sm-3">
-                <ul class="list-item list-item-alt">
-                    <li>
-                        <a href="{{ path('account_order_list') }}" class="btn-list">Bestellijst
-                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn-list">Bestelhistorie
-                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn-list">Bestellijst aanpassen
-                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="btn-list">Wachtwoord wijzigen
-                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ path('logout') }}" class="btn-list">Uitloggen
-                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
-                        </a>
-                    </li>
-                </ul>
+                {{ include('_partials/account/list.html.twig') }}
             </div>
             <div class="col-sm-9">
                 <h1 class="page-title">Mijn bestellijst</h1>
                 <div class="content is-section">
-                    <p><strong>Persoonlijke bestellijst van Kevin van Laak</strong>. Wilt u de volgorde of producten wijzigen op
-                        uw bestellijst klik dan <a href="#">hier</a>.</p>
+                    <p>Persoonlijke bestellijst van <strong>{{ app.user.name }}</strong>. Wilt u de volgorde of producten wijzigen op
+                        uw bestellijst klik dan <a href="{{ path('account_order_list_edit') }}">hier</a>.</p>
+                </div>
+                <ul class="list-unit list-unit-rwd is-section">
+                    <li>
+                        <div class="table-number">
+                            <div><input title="" class="form-control" type="number"/>
+                            </div>
+                            <div><h2 class="table-section-base-header">Jupiler pils krat</h2></div>
+                            <div><div>Jupiler</div></div>
+                            <div>
+                                <div class="table-section-base-meta">
+                                    <div>1st. | Krat</div>
+                                    <div>Inhoud: 24x25cl</div>
+                                </div>
+                            </div>
+                            <div><div class="table-section-base-price">&euro; 13,65</div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="table-number">
+                            <div><input title="" class="form-control" type="number"/>
+                            </div>
+                            <div><h2 class="table-section-base-header">Jupiler pils krat</h2></div>
+                            <div><div>Jupiler</div></div>
+                            <div>
+                                <div class="table-section-base-meta">
+                                    <div>1st. | Krat</div>
+                                    <div>Inhoud: 24x25cl</div>
+                                </div>
+                            </div>
+                            <div><div class="table-section-base-price">&euro; 13,65</div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="table-number">
+                            <div><input title="" class="form-control" type="number"/>
+                            </div>
+                            <div><h2 class="table-section-base-header">Jupiler pils krat</h2></div>
+                            <div><div>Jupiler</div></div>
+                            <div>
+                                <div class="table-section-base-meta">
+                                    <div>1st. | Krat</div>
+                                    <div>Inhoud: 24x25cl</div>
+                                </div>
+                            </div>
+                            <div><div class="table-section-base-price">&euro; 13,65</div></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="table-number">
+                            <div><input title="" class="form-control" type="number"/>
+                            </div>
+                            <div><h2 class="table-section-base-header">Jupiler pils krat</h2></div>
+                            <div><div>Jupiler</div></div>
+                            <div>
+                                <div class="table-section-base-meta">
+                                    <div>1st. | Krat</div>
+                                    <div>Inhoud: 24x25cl</div>
+                                </div>
+                            </div>
+                            <div><div class="table-section-base-price">&euro; 13,65</div></div>
+                        </div>
+                        <div class="list-unit-meta">
+                            <div>
+                                <div class="highlight-label">
+                                    <div class="highlight-label-head">Actie</div>
+                                    <div class="highlight-label-sub">Actie geldig van 22 februari t/m 30 juni 2018</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="order-timer">
+                                    <div class="order-timer-icon"><i class="far fa-clock"></i></div>
+                                    <div class="order-timer-meta">Dit product wordt nabesteld</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="table-number">
+                            <div><input title="" class="form-control" type="number"/>
+                            </div>
+                            <div><h2 class="table-section-base-header">Jupiler pils krat</h2></div>
+                            <div><div>Jupiler</div></div>
+                            <div>
+                                <div class="table-section-base-meta">
+                                    <div>1st. | Krat</div>
+                                    <div>Inhoud: 24x25cl</div>
+                                </div>
+                            </div>
+                            <div><div class="table-section-base-price">&euro; 13,65</div></div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="tar">
+                    <button type="submit" class="btn btn-icon-label">
+                        <span class="icon"><i class="fas fa-cart-arrow-down"></i></span>
+                        <span class="label">Toevoegen in winkelwagen</span>
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
-
-
-    <div class="container hidden">
-        {{ include('_partials/page/breadcrumbs.html.twig') }}
-        <h1 class="page-title page-title-border">Mijn bestellijst</h1>
-        <div class="content is-section">
-            <p><strong>Persoonlijke bestellijst van Kevin van Laak</strong>. Wilt u de volgorde of producten wijzigen op
-                uw bestellijst klik dan <a href="#">hier</a>.</p>
-        </div>
-        <form>
-            <ul class="list-unit list-unit-rwd is-section">
-                <li>
-                    <div class="table-number">
-                        <div><input title="" class="form-control" type="number"/>
-                        </div>
-                        <div><h2 class="table-section-base-header">Jupiler pils krat</h2></div>
-                        <div><div>Jupiler</div></div>
-                        <div>
-                            <div class="table-section-base-meta">
-                                <div>1st. | Krat</div>
-                                <div>Inhoud: 24x25cl</div>
-                            </div>
-                        </div>
-                        <div><div class="table-section-base-price">&euro; 13,65</div></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="table-number">
-                        <div><input title="" class="form-control" type="number"/>
-                        </div>
-                        <div><h2 class="table-section-base-header">Jupiler pils krat</h2></div>
-                        <div><div>Jupiler</div></div>
-                        <div>
-                            <div class="table-section-base-meta">
-                                <div>1st. | Krat</div>
-                                <div>Inhoud: 24x25cl</div>
-                            </div>
-                        </div>
-                        <div><div class="table-section-base-price">&euro; 13,65</div></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="table-number">
-                        <div><input title="" class="form-control" type="number"/>
-                        </div>
-                        <div><h2 class="table-section-base-header">Jupiler pils krat</h2></div>
-                        <div><div>Jupiler</div></div>
-                        <div>
-                            <div class="table-section-base-meta">
-                                <div>1st. | Krat</div>
-                                <div>Inhoud: 24x25cl</div>
-                            </div>
-                        </div>
-                        <div><div class="table-section-base-price">&euro; 13,65</div></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="table-number">
-                        <div><input title="" class="form-control" type="number"/>
-                        </div>
-                        <div><h2 class="table-section-base-header">Jupiler pils krat</h2></div>
-                        <div><div>Jupiler</div></div>
-                        <div>
-                            <div class="table-section-base-meta">
-                                <div>1st. | Krat</div>
-                                <div>Inhoud: 24x25cl</div>
-                            </div>
-                        </div>
-                        <div><div class="table-section-base-price">&euro; 13,65</div></div>
-                    </div>
-                    <div class="list-unit-meta">
-                        <div>
-                            <div class="highlight-label">
-                                <div class="highlight-label-head">Actie</div>
-                                <div class="highlight-label-sub">Actie geldig van 22 februari t/m 30 juni 2018</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="order-timer">
-                                <div class="order-timer-icon"><i class="far fa-clock"></i></div>
-                                <div class="order-timer-meta">Dit product wordt nabesteld</div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="table-number">
-                        <div><input title="" class="form-control" type="number"/>
-                        </div>
-                        <div><h2 class="table-section-base-header">Jupiler pils krat</h2></div>
-                        <div><div>Jupiler</div></div>
-                        <div>
-                            <div class="table-section-base-meta">
-                                <div>1st. | Krat</div>
-                                <div>Inhoud: 24x25cl</div>
-                            </div>
-                        </div>
-                        <div><div class="table-section-base-price">&euro; 13,65</div></div>
-                    </div>
-                </li>
-            </ul>
-            <div class="tar">
-                <button type="submit" class="btn btn-icon-label">
-                    <span class="icon"><i class="fas fa-cart-arrow-down"></i></span>
-                    <span class="label">Toevoegen in winkelwagen</span>
-                </button>
-            </div>
-        </form>
     </div>
 {% endblock %}

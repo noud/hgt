@@ -27,6 +27,24 @@ class AccountController extends Controller
     }
 
     /**
+     * @Route("/mijn-account/bestellijst-aanpassen", name="account_order_list_edit")
+     */
+    public function orderListEditAction(Request $request)
+    {
+        return $this->render('account/order-list-edit.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/mijn-account/bestelhistorie", name="account_order_history")
+     */
+    public function orderHistoryAction(Request $request)
+    {
+        return $this->render('account/order-history.html.twig', [
+        ]);
+    }
+
+    /**
      * @throws \Exception
      * @Route("/logout", name="logout")
      */

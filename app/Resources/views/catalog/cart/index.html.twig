@@ -43,7 +43,9 @@
                                 </div>
                                 <div>
                                     <div class="list-cart-unit">
-                                        <div>{{ form_widget(product) }}</div>
+                                        <div>
+                                            {{ form_widget(product.qty) }}
+                                        </div>
                                         <div class="table-section-base-price">{{ cartProduct.getRowTotal|price }}</div>
 
                                     </div>
