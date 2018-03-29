@@ -1,0 +1,52 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block bodyClass %}account-index{% endblock %}
+
+{% block body %}
+    <div class="container layout-flip-sidebar-sm">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        <div class="row main-row">
+            <div class="col-sm-3">
+                <ul class="list-item list-item-alt">
+                    <li>
+                        <a href="{{ path('account_order_list') }}" class="btn-list">Bestellijst
+                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="btn-list">Bestelhistorie
+                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="btn-list">Bestellijst aanpassen
+                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="btn-list">Wachtwoord wijzigen
+                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('logout') }}" class="btn-list">Uitloggen
+                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-9">
+                <h1 class="page-title">Mijn account</h1>
+                <div class="content">
+                    <p>
+                        Welkom <strong>{{ app.user.name }}</strong>
+                            {% if app.user.company %}
+                                ({{ app.user.company }})
+                            {% endif %}.
+                        U bevindt zich in uw account.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -13,7 +13,16 @@ class AccountController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('account/order-list-edit.html.twig', [
+        return $this->render('account/account.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/mijn-account/bestellijst", name="account_order_list")
+     */
+    public function orderListAction(Request $request)
+    {
+        return $this->render('account/order-list.html.twig', [
         ]);
     }
 

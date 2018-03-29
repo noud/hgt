@@ -3,7 +3,52 @@
 {% block bodyClass %}account-index account-index-order{% endblock %}
 
 {% block body %}
-    <div class="container">
+
+
+    <div class="container layout-flip-sidebar-sm">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        <div class="row main-row">
+            <div class="col-sm-3">
+                <ul class="list-item list-item-alt">
+                    <li>
+                        <a href="{{ path('account_order_list') }}" class="btn-list">Bestellijst
+                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="btn-list">Bestelhistorie
+                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="btn-list">Bestellijst aanpassen
+                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="btn-list">Wachtwoord wijzigen
+                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('logout') }}" class="btn-list">Uitloggen
+                            <span class="icon"><i class="fa fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-9">
+                <h1 class="page-title">Mijn bestellijst</h1>
+                <div class="content is-section">
+                    <p><strong>Persoonlijke bestellijst van Kevin van Laak</strong>. Wilt u de volgorde of producten wijzigen op
+                        uw bestellijst klik dan <a href="#">hier</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container hidden">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
         <h1 class="page-title page-title-border">Mijn bestellijst</h1>
         <div class="content is-section">

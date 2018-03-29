@@ -20,7 +20,7 @@
                 <div class="header-corporate">
                     <div>
                     {% if app.user %}
-                        Welkom <a href="#" title="">{{ app.user.name }}
+                        Welkom <a href="{{ path('account_index') }}" title="">{{ app.user.name }}
                         {% if app.user.company %}
                             ({{ app.user.company }})
                         {% endif %}</a> | <a href="{{ path('logout') }}" title="Uitloggen">Uitloggen</a>
@@ -73,11 +73,11 @@
                         </div>
                     </form>
                     {% if app.user %}
-                        <a href="#" class="btn btn-icon-label">
+                        <a href="{{ path('account_index') }}" class="btn btn-icon-label">
                             <span class="icon"><i class="fa fa-user"></i></span>
                             <span class="label">Mijn account</span>
                         </a>
-                        <a href="#" class="btn btn-icon-label">
+                        <a href="{{ path('account_order_list') }}" class="btn btn-icon-label">
                             <span class="icon"><i class="fa fa-list-ul"></i></span>
                             <span class="label">Mijn bestellijst</span>
                         </a>
