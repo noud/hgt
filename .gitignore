@@ -1,3 +1,4 @@
+/.web-server-pid
 /app/config/parameters.yml
 /build/
 /phpunit.xml
@@ -14,7 +15,8 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-.idea
-/node_modules/
-web/assets/css/main.css.map
-/web/tmp
+
+.idea/
+node_modules/
+/web/assets/css/main.css.map
+/web/tmp/
