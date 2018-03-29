@@ -41,4 +41,18 @@ class CustomerProductRepository extends ServiceEntityRepository
     {
         $this->getEntityManager()->remove($customerProduct);
     }
+
+    /**
+     * @return CustomerProduct[]
+     */
+    public function getCustomerProducts()
+    {
+        $query = $this->createQueryBuilder('cp')
+            ->leftJoin('cp.product', 'p')
+            ->where('p.enabled = true')
+            ->orderBy('cp.priority')
+        ;
+
+        return $query->getQuery()->getResult();
+    }
 }

@@ -17,6 +17,8 @@
                 {{ form_start(form, {'attr': {'id': 'cart_form'} }) }}
                 <ul class="list-cart list-cart-rwd is-section">
                     {% for product in form.products %}
+
+                        {{ dump(product) }}
                         {% set cartProduct = product.vars.data %}
                         <li>
                             <div class="list-cart-table">

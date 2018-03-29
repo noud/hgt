@@ -12,7 +12,15 @@
             <div class="col-sm-9">
                 <h1 class="page-title">Bestellijst aanpassen</h1>
                 <div class="content is-section"><p>Pas hier uw bestellijst aan.</p></div>
-                <ul id="sortable" class="list-edit list-edit-rwd is-section">
+
+                {{ form_start(form) }}
+
+                {% for product in form.products %}
+
+                {% endfor %}
+                {{ form_end(form) }}
+
+                <ul id="sortable" class="list-edit list-edit-rwd is-section hidden">
                     <li>
                         <div class="table-edit">
                             <div>

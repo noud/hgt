@@ -19,4 +19,12 @@ class CustomerProductService
     {
         $this->customerProductRepository = $customerProductRepository;
     }
+
+    /**
+     * @return CustomerProduct\CustomerProduct[]
+     */
+    public function getCustomerProducts()
+    {
+        return $this->customerProductRepository->getCustomerProducts();
+    }
 }
