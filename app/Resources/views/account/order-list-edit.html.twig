@@ -11,83 +11,46 @@
             </div>
             <div class="col-sm-9">
                 <h1 class="page-title">Bestellijst aanpassen</h1>
-                <div class="content is-section"><p>Pas hier uw bestellijst aan.</p></div>
-
-                {{ form_start(form) }}
-
-                {% for product in form.products %}
-
-                {% endfor %}
-                {{ form_end(form) }}
-
-                <ul id="sortable" class="list-edit list-edit-rwd is-section hidden">
-                    <li>
-                        <div class="table-edit">
-                            <div>
-                                <div class="table-edit-head">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-                                        </label>
-                                    </div>
-                                    <h2 class="table-section-base-header">Groene thee lemon</h2>
-                                </div>
-                            </div>
-                            <div>Pickwick</div>
-                            <div>
-                                <div class="table-section-base-meta">3st. | Overdoos</div>
-                            </div>
-                            <div>
-                                <div class="table-edit-icon"><i class="fas fa-bars"></i></div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="table-edit">
-                            <div>
-                                <div class="table-edit-head">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-                                        </label>
-                                    </div>
-                                    <h2 class="table-section-base-header">Groene thee lemon</h2>
-                                </div>
-                            </div>
-                            <div>Pickwick</div>
-                            <div>
-                                <div class="table-section-base-meta">3st. | Overdoos</div>
-                            </div>
-                            <div>
-                                <div class="table-edit-icon"><i class="fas fa-bars"></i></div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="table-edit">
-                            <div>
-                                <div class="table-edit-head">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-                                        </label>
-                                    </div>
-                                    <h2 class="table-section-base-header">Groene thee lemon</h2>
-                                </div>
-                            </div>
-                            <div>Pickwick</div>
-                            <div>
-                                <div class="table-section-base-meta">3st. | Overdoos</div>
-                            </div>
-                            <div>
-                                <div class="table-edit-icon"><i class="fas fa-bars"></i></div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="tar">
-                    <button type="submit" class="btn btn-special">Verwijderen</button>
+                <div class="content is-section">
+                    {% if form.products is not empty %}
+                        <p>Pas hier uw bestellijst aan.</p>
+                    {% else %}
+                        <p>Geen producten.</p>
+                    {% endif %}
                 </div>
+                {% if form.products is not empty %}
+                    {{ form_start(form, {'attr': {'id': form.vars.id} }) }}
+                    <ul id="sortable" class="list-edit list-edit-rwd is-section">
+                        {% for customerProductForm in form.products %}
+                            {% set customerProduct = customerProductForm.vars.data.product %}
+                            <li data-customer-product-id="{{ customerProduct.id }}">
+                                <div class="table-edit">
+                                    <div>
+                                        <div class="table-edit-head">
+                                            {{ form_widget(customerProductForm.remove) }}
+                                            <h2 class="table-section-base-header">{{ customerProduct.product.name }}</h2>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        {% if customerProduct.product.manufacturer %}
+                                            {{ customerProduct.product.manufacturer.name }}
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <div class="table-section-base-meta">{{ customerProduct.product.volume }}</div>
+                                    </div>
+                                    <div>
+                                        <div class="table-edit-icon"><i class="fas fa-bars"></i></div>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="tar">
+                        <button type="submit" class="js-order-delete-confirm btn btn-special">Verwijderen</button>
+                    </div>
+                    {{ form_end(form) }}
+                {% endif %}
             </div>
         </div>
     </div>
@@ -98,6 +61,13 @@
         $(document).ready(function () {
             $('#sortable').sortable({
                 revert: true
+            });
+
+            $('.js-order-delete-confirm').click(function () {
+                if (confirm('Weet u zeker dat u de geselecteerde producten uit uw bestellijst wilt verwijderen?')) {
+                    $('#{{ form.vars.id }}').submit();
+                }
+                return false;
             });
         });
     </script>

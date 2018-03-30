@@ -2,14 +2,25 @@
 
 namespace HGT\Application\Catalog\Order\Command;
 
-use Symfony\Component\Validator\Constraints as Assert;
+use HGT\Application\User\CustomerProduct\CustomerProduct;
 
 class ReviseOrderList
 {
+    /**
+     * @var RemoveOrderlistProductItem[]
+     */
     public $products;
 
-    public function __construct($products)
+    /**
+     * ReviseOrderList constructor.
+     * @param array|CustomerProduct[] $products
+     */
+    public function __construct(array $products)
     {
-        $this->products = $products;
+        $this->products = [];
+
+        foreach ($products as  $product) {
+            $this->products[] = new RemoveOrderlistProductItem($product);
+        }
     }
 }

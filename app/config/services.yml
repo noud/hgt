@@ -54,3 +54,9 @@ services:
     HGT\Application\Content\NewsletterService:
         arguments:
             - "%mailchimp_api_key%"
+
+    HGT\AppBundle\Mailer\Sender\CustomerProductRemovalSender:
+        arguments:
+            - "%mailer_default_to_order_name%"
+            - "%mailer_default_to_order_email%"
+            - ""

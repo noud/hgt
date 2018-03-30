@@ -1,0 +1,19 @@
+{% extends 'emails/base.html.twig' %}
+
+{% block body %}
+    <h2>Klant</h2>
+    <ul>
+        <li>Klant ID: {{ customer.id }}</li>
+        <li>Klant Naam: {{ customer.name }}</li>
+        <li>Klant Email: {{ customer.email }}</li>
+    </ul>
+    <h2>Producten</h2>
+    <ul>
+        {% for product in products %}
+        <li>
+            <div>ID: {{ product.product.id }}</div>
+            <div>Naam: {{ product.product.name }}</div>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

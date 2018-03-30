@@ -4,6 +4,7 @@ namespace HGT\AppBundle\Repository\User\CustomerProduct;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use HGT\Application\User\CustomerGroup\CustomerGroup;
 use HGT\Application\User\CustomerProduct\CustomerProduct;
 
 class CustomerProductRepository extends ServiceEntityRepository
@@ -43,13 +44,16 @@ class CustomerProductRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return CustomerProduct[]
+     * @param CustomerGroup $customerGroup
+     * @return array
      */
-    public function getCustomerProducts()
+    public function getCustomerProducts(CustomerGroup $customerGroup)
     {
         $query = $this->createQueryBuilder('cp')
             ->leftJoin('cp.product', 'p')
-            ->where('p.enabled = true')
+            ->where('cp.customer_group = :customer_group')
+            ->setParameter('customer_group', $customerGroup->getId())
+            ->andWhere('p.enabled = true')
             ->orderBy('cp.priority')
         ;
 

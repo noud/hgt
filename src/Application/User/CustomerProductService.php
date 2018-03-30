@@ -3,6 +3,7 @@
 namespace HGT\Application\User;
 
 use HGT\AppBundle\Repository\User\CustomerProduct\CustomerProductRepository;
+use HGT\Application\User\CustomerGroup\CustomerGroup;
 
 class CustomerProductService
 {
@@ -21,10 +22,38 @@ class CustomerProductService
     }
 
     /**
-     * @return CustomerProduct\CustomerProduct[]
+     * @param CustomerGroup $customerGroup
+     * @return array
      */
-    public function getCustomerProducts()
+    public function getCustomerProducts(CustomerGroup $customerGroup)
     {
-        return $this->customerProductRepository->getCustomerProducts();
+        return $this->customerProductRepository->getCustomerProducts($customerGroup);
+    }
+
+    /**
+     * @param $command
+     * @return array
+     */
+    public function getSelectedCustomerProducts($command)
+    {
+        $countSelected = 0;
+        $sendEmail = false;
+        $customerProducts = [];
+
+        foreach ($command->products as $removeOrderlistProductItem ) {
+            if ($removeOrderlistProductItem->remove) {
+                $countSelected++;
+                $customerProducts[] = $removeOrderlistProductItem->product;
+            }
+        }
+
+        if($countSelected > 0) {
+            $sendEmail = true;
+        }
+
+        return [
+            'sendEmail' => $sendEmail,
+            'customerProducts' => $customerProducts,
+        ];
     }
 }

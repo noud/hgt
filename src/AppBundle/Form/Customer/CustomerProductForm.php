@@ -2,10 +2,9 @@
 
 namespace HGT\AppBundle\Form\Customer;
 
-use HGT\Application\User\CustomerProduct\CustomerProduct;
+use HGT\Application\Catalog\Order\Command\RemoveOrderlistProductItem;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,8 +16,9 @@ class CustomerProductForm extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('volume', TextType::class, [
+        $builder->add('remove', CheckboxType::class, [
             'label' => false,
+            'required' => false
         ]);
     }
 
@@ -28,7 +28,7 @@ class CustomerProductForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => CustomerProduct::class,
+            'data_class' => RemoveOrderlistProductItem::class,
         ]);
     }
 }

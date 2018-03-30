@@ -3,8 +3,10 @@
 namespace HGT\AppBundle\Controller\Customer;
 
 use HGT\AppBundle\Form\Customer\OrderListEditForm;
+use HGT\AppBundle\Mailer\Sender\CustomerProductRemovalSender;
 use HGT\Application\Catalog\Order\Command\ReviseOrderList;
 use HGT\Application\User\CustomerProductService;
+use HGT\Application\User\CustomerService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,11 +36,11 @@ class AccountController extends Controller
      */
     public function orderListEditAction(
         Request $request,
-        CustomerProductService $customerProductService
+        CustomerProductService $customerProductService,
+        CustomerService $customerService,
+        CustomerProductRemovalSender $customerProductRemovalSender
     ) {
-
-        $customerProducts = $customerProductService->getCustomerProducts();
-
+        $customerProducts = $customerProductService->getCustomerProducts($customerService->getCurrentCustomer()->getCustomerGroup());
         $command = new ReviseOrderList($customerProducts);
         $form = $this->createForm(OrderListEditForm::class, $command);
 
@@ -46,6 +48,32 @@ class AccountController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $customerProductData = $customerProductService->getSelectedCustomerProducts($command);
+
+            if ($customerProductData['sendEmail']) {
+                try {
+                    $customerProductRemovalSender->sendCustomerProductRemoval(
+                        $customerService->getCurrentCustomer(),
+                        $customerProductData['customerProducts']
+                    );
+                } catch (\Twig_Error_Loader $e) {
+                } catch (\Twig_Error_Runtime $e) {
+                } catch (\Twig_Error_Syntax $e) {
+                }
+
+                $this->addFlash(
+                    'success',
+                    'Een email is verzonden. Binnen 2 dagen hoort.'
+                );
+
+            } else {
+                $this->addFlash(
+                    'danger',
+                    'U dient tenminste een product aan te vinken om te verwijderen.'
+                );
+            }
+
+            return $this->redirectToRoute('account_order_list_edit');
         }
 
         return $this->render('account/order-list-edit.html.twig', [
