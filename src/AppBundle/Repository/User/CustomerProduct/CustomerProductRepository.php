@@ -47,7 +47,7 @@ class CustomerProductRepository extends ServiceEntityRepository
      * @param CustomerGroup $customerGroup
      * @return array
      */
-    public function getCustomerProducts(CustomerGroup $customerGroup)
+    public function getCustomerProducts($customerGroup)
     {
         $query = $this->createQueryBuilder('cp')
             ->leftJoin('cp.product', 'p')

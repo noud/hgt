@@ -12,13 +12,13 @@
             <div class="col-sm-9">
                 <h1 class="page-title">Bestellijst aanpassen</h1>
                 <div class="content is-section">
-                    {% if form.products is not empty %}
+                    {% if form is defined and form.products is not empty %}
                         <p>Pas hier uw bestellijst aan.</p>
                     {% else %}
                         <p>Geen producten.</p>
                     {% endif %}
                 </div>
-                {% if form.products is not empty %}
+                {% if form is defined and form.products is not empty %}
                     {{ form_start(form, {'attr': {'id': form.vars.id} }) }}
                     <ul id="sortable" class="list-edit list-edit-rwd is-section">
                         {% for customerProductForm in form.products %}
@@ -57,6 +57,7 @@
 {% endblock %}
 
 {% block scripts %}
+    {% if form is defined %}
     <script>
         $(document).ready(function () {
             $('#sortable').sortable({
@@ -71,4 +72,5 @@
             });
         });
     </script>
+{% endif %}
 {% endblock %}

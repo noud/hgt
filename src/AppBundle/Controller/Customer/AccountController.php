@@ -40,7 +40,13 @@ class AccountController extends Controller
         CustomerService $customerService,
         CustomerProductRemovalSender $customerProductRemovalSender
     ) {
+
+        if(is_null($customerService->getCurrentCustomer()->getCustomerGroup())){
+            return $this->render('account/order-list-edit.html.twig');
+        }
+
         $customerProducts = $customerProductService->getCustomerProducts($customerService->getCurrentCustomer()->getCustomerGroup());
+
         $command = new ReviseOrderList($customerProducts);
         $form = $this->createForm(OrderListEditForm::class, $command);
 

@@ -25,7 +25,7 @@ class CustomerProductService
      * @param CustomerGroup $customerGroup
      * @return array
      */
-    public function getCustomerProducts(CustomerGroup $customerGroup)
+    public function getCustomerProducts($customerGroup)
     {
         return $this->customerProductRepository->getCustomerProducts($customerGroup);
     }
