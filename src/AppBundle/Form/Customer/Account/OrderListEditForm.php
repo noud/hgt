@@ -10,14 +10,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OrderListEditForm extends AbstractType
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
-     */
+  /**
+   * @param FormBuilderInterface $builder
+   * @param array $options
+   */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('products', CollectionType::class, [
-            'entry_type' => OrderListEditProductsForm::class
+            'entry_type' => OrderListEditProductForm::class
         ]);
     }
 }

@@ -5,12 +5,11 @@ namespace HGT\AppBundle\Controller\Customer;
 use HGT\AppBundle\Form\Customer\Account\OrderListEditForm;
 use HGT\AppBundle\Form\Customer\Account\OrderListForm;
 use HGT\AppBundle\Mailer\Sender\CustomerProductRemovalSender;
-use HGT\Application\Account\Command\ReviseOrderListEditProducts;
+use HGT\Application\Account\Command\ReviseOrderListEditProduct;
 use HGT\Application\Account\Command\ReviseOrderListProduct;
 use HGT\Application\Catalog\Cart\Command\DefineCartProductCommand;
 use HGT\Application\Catalog\CartProductService;
 use HGT\Application\Catalog\CartService;
-use HGT\Application\User\CustomerProduct\CustomerProduct;
 use HGT\Application\User\CustomerProductService;
 use HGT\Application\User\CustomerService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -28,16 +27,16 @@ class AccountController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/mijn-account/bestellijst", name="account_order_list")
-     * @param Request $request
-     * @param CustomerService $customerService
-     * @param CustomerProductService $customerProductService
-     * @param CartService $cartService
-     * @param CartProductService $cartProductService
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
+  /**
+   * @Route("/mijn-account/bestellijst", name="account_order_list")
+   * @param Request $request
+   * @param CustomerService $customerService
+   * @param CustomerProductService $customerProductService
+   * @param CartService $cartService
+   * @param CartProductService $cartProductService
+   * @return \Symfony\Component\HttpFoundation\Response
+   * @throws \Doctrine\ORM\OptimisticLockException
+   */
     public function orderListAction(
         Request $request,
         CustomerService $customerService,
@@ -60,23 +59,13 @@ class AccountController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var CustomerProduct $customerProduct */
-            foreach($customerProducts as $customerProduct) {
+          foreach($command->products as $increaseOrderListProduct) {
+            $defineCartProductCommand = new DefineCartProductCommand($increaseOrderListProduct->product->getProduct(), $cart);
+            $defineCartProductCommand->unit_of_measure = $increaseOrderListProduct->product->getUnitOfMeasure();
+            $defineCartProductCommand->qty = $increaseOrderListProduct->increase;
 
-                $defineCartProductCommand = new DefineCartProductCommand($customerProduct->getProduct(), $cart);
-                $defineCartProductCommand->unit_of_measure = $customerProduct->getUnitOfMeasure();
-
-                dump($defineCartProductCommand);
-
-
-
-                $cartProductService->defineCartProduct($defineCartProductCommand);
-
-            }
-
-            exit;
-
-
+            $cartProductService->defineCartProduct($defineCartProductCommand);
+          }
             $em->flush();
         }
 
@@ -107,8 +96,7 @@ class AccountController extends Controller
         }
 
         $customerProducts = $customerProductService->getCustomerProducts($customerService->getCurrentCustomer()->getCustomerGroup());
-
-        $command = new ReviseOrderListEditProducts($customerProducts);
+        $command = new ReviseOrderListEditProduct($customerProducts);
         $form = $this->createForm(OrderListEditForm::class, $command);
 
         $form->handleRequest($request);

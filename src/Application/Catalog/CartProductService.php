@@ -86,6 +86,7 @@ class CartProductService
         //@TODO: Duplicate cart products fixen
 
         $qty = $command->qty;
+
         if ($qty <= 0) {
             $qty = 1;
         }
@@ -114,20 +115,12 @@ class CartProductService
             $qty
         );
 
-
-        dump($unitPrice);
-
-
-//
-//        if ($unitPrice === null) {
-//            return null;
-//        }
-
         $cartProduct->setCart($command->cart);
         $cartProduct->setProduct($product);
         $cartProduct->setUnitOfMeasure($unitOfMeasure);
         $cartProduct->setUnitPrice($unitPrice);
         $cartProduct->setQty($qty);
+
         $cartProduct->setTaxPercentage($taxPercentage);
         $cartProduct->setIsAction($this->productPriceService->getActionProductPrice(
             $customer,
@@ -137,7 +130,6 @@ class CartProductService
         ) ? "1" : "0");
 
         $this->addCartProduct($cartProduct);
-
 
         return $cartProduct;
     }

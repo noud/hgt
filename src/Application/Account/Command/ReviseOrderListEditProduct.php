@@ -4,23 +4,23 @@ namespace HGT\Application\Account\Command;
 
 use HGT\Application\User\CustomerProduct\CustomerProduct;
 
-class ReviseOrderListProduct
+class ReviseOrderListEditProduct
 {
-    /**
-     * @var IncreaseOrderListProduct[]
-     */
+  /**
+   * @var RemoveOrderListEditProduct[]
+   */
     public $products;
 
   /**
-   * ReviseOrderListProduct constructor.
+   * ReviseOrderListEditProduct constructor.
    * @param CustomerProduct[]
    */
     public function __construct(array $products)
     {
         $this->products = [];
 
-        foreach ($products as  $product) {
-            $this->products[] = new IncreaseOrderListProduct($product);
+        foreach ($products as $product) {
+            $this->products[] = new RemoveOrderListEditProduct($product);
         }
     }
 }
