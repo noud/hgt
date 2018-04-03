@@ -3,6 +3,7 @@
 namespace HGT\Application\User\CustomerProduct;
 
 use Doctrine\ORM\Mapping as ORM;
+use HGT\Application\Catalog\Product\UnitOfMeasure;
 
 /**
  * @ORM\Entity(repositoryClass="HGT\AppBundle\Repository\User\CustomerProduct\CustomerProductRepository")
@@ -33,7 +34,7 @@ class CustomerProduct
      * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\UnitOfMeasure", inversedBy="customer_product")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $unit_of_measure_id;
+    private $unit_of_measure;
 
     /**
      * @var string
@@ -106,19 +107,19 @@ class CustomerProduct
     }
 
     /**
-     * @return mixed
+     * @return UnitOfMeasure
      */
-    public function getUnitOfMeasureId()
+    public function getUnitOfMeasure()
     {
-        return $this->unit_of_measure_id;
+        return $this->unit_of_measure;
     }
 
     /**
-     * @param mixed $unit_of_measure_id
+     * @param UnitOfMeasure $unit_of_measure
      */
-    public function setUnitOfMeasureId($unit_of_measure_id)
+    public function setUnitOfMeasure(UnitOfMeasure $unit_of_measure)
     {
-        $this->unit_of_measure_id = $unit_of_measure_id;
+        $this->unit_of_measure = $unit_of_measure;
     }
 
     /**

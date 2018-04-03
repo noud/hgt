@@ -2,9 +2,15 @@
 
 namespace HGT\AppBundle\Controller\Customer;
 
-use HGT\AppBundle\Form\Customer\OrderListEditForm;
+use HGT\AppBundle\Form\Customer\Account\OrderListEditForm;
+use HGT\AppBundle\Form\Customer\Account\OrderListForm;
 use HGT\AppBundle\Mailer\Sender\CustomerProductRemovalSender;
-use HGT\Application\Catalog\Order\Command\ReviseOrderList;
+use HGT\Application\Account\Command\ReviseOrderListEditProducts;
+use HGT\Application\Account\Command\ReviseOrderListProduct;
+use HGT\Application\Catalog\Cart\Command\DefineCartProductCommand;
+use HGT\Application\Catalog\CartProductService;
+use HGT\Application\Catalog\CartService;
+use HGT\Application\User\CustomerProduct\CustomerProduct;
 use HGT\Application\User\CustomerProductService;
 use HGT\Application\User\CustomerService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -24,15 +30,71 @@ class AccountController extends Controller
 
     /**
      * @Route("/mijn-account/bestellijst", name="account_order_list")
+     * @param Request $request
+     * @param CustomerService $customerService
+     * @param CustomerProductService $customerProductService
+     * @param CartService $cartService
+     * @param CartProductService $cartProductService
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function orderListAction(Request $request)
-    {
+    public function orderListAction(
+        Request $request,
+        CustomerService $customerService,
+        CustomerProductService $customerProductService,
+        CartService $cartService,
+        CartProductService $cartProductService
+    ) {
+        if (is_null($customerService->getCurrentCustomer()->getCustomerGroup())) {
+            return $this->render('account/order-list.html.twig');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $customerProducts = $customerProductService->getCustomerProducts($customerService->getCurrentCustomer()->getCustomerGroup());
+
+        $command = new ReviseOrderListProduct($customerProducts);
+        $form = $this->createForm(OrderListForm::class, $command);
+
+        $cart = $cartService->getOpenCart();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var CustomerProduct $customerProduct */
+            foreach($customerProducts as $customerProduct) {
+
+                $defineCartProductCommand = new DefineCartProductCommand($customerProduct->getProduct(), $cart);
+                $defineCartProductCommand->unit_of_measure = $customerProduct->getUnitOfMeasure();
+
+                dump($defineCartProductCommand);
+
+
+
+                $cartProductService->defineCartProduct($defineCartProductCommand);
+
+            }
+
+            exit;
+
+
+            $em->flush();
+        }
+
         return $this->render('account/order-list.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 
     /**
      * @Route("/mijn-account/bestellijst-aanpassen", name="account_order_list_edit")
+     * @param Request $request
+     * @param CustomerProductService $customerProductService
+     * @param CustomerService $customerService
+     * @param CustomerProductRemovalSender $customerProductRemovalSender
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function orderListEditAction(
         Request $request,
@@ -40,14 +102,13 @@ class AccountController extends Controller
         CustomerService $customerService,
         CustomerProductRemovalSender $customerProductRemovalSender
     ) {
-
-        if(is_null($customerService->getCurrentCustomer()->getCustomerGroup())){
+        if (is_null($customerService->getCurrentCustomer()->getCustomerGroup())) {
             return $this->render('account/order-list-edit.html.twig');
         }
 
         $customerProducts = $customerProductService->getCustomerProducts($customerService->getCurrentCustomer()->getCustomerGroup());
 
-        $command = new ReviseOrderList($customerProducts);
+        $command = new ReviseOrderListEditProducts($customerProducts);
         $form = $this->createForm(OrderListEditForm::class, $command);
 
         $form->handleRequest($request);
@@ -57,15 +118,11 @@ class AccountController extends Controller
             $customerProductData = $customerProductService->getSelectedCustomerProducts($command);
 
             if ($customerProductData['sendEmail']) {
-                try {
-                    $customerProductRemovalSender->sendCustomerProductRemoval(
-                        $customerService->getCurrentCustomer(),
-                        $customerProductData['customerProducts']
-                    );
-                } catch (\Twig_Error_Loader $e) {
-                } catch (\Twig_Error_Runtime $e) {
-                } catch (\Twig_Error_Syntax $e) {
-                }
+
+                $customerProductRemovalSender->sendCustomerProductRemoval(
+                    $customerService->getCurrentCustomer(),
+                    $customerProductData['customerProducts']
+                );
 
                 $this->addFlash(
                     'success',

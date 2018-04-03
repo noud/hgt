@@ -1,10 +1,10 @@
 <?php
 
-namespace HGT\Application\Catalog\Order\Command;
+namespace HGT\Application\Account\Command;
 
 use HGT\Application\User\CustomerProduct\CustomerProduct;
 
-class RemoveOrderlistProductItem
+class RemoveOrderlistEditProducts
 {
     /**
      * @var bool

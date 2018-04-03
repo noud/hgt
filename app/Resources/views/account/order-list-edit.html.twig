@@ -58,19 +58,16 @@
 
 {% block scripts %}
     {% if form is defined %}
-    <script>
-        $(document).ready(function () {
+        <script>
             $('#sortable').sortable({
                 revert: true
             });
-
             $('.js-order-delete-confirm').click(function () {
                 if (confirm('Weet u zeker dat u de geselecteerde producten uit uw bestellijst wilt verwijderen?')) {
                     $('#{{ form.vars.id }}').submit();
                 }
                 return false;
             });
-        });
-    </script>
-{% endif %}
+        </script>
+    {% endif %}
 {% endblock %}

@@ -92,7 +92,12 @@ class CartProductService
 
         $cartProduct = new CartProduct();
         $customer = $this->customerService->getCurrentCustomer();
-        $unitOfMeasure = $command->product_unit_of_measure->getUnitOfMeasure();
+
+        if ($command->unit_of_measure) {
+            $unitOfMeasure = $command->unit_of_measure;
+        } else {
+            $unitOfMeasure = $command->product_unit_of_measure->getUnitOfMeasure();
+        }
 
         /** @var Product $product */
         $product = $command->product;
@@ -109,6 +114,15 @@ class CartProductService
             $qty
         );
 
+
+        dump($unitPrice);
+
+
+//
+//        if ($unitPrice === null) {
+//            return null;
+//        }
+
         $cartProduct->setCart($command->cart);
         $cartProduct->setProduct($product);
         $cartProduct->setUnitOfMeasure($unitOfMeasure);
@@ -123,6 +137,7 @@ class CartProductService
         ) ? "1" : "0");
 
         $this->addCartProduct($cartProduct);
+
 
         return $cartProduct;
     }

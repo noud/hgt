@@ -1,13 +1,13 @@
 <?php
 
-namespace HGT\Application\Catalog\Order\Command;
+namespace HGT\Application\Account\Command;
 
 use HGT\Application\User\CustomerProduct\CustomerProduct;
 
-class ReviseOrderList
+class ReviseOrderListEditProducts
 {
     /**
-     * @var RemoveOrderlistProductItem[]
+     * @var RemoveOrderlistEditProducts[]
      */
     public $products;
 
@@ -20,7 +20,7 @@ class ReviseOrderList
         $this->products = [];
 
         foreach ($products as  $product) {
-            $this->products[] = new RemoveOrderlistProductItem($product);
+            $this->products[] = new RemoveOrderlistEditProducts($product);
         }
     }
 }

@@ -12,99 +12,56 @@
             <div class="col-sm-9">
                 <h1 class="page-title">Mijn bestellijst</h1>
                 <div class="content is-section">
-                    <p>Persoonlijke bestellijst van <strong>{{ app.user.name }}</strong>. Wilt u de volgorde of producten wijzigen op
+                    <p>Persoonlijke bestellijst van <strong>{{ app.user.name }}</strong>. Wilt u de volgorde of
+                        producten wijzigen op
                         uw bestellijst klik dan <a href="{{ path('account_order_list_edit') }}">hier</a>.</p>
                 </div>
+
+                {{ form_start(form) }}
                 <ul class="list-unit list-unit-rwd is-section">
-                    <li>
-                        <div class="table-number">
-                            <div><input title="" class="form-control" type="number"/>
-                            </div>
-                            <div><h2 class="table-section-base-header">Jupiler pils krat</h2></div>
-                            <div><div>Jupiler</div></div>
-                            <div>
-                                <div class="table-section-base-meta">
-                                    <div>1st. | Krat</div>
-                                    <div>Inhoud: 24x25cl</div>
+
+                    {% for subForm in form.products %}
+
+                        {% set customerProduct = subForm.vars.data.product %}
+                        <li>
+                            <div class="table-number">
+                                <div>
+                                    {{ form_widget(subForm.increase) }}
+                                </div>
+                                <div><h2 class="table-section-base-header">{{ customerProduct.product.name }}</h2></div>
+                                <div>
+                                    <div>
+                                        {% if customerProduct.product.manufacturer %}
+                                            {{ customerProduct.product.manufacturer.name }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="table-section-base-meta">
+                                        <div>{{ customerProduct.product.volume }}</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="table-section-base-price">&euro; {{ customerProduct.product.price }}</div>
                                 </div>
                             </div>
-                            <div><div class="table-section-base-price">&euro; 13,65</div></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="table-number">
-                            <div><input title="" class="form-control" type="number"/>
-                            </div>
-                            <div><h2 class="table-section-base-header">Jupiler pils krat</h2></div>
-                            <div><div>Jupiler</div></div>
-                            <div>
-                                <div class="table-section-base-meta">
-                                    <div>1st. | Krat</div>
-                                    <div>Inhoud: 24x25cl</div>
+                            <div class="list-unit-meta">
+                                <div>
+                                    <div class="highlight-label">
+                                        <div class="highlight-label-head">Actie</div>
+                                        <div class="highlight-label-sub">Actie geldig van 22 februari t/m 30 juni 2018
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="order-timer">
+                                        <div class="order-timer-icon"><i class="far fa-clock"></i></div>
+                                        <div class="order-timer-meta">Dit product wordt nabesteld</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div><div class="table-section-base-price">&euro; 13,65</div></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="table-number">
-                            <div><input title="" class="form-control" type="number"/>
-                            </div>
-                            <div><h2 class="table-section-base-header">Jupiler pils krat</h2></div>
-                            <div><div>Jupiler</div></div>
-                            <div>
-                                <div class="table-section-base-meta">
-                                    <div>1st. | Krat</div>
-                                    <div>Inhoud: 24x25cl</div>
-                                </div>
-                            </div>
-                            <div><div class="table-section-base-price">&euro; 13,65</div></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="table-number">
-                            <div><input title="" class="form-control" type="number"/>
-                            </div>
-                            <div><h2 class="table-section-base-header">Jupiler pils krat</h2></div>
-                            <div><div>Jupiler</div></div>
-                            <div>
-                                <div class="table-section-base-meta">
-                                    <div>1st. | Krat</div>
-                                    <div>Inhoud: 24x25cl</div>
-                                </div>
-                            </div>
-                            <div><div class="table-section-base-price">&euro; 13,65</div></div>
-                        </div>
-                        <div class="list-unit-meta">
-                            <div>
-                                <div class="highlight-label">
-                                    <div class="highlight-label-head">Actie</div>
-                                    <div class="highlight-label-sub">Actie geldig van 22 februari t/m 30 juni 2018</div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="order-timer">
-                                    <div class="order-timer-icon"><i class="far fa-clock"></i></div>
-                                    <div class="order-timer-meta">Dit product wordt nabesteld</div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="table-number">
-                            <div><input title="" class="form-control" type="number"/>
-                            </div>
-                            <div><h2 class="table-section-base-header">Jupiler pils krat</h2></div>
-                            <div><div>Jupiler</div></div>
-                            <div>
-                                <div class="table-section-base-meta">
-                                    <div>1st. | Krat</div>
-                                    <div>Inhoud: 24x25cl</div>
-                                </div>
-                            </div>
-                            <div><div class="table-section-base-price">&euro; 13,65</div></div>
-                        </div>
-                    </li>
+                        </li>
+                    {% endfor %}
                 </ul>
                 <div class="tar">
                     <button type="submit" class="btn btn-icon-label">
@@ -112,6 +69,7 @@
                         <span class="label">Toevoegen in winkelwagen</span>
                     </button>
                 </div>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
