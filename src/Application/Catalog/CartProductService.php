@@ -83,16 +83,11 @@ class CartProductService
      */
     public function defineCartProduct(DefineCartProductCommand $command)
     {
-        //@TODO: Duplicate cart products fixen
-
-        $qty = $command->qty;
-
-        if ($qty <= 0) {
+        if ($command->qty <= 0) {
             $qty = 1;
+        } else {
+            $qty = $command->qty;
         }
-
-        $cartProduct = new CartProduct();
-        $customer = $this->customerService->getCurrentCustomer();
 
         if ($command->unit_of_measure) {
             $unitOfMeasure = $command->unit_of_measure;
@@ -100,36 +95,48 @@ class CartProductService
             $unitOfMeasure = $command->product_unit_of_measure->getUnitOfMeasure();
         }
 
-        /** @var Product $product */
-        $product = $command->product;
+        $cartProduct = $this->getUniqueCartProduct($command->cart, $command->product, $unitOfMeasure);
 
-        $taxPercentage = $this->productPriceService->getTaxPercentage(
-            $customer->getCustomerTaxGroup(),
-            $product->getProductTaxGroup()
-        );
+        if (is_null($cartProduct)) {
+            $cartProduct = new CartProduct();
 
-        $unitPrice = $this->productPriceService->getUnitPriceForCustomer(
-            $customer,
-            $product,
-            $unitOfMeasure,
-            $qty
-        );
+            $customer = $this->customerService->getCurrentCustomer();
 
-        $cartProduct->setCart($command->cart);
-        $cartProduct->setProduct($product);
-        $cartProduct->setUnitOfMeasure($unitOfMeasure);
-        $cartProduct->setUnitPrice($unitPrice);
-        $cartProduct->setQty($qty);
+            /** @var Product $product */
+            $product = $command->product;
 
-        $cartProduct->setTaxPercentage($taxPercentage);
-        $cartProduct->setIsAction($this->productPriceService->getActionProductPrice(
-            $customer,
-            $product,
-            $unitOfMeasure,
-            $qty
-        ) ? "1" : "0");
+            $taxPercentage = $this->productPriceService->getTaxPercentage(
+                $customer->getCustomerTaxGroup(),
+                $product->getProductTaxGroup()
+            );
 
-        $this->addCartProduct($cartProduct);
+            $unitPrice = $this->productPriceService->getUnitPriceForCustomer(
+                $customer,
+                $product,
+                $unitOfMeasure,
+                $qty
+            );
+
+            $cartProduct->setCart($command->cart);
+            $cartProduct->setProduct($product);
+            $cartProduct->setUnitOfMeasure($unitOfMeasure);
+            $cartProduct->setUnitPrice($unitPrice);
+            $cartProduct->setQty($qty);
+
+            $cartProduct->setTaxPercentage($taxPercentage);
+            $cartProduct->setIsAction($this->productPriceService->getActionProductPrice(
+                $customer,
+                $product,
+                $unitOfMeasure,
+                $qty
+            ) ? "1" : "0");
+
+            $this->addCartProduct($cartProduct);
+
+        } else {
+            $cartProduct = $this->getCartProductById($cartProduct->getId());
+            $cartProduct->setQty($cartProduct->getQty() + $qty);
+        }
 
         return $cartProduct;
     }

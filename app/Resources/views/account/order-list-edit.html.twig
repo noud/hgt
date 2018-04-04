@@ -1,6 +1,6 @@
 {% extends 'layout/base.html.twig' %}
 
-{% block bodyClass %}account-index account-index-order-overview{% endblock %}
+{% block bodyClass %}{% endblock %}
 
 {% block body %}
     <div class="container layout-flip-sidebar-sm">
@@ -21,13 +21,13 @@
                 {% if form is defined and form.products is not empty %}
                     {{ form_start(form, {'attr': {'id': form.vars.id} }) }}
                     <ul id="sortable" class="list-edit list-edit-rwd is-section">
-                        {% for customerProductForm in form.products %}
-                            {% set customerProduct = customerProductForm.vars.data.product %}
+                        {% for subForm in form.products %}
+                            {% set customerProduct = subForm.vars.data.product %}
                             <li data-customer-product-id="{{ customerProduct.id }}">
                                 <div class="table-edit">
                                     <div>
                                         <div class="table-edit-head">
-                                            {{ form_widget(customerProductForm.remove) }}
+                                            {{ form_widget(subForm.remove) }}
                                             <h2 class="table-section-base-header">{{ customerProduct.product.name }}</h2>
                                         </div>
                                     </div>

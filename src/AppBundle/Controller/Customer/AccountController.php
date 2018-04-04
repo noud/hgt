@@ -27,16 +27,16 @@ class AccountController extends Controller
         ]);
     }
 
-  /**
-   * @Route("/mijn-account/bestellijst", name="account_order_list")
-   * @param Request $request
-   * @param CustomerService $customerService
-   * @param CustomerProductService $customerProductService
-   * @param CartService $cartService
-   * @param CartProductService $cartProductService
-   * @return \Symfony\Component\HttpFoundation\Response
-   * @throws \Doctrine\ORM\OptimisticLockException
-   */
+    /**
+     * @Route("/mijn-account/bestellijst", name="account_order_list")
+     * @param Request $request
+     * @param CustomerService $customerService
+     * @param CustomerProductService $customerProductService
+     * @param CartService $cartService
+     * @param CartProductService $cartProductService
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function orderListAction(
         Request $request,
         CustomerService $customerService,
@@ -59,13 +59,13 @@ class AccountController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-          foreach($command->products as $increaseOrderListProduct) {
-            $defineCartProductCommand = new DefineCartProductCommand($increaseOrderListProduct->product->getProduct(), $cart);
-            $defineCartProductCommand->unit_of_measure = $increaseOrderListProduct->product->getUnitOfMeasure();
-            $defineCartProductCommand->qty = $increaseOrderListProduct->increase;
-
-            $cartProductService->defineCartProduct($defineCartProductCommand);
-          }
+            foreach ($command->products as $increaseOrderListProduct) {
+                $defineCartProductCommand = new DefineCartProductCommand($increaseOrderListProduct->product->getProduct(),
+                    $cart);
+                $defineCartProductCommand->unit_of_measure = $increaseOrderListProduct->product->getUnitOfMeasure();
+                $defineCartProductCommand->qty = $increaseOrderListProduct->increase;
+                $cartProductService->defineCartProduct($defineCartProductCommand);
+            }
             $em->flush();
         }
 
