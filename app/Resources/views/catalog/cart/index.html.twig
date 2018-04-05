@@ -51,12 +51,14 @@
                                     </div>
                                 </div>
                             </div>
+                            {% if cartProduct.product.isOrderProduct %}
                             <div class="list-cart-timer">
                                 <div class="order-timer">
                                     <div class="order-timer-icon"><i class="far fa-clock"></i></div>
                                     <div class="order-timer-meta">Dit product wordt nabesteld</div>
                                 </div>
                             </div>
+                            {% endif %}
                         </li>
                     {% endfor %}
                 </ul>
