@@ -49,7 +49,8 @@ class AccountController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
-        $customerProducts = $customerProductService->getCustomerProducts($customerService->getCurrentCustomer()->getCustomerGroup());
+        $customerProducts = $customerProductService->getCustomerProducts($customerService->getCurrentCustomer()
+            ->getCustomerGroup());
 
         $command = new ReviseOrderListProduct($customerProducts);
         $form = $this->createForm(OrderListForm::class, $command);
@@ -60,8 +61,8 @@ class AccountController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             foreach ($command->products as $increaseOrderListProduct) {
-                $defineCartProductCommand = new DefineCartProductCommand($increaseOrderListProduct->product->getProduct(),
-                    $cart);
+                $defineCartProductCommand = new DefineCartProductCommand($increaseOrderListProduct->product
+                    ->getProduct(), $cart);
                 $defineCartProductCommand->unit_of_measure = $increaseOrderListProduct->product->getUnitOfMeasure();
                 $defineCartProductCommand->qty = $increaseOrderListProduct->increase;
                 $cartProductService->defineCartProduct($defineCartProductCommand);
@@ -95,18 +96,17 @@ class AccountController extends Controller
             return $this->render('account/order-list-edit.html.twig');
         }
 
-        $customerProducts = $customerProductService->getCustomerProducts($customerService->getCurrentCustomer()->getCustomerGroup());
+        $customerProducts = $customerProductService->getCustomerProducts($customerService->getCurrentCustomer()
+            ->getCustomerGroup());
         $command = new ReviseOrderListEditProduct($customerProducts);
         $form = $this->createForm(OrderListEditForm::class, $command);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $customerProductData = $customerProductService->getSelectedCustomerProducts($command);
 
             if ($customerProductData['sendEmail']) {
-
                 $customerProductRemovalSender->sendCustomerProductRemoval(
                     $customerService->getCurrentCustomer(),
                     $customerProductData['customerProducts']
@@ -116,7 +116,6 @@ class AccountController extends Controller
                     'success',
                     'Een email is verzonden. Binnen 2 dagen hoort.'
                 );
-
             } else {
                 $this->addFlash(
                     'danger',

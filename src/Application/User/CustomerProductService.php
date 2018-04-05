@@ -40,14 +40,14 @@ class CustomerProductService
         $sendEmail = false;
         $customerProducts = [];
 
-        foreach ($command->products as $removeOrderlistProductItem ) {
+        foreach ($command->products as $removeOrderlistProductItem) {
             if ($removeOrderlistProductItem->remove) {
                 $countSelected++;
                 $customerProducts[] = $removeOrderlistProductItem->product;
             }
         }
 
-        if($countSelected > 0) {
+        if ($countSelected > 0) {
             $sendEmail = true;
         }
 

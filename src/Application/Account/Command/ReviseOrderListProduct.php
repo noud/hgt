@@ -11,15 +11,15 @@ class ReviseOrderListProduct
      */
     public $products;
 
-  /**
-   * ReviseOrderListProduct constructor.
-   * @param CustomerProduct[]
-   */
+    /**
+     * ReviseOrderListProduct constructor.
+     * @param CustomerProduct[]
+     */
     public function __construct(array $products)
     {
         $this->products = [];
 
-        foreach ($products as  $product) {
+        foreach ($products as $product) {
             $this->products[] = new IncreaseOrderListProduct($product);
         }
     }

@@ -132,7 +132,6 @@ class CartProductService
             ) ? "1" : "0");
 
             $this->addCartProduct($cartProduct);
-
         } else {
             $cartProduct = $this->getCartProductById($cartProduct->getId());
             $cartProduct->setQty($cartProduct->getQty() + $qty);
