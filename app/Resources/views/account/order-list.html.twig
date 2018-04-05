@@ -22,17 +22,6 @@
                         {% for subForm in form.products %}
                             {% set customerProduct = subForm.vars.data.product %}
                             <li>
-
-                                {{ dump( customerProduct.product.lowestProductPrice) }}
-
-                                {#{{ customerProduct.product.lowestProductPrice }}#}
-
-                                {#{% for testing in customerProduct.product.productPrices %}#}
-                                    {#{{ dump(testing) }}#}
-                                {#{% endfor %}#}
-
-
-
                                 <div class="table-number">
                                     <div>
                                         {{ form_widget(subForm.increase) }}
@@ -53,33 +42,38 @@
                                     </div>
                                     <div>
                                         <div class="table-section-base-price">
-
-
-
-                                            {#&euro; {{ customerProduct.product.price }}#}
-
-
-
-
-                                           </div>
-                                    </div>
-                                </div>
-                                <div class="list-unit-meta hidden">
-                                    <div>
-                                        <div class="highlight-label">
-                                            <div class="highlight-label-head">Actie</div>
-                                            <div class="highlight-label-sub">Actie geldig van 22 februari t/m 30 juni
-                                                2018
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="order-timer">
-                                            <div class="order-timer-icon"><i class="far fa-clock"></i></div>
-                                            <div class="order-timer-meta">Dit product wordt nabesteld</div>
+                                            {% if customerProduct.product.lowestProductPrice %}
+                                                &euro; {{ customerProduct.product.lowestProductPrice.unitPrice }}
+                                            {% else %}
+                                                &euro; {{ customerProduct.product.price }}
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
+                                {% if customerProduct.product.lowestProductPrice or customerProduct.product.isOrderProduct %}
+                                    <div class="list-unit-meta">
+                                        <div>
+                                            {% if customerProduct.product.lowestProductPrice %}
+                                                <div class="highlight-label">
+                                                    <div class="highlight-label-head">Actie</div>
+                                                    <div class="highlight-label-sub">Actie geldig
+                                                        van {{ customerProduct.product.getDates.startDate|date('d F') }}
+                                                        t/m
+                                                        {{ customerProduct.product.getDates.startDate|date('d F Y') }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div>
+                                            {% if customerProduct.product.isOrderProduct %}
+                                                <div class="order-timer">
+                                                    <div class="order-timer-icon"><i class="far fa-clock"></i></div>
+                                                    <div class="order-timer-meta">Dit product wordt nabesteld</div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endif %}
                             </li>
                         {% endfor %}
                     </ul>

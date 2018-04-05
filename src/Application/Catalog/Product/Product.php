@@ -145,23 +145,29 @@ class Product
     public function getLowestProductPrice()
     {
         /** @var ProductPrice|null $lowestProductPrice */
-        $lowestProductPrice = $this->getProductPrices();
+        $lowestProductPrice = $this->getProductPrices()->first();
 
-
-        dump($lowestProductPrice);
-
-
-
-//
-//        foreach ($this->getProductPrices() as $productPrice) {
-//            if ($productPrice->getUnitPrice() < $lowestProductPrice->getUnitPrice()) {
-//                $lowestProductPrice = $productPrice;
-//            }
-//        }
-
-
+        foreach ($this->getProductPrices() as $productPrice) {
+            if ($productPrice->getUnitPrice() < $lowestProductPrice->getUnitPrice()) {
+                $lowestProductPrice = $productPrice;
+            }
+        }
 
         return $lowestProductPrice;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDates()
+    {
+        /** @var ProductPrice $firstObject */
+        $firstObject = $this->getProductPrices()->first();
+
+        return [
+            'startDate' => $firstObject->getStartDate(),
+            'endDate' => $firstObject->getEndDate()
+        ];
     }
 
     /**
