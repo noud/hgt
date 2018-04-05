@@ -1,0 +1,31 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block bodyClass %}{% endblock %}
+
+{% block body %}
+    <div class="container layout-flip-sidebar-sm">
+        {{ include('_partials/page/breadcrumbs.html.twig') }}
+
+        <h1 class="page-title page-title-border">Producten</h1>
+
+        <ul class="list">
+            {{ manufacturerProds[0].manufacturer_name }}
+            <hr>
+            {{ manufacturerProds|length }} resultaten in {{ manufacturerProds[0].manufacturer_name }}
+            <hr>
+            {% for manufacturerProd in manufacturerProds %}
+                <li>
+                    <ul>
+                            <li>{{ manufacturerProd.name }}<br>
+                                {{ manufacturerProd.manufacturer_name }} {{ manufacturerProd.volume }}
+                                <div class="bestel visible-dsktop">
+                                    <a href="{{ path('product_view', { 'id': manufacturerProd.id}) }}" title="Bestel {{ manufacturerProd.name }}">Bestel</a>
+                                </div>
+                            </li>
+                        <hr>
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

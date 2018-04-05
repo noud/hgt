@@ -59,4 +59,22 @@ class ManufacturerService
 
         return $manufacturerCats;
     }
+
+    /**
+     * @param $name
+     * @return array
+     */
+    public function getManufacturerMerkIndex($name)
+    {
+        $manufacturerProds = array();
+
+        $manufacturersObjects = $this->manufacturerRepository->getManufacturerProducts($name);
+
+        foreach ($manufacturersObjects as $manufacturersObject) {
+            $manufacturerProds[] = $manufacturersObject;
+            //$manufacturerProds[]['urlKey'] = '/merk' . $manufacturersObject['name'];
+        }
+        //dump($manufacturerProds);
+        return $manufacturerProds;
+    }
 }

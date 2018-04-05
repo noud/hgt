@@ -65,13 +65,18 @@ class ManufacturerRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Manufacturer[]
+     * @param $name
+     * @return array
      */
-    public function getManufacturersWithProducts()
+    public function getManufacturerProducts($name)
     {
         $qb = $this->createQueryBuilder('q');
         $qb->where('q.total_product_count > 0')
-            ->orderBy('q.name', 'ASC');
+            ->innerJoin('q.products', 'p')
+            ->andWhere('q.name = :name')
+            ->setParameter('name', $name)
+            ->select('q.name AS manufacturer_name','p.name','p.id','p.volume')
+            ->orderBy('p.name', 'ASC');
 
         return $qb->getQuery()->getResult();
     }

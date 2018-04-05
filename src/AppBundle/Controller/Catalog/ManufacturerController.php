@@ -23,4 +23,20 @@ class ManufacturerController extends controller
             'manufacturerCats' => $manufacturerService->getManufacturerLetterIndex(),
         ]);
     }
+
+    /**
+     *
+     * @Route("/merk/{name}", name="manufacturer_view")
+     * @param $name
+     * @param ManufacturerService $manufacturerService
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function viewAction(
+        $name,
+        ManufacturerService $manufacturerService
+    ) {
+         return $this->render('catalog/manufacture/view.html.twig', [
+            'manufacturerProds' => $manufacturerService->getManufacturerMerkIndex($name),
+        ]);
+    }
 }
