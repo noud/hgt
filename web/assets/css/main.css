@@ -3781,6 +3781,12 @@ textarea.form-control {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
+}
+.table-3-col > li > a {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 .table-3-col > li > div {
   -webkit-box-flex: 1;
@@ -3808,6 +3814,7 @@ textarea.form-control {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
 }
 .table-5-col > li > div {
   -webkit-box-flex: 1;

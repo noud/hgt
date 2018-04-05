@@ -10,6 +10,10 @@ use HGT\Application\Account\Command\ReviseOrderListProduct;
 use HGT\Application\Catalog\Cart\Command\DefineCartProductCommand;
 use HGT\Application\Catalog\CartProductService;
 use HGT\Application\Catalog\CartService;
+use HGT\Application\User\CustomerOrder\CustomerOrder;
+use HGT\Application\User\CustomerOrder\CustomerOrderLine;
+use HGT\Application\User\CustomerOrderLineService;
+use HGT\Application\User\CustomerOrderService;
 use HGT\Application\User\CustomerProductService;
 use HGT\Application\User\CustomerService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -134,9 +138,41 @@ class AccountController extends Controller
     /**
      * @Route("/mijn-account/bestelhistorie", name="account_order_history")
      */
-    public function orderHistoryAction(Request $request)
-    {
+    public function orderHistoryAction(
+        Request $request,
+        CustomerOrderService $customerOrderService,
+        CustomerService $customerService
+    ) {
+        $deliveredCustomerOrders = $customerOrderService->getCustomerOrders(
+            $customerService->getCurrentCustomer(),
+            true
+        );
+        $customerOrders = $customerOrderService->getCustomerOrders($customerService->getCurrentCustomer());
+
         return $this->render('account/order-history.html.twig', [
+            'deliveredCustomerOrders' => $deliveredCustomerOrders,
+            'customerOrders' => $customerOrders,
+        ]);
+    }
+
+    /**
+     * @Route("/mijn-account/bestelhistorie/view/{id}", name="account_order_history_view")
+     */
+    public function orderHistoryViewAction(
+        Request $request,
+        CustomerOrderService $customerOrderService,
+        CustomerOrder $customerOrder,
+        CustomerOrderLineService $customerOrderLineService,
+        CustomerService $customerService
+    ) {
+        $customerOrder = $customerOrderService->get($customerOrder);
+        $customerOrderLines = $customerOrderLineService->getByCustomerOrder($customerOrder);
+        $customer = $customerService->getCurrentCustomer();
+
+        return $this->render('account/order.html.twig', [
+            'customer' => $customer,
+            'customerOrder' => $customerOrder,
+            'customerOrderLines' => $customerOrderLines,
         ]);
     }
 

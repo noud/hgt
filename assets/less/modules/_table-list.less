@@ -4,8 +4,19 @@
 /* ----- */
 .table-3-col {
   .table-base-bg();
+
+
+
   > li {
     display: flex;
+    position: relative;
+
+    > a {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
     > div {
       flex-grow: 1;
       width: 100%/3;
@@ -18,6 +29,7 @@
   .table-base-bg();
   > li {
     display: flex;
+    position: relative;
     > div {
       flex-grow: 1;
       width: 100%/5;
