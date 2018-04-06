@@ -31,10 +31,10 @@ class CustomerProductService
         return $this->customerProductRepository->getCustomerProducts($customerGroup);
     }
 
-  /**
-   * @param $command
-   * @return array
-   */
+    /**
+     * @param $command
+     * @return array
+     */
     public function getSelectedCustomerProducts($command)
     {
         $countSelected = 0;
@@ -58,21 +58,21 @@ class CustomerProductService
         ];
     }
 
-  /**
-   * @param array $inOrderProducts
-   * @param Customer $customer
-   */
+    /**
+     * @param array $inOrderProducts
+     * @param Customer $customer
+     */
     public function reOrderCustomerProducts(array $inOrderProducts, Customer $customer)
     {
-      $resetPosition = 0;
+        $resetPosition = 0;
 
-      foreach($inOrderProducts as $inOrderProduct) {
-        $customerProduct = $this->customerProductRepository->get($inOrderProduct);
+        foreach ($inOrderProducts as $inOrderProduct) {
+            $customerProduct = $this->customerProductRepository->get($inOrderProduct);
 
-        if($customerProduct->getCustomerGroup() == $customer->getCustomerGroup()) {
-          $customerProduct->setPriority($resetPosition);
-          $resetPosition++;
+            if ($customerProduct->getCustomerGroup() == $customer->getCustomerGroup()) {
+                $customerProduct->setPriority($resetPosition);
+                $resetPosition++;
+            }
         }
-      }
     }
 }

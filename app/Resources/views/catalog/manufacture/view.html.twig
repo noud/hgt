@@ -3,40 +3,71 @@
 {% block bodyClass %}{% endblock %}
 
 {% block body %}
-    <div class="container layout-flip-sidebar-sm">
+    <div class="container layout-flip-sidebar-md">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
-
-        <h1 class="page-title page-title-border">Categories</h1>
-        <ul class="list">
-            <ul>
-                {% for category in categories %}
-                    <li>
-                    <a href="{{ path('category_view', { 'id': category.id}) }}" title="{{ category.name }}">{{ category.name }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </ul>
-
-        <h1 class="page-title page-title-border">Producten</h1>
-
-        <ul class="list">
-            {{ manufacturer.name }}
-            <hr>
-            {{ manufacturer.products|length }} resultaten in {{ manufacturer.name }}
-            <hr>
-            {% for product in manufacturer.products %}
-                <li>
-                    <ul>
-                            <li>{{ product.name }}<br>
-                                {{ manufacturer.name }} {{ product.volume }}
-                                <div class="bestel visible-dsktop">
-                                    <a href="{{ path('product_view', { 'id': product.id}) }}" title="Bestel {{ product.name }}">Bestel</a>
+        <div class="page-title-container">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="{{ path('manufacturer_index') }}" class="btn-border">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Terug</span>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <h1 class="page-title">{{ manufacturer.name }}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row main-row">
+            <div class="col-md-3">
+                <ul class="list-item list-item-alt">
+                    {% for category in categories %}
+                        <li>
+                            <a href="{{ path('category_view', {'id': category.id }) }}" class="btn-list">
+                                {{ category.name }}
+                                <span class="icon"><i class="fa fa-chevron-right"></i></span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <div class="content"><p><strong>{{ manufacturer.products|length }}</strong> resultaten in <strong>{{ manufacturer.name }}</strong></p></div>
+                <ul class="list-product list-product-rwd">
+                    {% for product in manufacturer.products %}
+                        <li>
+                            <div class="list-product-img">
+                                {% if product.mainPicture %}
+                                    <a href="#"><img
+                                                src="{{ product.mainPicture.filename }}"
+                                                alt="{{ product.name }}"/></a>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <h2 class="table-section-base-header"><a
+                                            href="{{ path('product_view', { 'id': product.id }) }}">{{ product.name|upper }}</a>
+                                </h2>
+                                <ul class="list-product-meta">
+                                    <li>
+                                        {% if product.manufacturer %}
+                                            {{ product.manufacturer.name }}
+                                        {% endif %}
+                                    </li>
+                                    <li class="table-section-base-meta">{{ product.volume }}</li>
+                                    <li class="table-section-base-price">{{ product.price|price }}</li>
+                                </ul>
+                                <div class="list-product-btn">
+                                    <a href="{{ path('product_view', { 'id': product.id }) }}"
+                                       class="btn btn-icon-label">
+                                        <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+                                        <span class="label">Bestellen</span>
+                                    </a>
                                 </div>
-                            </li>
-                        <hr>
-                    </ul>
-                </li>
-            {% endfor %}
-        </ul>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
 {% endblock %}
