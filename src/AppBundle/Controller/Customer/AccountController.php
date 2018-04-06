@@ -11,21 +11,42 @@ use HGT\Application\Account\Command\ReviseOrderListProduct;
 use HGT\Application\Catalog\Cart\Command\DefineCartProductCommand;
 use HGT\Application\Catalog\CartProductService;
 use HGT\Application\Catalog\CartService;
+use HGT\Application\User\CustomerOrder\CustomerOrder;
+use HGT\Application\User\CustomerOrderLineService;
+use HGT\Application\User\CustomerOrderService;
 use HGT\Application\User\CustomerProductService;
 use HGT\Application\User\CustomerService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AccountController extends Controller
 {
+
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * AccountController constructor.
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Route("/mijn-account", name="account_index")
+     * @param Request $request
+     * @return Response
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        return $this->render('account/account.html.twig', [
-        ]);
+        return $this->render('account/account.html.twig');
     }
 
     /**
@@ -35,12 +56,11 @@ class AccountController extends Controller
      * @param CustomerProductService $customerProductService
      * @param CartService $cartService
      * @param CartProductService $cartProductService
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function orderListAction(
         Request $request,
-        EntityManagerInterface $entityManager,
         CustomerService $customerService,
         CustomerProductService $customerProductService,
         CartService $cartService,
@@ -67,7 +87,7 @@ class AccountController extends Controller
                 $defineCartProductCommand->qty = $increaseOrderListProduct->increase;
                 $cartProductService->defineCartProduct($defineCartProductCommand);
             }
-            $entityManager->flush();
+            $this->entityManager->flush();
         }
 
         return $this->render('account/order-list.html.twig', [
@@ -81,7 +101,7 @@ class AccountController extends Controller
      * @param CustomerProductService $customerProductService
      * @param CustomerService $customerService
      * @param CustomerProductRemovalSender $customerProductRemovalSender
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
@@ -132,11 +152,72 @@ class AccountController extends Controller
     }
 
     /**
-     * @Route("/mijn-account/bestelhistorie", name="account_order_history")
+     * @Route("/mijn-account/bestellijst-aanpassen/drag", name="account_order_list_edit_drag")
+     * @param Request $request
+     * @param CustomerProductService $customerProductService
+     * @param CustomerService $customerService
+     * @return JsonResponse
      */
-    public function orderHistoryAction(Request $request)
-    {
+    public function orderListEditDragAction(
+        Request $request,
+        CustomerProductService $customerProductService,
+        CustomerService $customerService
+    ) {
+
+        $inOrderProducts = array_map('intval', explode(',', $request->get('data')));
+        $customer = $customerService->getCurrentCustomer();
+
+        $customerProductService->reOrderCustomerProducts($inOrderProducts, $customer);
+
+        $this->entityManager->flush();
+
+        return new JsonResponse($inOrderProducts);
+    }
+
+    /**
+     * @Route("/mijn-account/bestelhistorie", name="account_order_history")
+     * @param CustomerOrderService $customerOrderService
+     * @param CustomerService $customerService
+     * @return Response
+     */
+    public function orderHistoryAction(
+        CustomerOrderService $customerOrderService,
+        CustomerService $customerService
+    ) {
+        $deliveredCustomerOrders = $customerOrderService->getCustomerOrders(
+            $customerService->getCurrentCustomer(),
+            true
+        );
+        $customerOrders = $customerOrderService->getCustomerOrders($customerService->getCurrentCustomer());
+
         return $this->render('account/order-history.html.twig', [
+            'deliveredCustomerOrders' => $deliveredCustomerOrders,
+            'customerOrders' => $customerOrders,
+        ]);
+    }
+
+    /**
+     * @Route("/mijn-account/bestelhistorie/view/{id}", name="account_order_history_view")
+     * @param CustomerOrderService $customerOrderService
+     * @param CustomerOrder $customerOrder
+     * @param CustomerOrderLineService $customerOrderLineService
+     * @param CustomerService $customerService
+     * @return Response
+     */
+    public function orderHistoryViewAction(
+        CustomerOrderService $customerOrderService,
+        CustomerOrder $customerOrder,
+        CustomerOrderLineService $customerOrderLineService,
+        CustomerService $customerService
+    ) {
+        $customerOrder = $customerOrderService->get($customerOrder);
+        $customerOrderLines = $customerOrderLineService->getByCustomerOrder($customerOrder);
+        $customer = $customerService->getCurrentCustomer();
+
+        return $this->render('account/order.html.twig', [
+            'customer' => $customer,
+            'customerOrder' => $customerOrder,
+            'customerOrderLines' => $customerOrderLines,
         ]);
     }
 
