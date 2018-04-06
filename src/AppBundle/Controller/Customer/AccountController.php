@@ -24,6 +24,21 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AccountController extends Controller
 {
+
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * AccountController constructor.
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Route("/mijn-account", name="account_index")
      * @param Request $request
@@ -46,7 +61,6 @@ class AccountController extends Controller
      */
     public function orderListAction(
         Request $request,
-        EntityManagerInterface $entityManager,
         CustomerService $customerService,
         CustomerProductService $customerProductService,
         CartService $cartService,
@@ -73,7 +87,7 @@ class AccountController extends Controller
                 $defineCartProductCommand->qty = $increaseOrderListProduct->increase;
                 $cartProductService->defineCartProduct($defineCartProductCommand);
             }
-            $entityManager->flush();
+            $this->entityManager->flush();
         }
 
         return $this->render('account/order-list.html.twig', [
@@ -155,7 +169,7 @@ class AccountController extends Controller
 
         $customerProductService->reOrderCustomerProducts($inOrderProducts, $customer);
 
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->flush();
 
         return new JsonResponse($inOrderProducts);
     }
