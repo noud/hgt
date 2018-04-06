@@ -2,6 +2,7 @@
 
 namespace HGT\AppBundle\Controller\Catalog;
 
+use HGT\Application\Catalog\CategoryService;
 use HGT\Application\Catalog\ManufacturerService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -29,14 +30,19 @@ class ManufacturerController extends controller
      * @Route("/merk/{id}", name="manufacturer_view")
      * @param $name
      * @param ManufacturerService $manufacturerService
+     * @param CategoryService $categoryService
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function viewAction(
         $id,
-        ManufacturerService $manufacturerService
+        ManufacturerService $manufacturerService,
+        CategoryService $categoryService
     ) {
+        $categories = $categoryService->getHomeCategories();
+        dump($categories);
          return $this->render('catalog/manufacture/view.html.twig', [
-             'manufacturer' => $manufacturerService->getManufactureWithProducts($id)
+             'manufacturer' => $manufacturerService->getManufactureWithProducts($id),
+             'categories' => $categories
         ]);
     }
 }

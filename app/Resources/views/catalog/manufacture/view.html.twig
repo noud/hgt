@@ -6,6 +6,17 @@
     <div class="container layout-flip-sidebar-sm">
         {{ include('_partials/page/breadcrumbs.html.twig') }}
 
+        <h1 class="page-title page-title-border">Categories</h1>
+        <ul class="list">
+            <ul>
+                {% for category in categories %}
+                    <li>
+                    <a href="{{ path('category_view', { 'id': category.id}) }}" title="{{ category.name }}">{{ category.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </ul>
+
         <h1 class="page-title page-title-border">Producten</h1>
 
         <ul class="list">
