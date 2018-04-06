@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="container layout-sidebar-hide-content-md">
-        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        {% include '_partials/page/breadcrumbs.html.twig' with {'breadcrumbs' : breadcrumbs } %}
         <div class="page-title-container page-title-container-hide-md">
             <div class="row">
                 <div class="col-md-3"></div>

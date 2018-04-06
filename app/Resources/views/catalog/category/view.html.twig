@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="container {% if categories %}layout-sidebar-hide-content-md{% else %}layout-flip-sidebar-md{% endif %}">
-        {{ include('_partials/page/breadcrumbs.html.twig') }}
+        {% include '_partials/page/breadcrumbs.html.twig' with {'breadcrumbs' : breadcrumbs } %}
         <div class="page-title-container">
             <div class="row">
                 <div class="col-md-3">

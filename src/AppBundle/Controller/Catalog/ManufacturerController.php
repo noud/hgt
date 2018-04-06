@@ -2,6 +2,7 @@
 
 namespace HGT\AppBundle\Controller\Catalog;
 
+use HGT\Application\Breadcrumb\BreadcrumbService;
 use HGT\Application\Catalog\CategoryService;
 use HGT\Application\Catalog\ManufacturerService;
 use HGT\Application\Catalog\ProductService;
@@ -14,13 +15,20 @@ class ManufacturerController extends controller
     /**
      * @Route("/merken", name="manufacturer_index")
      * @param ManufacturerService $manufacturerService
+     * @param BreadcrumbService $breadcrumbService
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(
-        ManufacturerService $manufacturerService
+        Request $request,
+        ManufacturerService $manufacturerService,
+        BreadcrumbService $breadcrumbService
     ) {
+        $breadcrumbService->addBreadcrumb('merken', '');
+        $breadcrumbs = $breadcrumbService->getBreadcrumbs();
+
         return $this->render('catalog/manufacture/index.html.twig', [
             'manufacturerCats' => $manufacturerService->getManufacturerLetterIndex(),
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 
