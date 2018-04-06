@@ -255,27 +255,18 @@ class AccountController extends Controller
         $form = $this->createForm(ChangePasswordFormType::class, $command);
 
         $form->handleRequest($request);
-        dump($form->isValid());
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $customer->setOldPassword($this->passwordEncoder->encodePassword($command->getOldPassword()));
-
-            $this->entityManager->flush();
-            dump($this->passwordEncoder->isOldPasswordValid($customer, $command->getOldPassword()));
-
-
-            dump($this->passwordEncoder->encodePassword($command->getOldPassword())); exit;
-            if ($this->passwordEncoder->isOldPasswordValid($customer, $this->passwordEncoder->encodePassword($command->getOldPassword()))) {
-//            if ($customer->getPassword() ===  $command->getOldPassword()) {
-                dump("X");exit();
-                dump($command->getOldPassword());
-                dump($command->getPlainPassword());
-                $customerService->updatePassword($customer->getId(), $command->getPlainPassword());
-                $this->entityManager->flush();
-            } else {
-                dump("NOT OLD PASSWORD");
+            if (!$this->passwordEncoder->isPasswordValid($customer, $command->getOldPassword())) {
+                $this->addFlash('danger', 'Incorrect current password');
+                return $this->redirectToRoute('account_index');
             }
 
-            return $this->redirectToRoute('account_index');
+            $customerService->updatePassword($customer->getId(), $command->getPlainPassword());
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'Password changed');
+            return $this->redirectToRoute('account_password');
         } else {
             dump("NOT VALID");
         }
