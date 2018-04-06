@@ -60,8 +60,8 @@ class ManufacturerService
         return $manufacturerCats;
     }
 
-    public function getManufactureWithProducts($name)
+    public function getManufactureWithProducts($id)
     {
-        return $this->manufacturerRepository->getManufactureWithProducts($name);
+        return $this->manufacturerRepository->getManufactureWithProducts($id);
     }
 }

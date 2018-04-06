@@ -26,17 +26,17 @@ class ManufacturerController extends controller
 
     /**
      *
-     * @Route("/merk/{name}", name="manufacturer_view")
+     * @Route("/merk/{id}", name="manufacturer_view")
      * @param $name
      * @param ManufacturerService $manufacturerService
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function viewAction(
-        $name,
+        $id,
         ManufacturerService $manufacturerService
     ) {
          return $this->render('catalog/manufacture/view.html.twig', [
-             'manufacturer' => $manufacturerService->getManufactureWithProducts($name)
+             'manufacturer' => $manufacturerService->getManufactureWithProducts($id)
         ]);
     }
 }
