@@ -156,4 +156,20 @@ class Manufacturer
 
         return $indexLetter;
     }
+
+    /**
+     * @return Product[]
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @param Product[] $products
+     */
+    public function setProducts($products)
+    {
+        $this->products = $products;
+    }
 }

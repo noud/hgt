@@ -36,7 +36,7 @@ class ManufacturerController extends controller
         ManufacturerService $manufacturerService
     ) {
          return $this->render('catalog/manufacture/view.html.twig', [
-            'manufacturerProds' => $manufacturerService->getManufacturerMerkIndex($name),
+             'manufacturer' => $manufacturerService->getManufactureWithProducts($name)
         ]);
     }
 }

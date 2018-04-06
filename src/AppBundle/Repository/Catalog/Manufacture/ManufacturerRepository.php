@@ -66,18 +66,17 @@ class ManufacturerRepository extends ServiceEntityRepository
 
     /**
      * @param $name
-     * @return array
+     * @return mixed
      */
-    public function getManufacturerProducts($name)
+    public function getManufactureWithProducts($name)
     {
-        $qb = $this->createQueryBuilder('q');
-        $qb->where('q.total_product_count > 0')
-            ->innerJoin('q.products', 'p')
-            ->andWhere('q.name = :name')
+        $queryBuilder = $this->createQueryBuilder('m');
+        $queryBuilder->
+        innerJoin('m.products', 'p')
+            ->andWhere('m.name = :name')
             ->setParameter('name', $name)
-            ->select('q.name AS manufacturer_name','p.name','p.id','p.volume')
-            ->orderBy('p.name', 'ASC');
+            ->addSelect('p');
 
-        return $qb->getQuery()->getResult();
+        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 }

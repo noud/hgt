@@ -9,17 +9,17 @@
         <h1 class="page-title page-title-border">Producten</h1>
 
         <ul class="list">
-            {{ manufacturerProds[0].manufacturer_name }}
+            {{ manufacturer.name }}
             <hr>
-            {{ manufacturerProds|length }} resultaten in {{ manufacturerProds[0].manufacturer_name }}
+            {{ manufacturer.products|length }} resultaten in {{ manufacturer.name }}
             <hr>
-            {% for manufacturerProd in manufacturerProds %}
+            {% for product in manufacturer.products %}
                 <li>
                     <ul>
-                            <li>{{ manufacturerProd.name }}<br>
-                                {{ manufacturerProd.manufacturer_name }} {{ manufacturerProd.volume }}
+                            <li>{{ product.name }}<br>
+                                {{ manufacturer.name }} {{ product.volume }}
                                 <div class="bestel visible-dsktop">
-                                    <a href="{{ path('product_view', { 'id': manufacturerProd.id}) }}" title="Bestel {{ manufacturerProd.name }}">Bestel</a>
+                                    <a href="{{ path('product_view', { 'id': product.id}) }}" title="Bestel {{ product.name }}">Bestel</a>
                                 </div>
                             </li>
                         <hr>
