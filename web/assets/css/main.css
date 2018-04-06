@@ -3516,12 +3516,12 @@ main {
     border-bottom: 1px solid #e2e2e2;
   }
 }
-.primary-menu > ul.desktop-menu > li.active > a {
-  color: white;
-  background-color: #ff671e;
+.primary-menu > ul.desktop-menu > li.is-active > a {
+  color: #ff671e;
+  background-color: transparent;
 }
 @media (max-width: 991px) {
-  .primary-menu > ul.desktop-menu > li.active > a {
+  .primary-menu > ul.desktop-menu > li.is-active > a {
     color: inherit;
     background-color: transparent;
   }
