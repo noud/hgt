@@ -1,3 +1,5 @@
+{% set currentPath = app.request.pathinfo %}
+
 <nav class="primary-menu">
     <ul class="mobile-menu">
         <li>
@@ -42,8 +44,8 @@
         </li>
     </ul>
     <ul class="desktop-menu">
-        <li><a href="{{ path('homepage') }}" title="Home">Home</a></li>
-        <li class="{{ menu_manager.checkMenuHasItems() ? "has-sub" : "" }}">
+        <li class="{% if currentPath == '/' %}is-active{% endif %}"><a href="{{ path('homepage') }}" title="Home">Home</a></li>
+        <li class="{{ menu_manager.checkMenuHasItems() ? "has-sub" : "" }} {% if currentPath == '/category' %}is-active{% endif %}">
             <a href="{{ path('category_index') }}" title="Assortiment">Assortiment</a>
             {% if menu_manager.checkMenuHasItems() %}
                 <div>
@@ -58,11 +60,11 @@
                 </div>
             {% endif %}
         </li>
-        <li><a href="{{ path('action_index') }}" title="Acties">Acties</a></li>
-        <li><a href="{{ path('folder_index') }}" title="Folder">Folder</a></li>
-        <li><a href="#" title="Kerstpakketten">Kerstpakketten</a></li>
-        <li><a href="{{ path('news_index') }}" title="Nieuws">Nieuws</a></li>
-        <li><a href="{{ path('page', {'id': 1}) }}" title="Over ons">Over ons</a></li>
-        <li><a href="{{ path('contact_index') }}" title="Contact">Contact</a></li>
+        <li class="{% if currentPath == '/acties' %}is-active{% endif %}"><a href="{{ path('action_index') }}" title="Acties">Acties</a></li>
+        <li class="{% if currentPath == '/folder' or 'folder/view' in currentPath %}is-active{% endif %}"><a href="{{ path('folder_index') }}" title="Folder">Folder</a></li>
+        <li class=""><a href="#" title="Kerstpakketten">Kerstpakketten</a></li>
+        <li class="{% if currentPath == '/nieuws' or 'nieuws' in currentPath %}is-active{% endif %}"><a href="{{ path('news_index') }}" title="Nieuws">Nieuws</a></li>
+        <li class=""><a href="{{ path('page', {'id': 1}) }}" title="Over ons">Over ons</a></li>
+        <li class="{% if currentPath == '/contact' %}is-active{% endif %}"><a href="{{ path('contact_index') }}" title="Contact">Contact</a></li>
     </ul>
 </nav>
