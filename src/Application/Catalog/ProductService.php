@@ -77,4 +77,13 @@ class ProductService
     {
         return $this->productRepository->getActionProducts($loggedIn);
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getPagedManufactureWithProducts($currentPage, $perPage, $manufacturer)
+    {
+        return $this->productRepository->getPagedManufactureWithProducts($currentPage, $perPage, $manufacturer);
+    }
 }

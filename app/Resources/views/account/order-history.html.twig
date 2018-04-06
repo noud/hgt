@@ -29,77 +29,84 @@
                     </ul>
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="home">
-                            <div class="table-w-head table-history table-history-rwd">
-                                <div class="table-w-head-header">
-                                    <div>Besteldatum</div>
-                                    <div>Ordernummer</div>
-                                    <div>Totaalbedrag</div>
+                            {% if customerOrders is not empty %}
+                                <div class="table-w-head table-history table-history-rwd">
+                                    <div class="table-w-head-header">
+                                        <div>Besteldatum</div>
+                                        <div>Ordernummer</div>
+                                        <div>Totaalbedrag</div>
+                                    </div>
+                                    <ul class="table-3-col">
+                                        {% for customerOrder in customerOrders %}
+                                            <li>
+                                                <a href="{{ path('account_order_history_view', {'id': customerOrder.id } ) }}"></a>
+                                                <div>
+                                                    <div class="table-w-head-meta">
+                                                        <div>Besteldatum:</div>
+                                                        <div>{{ customerOrder.orderDate|date('d-m-Y') }}</div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="table-w-head-meta">
+                                                        <div>Ordernummer:</div>
+                                                        <div>{{ customerOrder.orderNumber }}</div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="table-w-head-meta">
+                                                        <div>Totaalbedrag:</div>
+                                                        <div>&euro; {{ customerOrder.totalPrice }}
+                                                            ({{ customerOrder.totalProductCount }} producten)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
                                 </div>
-                                <ul class="table-3-col">
-                                    <li>
-                                        <div>
-                                            <div class="table-w-head-meta">
-                                                <div>Besteldatum:</div>
-                                                <div>29-01-2015</div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="table-w-head-meta">
-                                                <div>Besteldatum:</div>
-                                                <div>29-01-2015</div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="table-w-head-meta">
-                                                <div>Besteldatum:</div>
-                                                <div>29-01-2015</div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <div class="table-w-head-meta">
-                                                <div>Besteldatum:</div>
-                                                <div>29-01-2015</div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="table-w-head-meta">
-                                                <div>Besteldatum:</div>
-                                                <div>29-01-2015</div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="table-w-head-meta">
-                                                <div>Besteldatum:</div>
-                                                <div>29-01-2015</div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div>
-                                            <div class="table-w-head-meta">
-                                                <div>Besteldatum:</div>
-                                                <div>29-01-2015</div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="table-w-head-meta">
-                                                <div>Besteldatum:</div>
-                                                <div>29-01-2015</div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="table-w-head-meta">
-                                                <div>Besteldatum:</div>
-                                                <div>29-01-2015</div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                            {% else %}
+                                <div class="content"><p>Er zijn geen orders gevonden.</p></div>
+                            {% endif %}
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="profile">2</div>
+                        <div role="tabpanel" class="tab-pane" id="profile">
+                            {% if deliveredCustomerOrders is not empty %}
+                                <div class="table-w-head table-history table-history-rwd">
+                                    <div class="table-w-head-header">
+                                        <div>Besteldatum</div>
+                                        <div>Ordernummer</div>
+                                        <div>Totaalbedrag</div>
+                                    </div>
+                                    <ul class="table-3-col">
+                                        {% for deliveredCustomerOrder in deliveredCustomerOrders %}
+                                            <li>
+                                                <div>
+                                                    <div class="table-w-head-meta">
+                                                        <div>Besteldatum:</div>
+                                                        <div>{{ deliveredCustomerOrder.orderDate|date('d-m-Y') }}</div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="table-w-head-meta">
+                                                        <div>Ordernummer:</div>
+                                                        <div>{{ deliveredCustomerOrder.orderNumber }}</div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="table-w-head-meta">
+                                                        <div>Totaalbedrag:</div>
+                                                        <div>&euro; {{ deliveredCustomerOrder.totalPrice }}
+                                                            ({{ deliveredCustomerOrder.totalProductCount }} producten)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% else %}
+                                <div class="content"><p>Er zijn geen orders gevonden.</p></div>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>

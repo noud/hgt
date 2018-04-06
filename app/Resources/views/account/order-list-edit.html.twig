@@ -20,10 +20,10 @@
                 </div>
                 {% if form is defined and form.products is not empty %}
                     {{ form_start(form, {'attr': {'id': form.vars.id} }) }}
-                    <ul id="sortable" class="list-edit list-edit-rwd is-section">
+                    <ul class="list-edit list-edit-rwd is-section js-sortable">
                         {% for subForm in form.products %}
                             {% set customerProduct = subForm.vars.data.product %}
-                            <li data-customer-product-id="{{ customerProduct.id }}">
+                            <li data-product-id="{{ customerProduct.id }}">
                                 <div class="table-edit">
                                     <div>
                                         <div class="table-edit-head">
@@ -59,8 +59,23 @@
 {% block scripts %}
     {% if form is defined %}
         <script>
-            $('#sortable').sortable({
-                revert: true
+            var sortableList = $('.js-sortable');
+            sortableList.sortable({
+                revert: true,
+                stop: function () {
+
+                    var sortableData = [];
+                    sortableList.children().each(function () {
+                        sortableData.push($(this).data('product-id'));
+                    });
+
+                    sortableData = sortableData.join();
+
+                    $.post('{{ path('account_order_list_edit_drag') }}', {data: sortableData}).done(function () {
+                        location.reload();
+                    });
+
+                }
             });
             $('.js-order-delete-confirm').click(function () {
                 if (confirm('Weet u zeker dat u de geselecteerde producten uit uw bestellijst wilt verwijderen?')) {

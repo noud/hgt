@@ -56,7 +56,7 @@ class ProductController extends Controller
     ) {
         $productCategory = $product->getCategory();
 
-        if ($productCategory->getParent()) {
+        if (isset($productCategory) && $productCategory->getParent()) {
             $productCategory = $productCategory->getParent()->getId();
         }
 

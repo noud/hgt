@@ -79,7 +79,7 @@ class CategoryController extends Controller
             foreach ($results as $result) {
                 $resultNumber += count($result);
             }
-
+dump($results);
             $productCategoryData['products'] = $results;
             $productCategoryData['pagination'] = $pagination;
             $productCategoryData['perPage'] = $perPage;

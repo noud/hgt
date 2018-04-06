@@ -459,4 +459,12 @@ class Customer implements UserInterface
     {
         return $this->customer_price_group;
     }
+
+    /**
+     * @return string
+     */
+    public function getNavisionPricingDiscountId()
+    {
+        return $this->navision_pricing_discount_id;
+    }
 }

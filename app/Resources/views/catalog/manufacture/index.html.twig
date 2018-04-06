@@ -14,7 +14,7 @@
                     <div class="list-col-head">{{ letter }}</div>
                     <ul>
                         {% for catName in manufacturerCat %}
-                            <li><a href="{{ catName.urlKey }}">{{ catName.name }} ({{ catName.totalProductCount }})</a>
+                            <li><a href="{{ path('manufacturer_view', { 'id': catName.id}) }}">{{ catName.name }} ({{ catName.totalProductCount }})</a>
                             </li>
                         {% endfor %}
                     </ul>

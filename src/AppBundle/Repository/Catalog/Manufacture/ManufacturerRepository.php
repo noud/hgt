@@ -4,6 +4,7 @@ namespace HGT\AppBundle\Repository\Catalog\Manufacture;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use HGT\Application\Catalog\Manufacture\Manufacturer;
 
 class ManufacturerRepository extends ServiceEntityRepository
@@ -74,5 +75,21 @@ class ManufacturerRepository extends ServiceEntityRepository
             ->orderBy('q.name', 'ASC');
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @param $name
+     * @return mixed
+     */
+    public function getManufactureWithProducts($id)
+    {
+        $queryBuilder = $this->createQueryBuilder('m');
+        $queryBuilder->
+        innerJoin('m.products', 'p')
+            ->andWhere('m.id = :id')
+            ->setParameter('id', $id)
+            ->addSelect('p');
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 }

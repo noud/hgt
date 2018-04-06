@@ -3,6 +3,7 @@
 namespace HGT\Application\User;
 
 use HGT\AppBundle\Repository\User\CustomerProduct\CustomerProductRepository;
+use HGT\Application\User\Customer\Customer;
 use HGT\Application\User\CustomerGroup\CustomerGroup;
 
 class CustomerProductService
@@ -55,5 +56,23 @@ class CustomerProductService
             'sendEmail' => $sendEmail,
             'customerProducts' => $customerProducts,
         ];
+    }
+
+    /**
+     * @param array $inOrderProducts
+     * @param Customer $customer
+     */
+    public function reOrderCustomerProducts(array $inOrderProducts, Customer $customer)
+    {
+        $resetPosition = 0;
+
+        foreach ($inOrderProducts as $inOrderProduct) {
+            $customerProduct = $this->customerProductRepository->get($inOrderProduct);
+
+            if ($customerProduct->getCustomerGroup() == $customer->getCustomerGroup()) {
+                $customerProduct->setPriority($resetPosition);
+                $resetPosition++;
+            }
+        }
     }
 }

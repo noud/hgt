@@ -48,6 +48,12 @@ class Manufacturer
     private $picture;
 
     /**
+     * @var Product[]
+     * @ORM\OneToMany(targetEntity="HGT\Application\Catalog\Product\Product", mappedBy="manufacturer")
+     */
+    private $products;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -149,5 +155,21 @@ class Manufacturer
         }
 
         return $indexLetter;
+    }
+
+    /**
+     * @return Product[]
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @param Product[] $products
+     */
+    public function setProducts($products)
+    {
+        $this->products = $products;
     }
 }
