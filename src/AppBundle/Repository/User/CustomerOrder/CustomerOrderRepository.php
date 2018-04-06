@@ -54,7 +54,7 @@ class CustomerOrderRepository extends ServiceEntityRepository
             ->setParameter('cg_id', $customer->getCustomerGroup()->getId());
 
         if (!$delivered) {
-            $query->andWhere('co.delivery_date => CURRENT_DATE()');
+            $query->andWhere('co.delivery_date >= CURRENT_DATE()');
         } else {
             $query->andWhere('co.delivery_date < CURRENT_DATE()');
         }
