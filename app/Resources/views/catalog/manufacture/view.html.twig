@@ -33,8 +33,29 @@
             </div>
             <div class="col-md-9">
                 <div class="content"><p><strong>{{ manufacturer.products|length }}</strong> resultaten in <strong>{{ manufacturer.name }}</strong></p></div>
+                <div class="paging paging-top paging-rwd">
+                    <div>
+                        {% include '_partials/catalog/manufacture/pagination.html.twig' with {
+                            paginateData: pagination,
+                            routeName: 'manufacturer_view',
+                            manufacturerId: manufacturer.id,
+                            perPage: perPage
+                        } %}
+                    </div>
+                    <div>
+                        {% include '_partials/catalog/manufacture/pageLengthSelector.html.twig' with {
+                            currentPage: pagination.current,
+                            routeName: 'manufacturer_view',
+                            manufacturerId: manufacturer.id,
+                            perPage: perPage
+                        } %}
+                    </div>
+                </div>
+                {#{% for product in manufacturer.products %}#}
+                {#{{ dump(product) }}#}
+                {#{% endfor %}#}
                 <ul class="list-product list-product-rwd">
-                    {% for product in manufacturer.products %}
+                    {% for product in products %}
                         <li>
                             <div class="list-product-img">
                                 {% if product.mainPicture %}
@@ -42,6 +63,7 @@
                                                 src="{{ product.mainPicture.filename }}"
                                                 alt="{{ product.name }}"/></a>
                                 {% endif %}
+                                {#{{ dump(product) }}#}
                             </div>
                             <div>
                                 <h2 class="table-section-base-header"><a
@@ -67,6 +89,24 @@
                         </li>
                     {% endfor %}
                 </ul>
+                <div class="paging paging-bottom paging-rwd">
+                    <div>
+                        {% include '_partials/catalog/manufacture/pagination.html.twig' with {
+                            paginateData: pagination,
+                            routeName: 'manufacturer_view',
+                            manufacturerId: manufacturer.id,
+                            perPage: perPage
+                        } %}
+                    </div>
+                    <div>
+                        {% include '_partials/catalog/manufacture/pageLengthSelector.html.twig' with {
+                            currentPage: pagination.current,
+                            routeName: 'manufacturer_view',
+                            manufacturerId: manufacturer.id,
+                            perPage: perPage
+                        } %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

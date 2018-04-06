@@ -6,6 +6,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use HGT\Application\Catalog\Category\Category;
+use HGT\Application\Catalog\Manufacture\Manufacturer;
 use HGT\Application\Catalog\Product\Product;
 use HGT\Application\Catalog\Product\ProductUnitOfMeasure;
 
@@ -130,5 +131,26 @@ class ProductRepository extends ServiceEntityRepository
         }
 
         return $query->getQuery()->getResult();
+    }
+
+    /**
+     * @param $currentPage
+     * @param $perPage
+     * @param $manufacturer
+     * @return Paginator
+     */
+    public function getPagedManufactureWithProducts($currentPage, $perPage, Manufacturer $manufacturer)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->where('p.manufacturer = :manufacturer')
+            ->setParameter('manufacturer', $manufacturer)
+            ->orderBy('p.name', 'ASC');
+
+        $paginator = new Paginator($qb->getQuery());
+        $paginator->getQuery()
+            ->setFirstResult($perPage * ($currentPage - 1))// Offset
+            ->setMaxResults($perPage); // Limit
+
+        return $paginator;
     }
 }
