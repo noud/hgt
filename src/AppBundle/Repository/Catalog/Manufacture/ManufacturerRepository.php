@@ -75,4 +75,20 @@ class ManufacturerRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * @param $name
+     * @return mixed
+     */
+    public function getManufactureWithProducts($id)
+    {
+        $queryBuilder = $this->createQueryBuilder('m');
+        $queryBuilder->
+        innerJoin('m.products', 'p')
+            ->andWhere('m.id = :id')
+            ->setParameter('id', $id)
+            ->addSelect('p');
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
 }

@@ -59,4 +59,9 @@ class ManufacturerService
 
         return $manufacturerCats;
     }
+
+    public function getManufactureWithProducts($id)
+    {
+        return $this->manufacturerRepository->getManufactureWithProducts($id);
+    }
 }
