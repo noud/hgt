@@ -23,8 +23,12 @@ class ManufacturerController extends controller
         ManufacturerService $manufacturerService,
         BreadcrumbService $breadcrumbService
     ) {
-        $breadcrumbService->addBreadcrumb('merken', '');
+        $breadcrumbService->addBreadcrumb('merken', 'manufacturer_index');
+        $breadcrumbService->addBreadcrumb('merken', 'manufacturer_index');
+        $breadcrumbService->addBreadcrumb('merken', 'manufacturer_index');
         $breadcrumbs = $breadcrumbService->getBreadcrumbs();
+
+        dump($breadcrumbs);
 
         return $this->render('catalog/manufacture/index.html.twig', [
             'manufacturerCats' => $manufacturerService->getManufacturerLetterIndex(),

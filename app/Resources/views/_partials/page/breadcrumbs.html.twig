@@ -1,13 +1,13 @@
-<nav class="breadcrumbs">
-    <ul>
-        <li><a href="/">Home</a></li>
-        {% if breadcrumbs is defined %}
-        {% for breadcrumb in breadcrumbs %}
-            {% if breadcrumb != breadcrumbs|last %}
-        <li><a href="{{ path(breadcrumb.url) }}">{{ breadcrumb.name }}</a></li>
-            {% endif %}
-        {% endfor %}
-        <li>{{ breadcrumbs|last.name }}</a></li>
-        {% endif %}
-    </ul>
-</nav>
+{% if breadcrumbs is defined %}
+    <nav class="breadcrumbs">
+        <ul>
+            <li><a href="/">Home</a></li>
+            {% for breadcrumb in breadcrumbs %}
+                {% if breadcrumb != breadcrumbs|last %}
+                    <li><a href="{{ path(breadcrumb.url) }}">{{ breadcrumb.name }}</a></li>
+                {% endif %}
+            {% endfor %}
+            <li>{{ breadcrumbs|last.name }}</a></li>
+        </ul>
+    </nav>
+{% endif %}

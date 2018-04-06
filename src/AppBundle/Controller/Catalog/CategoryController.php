@@ -4,7 +4,6 @@ namespace HGT\AppBundle\Controller\Catalog;
 
 use HGT\Application\Breadcrumb\BreadcrumbService;
 use HGT\Application\Catalog\CategoryService;
-use HGT\Application\Catalog\Product\Product;
 use HGT\Application\Catalog\ProductService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,8 +18,10 @@ class CategoryController extends Controller
      * @param BreadcrumbService $breadcrumbService
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request, CategoryService $categoryService, BreadcrumbService $breadcrumbService)
-    {
+    public function indexAction(
+        CategoryService $categoryService,
+        BreadcrumbService $breadcrumbService
+    ) {
         $categories = $categoryService->getCategoriesWithProducts("NULL");
 
         $breadcrumbService->addBreadcrumb('category', '');
@@ -79,7 +80,6 @@ class CategoryController extends Controller
             foreach ($results as $result) {
                 $resultNumber += count($result);
             }
-dump($results);
             $productCategoryData['products'] = $results;
             $productCategoryData['pagination'] = $pagination;
             $productCategoryData['perPage'] = $perPage;
