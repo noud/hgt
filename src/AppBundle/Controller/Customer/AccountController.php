@@ -2,6 +2,7 @@
 
 namespace HGT\AppBundle\Controller\Customer;
 
+use Doctrine\ORM\EntityManagerInterface;
 use HGT\AppBundle\Form\Customer\Account\OrderListEditForm;
 use HGT\AppBundle\Form\Customer\Account\OrderListForm;
 use HGT\AppBundle\Mailer\Sender\CustomerProductRemovalSender;
@@ -45,6 +46,7 @@ class AccountController extends Controller
      */
     public function orderListAction(
         Request $request,
+        EntityManagerInterface $entityManager,
         CustomerService $customerService,
         CustomerProductService $customerProductService,
         CartService $cartService,
@@ -53,8 +55,6 @@ class AccountController extends Controller
         if (is_null($customerService->getCurrentCustomer()->getCustomerGroup())) {
             return $this->render('account/order-list.html.twig');
         }
-
-        $em = $this->getDoctrine()->getManager();
         $customerProducts = $customerProductService->getCustomerProducts($customerService->getCurrentCustomer()
             ->getCustomerGroup());
 
@@ -73,7 +73,7 @@ class AccountController extends Controller
                 $defineCartProductCommand->qty = $increaseOrderListProduct->increase;
                 $cartProductService->defineCartProduct($defineCartProductCommand);
             }
-            $em->flush();
+            $entityManager->flush();
         }
 
         return $this->render('account/order-list.html.twig', [
