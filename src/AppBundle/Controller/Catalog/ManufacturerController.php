@@ -12,12 +12,10 @@ class ManufacturerController extends controller
 {
     /**
      * @Route("/merken", name="manufacturer_index")
-     * @param Request $request
      * @param ManufacturerService $manufacturerService
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(
-        Request $request,
         ManufacturerService $manufacturerService
     ) {
         return $this->render('catalog/manufacture/index.html.twig', [
@@ -26,9 +24,8 @@ class ManufacturerController extends controller
     }
 
     /**
-     *
      * @Route("/merk/{id}", name="manufacturer_view")
-     * @param $name
+     * @param $id
      * @param ManufacturerService $manufacturerService
      * @param CategoryService $categoryService
      * @return \Symfony\Component\HttpFoundation\Response
@@ -39,10 +36,9 @@ class ManufacturerController extends controller
         CategoryService $categoryService
     ) {
         $categories = $categoryService->getHomeCategories();
-        dump($categories);
-         return $this->render('catalog/manufacture/view.html.twig', [
-             'manufacturer' => $manufacturerService->getManufactureWithProducts($id),
-             'categories' => $categories
+        return $this->render('catalog/manufacture/view.html.twig', [
+            'manufacturer' => $manufacturerService->getManufactureWithProducts($id),
+            'categories' => $categories
         ]);
     }
 }
