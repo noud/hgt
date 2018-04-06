@@ -4,6 +4,7 @@ namespace HGT\AppBundle\Repository\Catalog\Manufacture;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use HGT\Application\Catalog\Manufacture\Manufacturer;
 
 class ManufacturerRepository extends ServiceEntityRepository

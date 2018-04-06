@@ -7,11 +7,11 @@
             {% if paginateData.current == i %}
                 <li class="active">{{ i }}</li>
             {% else %}
-                {% if paginateData.pages < 7 %}
+                {% if paginateData.pages > 7 and i > paginateData.current - 3 and i < paginateData.current + 3 %}
                     <li>
                         <a href="{{ path(routeName, {p: i, q: query}) }}">{{ i }}</a>
                     </li>
-                {% endif %}
+                {%  endif %}
             {% endif %}
         {% endfor %}
         {% if paginateData.current < paginateData.pages %}

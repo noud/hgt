@@ -60,6 +60,10 @@ class ManufacturerService
         return $manufacturerCats;
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getManufactureWithProducts($id)
     {
         return $this->manufacturerRepository->getManufactureWithProducts($id);
