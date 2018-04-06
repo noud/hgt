@@ -2,6 +2,7 @@
 
 namespace HGT\AppBundle\Controller\Catalog;
 
+use HGT\Application\Breadcrumb\BreadcrumbService;
 use HGT\Application\Catalog\CategoryService;
 use HGT\Application\Catalog\Product\Product;
 use HGT\Application\Catalog\ProductService;
@@ -15,14 +16,19 @@ class CategoryController extends Controller
      * @Route("/category", name="category_index")
      * @param Request $request
      * @param CategoryService $categoryService
+     * @param BreadcrumbService $breadcrumbService
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request, CategoryService $categoryService)
+    public function indexAction(Request $request, CategoryService $categoryService, BreadcrumbService $breadcrumbService)
     {
         $categories = $categoryService->getCategoriesWithProducts("NULL");
 
+        $breadcrumbService->addBreadcrumb('category', '');
+        $breadcrumbs = $breadcrumbService->getBreadcrumbs();
+
         return $this->render('catalog/category/index.html.twig', [
-            'categories' => $categories
+            'categories' => $categories,
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 
@@ -30,11 +36,12 @@ class CategoryController extends Controller
      * @Route("/category/view/{id}", name="category_view")
      * @param Request $request
      * @param CategoryService $categoryService
+     * @param BreadcrumbService $breadcrumbService
      * @param ProductService $productService
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction(Request $request, CategoryService $categoryService, ProductService $productService, $id)
+    public function viewAction(Request $request, CategoryService $categoryService, BreadcrumbService $breadcrumbService, ProductService $productService, $id)
     {
         $category = $categoryService->get($id);
         $parentId = $category->getParent() ? $category->getParent()->getId() : null;
@@ -77,6 +84,10 @@ class CategoryController extends Controller
             $productCategoryData['pagination'] = $pagination;
             $productCategoryData['perPage'] = $perPage;
         }
+
+        $breadcrumbService->addBreadcrumb('category', 'category_index');
+        $breadcrumbService->addBreadcrumb($category->getName(), '');
+        $productCategoryData['breadcrumbs'] = $breadcrumbService->getBreadcrumbs();
 
         return $this->render('catalog/category/view.html.twig', $productCategoryData);
     }
