@@ -27,5 +27,6 @@ security:
             switch_user: ~
 
     access_control:
+        - { path: ^/mijn-account, roles: ROLE_CUSTOMER }
+        - { path: ^/cart, roles: ROLE_CUSTOMER }
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/cart, roles: ROLE_CUSTOM }

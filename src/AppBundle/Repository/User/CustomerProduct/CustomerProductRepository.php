@@ -4,6 +4,7 @@ namespace HGT\AppBundle\Repository\User\CustomerProduct;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use HGT\Application\User\CustomerGroup\CustomerGroup;
 use HGT\Application\User\CustomerProduct\CustomerProduct;
 
 class CustomerProductRepository extends ServiceEntityRepository
@@ -40,5 +41,22 @@ class CustomerProductRepository extends ServiceEntityRepository
     public function remove(CustomerProduct $customerProduct)
     {
         $this->getEntityManager()->remove($customerProduct);
+    }
+
+    /**
+     * @param CustomerGroup $customerGroup
+     * @return array
+     */
+    public function getCustomerProducts($customerGroup)
+    {
+        $query = $this->createQueryBuilder('cp')
+            ->leftJoin('cp.product', 'p')
+            ->where('cp.customer_group = :customer_group')
+            ->setParameter('customer_group', $customerGroup->getId())
+            ->andWhere('p.enabled = true')
+            ->orderBy('cp.priority')
+        ;
+
+        return $query->getQuery()->getResult();
     }
 }

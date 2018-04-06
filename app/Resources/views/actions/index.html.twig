@@ -40,10 +40,9 @@
                         <div class="list-action-sub">
                             <div class="list-action-label">Actie</div>
                             <div class="list-action-expire">
-                                Actie geldig van
-                                {{ actionProduct.productPrices|first.startDate|date('d F') }}
-                                t/m
-                                {{ actionProduct.productPrices|first.endDate|date('d F Y') }}
+                                Actie geldig
+                                van {{ actionProduct.getDates.startDate|date('d F') }} t/m
+                                {{ actionProduct.getDates.startDate|date('d F Y') }}
                             </div>
                         </div>
                     </li>

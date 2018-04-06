@@ -23,6 +23,8 @@ class ActionController extends Controller
     ) {
         $actionProducts = $productService->getActionProducts($this->isGranted('ROLE_CUSTOMER'));
 
+
+
         return $this->render('actions/index.html.twig', [
             'actionProducts' => $actionProducts
         ]);

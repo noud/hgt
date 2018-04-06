@@ -51,9 +51,11 @@ class TaxRepository extends ServiceEntityRepository
      */
     public function getTaxByGroupIds(CustomerTaxGroup $customerTaxGroup, ProductTaxGroup $productTaxGroup)
     {
-        return $this->findOneBy([
+        $tax = $this->findOneBy([
             'customer_tax_group' => $customerTaxGroup,
             'product_tax_group' => $productTaxGroup
         ]);
+
+        return $tax;
     }
 }

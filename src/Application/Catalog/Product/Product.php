@@ -157,6 +157,20 @@ class Product
     }
 
     /**
+     * @return array
+     */
+    public function getDates()
+    {
+        /** @var ProductPrice $firstObject */
+        $firstObject = $this->getProductPrices()->first();
+
+        return [
+            'startDate' => $firstObject->getStartDate(),
+            'endDate' => $firstObject->getEndDate()
+        ];
+    }
+
+    /**
      * @return ArrayCollection|ProductUnitOfMeasure[]
      */
     public function getProductUnitOfMeasures()
