@@ -54,7 +54,6 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
 
 {% block scripts %}
@@ -63,18 +62,18 @@
             var sortableList = $('.js-sortable');
             sortableList.sortable({
                 revert: true,
-                stop: function( event, ui ) {
+                stop: function () {
 
-                  var sortableData = [];
-                  sortableList.children().each(function() {
-                    sortableData.push($(this).data('product-id'));
-                  });
+                    var sortableData = [];
+                    sortableList.children().each(function () {
+                        sortableData.push($(this).data('product-id'));
+                    });
 
-                  sortableData = sortableData.join();
+                    sortableData = sortableData.join();
 
-                  $.post('{{ path('account_order_list_edit_drag') }}', { data: sortableData }).finish(function() {
-                    location.reload();
-                  });
+                    $.post('{{ path('account_order_list_edit_drag') }}', {data: sortableData}).done(function () {
+                        location.reload();
+                    });
 
                 }
             });
