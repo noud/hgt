@@ -4,6 +4,7 @@ namespace HGT\AppBundle\Controller\Catalog;
 
 use Doctrine\ORM\EntityManager;
 use HGT\AppBundle\Form\Catalog\Product\AddToCartForm;
+use HGT\Application\Breadcrumb\BreadcrumbService;
 use HGT\Application\Catalog\Cart\Command\DefineCartProductCommand;
 use HGT\Application\Catalog\CartProductService;
 use HGT\Application\Catalog\CartService;
@@ -16,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+
 
 class ProductController extends Controller
 {
@@ -52,9 +54,11 @@ class ProductController extends Controller
         ProductPriceService $productPriceService,
         ProductUnitOfMeasureService $productUnitOfMeasureService,
         CartService $cartService,
-        Product $product
+        Product $product,
+        BreadcrumbService $breadcrumbService
     ) {
         $productCategory = $product->getCategory();
+        $category = $productCategory;
 
         if (isset($productCategory) && $productCategory->getParent()) {
             $productCategory = $productCategory->getParent()->getId();
@@ -106,6 +110,24 @@ class ProductController extends Controller
             $singleProductData['addToCartForm'] = $form->createView();
             $singleProductData['isCustomer'] = true;
         }
+
+        $breadcrumbService->addBreadcrumb($product->getName(), '');
+        $url = $this->generateUrl('category_view', array('id' => $category->getId()));
+        $breadcrumbService->addBreadcrumb($category->getName(), $url);
+
+        // find all parents
+        $parentId = $category->getParent() ? $category->getParent()->getId() : null;
+        $parentCategory = $categoryService->getParentCategory($parentId);
+        while ($parentCategory) {
+            $url = $this->generateUrl('category_view', array('id' => $parentCategory->getId()));
+            $breadcrumbService->addBreadcrumb($parentCategory->getName(), $url);
+            $parentId = $parentCategory->getParent() ? $parentCategory->getParent()->getId() : null;
+            $parentCategory = $categoryService->getParentCategory($parentId);
+        }
+
+        $url = $this->generateUrl('category_index');
+        $breadcrumbService->addBreadcrumb('category', $url);
+        $singleProductData['breadcrumbs'] = $breadcrumbService->getBreadcrumbs();
 
         return $this->render('catalog/product/view.html.twig', $singleProductData);
     }
