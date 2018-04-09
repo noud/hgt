@@ -4,17 +4,31 @@ security:
 
     encoders:
         HGT\Application\User\Customer\Customer: bcrypt
+        HGT\Application\User\User\User: plaintext
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         accounts:
             entity: { class: HGT\Application\User\Customer\Customer, property: username }
+        easyadmin:
+            entity: { class: HGT\Application\User\User\User, property: name }
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        easy_admin:
+            anonymous: ~
+            pattern: ^/(easyadmin|admin)
+            guard:
+                authenticators:
+                    - HGT\Application\User\Security\LoginFormAuthenticator
+            provider: easyadmin
+            logout:
+                path: /admin/logout
+            logout_on_user_change: true
 
         main:
             anonymous: ~
@@ -27,6 +41,8 @@ security:
             switch_user: ~
 
     access_control:
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/easyadmin, roles: ROLE_USER }
         - { path: ^/mijn-account, roles: ROLE_CUSTOMER }
         - { path: ^/cart, roles: ROLE_CUSTOMER }
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
