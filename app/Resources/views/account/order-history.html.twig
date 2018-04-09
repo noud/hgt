@@ -79,6 +79,7 @@
                                     <ul class="table-3-col">
                                         {% for deliveredCustomerOrder in deliveredCustomerOrders %}
                                             <li>
+                                                <a href="{{ path('account_order_history_view', {'id': deliveredCustomerOrder.id } ) }}"></a>
                                                 <div>
                                                     <div class="table-w-head-meta">
                                                         <div>Besteldatum:</div>
