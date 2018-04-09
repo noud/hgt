@@ -13,7 +13,8 @@ class BreadcrumbService
      * @param $name
      * @param $url
      */
-    public function addBreadcrumb($name, $url) {
+    public function addBreadcrumb($name, $url)
+    {
         $counter = count($this->breadcrumbs);
         $this->breadcrumbs[$counter]['name'] = $name;
         $this->breadcrumbs[$counter]['url'] = $url;
@@ -22,7 +23,8 @@ class BreadcrumbService
     /**
      * @return array
      */
-    public function getBreadcrumbs() {
+    public function getBreadcrumbs()
+    {
         return array_reverse($this->breadcrumbs);
     }
 }
