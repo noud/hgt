@@ -100,8 +100,7 @@ class CategoryController extends Controller
         while ($parentCategory) {
             $url = $this->generateUrl('category_view', array('id' => $parentCategory->getId()));
             $breadcrumbService->addBreadcrumb($parentCategory->getName(), $url);
-            $parentId = $parentCategory->getParent() ? $parentCategory->getParent()->getId() : null;
-            $parentCategory = $categoryService->getParentCategory($parentId);
+            $parentCategory = $parentCategory->getParent();
         }
 
         $url = $this->generateUrl('category_index');

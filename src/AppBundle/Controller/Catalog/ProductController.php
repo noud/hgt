@@ -116,13 +116,11 @@ class ProductController extends Controller
         $breadcrumbService->addBreadcrumb($category->getName(), $url);
 
         // find all parents
-        $parentId = $category->getParent() ? $category->getParent()->getId() : null;
-        $parentCategory = $categoryService->getParentCategory($parentId);
+        $parentCategory = $category->getParent();
         while ($parentCategory) {
             $url = $this->generateUrl('category_view', array('id' => $parentCategory->getId()));
             $breadcrumbService->addBreadcrumb($parentCategory->getName(), $url);
-            $parentId = $parentCategory->getParent() ? $parentCategory->getParent()->getId() : null;
-            $parentCategory = $categoryService->getParentCategory($parentId);
+            $parentCategory = $parentCategory->getParent();
         }
 
         $url = $this->generateUrl('category_index');
