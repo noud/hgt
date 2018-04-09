@@ -94,7 +94,6 @@ class CategoryController extends Controller
             $breadcrumbService->addBreadcrumb($parentCategory->getName(), $url);
             $parentId = $parentCategory->getParent() ? $parentCategory->getParent()->getId() : null;
             $parentCategory = $categoryService->getParentCategory($parentId);
-            dump($parentCategory);
         }
 
         $url = $this->generateUrl('category_index');
