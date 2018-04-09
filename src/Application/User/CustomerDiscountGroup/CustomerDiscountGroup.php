@@ -22,4 +22,20 @@ class CustomerDiscountGroup
      * @ORM\Column(type="string", length=16)
      */
     private $navision_id;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNavisionId()
+    {
+        return $this->navision_id;
+    }
 }

@@ -53,14 +53,4 @@ class WebOrderRepository extends ServiceEntityRepository
             'cart' => $cart
         ]);
     }
-
-    /**
-     * @param WebOrder $webOrder
-     */
-    public function exportToNavision(WebOrder $webOrder)
-    {
-        if ($webOrder !== null) {
-            $webOrder->setExportDate(new \DateTime());
-        }
-    }
 }

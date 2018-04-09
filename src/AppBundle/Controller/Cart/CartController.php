@@ -68,7 +68,7 @@ class CartController extends Controller
                     $this->addFlash('success', 'Winkelwagen succesvol bijgewerkt.');
                     break;
                 case 'finish':
-                    $cartService->finish($cart);
+                    $cartService->finish($cart, $this->getParameter('xml_export_dir'));
                     $this->entityManager->flush();
                     return $this->redirectToRoute('cart_success');
                     break;

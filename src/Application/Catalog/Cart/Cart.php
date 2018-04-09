@@ -249,4 +249,12 @@ class Cart
     {
         return $this->cartProducts;
     }
+
+    /**
+     * @return string
+     */
+    public function getIpAddress()
+    {
+        return $this->ip_address;
+    }
 }

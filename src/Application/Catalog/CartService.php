@@ -98,11 +98,12 @@ class CartService
 
     /**
      * @param Cart $cart
+     * @param string $xmlPath
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function finish(Cart $cart)
+    public function finish(Cart $cart, $xmlPath)
     {
         if ($cart->getState() !== Cart::STATE_FINISHED) {
             $cart->setState(Cart::STATE_FINISHED);
@@ -119,7 +120,7 @@ class CartService
         }
 
         //export weborder to navision
-        $this->webOrderService->exportToNavision($webOrder);
+        $this->webOrderService->exportToNavision($webOrder, $xmlPath);
 
         //send emails
         $this->orderSender->sendOrderToCustomer($webOrder);

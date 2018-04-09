@@ -173,6 +173,14 @@ class CartProduct
     }
 
     /**
+     * @return bool
+     */
+    public function isAction()
+    {
+        return $this->is_action;
+    }
+
+    /**
      * @return float|int
      */
     public function getRowTotal()

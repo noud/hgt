@@ -132,6 +132,14 @@ class Product
     }
 
     /**
+     * @return string
+     */
+    public function getNavisionId()
+    {
+        return $this->navision_id;
+    }
+
+    /**
      * @return ArrayCollection|ProductPrice[]
      */
     public function getProductPrices()
