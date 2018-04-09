@@ -79,14 +79,26 @@ class CategoryController extends Controller
             foreach ($results as $result) {
                 $resultNumber += count($result);
             }
-dump($results);
+
             $productCategoryData['products'] = $results;
             $productCategoryData['pagination'] = $pagination;
             $productCategoryData['perPage'] = $perPage;
         }
 
-        $breadcrumbService->addBreadcrumb('category', 'category_index');
         $breadcrumbService->addBreadcrumb($category->getName(), '');
+
+        // find all parents
+        $parentCategory = $categoryService->getParentCategory($parentId);
+        while ($parentCategory) {
+            $url = $this->generateUrl('category_view', array('id' => $parentCategory->getId()));
+            $breadcrumbService->addBreadcrumb($parentCategory->getName(), $url);
+            $parentId = $parentCategory->getParent() ? $parentCategory->getParent()->getId() : null;
+            $parentCategory = $categoryService->getParentCategory($parentId);
+            dump($parentCategory);
+        }
+
+        $url = $this->generateUrl('category_index');
+        $breadcrumbService->addBreadcrumb('category', $url);
         $productCategoryData['breadcrumbs'] = $breadcrumbService->getBreadcrumbs();
 
         return $this->render('catalog/category/view.html.twig', $productCategoryData);
