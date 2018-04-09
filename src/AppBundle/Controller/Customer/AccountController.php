@@ -45,8 +45,7 @@ class AccountController extends Controller
     public function __construct(
         EntityManagerInterface $entityManager,
         PasswordEncoder $passwordEncoder
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->passwordEncoder = $passwordEncoder;
     }
@@ -243,13 +242,12 @@ class AccountController extends Controller
     }
 
     /**
-     * @Route("/mijn-account/password", name="account_password")
+     * @Route("/mijn-account/wachtwoord-wijzigen", name="account_password")
      */
     public function passwordChangeAction(
         Request $request,
         CustomerService $customerService
-    )
-    {
+    ) {
         $customer = $customerService->getCurrentCustomer();
         $command = new ChangePasswordCommand();
         $form = $this->createForm(ChangePasswordFormType::class, $command);
@@ -258,17 +256,15 @@ class AccountController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (!$this->passwordEncoder->isPasswordValid($customer, $command->getOldPassword())) {
-                $this->addFlash('danger', 'Incorrect current password');
-                return $this->redirectToRoute('account_index');
+                $this->addFlash('danger', 'Uw huidig wachtwoord is incorrect.');
+                return $this->redirectToRoute('account_password');
             }
 
             $customerService->updatePassword($customer->getId(), $command->getPlainPassword());
             $this->entityManager->flush();
+            $this->addFlash('success', 'Uw wachtwoord is gewijzigd.');
 
-            $this->addFlash('success', 'Password changed');
             return $this->redirectToRoute('account_password');
-        } else {
-            dump("NOT VALID");
         }
 
         return $this->render('account/password.html.twig', [

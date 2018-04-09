@@ -1,12 +1,11 @@
 <?php
+
 namespace HGT\Application\User\Form;
 
-use HGT\Application\User\Command\ChangePasswordCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class ChangePasswordFormType
@@ -22,25 +21,14 @@ class ChangePasswordFormType extends AbstractType
     {
         $builder
             ->add('oldPassword', PasswordType::class, [
-                'label' => 'Oud Wachtwoord',
+                'label' => 'Huidig wachtwoord',
                 'translation_domain' => 'forms',
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options' => ['label' => 'Nieuw wachtwoord'],
+                'second_options' => ['label' => 'Bevestig nieuw wachtwoord'],
                 'translation_domain' => 'forms',
             ]);
     }
-
-    /**
-     * @param OptionsResolver $resolver
-     */
-//    public function configureOptions(OptionsResolver $resolver)
-//    {
-//        $resolver->setDefaults([
-//            'data_class' => ChangePasswordCommand::class,
-//            'validation_groups' => ['Default']
-//        ]);
-//    }
 }
