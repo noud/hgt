@@ -19,8 +19,11 @@ class CategoryController extends Controller
      * @param BreadcrumbService $breadcrumbService
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request, CategoryService $categoryService, BreadcrumbService $breadcrumbService)
-    {
+    public function indexAction(
+        Request $request,
+        CategoryService $categoryService,
+        BreadcrumbService $breadcrumbService
+    ) {
         $categories = $categoryService->getCategoriesWithProducts("NULL");
 
         $breadcrumbService->addBreadcrumb('category', '');
@@ -41,8 +44,13 @@ class CategoryController extends Controller
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction(Request $request, CategoryService $categoryService, BreadcrumbService $breadcrumbService, ProductService $productService, $id)
-    {
+    public function viewAction(
+        Request $request,
+        CategoryService $categoryService,
+        BreadcrumbService $breadcrumbService,
+        ProductService $productService,
+        $id
+    ) {
         $category = $categoryService->get($id);
         $parentId = $category->getParent() ? $category->getParent()->getId() : null;
         $parentCategory = $categoryService->getParentCategory($parentId);
@@ -79,7 +87,7 @@ class CategoryController extends Controller
             foreach ($results as $result) {
                 $resultNumber += count($result);
             }
-dump($results);
+
             $productCategoryData['products'] = $results;
             $productCategoryData['pagination'] = $pagination;
             $productCategoryData['perPage'] = $perPage;

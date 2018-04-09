@@ -12,6 +12,7 @@ use HGT\Application\Account\Command\ReviseOrderListProduct;
 use HGT\Application\Catalog\Cart\Command\DefineCartProductCommand;
 use HGT\Application\Catalog\CartProductService;
 use HGT\Application\Catalog\CartService;
+use HGT\Application\Catalog\CategoryService;
 use HGT\Application\User\Command\ChangePasswordCommand;
 use HGT\Application\User\CustomerOrder\CustomerOrder;
 use HGT\Application\User\CustomerOrderLineService;
@@ -246,7 +247,8 @@ class AccountController extends Controller
      */
     public function passwordChangeAction(
         Request $request,
-        CustomerService $customerService
+        CustomerService $customerService,
+        CategoryService $categoryService
     ) {
         $customer = $customerService->getCurrentCustomer();
         $command = new ChangePasswordCommand();
