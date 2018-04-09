@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new HGT\AppBundle\AppBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

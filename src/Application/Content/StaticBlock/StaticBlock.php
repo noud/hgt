@@ -42,11 +42,27 @@ class StaticBlock
     private $name;
 
     /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * @return string
      */
     public function getIdentifier()
     {
         return $this->identifier;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**

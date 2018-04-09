@@ -1,0 +1,14 @@
+easy_admin:
+    entities:
+        News:
+          class: HGT\Application\Content\News\News
+        Folder:
+          class: HGT\Application\Content\Folder\Folder
+        InvalidDeliveryDate:
+          class: HGT\Application\Catalog\Order\InvalidDeliveryDate
+        Page:
+          class: HGT\Application\Content\Page\Page
+          disabled_actions: ['new', 'delete']
+        StaticBlock:
+          class: HGT\Application\Content\StaticBlock\StaticBlock
+          disabled_actions: ['new', 'delete']

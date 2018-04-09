@@ -204,4 +204,37 @@ class Page
     {
         return $this->pageStaticBlocks;
     }
+
+    /**
+     * @return bool
+     */
+    public function isShowInSearch()
+    {
+        return $this->show_in_search;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSort()
+    {
+        return $this->sort;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPageType()
+    {
+        return $this->page_type;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
 }

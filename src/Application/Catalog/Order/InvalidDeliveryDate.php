@@ -37,4 +37,21 @@ class InvalidDeliveryDate
     {
         return $this->invalid_delivery_date;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+
 }
