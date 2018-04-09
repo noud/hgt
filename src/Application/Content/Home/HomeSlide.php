@@ -101,4 +101,37 @@ class HomeSlide
     {
         $this->url = $url;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDateFrom()
+    {
+        return $this->date_from;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDateTo()
+    {
+        return $this->date_to;
+    }
+
 }

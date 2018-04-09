@@ -12,3 +12,7 @@ easy_admin:
         StaticBlock:
           class: HGT\Application\Content\StaticBlock\StaticBlock
           disabled_actions: ['new', 'delete']
+        HomeBanner:
+          class: HGT\Application\Content\Home\HomeBanner
+        HomeSlide:
+          class: HGT\Application\Content\Home\HomeSlide
