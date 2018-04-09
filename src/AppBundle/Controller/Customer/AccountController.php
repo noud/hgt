@@ -6,16 +6,20 @@ use Doctrine\ORM\EntityManagerInterface;
 use HGT\AppBundle\Form\Customer\Account\OrderListEditForm;
 use HGT\AppBundle\Form\Customer\Account\OrderListForm;
 use HGT\AppBundle\Mailer\Sender\CustomerProductRemovalSender;
+use HGT\AppBundle\Security\PasswordEncoder;
 use HGT\Application\Account\Command\ReviseOrderListEditProduct;
 use HGT\Application\Account\Command\ReviseOrderListProduct;
 use HGT\Application\Catalog\Cart\Command\DefineCartProductCommand;
 use HGT\Application\Catalog\CartProductService;
 use HGT\Application\Catalog\CartService;
+use HGT\Application\Catalog\CategoryService;
+use HGT\Application\User\Command\ChangePasswordCommand;
 use HGT\Application\User\CustomerOrder\CustomerOrder;
 use HGT\Application\User\CustomerOrderLineService;
 use HGT\Application\User\CustomerOrderService;
 use HGT\Application\User\CustomerProductService;
 use HGT\Application\User\CustomerService;
+use HGT\Application\User\Form\ChangePasswordFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -31,12 +35,20 @@ class AccountController extends Controller
     private $entityManager;
 
     /**
+     * @var PasswordEncoder
+     */
+    private $passwordEncoder;
+
+    /**
      * AccountController constructor.
      * @param EntityManagerInterface $entityManager
      */
-    public function __construct(EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        PasswordEncoder $passwordEncoder
+    ) {
         $this->entityManager = $entityManager;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     /**
@@ -228,5 +240,37 @@ class AccountController extends Controller
     public function logoutAction()
     {
         throw new \Exception('this should not be reached');
+    }
+
+    /**
+     * @Route("/mijn-account/wachtwoord-wijzigen", name="account_password")
+     */
+    public function passwordChangeAction(
+        Request $request,
+        CustomerService $customerService,
+        CategoryService $categoryService
+    ) {
+        $customer = $customerService->getCurrentCustomer();
+        $command = new ChangePasswordCommand();
+        $form = $this->createForm(ChangePasswordFormType::class, $command);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (!$this->passwordEncoder->isPasswordValid($customer, $command->getOldPassword())) {
+                $this->addFlash('danger', 'Uw huidig wachtwoord is incorrect.');
+                return $this->redirectToRoute('account_password');
+            }
+
+            $customerService->updatePassword($customer->getId(), $command->getPlainPassword());
+            $this->entityManager->flush();
+            $this->addFlash('success', 'Uw wachtwoord is gewijzigd.');
+
+            return $this->redirectToRoute('account_password');
+        }
+
+        return $this->render('account/password.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }
