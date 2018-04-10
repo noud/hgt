@@ -60,3 +60,7 @@ services:
             - "%mailer_default_to_order_name%"
             - "%mailer_default_to_order_email%"
             - ""
+
+    HGT\AppBundle\Doctrine\HashPasswordListener:
+        tags:
+            - { name: doctrine.event_subscriber }

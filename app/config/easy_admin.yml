@@ -16,3 +16,15 @@ easy_admin:
           class: HGT\Application\Content\Home\HomeBanner
         HomeSlide:
           class: HGT\Application\Content\Home\HomeSlide
+        CmsUser:
+          class: HGT\Application\User\User\CmsUser
+          list:
+                fields:
+                    - { property: 'email', type: 'email' }
+                    - name
+          form:
+                fields:
+                    - { type: 'section', label: 'User details' }
+                    - { property: 'name', type: 'text' }
+                    - email
+                    - { property: 'plainPassword', type: 'password', label: 'Password' }

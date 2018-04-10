@@ -7,7 +7,7 @@ use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="HGT\AppBundle\Repository\User\LockedAccount\LockedAccountRepository")
+ * @ORM\Entity(repositoryClass="HGT\AppBundle\Repository\CmsUser\LockedAccount\LockedAccountRepository")
  */
 class LockedAccount
 {

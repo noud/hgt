@@ -21,7 +21,7 @@
                     <div>
                     {% if app.user %}
                         Welkom <a href="{{ path('account_index') }}" title="">{{ app.user.name }}
-                        {% if app.user.company is defined and app.user.company %}
+                        {% if app.user and is_granted('ROLE_CUSTOMER') %}
                             ({{ app.user.company }})
                         {% endif %}</a> | <a href="{{ path('logout') }}" title="Uitloggen">Uitloggen</a>
                     {% else %}

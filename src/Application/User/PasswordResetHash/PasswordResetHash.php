@@ -6,7 +6,7 @@ use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="HGT\AppBundle\Repository\User\PasswordResetHash\PasswordResetHashRepository")
+ * @ORM\Entity(repositoryClass="HGT\AppBundle\Repository\CmsUser\PasswordResetHash\PasswordResetHashRepository")
  * @ORM\Table(name="password_reset_hash")
  */
 class PasswordResetHash

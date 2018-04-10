@@ -23,6 +23,7 @@ class FailedAttemptsRepository extends ServiceEntityRepository
      */
     public function add(FailedAttempts $failedAttempts)
     {
+        dump($failedAttempts);
         $this->getEntityManager()->persist($failedAttempts);
     }
 

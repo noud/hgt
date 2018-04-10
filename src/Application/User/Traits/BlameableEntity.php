@@ -4,19 +4,19 @@ namespace HGT\Application\User\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use HGT\Application\User\User\User;
+use HGT\Application\User\User\CmsUser;
 
 trait BlameableEntity
 {
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\User\User\User")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\User\User\CmsUser")
      * @Gedmo\Blameable(on="create")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $createdBy;
 
     /**
-     * @ORM\ManyToOne(targetEntity="HGT\Application\User\User\User")
+     * @ORM\ManyToOne(targetEntity="HGT\Application\User\User\CmsUser")
      * @Gedmo\Blameable(on="update")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -25,10 +25,10 @@ trait BlameableEntity
     /**
      * Sets createdBy.
      *
-     * @param User $createdBy
+     * @param CmsUser $createdBy
      * @return $this
      */
-    public function setCreatedBy(User $createdBy)
+    public function setCreatedBy(CmsUser $createdBy)
     {
         $this->createdBy = $createdBy;
 
@@ -48,10 +48,10 @@ trait BlameableEntity
     /**
      * Sets updatedBy.
      *
-     * @param  User $updatedBy
+     * @param  CmsUser $updatedBy
      * @return $this
      */
-    public function setUpdatedBy(User $updatedBy)
+    public function setUpdatedBy(CmsUser $updatedBy)
     {
         $this->updatedBy = $updatedBy;
 

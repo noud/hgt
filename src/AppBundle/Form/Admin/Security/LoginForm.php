@@ -1,5 +1,5 @@
 <?php
-namespace HGT\AppBundle\Form\User;
+namespace HGT\AppBundle\Form\Admin\Security;
 use Symfony\Component\Form\AbstractType;
 
 use Symfony\Component\Form\FormBuilderInterface;

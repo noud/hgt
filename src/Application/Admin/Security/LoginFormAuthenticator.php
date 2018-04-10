@@ -1,7 +1,7 @@
 <?php
-namespace HGT\Application\User\Security;
+namespace HGT\Application\Admin\Security;
 
-use HGT\AppBundle\Repository\User\User\UserRepository;
+use HGT\AppBundle\Repository\User\User\CmsUserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Routing\RouterInterface;
-use HGT\AppBundle\Form\User\LoginForm;
+use HGT\AppBundle\Form\Admin\Security\LoginForm;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -31,7 +31,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $formFactory;
 
     /**
-     * @var UserRepository
+     * @var CmsUserRepository
      */
     private $userRepository;
 
@@ -54,12 +54,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      * LoginFormAuthenticator constructor.
      * @param EntityManagerInterface $entityManager
      * @param FormFactoryInterface $formFactory
-     * @param UserRepository $userRepository
+     * @param CmsUserRepository $userRepository
      * @param RouterInterface $router
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param SessionInterface $session
      */
-    public function __construct(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory, UserRepository $userRepository, RouterInterface $router, UserPasswordEncoderInterface $passwordEncoder, SessionInterface $session)
+    public function __construct(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory, CmsUserRepository $userRepository, RouterInterface $router, UserPasswordEncoderInterface $passwordEncoder, SessionInterface $session)
     {
         $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
@@ -125,7 +125,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     protected function getDefaultSuccessRedirectUrl()
     {
-        return $this->router->generate('homepage');
+        return $this->router->generate('easyadmin');
     }
 
     /**
@@ -133,6 +133,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      * @return bool
      */
     public function supports(Request $request) {
-        return $request->getPathInfo() == '/admin/login' && $request->isMethod('POST');
+        return $request->getPathInfo() === '/admin/login' && $request->isMethod('POST');
     }
 }

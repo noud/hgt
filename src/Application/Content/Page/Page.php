@@ -222,7 +222,7 @@ class Page
     }
 
     /**
-     * @return mixed
+     * @return PageType
      */
     public function getPageType()
     {

@@ -1,10 +1,10 @@
 <?php
-namespace HGT\AppBundle\Controller\User;
+namespace HGT\AppBundle\Controller\Admin;
 
-use HGT\AppBundle\Repository\User\User\UserRepository;
+use HGT\AppBundle\Repository\User\User\CmsUserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use HGT\AppBundle\Form\User\LoginForm;
+use HGT\AppBundle\Form\Admin\Security\LoginForm;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
@@ -14,16 +14,16 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends Controller
 {
     /**
-     * @var UserRepository
+     * @var CmsUserRepository
      */
     private $userRepository;
 
     /**
      * SecurityController constructor.
-     * @param UserRepository $userRepository
+     * @param CmsUserRepository $userRepository
      * @param TranslatorInterface $translator
      */
-    public function __construct(UserRepository $userRepository)
+    public function __construct(CmsUserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
@@ -42,7 +42,7 @@ class SecurityController extends Controller
             '_username' => $lastUsername,
         ]);
         return $this->render(
-            'security/login.html.twig',
+            'admin/security/login.html.twig',
             array(
                 // last username entered by the contact
                 'form' => $form->createView(),

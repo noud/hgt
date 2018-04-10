@@ -42,7 +42,7 @@ class StaticBlock
     private $name;
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
