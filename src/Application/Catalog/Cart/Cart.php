@@ -24,6 +24,7 @@ class Cart
     private $cartProducts;
 
     /**
+     * @var int
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
@@ -31,6 +32,7 @@ class Cart
     private $id;
 
     /**
+     * @var Customer
      * @ORM\ManyToOne(targetEntity="HGT\Application\User\Customer\Customer")
      * @ORM\JoinColumn(nullable=false,onDelete="CASCADE")
      */
@@ -99,7 +101,7 @@ class Cart
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -115,7 +117,7 @@ class Cart
     }
 
     /**
-     * @param mixed $customer
+     * @param Customer $customer
      */
     public function setCustomer($customer)
     {

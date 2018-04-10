@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class CustomerTaxGroup
 {
     /**
+     * @var int
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
@@ -30,19 +31,11 @@ class CustomerTaxGroup
     private $navision_id;
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -54,7 +47,7 @@ class CustomerTaxGroup
     }
 
     /**
-     * @param string $name
+     * @param string
      */
     public function setName($name)
     {
@@ -70,7 +63,7 @@ class CustomerTaxGroup
     }
 
     /**
-     * @param string $navision_id
+     * @param string
      */
     public function setNavisionId($navision_id)
     {

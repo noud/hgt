@@ -4,7 +4,10 @@ namespace HGT\Application\User\Customer;
 
 use Doctrine\ORM\Mapping as ORM;
 use HGT\Application\Content\SelectionCode\SelectionCode;
+use HGT\Application\User\CustomerDiscountGroup\CustomerDiscountGroup;
 use HGT\Application\User\CustomerGroup\CustomerGroup;
+use HGT\Application\User\CustomerPriceGroup\CustomerPriceGroup;
+use HGT\Application\User\CustomerTaxGroup\CustomerTaxGroup;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -81,6 +84,7 @@ class Customer implements UserInterface
     private $show_prices;
 
     /**
+     * @var CustomerPriceGroup
      * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerPriceGroup\CustomerPriceGroup")
      */
     private $customer_price_group;
@@ -103,6 +107,7 @@ class Customer implements UserInterface
     private $delivery_days;
 
     /**
+     * @var CustomerTaxGroup
      * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerTaxGroup\CustomerTaxGroup")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -235,6 +240,7 @@ class Customer implements UserInterface
     private $payment_terms;
 
     /**
+     * @var CustomerDiscountGroup
      * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerDiscountGroup\CustomerDiscountGroup")
      */
     private $customer_discount_group;
@@ -445,7 +451,7 @@ class Customer implements UserInterface
     }
 
     /**
-     * @return mixed
+     * @return CustomerTaxGroup
      */
     public function getCustomerTaxGroup()
     {
@@ -453,7 +459,7 @@ class Customer implements UserInterface
     }
 
     /**
-     * @return mixed
+     * @return CustomerPriceGroup
      */
     public function getCustomerPriceGroup()
     {
@@ -669,7 +675,7 @@ class Customer implements UserInterface
     }
 
     /**
-     * @return mixed
+     * @return CustomerDiscountGroup
      */
     public function getCustomerDiscountGroup()
     {

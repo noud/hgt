@@ -30,4 +30,4 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
 
-    xml_export_dir: 'xml'
+    xml_export_dir: '%kernel.root_dir%/xml'
