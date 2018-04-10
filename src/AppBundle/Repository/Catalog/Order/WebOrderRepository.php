@@ -19,6 +19,14 @@ class WebOrderRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return WebOrder[]
+     */
+    public function getAll()
+    {
+        return $this->findAll();
+    }
+
+    /**
      * @param int $id
      * @return null|object
      */

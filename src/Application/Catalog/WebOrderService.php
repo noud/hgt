@@ -27,18 +27,40 @@ class WebOrderService
      */
     private $entityManager;
 
+    /** @var string */
+    private $xmlPath;
+
     /**
      * WebOrderService constructor.
      * @param WebOrderRepository $webOrderRepository
      */
     public function __construct(
+        $xmlPath,
         WebOrderRepository $webOrderRepository,
         CustomerOrderLineService $customerOrderLineService,
         EntityManagerInterface $entityManager
     ) {
+        $this->xmlPath = $xmlPath;
         $this->webOrderRepository = $webOrderRepository;
         $this->customerOrderLineService = $customerOrderLineService;
         $this->entityManager = $entityManager;
+    }
+
+    /**
+     * @param $id
+     * @return null|object
+     */
+    public function get($id)
+    {
+        return $this->webOrderRepository->get($id);
+    }
+
+    /**
+     * @return WebOrder[]
+     */
+    public function getAll()
+    {
+        return $this->webOrderRepository->getAll();
     }
 
     /**
@@ -70,7 +92,7 @@ class WebOrderService
     /**
      * @param WebOrder $webOrder
      */
-    public function exportToNavision(WebOrder $webOrder, $xmlPath)
+    public function exportToNavision(WebOrder $webOrder)
     {
         if ($webOrder !== null) {
             $webOrder->setExportDate(new \DateTime());
@@ -145,24 +167,26 @@ class WebOrderService
         $order->addAttribute('OrderDate', $cart->getFinishedDate()->format('d-m-Y'));
         $order->addAttribute('DeliveryDate', $cart->getDeliveryDate()->format('d-m-Y'));
 
-        $count = 1;
+        if ($cartProducts) {
+            $count = 1;
 
-        foreach ($cartProducts as $cartProduct) {
-            $product = $cartProduct->getProduct();
+            foreach ($cartProducts as $cartProduct) {
+                $product = $cartProduct->getProduct();
 
-            /** @var UnitOfMeasure $unitOfMeasure */
-            $unitOfMeasure = $cartProduct->getUnitOfMeasure();
-            $orderLine = $orderLines->addChild('orderLine');
+                /** @var UnitOfMeasure $unitOfMeasure */
+                $unitOfMeasure = $cartProduct->getUnitOfMeasure();
+                $orderLine = $orderLines->addChild('orderLine');
 
-            $orderLine->addAttribute('OrderNumber', 'WO-' . $webOrder->getId());
-            $orderLine->addAttribute('LineNo', $count++);
-            $orderLine->addAttribute('ProductNavisionId', $product->getNavisionId());
-            $orderLine->addAttribute('Quantity', $cartProduct->getQty());
-            $orderLine->addAttribute('UnitOfMeasureCode', $unitOfMeasure->getNavisionId());
-            $orderLine->addAttribute('UnitPrice', $cartProduct->getUnitPrice());
-            $orderLine->addChild('actie', $cartProduct->isAction() ? '1' : '0');
+                $orderLine->addAttribute('OrderNumber', 'WO-' . $webOrder->getId());
+                $orderLine->addAttribute('LineNo', $count++);
+                $orderLine->addAttribute('ProductNavisionId', $product->getNavisionId());
+                $orderLine->addAttribute('Quantity', $cartProduct->getQty());
+                $orderLine->addAttribute('UnitOfMeasureCode', $unitOfMeasure->getNavisionId());
+                $orderLine->addAttribute('UnitPrice', $cartProduct->getUnitPrice());
+                $orderLine->addChild('actie', $cartProduct->isAction() ? '1' : '0');
+            }
         }
 
-        $rootNode->saveXML($xmlPath . '/wo-' . $webOrder->getId() . '.xml');
+        $rootNode->saveXML($this->xmlPath . '/wo-' . $webOrder->getId() . '.xml');
     }
 }

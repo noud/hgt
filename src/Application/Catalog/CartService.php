@@ -103,7 +103,7 @@ class CartService
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function finish(Cart $cart, $xmlPath)
+    public function finish(Cart $cart)
     {
         if ($cart->getState() !== Cart::STATE_FINISHED) {
             $cart->setState(Cart::STATE_FINISHED);
@@ -120,7 +120,7 @@ class CartService
         }
 
         //export weborder to navision
-        $this->webOrderService->exportToNavision($webOrder, $xmlPath);
+        $this->webOrderService->exportToNavision($webOrder);
 
         //send emails
         $this->orderSender->sendOrderToCustomer($webOrder);

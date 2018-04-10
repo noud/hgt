@@ -62,4 +62,12 @@ class WebOrder
     {
         $this->export_date = $export_date;
     }
+
+    /**
+     * @return DateTime
+     */
+    public function getExportDate()
+    {
+        return $this->export_date;
+    }
 }
