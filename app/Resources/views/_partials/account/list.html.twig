@@ -21,7 +21,9 @@
         </a>
     </li>
     <li>
-        <a href="#" class="btn-list">Wachtwoord wijzigen
+        <a href="{{ path('account_password') }}"
+           class="btn-list {% if currentPath == '/mijn-account/wachtwoord-wijzigen' %}is-active{% endif %}">Wachtwoord
+            wijzigen
             <span class="icon"><i class="fa fa-chevron-right"></i></span>
         </a>
     </li>

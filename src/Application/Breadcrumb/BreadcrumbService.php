@@ -9,18 +9,22 @@ class BreadcrumbService
      */
     private $breadcrumbs;
 
+    /**
+     * @param $name
+     * @param $url
+     */
     public function addBreadcrumb($name, $url)
     {
         $counter = count($this->breadcrumbs);
-
-        dump($counter);
-        exit;
         $this->breadcrumbs[$counter]['name'] = $name;
         $this->breadcrumbs[$counter]['url'] = $url;
     }
 
+    /**
+     * @return array
+     */
     public function getBreadcrumbs()
     {
-        return $this->breadcrumbs;
+        return array_reverse($this->breadcrumbs);
     }
 }
