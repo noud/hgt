@@ -2,6 +2,7 @@
 
 namespace HGT\AppBundle\Controller\Folder;
 
+use HGT\Application\Breadcrumb\BreadcrumbService;
 use HGT\Application\Content\Folder\Folder;
 use HGT\Application\Content\FolderPageService;
 use HGT\Application\Content\FolderService;
@@ -17,12 +18,19 @@ class FolderController extends Controller
      * @param FolderService $folderService
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request, FolderService $folderService)
-    {
+    public function indexAction(
+        Request $request,
+        FolderService $folderService,
+        BreadcrumbService $breadcrumbService
+    ) {
         $activeFolders = $folderService->getActiveFolders();
+
+        $breadcrumbService->addBreadcrumb('Folder', '');
+        $breadcrumbs = $breadcrumbService->getBreadcrumbs();
 
         return $this->render('folder/index.html.twig', [
             'folders' => $activeFolders,
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 
@@ -36,11 +44,19 @@ class FolderController extends Controller
     public function viewAction(
         Request $request,
         FolderPageService $folderPageService,
-        Folder $folder
+        Folder $folder,
+        FolderService $folderService,
+        BreadcrumbService $breadcrumbService
     ) {
+        $breadcrumbService->addBreadcrumb($folderService->getFolder($folder)->getTitle(), '');
+        $url = $this->generateUrl('folder_index');
+        $breadcrumbService->addBreadcrumb('Folder', $url);
+        $breadcrumbs = $breadcrumbService->getBreadcrumbs();
+
         return $this->render('folder/view.html.twig', [
             'folder' => $folder,
             'folder_images' => $folderPageService->getFolderPagesByFolderId($folder->getId()),
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 }

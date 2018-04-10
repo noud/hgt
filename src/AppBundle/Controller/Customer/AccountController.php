@@ -146,7 +146,7 @@ class AccountController extends Controller
 
                 $this->addFlash(
                     'success',
-                    'Een email is verzonden. Binnen 2 dagen hoort.'
+                    'Een email is verzonden. U hoort zo spoedig van ons.'
                 );
             } else {
                 $this->addFlash(

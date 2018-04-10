@@ -2,8 +2,8 @@
 
 namespace HGT\AppBundle\Controller\Action;
 
+use HGT\Application\Breadcrumb\BreadcrumbService;
 use HGT\Application\Catalog\ProductService;
-use HGT\Application\Catalog\ProductUnitOfMeasureService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,16 +17,17 @@ class ActionController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(
-        Request $request,
         ProductService $productService,
-        ProductUnitOfMeasureService $productUnitOfMeasureService
+        BreadcrumbService $breadcrumbService
     ) {
         $actionProducts = $productService->getActionProducts($this->isGranted('ROLE_CUSTOMER'));
 
-
+        $breadcrumbService->addBreadcrumb('acties', '');
+        $breadcrumbs = $breadcrumbService->getBreadcrumbs();
 
         return $this->render('actions/index.html.twig', [
-            'actionProducts' => $actionProducts
+            'actionProducts' => $actionProducts,
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 }

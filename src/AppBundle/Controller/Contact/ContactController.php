@@ -4,6 +4,7 @@ namespace HGT\AppBundle\Controller\Contact;
 
 use HGT\AppBundle\Form\Contact\ContactForm;
 use HGT\AppBundle\Mailer\Sender\ContactSender;
+use HGT\Application\Breadcrumb\BreadcrumbService;
 use HGT\Application\Contact\Command\ContactCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,8 +21,14 @@ class ContactController extends Controller
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function indexAction(Request $request, ContactSender $contactSender)
-    {
+    public function indexAction(
+        Request $request,
+        ContactSender $contactSender,
+        BreadcrumbService $breadcrumbService
+    ) {
+        $breadcrumbService->addBreadcrumb('Contact', '');
+        $breadcrumbs = $breadcrumbService->getBreadcrumbs();
+
         $contactCommand = new ContactCommand();
         $form = $this->createForm(ContactForm::class, $contactCommand);
 
@@ -34,6 +41,7 @@ class ContactController extends Controller
 
         return $this->render('contact/index.html.twig', [
             'form' => $form->createView(),
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 

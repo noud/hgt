@@ -15,7 +15,9 @@ class BreadcrumbService
      */
     public function addBreadcrumb($name, $url)
     {
-        $this->breadcrumbs[] = array('name' => $name, 'url' => $url);
+        $counter = count($this->breadcrumbs);
+        $this->breadcrumbs[$counter]['name'] = $name;
+        $this->breadcrumbs[$counter]['url'] = $url;
     }
 
     /**
