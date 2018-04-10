@@ -9,6 +9,7 @@ use HGT\Application\User\Event\FailedAttemptEvent;
 use HGT\Application\User\Event\PasswordResetEvent;
 use HGT\Application\User\LockingService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 
@@ -25,15 +26,21 @@ class AccountLockingListener implements EventSubscriberInterface, PasswordResetL
     private $entityManager;
 
     /**
+     * @var RequestStack
+     */
+    private $requestStack;
+    /**
      * AccountLockingListener constructor.
      *
      * @param LockingService $lockingService
      * @param EntityManagerInterface $entityManager
+     * @param RequestStack $requestStack
      */
-    public function __construct(LockingService $lockingService, EntityManagerInterface $entityManager)
+    public function __construct(LockingService $lockingService, EntityManagerInterface $entityManager, RequestStack $requestStack)
     {
         $this->lockingService = $lockingService;
         $this->entityManager = $entityManager;
+        $this->requestStack = $requestStack;
     }
 
     public static function getSubscribedEvents()
@@ -48,8 +55,7 @@ class AccountLockingListener implements EventSubscriberInterface, PasswordResetL
      */
     public function onAuthenticationFailure(AuthenticationFailureEvent $authenticationEvent)
     {
-        $credentials = $authenticationEvent->getAuthenticationToken()->getCredentials();
-        $ip = isset($credentials['ip_address']) ? $credentials['ip_address'] : false;
+        $ip = $this->requestStack->getMasterRequest()->getClientIp();
 
         $event = new FailedAttemptEvent();
         $event->ip = $ip;
