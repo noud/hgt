@@ -3,6 +3,7 @@
 namespace HGT\AppBundle\Controller\Search;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use HGT\Application\Breadcrumb\BreadcrumbService;
 use HGT\Application\Catalog\CategoryService;
 use HGT\Application\Search\SearchService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -20,8 +21,12 @@ class SearchController extends Controller
     public function indexAction(
         Request $request,
         SearchService $searchService,
-        CategoryService $categoryService
+        CategoryService $categoryService,
+        BreadcrumbService $breadcrumbService
     ) {
+        $breadcrumbService->addBreadcrumb('Zoeken', '');
+        $breadcrumbs = $breadcrumbService->getBreadcrumbs();
+
         $homeCategories = $categoryService->getHomeCategories();
 
         $query = $request->query->has('q') ?
@@ -35,7 +40,8 @@ class SearchController extends Controller
 
         if (!$query || strlen($query) < 3) {
             return $this->render('search/index.html.twig', [
-                'error' => 'Vul a.u.b. een zoekopdracht in van minimaal 3 tekens.'
+                'error' => 'Vul a.u.b. een zoekopdracht in van minimaal 3 tekens.',
+                'breadcrumbs' => $breadcrumbs
             ]);
         }
 
@@ -64,7 +70,8 @@ class SearchController extends Controller
             'resultNumber' => $resultNumber,
             'searchQuery' => $query,
             'perPage' => $perPage,
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 }
