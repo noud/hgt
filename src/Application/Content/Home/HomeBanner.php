@@ -90,7 +90,7 @@ class HomeBanner
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {

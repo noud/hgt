@@ -103,7 +103,7 @@ class HomeSlide
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {

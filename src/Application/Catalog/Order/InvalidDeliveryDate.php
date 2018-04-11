@@ -47,7 +47,7 @@ class InvalidDeliveryDate
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
