@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use HGT\Application\Catalog\Product\UnitOfMeasure;
 
 /**
- * @ORM\Entity(repositoryClass="HGT\AppBundle\Repository\User\CustomerProduct\CustomerProductRepository")
+ * @ORM\Entity(repositoryClass="HGT\AppBundle\Repository\CmsUser\CustomerProduct\CustomerProductRepository")
  * @ORM\Table(name="customer_product")
  */
 class CustomerProduct

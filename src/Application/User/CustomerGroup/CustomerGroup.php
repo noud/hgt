@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use HGT\Application\User\Customer\Customer;
 
 /**
- * @ORM\Entity(repositoryClass="HGT\AppBundle\Repository\User\CustomerGroup\CustomerGroupRepository")
+ * @ORM\Entity(repositoryClass="HGT\AppBundle\Repository\CmsUser\CustomerGroup\CustomerGroupRepository")
  * @ORM\Table(name="customer_group")
  */
 class CustomerGroup

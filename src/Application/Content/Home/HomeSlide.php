@@ -101,4 +101,61 @@ class HomeSlide
     {
         $this->url = $url;
     }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDateFrom()
+    {
+        return $this->date_from;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDateTo()
+    {
+        return $this->date_to;
+    }
+
+    /**
+     * @param int $priority
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+    }
+
+    /**
+     * @param DateTime $date_from
+     */
+    public function setDateFrom($date_from)
+    {
+        $this->date_from = $date_from;
+    }
+
+    /**
+     * @param DateTime $date_to
+     */
+    public function setDateTo($date_to)
+    {
+        $this->date_to = $date_to;
+    }
+
 }

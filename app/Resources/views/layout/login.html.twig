@@ -21,7 +21,7 @@
                     <div>
                     {% if app.user %}
                         Welkom <a href="{{ path('account_index') }}" title="">{{ app.user.name }}
-                        {% if app.user and is_granted('ROLE_CUSTOMER') %}
+                        {% if app.user.company is defined and app.user.company %}
                             ({{ app.user.company }})
                         {% endif %}</a> | <a href="{{ path('logout') }}" title="Uitloggen">Uitloggen</a>
                     {% else %}
@@ -80,12 +80,6 @@
                         <a href="{{ path('account_order_list') }}" class="btn btn-icon-label">
                             <span class="icon"><i class="fa fa-list-ul"></i></span>
                             <span class="label">Mijn bestellijst</span>
-                        </a>
-                        <a href="{{ path('cart_index') }}" class="btn btn-icon-label shopping-cart js-shopping-cart">
-                            <span class="icon"><i class="fas fa-shopping-cart"></i>
-                                <span>{{ cart_manager.countProductsInCart }}</span>
-                            </span>
-                            <span class="label">Winkelwagen</span>
                         </a>
                     {% else %}
                         <a href="{{ path('account_signup') }}" class="btn btn-icon-label">
