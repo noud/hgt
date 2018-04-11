@@ -43,17 +43,19 @@
                                     </div>
                                 </li>
                                 {% if product.productPrices is not empty %}
-                                    <li>
-                                        <div class="highlight-label">
-                                            <div class="highlight-label-head">Actie</div>
-                                            <div class="highlight-label-sub">
-                                                Actie geldig van
-                                                {{ product.productPrices|first.startDate|date('d F') }}
-                                                t/m
-                                                {{ product.productPrices|first.endDate|date('d F Y') }}
+                                    {% if app.user %}
+                                        <li>
+                                            <div class="highlight-label">
+                                                <div class="highlight-label-head">Actie</div>
+                                                <div class="highlight-label-sub">
+                                                    Actie geldig van
+                                                    {{ product.productPrices|first.startDate|date('d F') }}
+                                                    t/m
+                                                    {{ product.productPrices|first.endDate|date('d F Y') }}
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    {% endif %}
                                 {% endif %}
                                 {% if isCustomer and addToCartForm is defined %}
                                     <li>

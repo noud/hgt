@@ -3,6 +3,7 @@
 namespace HGT\AppBundle\Controller\Customer;
 
 use HGT\AppBundle\Form\Customer\LoginForm;
+use HGT\Application\Breadcrumb\BreadcrumbService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -27,8 +28,12 @@ class LoginController extends Controller
     /**
      * @Route("/inloggen", name="account_login")
      */
-    public function loginAction()
-    {
+    public function loginAction(
+        BreadcrumbService $breadcrumbService
+    ) {
+        $breadcrumbService->addBreadcrumb('Inloggen', '');
+        $breadcrumbs = $breadcrumbService->getBreadcrumbs();
+
         // Redirect teacher and student when already logged in
         if ($this->isGranted('ROLE_CUSTOMER')) {
             return $this->redirectToRoute('homepage');
@@ -42,7 +47,8 @@ class LoginController extends Controller
 
         return $this->render('account/login.html.twig', array(
             'form'  => $form->createView(),
-            'error' => $error
+            'error' => $error,
+            'breadcrumbs' => $breadcrumbs
         ));
     }
 }

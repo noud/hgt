@@ -22,7 +22,7 @@ class ActionController extends Controller
     ) {
         $actionProducts = $productService->getActionProducts($this->isGranted('ROLE_CUSTOMER'));
 
-        $breadcrumbService->addBreadcrumb('acties', '');
+        $breadcrumbService->addBreadcrumb('Acties', '');
         $breadcrumbs = $breadcrumbService->getBreadcrumbs();
 
         return $this->render('actions/index.html.twig', [

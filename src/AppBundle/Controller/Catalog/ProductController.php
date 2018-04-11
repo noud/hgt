@@ -8,7 +8,6 @@ use HGT\Application\Breadcrumb\BreadcrumbService;
 use HGT\Application\Catalog\Cart\Command\DefineCartProductCommand;
 use HGT\Application\Catalog\CartProductService;
 use HGT\Application\Catalog\CartService;
-use HGT\Application\Catalog\Category\Category;
 use HGT\Application\Catalog\CategoryService;
 use HGT\Application\Catalog\Product\Product;
 use HGT\Application\Catalog\ProductPriceService;
@@ -16,8 +15,6 @@ use HGT\Application\Catalog\ProductUnitOfMeasureService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
-
 
 class ProductController extends Controller
 {
@@ -44,6 +41,7 @@ class ProductController extends Controller
      * @param ProductUnitOfMeasureService $productUnitOfMeasureService
      * @param CartService $cartService
      * @param Product $product
+     * @param BreadcrumbService $breadcrumbService
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -68,15 +66,18 @@ class ProductController extends Controller
         $productUnitOfMeasures = $productUnitOfMeasureService->getProductUnitOfMeasures($product);
 
         $productPrices = array();
-        foreach ($productUnitOfMeasures as $productUnitOfMeasure) {
-            $productPrices[] = [
-                'productUnitOfMeasureId' => $productUnitOfMeasure->getUnitOfMeasure()->getId(),
-                'productPrice' => $productPriceService->getUnitPriceForCustomer(
-                    $this->getUser(),
-                    $product,
-                    $productUnitOfMeasure->getUnitOfMeasure()
-                ),
-            ];
+
+        if($this->getUser() !== null) {
+            foreach ($productUnitOfMeasures as $productUnitOfMeasure) {
+                $productPrices[] = [
+                    'productUnitOfMeasureId' => $productUnitOfMeasure->getUnitOfMeasure()->getId(),
+                    'productPrice' => $productPriceService->getUnitPriceForCustomer(
+                        $this->getUser(),
+                        $product,
+                        $productUnitOfMeasure->getUnitOfMeasure()
+                    ),
+                ];
+            }
         }
 
         $singleProductData = [

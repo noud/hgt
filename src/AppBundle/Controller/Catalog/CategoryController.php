@@ -26,7 +26,7 @@ class CategoryController extends Controller
     ) {
         $categories = $categoryService->getCategoriesWithProducts("NULL");
 
-        $breadcrumbService->addBreadcrumb('categorieën', '');
+        $breadcrumbService->addBreadcrumb('Categorieën', '');
         $breadcrumbs = $breadcrumbService->getBreadcrumbs();
 
         return $this->render('catalog/category/index.html.twig', [
@@ -105,7 +105,7 @@ class CategoryController extends Controller
         }
 
         $url = $this->generateUrl('category_index');
-        $breadcrumbService->addBreadcrumb('categorieën', $url);
+        $breadcrumbService->addBreadcrumb('Categorieën', $url);
         $productCategoryData['breadcrumbs'] = $breadcrumbService->getBreadcrumbs();
 
         return $this->render('catalog/category/view.html.twig', $productCategoryData);
