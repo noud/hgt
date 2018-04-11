@@ -19,4 +19,13 @@ class PageService
     {
         $this->pageRepository = $pageRepository;
     }
+
+    /**
+     * @param $id
+     * @return Page\Page|object
+     */
+    public function get($id)
+    {
+        return $this->pageRepository->get($id);
+    }
 }
