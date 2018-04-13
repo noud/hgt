@@ -94,9 +94,8 @@ class WebOrderService
      */
     public function exportToNavision(WebOrder $webOrder)
     {
-        if ($webOrder !== null) {
-            $webOrder->setExportDate(new \DateTime());
-        }
+
+        $webOrder->setExportDate(new \DateTime());
 
         //to get weborderID
         $this->entityManager->flush();
