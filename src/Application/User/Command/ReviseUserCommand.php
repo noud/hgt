@@ -2,7 +2,7 @@
 
 namespace HGT\Application\User\Command;
 
-use HGT\Application\User\User\User;
+use HGT\Application\User\User\CmsUser;
 
 class ReviseUserCommand
 {
@@ -27,7 +27,7 @@ class ReviseUserCommand
     /**
      * ReviseUserCommand constructor.
      */
-    public function __construct(User $user)
+    public function __construct(CmsUser $user)
     {
         $this->id = $user->getId();
         $this->email = $user->getEmail();

@@ -4,6 +4,7 @@ namespace HGT\AppBundle\Controller\Customer;
 
 use HGT\AppBundle\Form\Signup\SignupForm;
 use HGT\AppBundle\Mailer\Sender\SignupSender;
+use HGT\Application\Breadcrumb\BreadcrumbService;
 use HGT\Application\Catalog\Product\Product;
 use HGT\Application\Signup\Command\SignupCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -22,11 +23,17 @@ class SignupController extends Controller
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function indexAction(Request $request, SignupSender $signupSender)
-    {
+    public function indexAction(
+        Request $request,
+        SignupSender $signupSender,
+        BreadcrumbService $breadcrumbService
+    ) {
         $command = new SignupCommand();
         $form = $this->createForm(SignupForm::class, $command);
         $form->handleRequest($request);
+
+        $breadcrumbService->addBreadcrumb('Registreren', '');
+        $breadcrumbs = $breadcrumbService->getBreadcrumbs();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $signupSender->sendContactMessage($command);
@@ -35,6 +42,7 @@ class SignupController extends Controller
 
         return $this->render('signup/index.html.twig', [
             'form' => $form->createView(),
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 

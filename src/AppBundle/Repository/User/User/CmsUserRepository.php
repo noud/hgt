@@ -4,22 +4,22 @@ namespace HGT\AppBundle\Repository\User\User;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use HGT\Application\User\User\User;
+use HGT\Application\User\User\CmsUser;
 
-class UserRepository extends ServiceEntityRepository
+class CmsUserRepository extends ServiceEntityRepository
 {
     /**
-     * UserRepository constructor.
+     * CmsUserRepository constructor.
      * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, User::class);
+        parent::__construct($registry, CmsUser::class);
     }
 
     /**
      * @param $id
-     * @return User|object
+     * @return CmsUser|object
      */
     public function get($id)
     {
@@ -28,16 +28,16 @@ class UserRepository extends ServiceEntityRepository
 
     /**
      * Add a new user
-     * @param User $user
+     * @param CmsUser $user
      */
-    public function add(User $user)
+    public function add(CmsUser $user)
     {
         $this->getEntityManager()->persist($user);
     }
 
     /**
      * @param $email string
-     * @return User|null|object
+     * @return CmsUser|null|object
      */
     public function getUserByEmail($email)
     {
@@ -48,9 +48,9 @@ class UserRepository extends ServiceEntityRepository
 
     /**
      * Remove a user
-     * @param User $user
+     * @param CmsUser $user
      */
-    public function remove(User $user)
+    public function remove(CmsUser $user)
     {
         $this->getEntityManager()->remove($user);
     }

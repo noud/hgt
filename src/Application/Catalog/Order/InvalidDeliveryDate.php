@@ -37,4 +37,37 @@ class InvalidDeliveryDate
     {
         return $this->invalid_delivery_date;
     }
+
+    /**
+     * @param DateTime $invalid_delivery_date
+     */
+    public function setInvalidDeliveryDate($invalid_delivery_date)
+    {
+        $this->invalid_delivery_date = $invalid_delivery_date;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    /**
+     * @param string $note
+     */
+    public function setNote($note)
+    {
+        $this->note = $note;
+    }
+
 }

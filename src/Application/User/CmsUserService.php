@@ -2,14 +2,14 @@
 
 namespace HGT\Application\User;
 
-use HGT\AppBundle\Repository\User\User\UserRepository;
+use HGT\AppBundle\Repository\User\User\CmsUserRepository;
 use HGT\AppBundle\Security\PasswordEncoder;
-use HGT\Application\User\User\User;
+use HGT\Application\User\User\CmsUser;
 
-class UserService
+class CmsUserService
 {
     /**
-     * @var UserRepository
+     * @var CmsUserRepository
      */
     private $userRepository;
 
@@ -19,10 +19,10 @@ class UserService
     private $passwordEncoder;
 
     /**
-     * UserService constructor.
-     * @param UserRepository $userRepository
+     * CmsUserService constructor.
+     * @param CmsUserRepository $userRepository
      */
-    public function __construct(UserRepository $userRepository, PasswordEncoder $passwordEncoder)
+    public function __construct(CmsUserRepository $userRepository, PasswordEncoder $passwordEncoder)
     {
         $this->userRepository = $userRepository;
         $this->passwordEncoder = $passwordEncoder;
@@ -30,7 +30,7 @@ class UserService
 
     /**
      * @param $id string
-     * @return User
+     * @return CmsUser
      */
     public function getUserById($id)
     {
@@ -39,7 +39,7 @@ class UserService
 
     /**
      * @param $email string
-     * @return User
+     * @return CmsUser
      */
     public function getUserByEmail($email)
     {
@@ -47,12 +47,12 @@ class UserService
     }
 
     /**
-     * @param User $user
-     * @return User
+     * @param CmsUser $user
+     * @return CmsUser
      */
     public function defineUser(DefineUserCommand $command)
     {
-        $user = new User(
+        $user = new CmsUser(
             $command->email,
             $command->name,
             $this->passwordEncoder->encodePassword($command->password)
@@ -64,8 +64,8 @@ class UserService
     }
 
     /**
-     * @param User $user
-     * @return User
+     * @param CmsUser $user
+     * @return CmsUser
      */
     public function reviseUser(ReviseUserCommand $command)
     {
@@ -78,9 +78,9 @@ class UserService
     }
 
     /**
-     * @param User $user
+     * @param CmsUser $user
      */
-    public function removeUser(User $user)
+    public function removeUser(CmsUser $user)
     {
         $this->userRepository->remove($user);
     }
