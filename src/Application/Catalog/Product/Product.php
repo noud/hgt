@@ -38,6 +38,7 @@ class Product
     private $manufacturer;
 
     /**
+     * @var ProductPicture
      * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\ProductPicture", fetch="EAGER")
      */
     private $main_picture;
@@ -91,6 +92,7 @@ class Product
     private $url_key;
 
     /**
+     * @var ProductTaxGroup
      * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\ProductTaxGroup")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -103,6 +105,7 @@ class Product
     private $is_order_product;
 
     /**
+     * @var string
      * @ORM\Column(type="string")
      */
     private $mail_order_to_supplier;
@@ -129,6 +132,14 @@ class Product
         $this->categories = new ArrayCollection();
         $this->productPrices = new ArrayCollection();
         $this->productUnitOfMeasures = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public function getNavisionId()
+    {
+        return $this->navision_id;
     }
 
     /**
@@ -215,7 +226,7 @@ class Product
     }
 
     /**
-     * @return mixed
+     * @return ProductPicture
      */
     public function getMainPicture()
     {
@@ -263,7 +274,7 @@ class Product
     }
 
     /**
-     * @return mixed
+     * @return ProductTaxGroup
      */
     public function getProductTaxGroup()
     {
@@ -279,7 +290,7 @@ class Product
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getMailOrderToSupplier()
     {

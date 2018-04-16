@@ -61,6 +61,13 @@ services:
             - "%mailer_default_to_order_email%"
             - ""
 
+    HGT\Application\Catalog\WebOrderService:
+        arguments:
+            - "%xml_export_dir%"
+            - ""
+            - ""
+            - ""
+
     HGT\AppBundle\Doctrine\HashPasswordListener:
         tags:
             - { name: doctrine.event_subscriber }

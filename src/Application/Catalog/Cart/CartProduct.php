@@ -4,6 +4,7 @@ namespace HGT\Application\Catalog\Cart;
 
 use Doctrine\ORM\Mapping as ORM;
 use HGT\Application\Catalog\Product\Product;
+use HGT\Application\Catalog\Product\UnitOfMeasure;
 
 /**
  * @ORM\Entity(repositoryClass="HGT\AppBundle\Repository\Catalog\Cart\CartProductRepository")
@@ -12,6 +13,7 @@ use HGT\Application\Catalog\Product\Product;
 class CartProduct
 {
     /**
+     * @var int
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
@@ -19,18 +21,21 @@ class CartProduct
     private $id;
 
     /**
+     * @var Cart
      * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Cart\Cart", inversedBy="cartProducts")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $cart;
 
     /**
+     * @var Product
      * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\Product")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $product;
 
     /**
+     * @var UnitOfMeasure
      * @ORM\ManyToOne(targetEntity="HGT\Application\Catalog\Product\UnitOfMeasure")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -61,7 +66,7 @@ class CartProduct
     private $is_action;
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -77,7 +82,7 @@ class CartProduct
     }
 
     /**
-     * @param mixed $cart
+     * @param Cart $cart
      */
     public function setCart($cart)
     {
@@ -93,7 +98,7 @@ class CartProduct
     }
 
     /**
-     * @param mixed $product
+     * @param Product $product
      */
     public function setProduct($product)
     {
@@ -101,7 +106,7 @@ class CartProduct
     }
 
     /**
-     * @return mixed
+     * @return UnitOfMeasure
      */
     public function getUnitOfMeasure()
     {
@@ -109,7 +114,7 @@ class CartProduct
     }
 
     /**
-     * @param mixed $unit_of_measure
+     * @param UnitOfMeasure $unit_of_measure
      */
     public function setUnitOfMeasure($unit_of_measure)
     {
@@ -170,6 +175,14 @@ class CartProduct
     public function setIsAction($is_action)
     {
         $this->is_action = $is_action;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAction()
+    {
+        return $this->is_action;
     }
 
     /**

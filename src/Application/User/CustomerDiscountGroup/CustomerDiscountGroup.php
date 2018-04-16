@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class CustomerDiscountGroup
 {
     /**
+     * @var int
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
@@ -22,4 +23,20 @@ class CustomerDiscountGroup
      * @ORM\Column(type="string", length=16)
      */
     private $navision_id;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNavisionId()
+    {
+        return $this->navision_id;
+    }
 }

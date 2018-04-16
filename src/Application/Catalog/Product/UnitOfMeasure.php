@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class UnitOfMeasure
 {
     /**
+     * @var int
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
@@ -30,7 +31,7 @@ class UnitOfMeasure
     private $navision_id;
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -43,5 +44,13 @@ class UnitOfMeasure
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNavisionId()
+    {
+        return $this->navision_id;
     }
 }

@@ -4,7 +4,10 @@ namespace HGT\Application\User\Customer;
 
 use Doctrine\ORM\Mapping as ORM;
 use HGT\Application\Content\SelectionCode\SelectionCode;
+use HGT\Application\User\CustomerDiscountGroup\CustomerDiscountGroup;
 use HGT\Application\User\CustomerGroup\CustomerGroup;
+use HGT\Application\User\CustomerPriceGroup\CustomerPriceGroup;
+use HGT\Application\User\CustomerTaxGroup\CustomerTaxGroup;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -81,6 +84,7 @@ class Customer implements UserInterface
     private $show_prices;
 
     /**
+     * @var CustomerPriceGroup
      * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerPriceGroup\CustomerPriceGroup")
      */
     private $customer_price_group;
@@ -103,6 +107,7 @@ class Customer implements UserInterface
     private $delivery_days;
 
     /**
+     * @var CustomerTaxGroup
      * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerTaxGroup\CustomerTaxGroup")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -235,6 +240,7 @@ class Customer implements UserInterface
     private $payment_terms;
 
     /**
+     * @var CustomerDiscountGroup
      * @ORM\ManyToOne(targetEntity="HGT\Application\User\CustomerDiscountGroup\CustomerDiscountGroup")
      */
     private $customer_discount_group;
@@ -445,7 +451,7 @@ class Customer implements UserInterface
     }
 
     /**
-     * @return mixed
+     * @return CustomerTaxGroup
      */
     public function getCustomerTaxGroup()
     {
@@ -453,7 +459,7 @@ class Customer implements UserInterface
     }
 
     /**
-     * @return mixed
+     * @return CustomerPriceGroup
      */
     public function getCustomerPriceGroup()
     {
@@ -466,5 +472,237 @@ class Customer implements UserInterface
     public function getNavisionPricingDiscountId()
     {
         return $this->navision_pricing_discount_id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress1()
+    {
+        return $this->address1;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress2()
+    {
+        return $this->address2;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFax()
+    {
+        return $this->fax;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->last_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNavisionId()
+    {
+        return $this->navision_id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShippingCompany()
+    {
+        return $this->shipping_company;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPostCode()
+    {
+        return $this->post_code;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isShowPrices()
+    {
+        return $this->show_prices;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPasswordToken()
+    {
+        return $this->password_token;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShippingFirstName()
+    {
+        return $this->shipping_first_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShippingLastName()
+    {
+        return $this->shipping_last_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShippingAddress1()
+    {
+        return $this->shipping_address1;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShippingAddress2()
+    {
+        return $this->shipping_address2;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShippingCity()
+    {
+        return $this->shipping_city;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShippingPostCode()
+    {
+        return $this->shipping_post_code;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShippingCountry()
+    {
+        return $this->shipping_country;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShippingPhone()
+    {
+        return $this->shipping_phone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShippingFax()
+    {
+        return $this->shipping_fax;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShippingEmail()
+    {
+        return $this->shipping_email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getChamberOfCommerceNumber()
+    {
+        return $this->chamber_of_commerce_number;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMerchantNotes()
+    {
+        return $this->merchant_notes;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaymentTerms()
+    {
+        return $this->payment_terms;
+    }
+
+    /**
+     * @return CustomerDiscountGroup
+     */
+    public function getCustomerDiscountGroup()
+    {
+        return $this->customer_discount_group;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomerVatNumber()
+    {
+        return $this->customer_vat_number;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isBuyingOnAccount()
+    {
+        return $this->is_buying_on_account;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAllowLineDiscount()
+    {
+        return $this->allow_line_discount;
     }
 }

@@ -19,6 +19,14 @@ class WebOrderRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return WebOrder[]
+     */
+    public function getAll()
+    {
+        return $this->findAll();
+    }
+
+    /**
      * @param int $id
      * @return null|object
      */
@@ -52,15 +60,5 @@ class WebOrderRepository extends ServiceEntityRepository
         return $this->findOneBy([
             'cart' => $cart
         ]);
-    }
-
-    /**
-     * @param WebOrder $webOrder
-     */
-    public function exportToNavision(WebOrder $webOrder)
-    {
-        if ($webOrder !== null) {
-            $webOrder->setExportDate(new \DateTime());
-        }
     }
 }
