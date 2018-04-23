@@ -1,6 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<CustomerPriceGroupData>
-  <CustomerPriceGroups>
-    <CustomerPriceGroup NavisionId="1337" PriceIncludesVat="1" AllowInvoiceDisc="1" VatBusPostingGrPrice="1" Description="Description1337" AllowLineDisc="1" />
-  </CustomerPriceGroups>
-</CustomerPriceGroupData>

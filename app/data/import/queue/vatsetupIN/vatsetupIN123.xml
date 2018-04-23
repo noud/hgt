@@ -1,6 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<VatSetupData>
-  <VatSetups>
-    <VatSetup VatBusinessGroup="1337" VatProductGroup="1338" VatPercentage="13.37" />
-  </VatSetups>
-</VatSetupData>
