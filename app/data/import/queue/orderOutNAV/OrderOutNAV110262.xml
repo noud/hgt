@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OrdersData>
+  <Orders>
+    <Order OrderNumber="VO-525087" CustomerId="255059" CustomerName="Manege Thielen" InvoiceToId="255059" InvoiceToName="Manege Thielen" DeliveryAddress="Oude lijn 7a" DeliveryCity="TILBURG" OrderReference="" OrderDate="2018-03-29" DeliveryDate="2018-03-29">
+      <OrderLines>
+        <OrderLine LineNo="10000" Type="2" ProductNavisionId="103205" Description="TOBLERONE STICK" Brand="Domini" Volume="20x100ml" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="27.85">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="20000" Type="2" ProductNavisionId="303341" Description="TREKBAND ZAK 60LTR" Brand="Komo" Volume="15st" Quantity="4" UnitOfMeasureCode="ROL" UnitPrice="1.75">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="30000" Type="2" ProductNavisionId="314412001" Description="PINDA'S KINGSIZE GEZ" Brand="Chef's Delicious" Volume="3kg" Quantity="1" UnitOfMeasureCode="EMMER" UnitPrice="13.5">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="40000" Type="2" ProductNavisionId="100025001" Description="FRITES HORECA SNIT 10/10" Brand="Lutosa" Volume="4x2.5kg" Quantity="2" UnitOfMeasureCode="DOOS" UnitPrice="11.1">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="50000" Type="2" ProductNavisionId="100230" Description="BROODJE ROND" Brand="Subliem" Volume="32st" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="4.95">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="60000" Type="2" ProductNavisionId="103370201" Description="CASINO WIT" Brand="Kamstra" Volume="4x800gr" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="5.15">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="70000" Type="2" ProductNavisionId="103370203" Description="BROODJE *horeca* LANG" Brand="Kamstra" Volume="24st" Quantity="2" UnitOfMeasureCode="DOOS" UnitPrice="4.4">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="80000" Type="2" ProductNavisionId="103500126" Description="BROODJE FRIKANDEL FOLIE" Brand="Fast Food Express" Volume="16x115gr" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="14.7">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="90000" Type="2" ProductNavisionId="103500140" Description="WORSTENBROODJE 171313" Brand="Fast Food Express" Volume="16x110gr" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="11.7">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="100000" Type="2" ProductNavisionId="102445" Description="PICCOLO WIT" Brand="Chef's Delicious" Volume="84x85gr" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="11.15">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="110000" Type="2" ProductNavisionId="100773" Description="GIANT WHITE" Brand="Domini" Volume="20x120ml" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="22.85">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="120000" Type="2" ProductNavisionId="100776" Description="COOLCONE CLASSIC" Brand="Domini" Volume="24x120ml" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="25.25">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="130000" Type="2" ProductNavisionId="311625" Description="FRANSE MOSTERD FLACON" Brand="Remia" Volume="800ml" Quantity="1" UnitOfMeasureCode="FLACON" UnitPrice="2.35">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="140000" Type="2" ProductNavisionId="311628" Description="FRITESSAUS FLACON" Brand="Remia" Volume="800ml" Quantity="2" UnitOfMeasureCode="FLACON" UnitPrice="2.5">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="150000" Type="2" ProductNavisionId="308111111" Description="CHAMPIGNON CREME" Brand="Cup a Soup" Volume="21st" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="8.55">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="160000" Type="2" ProductNavisionId="308111117" Description="KIPPENSOEP" Brand="Cup a Soup" Volume="21st" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="8.55">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="170000" Type="2" ProductNavisionId="308111119" Description="KERRIE" Brand="Cup a Soup" Volume="21st" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="8.55">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="180000" Type="2" ProductNavisionId="310035305" Description="KOFFIEMELK CUPS 10%" Brand="Euro Cream" Volume="240x7.5gr" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="7.7">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="190000" Type="2" ProductNavisionId="310039" Description="AARDBEIEN THEE" Brand="Pickwick" Volume="25x1.5gr" Quantity="1" UnitOfMeasureCode="OVERDOOS" UnitPrice="6.55">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="200000" Type="2" ProductNavisionId="303197" Description="KOFFIEKOEKJES SPECULOOS MONO" Brand="Variate" Volume="175st" Quantity="2" UnitOfMeasureCode="DOOS" UnitPrice="5.45">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="210000" Type="2" ProductNavisionId="314410149" Description="M &amp; M PINDA" Brand="M&amp;M" Volume="24x45gr" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="11.85">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="220000" Type="2" ProductNavisionId="314410215" Description="SNICKERS" Brand="Snickers" Volume="32x50gr" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="15.45">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="230000" Type="2" ProductNavisionId="314410324" Description="M &amp; M CRISPY BLAUW" Brand="M&amp;M" Volume="24x36gr" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="11.65">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="240000" Type="2" ProductNavisionId="314410396" Description="MALTESERS" Brand="Maltesers" Volume="25x37gr" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="13.25">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="250000" Type="2" ProductNavisionId="314410130" Description="KITKAT" Brand="Kitkat" Volume="36x41.5gr" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="20.35">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="260000" Type="2" ProductNavisionId="314410158" Description="MENTOS FRUIT" Brand="Mentos" Volume="40x40gr" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="18.5">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="270000" Type="2" ProductNavisionId="314327095" Description="STARMIX" Brand="Haribo" Volume="30x75gr" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="13.05">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="280000" Type="2" ProductNavisionId="314327105" Description="MAOAM MAO MIX" Brand="Haribo" Volume="30x70gr" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="13.1">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="290000" Type="2" ProductNavisionId="314410370" Description="DORITOS COOL AMERICAN" Brand="Doritos" Volume="20x44gr" Quantity="2" UnitOfMeasureCode="DOOS" UnitPrice="8.45">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="300000" Type="2" ProductNavisionId="314411331" Description="NATUREL CHIPS X013" Brand="Lays" Volume="20x40gr" Quantity="2" UnitOfMeasureCode="DOOS" UnitPrice="8.5">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="310000" Type="2" ProductNavisionId="314411332" Description="PAPRIKA CHIPS X023" Brand="Lays" Volume="20x40gr" Quantity="2" UnitOfMeasureCode="DOOS" UnitPrice="8.5">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="320000" Type="2" ProductNavisionId="305130138" Description="BUIGRIETJES NEON ASSORTI 24cm" Brand="Sier" Volume="500st" Quantity="2" UnitOfMeasureCode="PAK" UnitPrice="3.35">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="330000" Type="2" ProductNavisionId="314410319" Description="KANJERS STROOPWAFEL" Brand="Kanjers" Volume="15x2st" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="9.8">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="340000" Type="2" ProductNavisionId="302015" Description="OREO COOKIES" Brand="Lu" Volume="20x66gr" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="15.4">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="350000" Type="2" ProductNavisionId="103159" Description="OLA LIPTON GREEN ICE TEA " Brand="Ola" Volume="24x105ml" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="19.4">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="360000" Type="2" ProductNavisionId="200243" Description="SLAGROOM SPUITBUS ***" Brand="Hollandia" Volume="0.7ltr" Quantity="1" UnitOfMeasureCode="FLES" UnitPrice="6.5">
+          <actie>false</actie>
+        </OrderLine>
+        <OrderLine LineNo="370000" Type="2" ProductNavisionId="304186" Description="FRAMBOOS ( ROZE )" Brand="Twist and Drink" Volume="24x20cl" Quantity="1" UnitOfMeasureCode="DOOS" UnitPrice="13.6">
+          <actie>false</actie>
+        </OrderLine>
+      </OrderLines>
+    </Order>
+  </Orders>
+</OrdersData>

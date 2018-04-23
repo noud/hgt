@@ -27,12 +27,17 @@ class WebOrderService
      */
     private $entityManager;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private $xmlPath;
 
     /**
      * WebOrderService constructor.
+     * @param $xmlPath
      * @param WebOrderRepository $webOrderRepository
+     * @param CustomerOrderLineService $customerOrderLineService
+     * @param EntityManagerInterface $entityManager
      */
     public function __construct(
         $xmlPath,
@@ -48,7 +53,7 @@ class WebOrderService
 
     /**
      * @param $id
-     * @return null|object
+     * @return null|object|WebOrder
      */
     public function get($id)
     {
@@ -94,7 +99,6 @@ class WebOrderService
      */
     public function exportToNavision(WebOrder $webOrder)
     {
-
         $webOrder->setExportDate(new \DateTime());
 
         //to get weborderID
@@ -186,6 +190,6 @@ class WebOrderService
             }
         }
 
-        $rootNode->saveXML($this->xmlPath . '/wo-' . $webOrder->getId() . '.xml');
+        $rootNode->saveXML($this->xmlPath . '/OrderOut_' . $webOrder->getId() . '_' . time() . '.xml');
     }
 }

@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<SalesPriceData>
+  <SalesPrices>
+    <SalesPrice ProductNavisionId="314410502" SalesCode="HR3" CurrencyCode="" StartingDate="2011-01-01" UnitPrice="7.95" PriceIncludesVat="false" AllowInvoiceDisc="false" VatBusPostingGrPrice="" SalesType="customer price group" MinimumQuantity="0" EndingDate="2018-06-16" UnitOfMeasureCode="DOOS" VariantCode="" AllowLineDisc="false" NavisionId="84581">
+      <ActionPrice>false</ActionPrice>
+    </SalesPrice>
+  </SalesPrices>
+</SalesPriceData>

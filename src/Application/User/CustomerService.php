@@ -11,6 +11,11 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class CustomerService
 {
     /**
+     * @var string
+     */
+    private $xmlPath;
+
+    /**
      * @var CustomerRepository
      */
     private $customerRepository;
@@ -27,11 +32,13 @@ class CustomerService
 
     /**
      * CustomerService constructor.
+     * @param $xmlPath
      * @param CustomerRepository $customerRepository
      * @param PasswordEncoder $passwordEncoder
      * @param TokenStorageInterface $tokenStorage
      */
     public function __construct(
+        $xmlPath,
         CustomerRepository $customerRepository,
         PasswordEncoder $passwordEncoder,
         TokenStorageInterface $tokenStorage
@@ -39,6 +46,16 @@ class CustomerService
         $this->customerRepository = $customerRepository;
         $this->passwordEncoder = $passwordEncoder;
         $this->tokenStorage = $tokenStorage;
+        $this->xmlPath = $xmlPath;
+    }
+
+    /**
+     * @param $id
+     * @return null|object|Customer
+     */
+    public function get($id)
+    {
+        return $this->customerRepository->get($id);
     }
 
     /**
@@ -100,5 +117,25 @@ class CustomerService
         }
 
         return $delivery_days;
+    }
+
+    public function exportToNavision(Customer $customer)
+    {
+        $headString = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?><CustomersData></CustomersData>";
+
+        $rootNode = new \SimpleXMLElement($headString);
+        $customersNode = $rootNode->addChild('Customers');
+        $customerNode = $customersNode->addChild('Customer');
+
+        $customerNode->addAttribute('CustomerId', $customer->getId());
+        $customerNode->addAttribute('NavisionId', $customer->getNavisionId());
+        $customerNode->addAttribute('UserName', $customer->getUsername());
+        $customerNode->addAttribute('FirstName', $customer->getFirstName());
+        $customerNode->addAttribute('LastName', $customer->getLastName());
+        $customerNode->addAttribute('Company', $customer->getCompany());
+        $customerNode->addAttribute('EMail', $customer->getEmail());
+        $customerNode->addAttribute('Block', $customer->isBlocked());
+
+        $rootNode->saveXML($this->xmlPath . '/CustomerOut_' . $customer->getId() . '_' . time() . '.xml');
     }
 }

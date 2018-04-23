@@ -2,7 +2,6 @@
 
 namespace HGT\AppBundle\Console;
 
-use HGT\Application\Catalog\Order\WebOrder;
 use HGT\Application\Catalog\WebOrderService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,6 +15,10 @@ class ExportWebOrderCommand extends Command
      */
     private $webOrderService;
 
+    /**
+     * ExportWebOrderCommand constructor.
+     * @param WebOrderService $webOrderService
+     */
     public function __construct(WebOrderService $webOrderService)
     {
         $this->webOrderService = $webOrderService;
@@ -30,36 +33,29 @@ class ExportWebOrderCommand extends Command
             ->addArgument('order_id', InputArgument::REQUIRED, 'Het ID van de order.');
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int|null|void
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $webOrders = $this->webOrderService->getAll();
+        $webOrder = $this->webOrderService->get((int)$input->getArgument('order_id'));
 
-        if ($webOrders) {
-            $webOrdersNumbers = [];
+        if ($webOrder !== null) {
+            $this->webOrderService->exportToNavision($webOrder);
 
-            foreach ($webOrders as $webOrder) {
-                $webOrdersNumbers[] = $webOrder->getId();
-            }
-
-            if (in_array($input->getArgument('order_id'), $webOrdersNumbers)) {
-
-                /** @var WebOrder $webOrder */
-                $webOrder = $this->webOrderService->get($input->getArgument('order_id'));
-
-                $this->webOrderService->exportToNavision($webOrder);
-
-                $output->writeln([
-                    '',
-                    'Order ' . $webOrder->getId() . ' is geexporteerd',
-                    '',
-                ]);
-            } else {
-                $output->writeln([
-                    '',
-                    'Ongeldige ID!',
-                    '',
-                ]);
-            }
+            $output->writeln([
+                '',
+                'Order ' . $webOrder->getId() . ' is geexporteerd',
+                '',
+            ]);
+        } else {
+            $output->writeln([
+                '',
+                'Ongeldige ID!',
+                '',
+            ]);
         }
     }
 }
