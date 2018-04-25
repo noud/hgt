@@ -68,6 +68,13 @@ services:
             - ""
             - ""
 
+    HGT\Application\User\CustomerService:
+        arguments:
+            - "%xml_export_dir%"
+            - ""
+            - ""
+            - ""
+
     HGT\AppBundle\Doctrine\HashPasswordListener:
         tags:
             - { name: doctrine.event_subscriber }
